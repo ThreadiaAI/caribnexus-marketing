@@ -11,7 +11,7 @@ export function Footer() {
             <div>
               <h4 className="text-[10px] font-bold text-cn-dark" style={{ marginBottom: "10px" }}>Product</h4>
               <ul className="space-y-1.5">
-                <li><a href="/services" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">CaribBooks</a></li>
+                <li><a href="/caribbooks" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">CaribBooks</a></li>
                 <li><a href="/pricing" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Pricing</a></li>
                 <li><a href="https://books.caribnexusai.com/login" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Sign in</a></li>
               </ul>
@@ -49,7 +49,7 @@ export function Footer() {
         <div style={{ gridColumn: "4 / 6" }}>
           <h4 className="text-[11px] font-bold text-cn-dark" style={{ marginBottom: "16px" }}>Product</h4>
           <ul className="space-y-2">
-            <li><a href="/services" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">CaribBooks</a></li>
+            <li><a href="/caribbooks" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">CaribBooks</a></li>
             <li><a href="/pricing" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Pricing</a></li>
             <li><a href="https://books.caribnexusai.com/login" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Sign in</a></li>
           </ul>
