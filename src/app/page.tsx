@@ -56,7 +56,7 @@ export default function HomePage() {
               <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">our flagship product</span>
             </h2>
           </FadeIn>
-          <FadeIn style={{ gridColumn: "7 / 12" }} delay={0.1}>
+          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
             <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
               AI bookkeeping via WhatsApp. One message posts a journal entry. Every report updates in real time. Built for JMD, GCT, and TRN compliance.
             </p>
@@ -127,7 +127,7 @@ export default function HomePage() {
               <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">cut costs by 50%.</span>
             </h2>
           </div>
-          <div style={{ gridColumn: "7 / 12" }}>
+          <div className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }}>
             <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
               We walk in, analyze your operations, and identify where AI can eliminate repetitive work — saving hours per week and reducing overhead. Custom-built systems, not off-the-shelf tools.
             </p>
@@ -143,7 +143,7 @@ export default function HomePage() {
         {/* Consultancy — dark panel (image LEFT, text RIGHT) */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[40px] pb-[80px]">
           <div
-            className="relative rounded-none overflow-hidden flex flex-col justify-between"
+            className="relative rounded-none overflow-hidden flex flex-col justify-between panel-scale-mobile"
             style={{
               gridColumn: "2 / 12",
               background: "linear-gradient(160deg, #0A0A0A 0%, #111827 40%, #0d1a2e 100%)",

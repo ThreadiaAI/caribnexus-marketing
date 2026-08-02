@@ -188,9 +188,11 @@ export function VoiceWidget() {
           <div ref={scrollRef} className="flex-1 px-5 py-4 overflow-y-auto">
             {messages.length === 0 && !transcript && !isProcessing ? (
               <div className="h-full flex flex-col items-center justify-center">
-                <GrainyOrb size={72} amplitude={0} />
+                <GrainyOrb size={72} amplitude={isListening ? 0.6 : 0} />
                 <p className="text-[11px] text-cn-muted text-center mt-4" style={{ lineHeight: "16px" }}>
-                  {mode === "ask"
+                  {isListening
+                    ? <>I&apos;m listening. Tap send when you&apos;re done.</>
+                    : mode === "ask"
                     ? <>Ask us anything about CaribNexus AI and<br />our products &amp; services.</>
                     : <>Book a consultation. Tell us your name, business name, industry, number of employees, email address,<br />and what you need help with.</>
                   }
@@ -227,7 +229,7 @@ export function VoiceWidget() {
           </div>
 
           {/* Bottom: orb + speak button + tabs */}
-          <div className="px-3 py-2 border-t border-cn-border flex items-center gap-2">
+          <div className="px-3 py-2 border-t border-cn-border flex items-center gap-2 flex-wrap">
             <div className={isListening ? "animate-pulse" : ""}>
               <GrainyOrb size={32} amplitude={isListening ? 0.8 : 0} />
             </div>
