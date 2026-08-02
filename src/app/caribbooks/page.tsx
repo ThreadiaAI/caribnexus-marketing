@@ -39,45 +39,58 @@ export default function CaribBooksPage() {
         {/* Product hero — recreated dashboard with WhatsApp overlay */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[80px]">
           <ScaleIn className="relative" style={{ gridColumn: "2 / 12" }}>
-            {/* Dashboard — wrapped in brand-colored stage */}
-            <div
-              className="p-6 md:p-10"
-              style={{ background: "#f5faf7", borderRadius: "4px" }}
-            >
-              <img
-                src="/screenshots/scrnli_GwpXkzC7ktrWYB.png"
-                alt="CaribBooks dashboard — transactions view showing internet bill posted"
-                className="w-full h-auto shadow-lg"
-                style={{ borderRadius: "2px" }}
-              />
+            {/* Mobile: WhatsApp first → then dashboard (flow: message → result) */}
+            <div className="md:hidden flex flex-col items-center gap-4">
+              <div className="w-[240px] shadow-xl" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
+                <img
+                  src="/screenshots/unnamed.jpg"
+                  alt="WhatsApp — Paid internet bill 15,000 → Posted to Utilities Expense"
+                  className="w-full h-auto"
+                />
+              </div>
+              <svg className="w-5 h-5 text-cn-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+              <div className="w-full p-4" style={{ background: "#f5faf7", borderRadius: "4px" }}>
+                <img
+                  src="/screenshots/scrnli_GwpXkzC7ktrWYB.png"
+                  alt="CaribBooks dashboard — transactions view showing internet bill posted"
+                  className="w-full h-auto shadow-lg"
+                  style={{ borderRadius: "2px" }}
+                />
+              </div>
             </div>
 
-
-
-            {/* WhatsApp screenshot — mobile: above panel, desktop: absolute overlay */}
-            <div className="md:hidden mb-4 mx-auto w-[240px] shadow-xl" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
-              <img
-                src="/screenshots/unnamed.jpg"
-                alt="WhatsApp — Paid internet bill 15,000 → Posted to Utilities Expense"
-                className="w-full h-auto"
-              />
-            </div>
-            <div
-              className="hidden md:block absolute shadow-2xl"
-              style={{
-                left: "4px",
-                bottom: "40px",
-                width: "220px",
-                borderRadius: "12px",
-                overflow: "hidden",
-                border: "1px solid rgba(0,0,0,0.08)",
-              }}
-            >
-              <img
-                src="/screenshots/unnamed.jpg"
-                alt="WhatsApp — Paid internet bill 15,000 → Posted to Utilities Expense"
-                className="w-full h-auto"
-              />
+            {/* Desktop: Dashboard with WhatsApp overlay */}
+            <div className="hidden md:block">
+              <div
+                className="p-10"
+                style={{ background: "#f5faf7", borderRadius: "4px" }}
+              >
+                <img
+                  src="/screenshots/scrnli_GwpXkzC7ktrWYB.png"
+                  alt="CaribBooks dashboard — transactions view showing internet bill posted"
+                  className="w-full h-auto shadow-lg"
+                  style={{ borderRadius: "2px" }}
+                />
+              </div>
+              <div
+                className="absolute shadow-2xl"
+                style={{
+                  left: "4px",
+                  bottom: "40px",
+                  width: "220px",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                }}
+              >
+                <img
+                  src="/screenshots/unnamed.jpg"
+                  alt="WhatsApp — Paid internet bill 15,000 → Posted to Utilities Expense"
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
           </ScaleIn>
         </section>
