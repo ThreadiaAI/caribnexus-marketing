@@ -69,7 +69,7 @@ export default function HomePage() {
                 Sign up
               </a>
               <a
-                href="/services"
+                href="/caribbooks"
                 className="text-[11px] font-medium text-cn-muted px-4 py-[6px] rounded-full border border-cn-border hover:text-[#FF5733] transition-colors"
               >
                 Learn more
