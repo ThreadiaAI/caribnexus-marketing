@@ -54,7 +54,14 @@ export default function CaribBooksPage() {
 
 
 
-            {/* WhatsApp screenshot overlay — desktop: absolute, mobile: below panel */}
+            {/* WhatsApp screenshot — mobile: above panel, desktop: absolute overlay */}
+            <div className="md:hidden mb-4 mx-auto w-[240px] shadow-xl" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
+              <img
+                src="/screenshots/unnamed.jpg"
+                alt="WhatsApp — Paid internet bill 15,000 → Posted to Utilities Expense"
+                className="w-full h-auto"
+              />
+            </div>
             <div
               className="hidden md:block absolute shadow-2xl"
               style={{
@@ -66,13 +73,6 @@ export default function CaribBooksPage() {
                 border: "1px solid rgba(0,0,0,0.08)",
               }}
             >
-              <img
-                src="/screenshots/unnamed.jpg"
-                alt="WhatsApp — Paid internet bill 15,000 → Posted to Utilities Expense"
-                className="w-full h-auto"
-              />
-            </div>
-            <div className="md:hidden mt-4 mx-auto w-[240px] shadow-xl" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
               <img
                 src="/screenshots/unnamed.jpg"
                 alt="WhatsApp — Paid internet bill 15,000 → Posted to Utilities Expense"
@@ -180,7 +180,14 @@ export default function CaribBooksPage() {
               />
             </div>
 
-            {/* Voice note screenshot overlay — desktop: absolute, mobile: below panel */}
+            {/* Voice note screenshot — mobile: above panel, desktop: absolute overlay */}
+            <div className="md:hidden mb-4 mx-auto w-[240px] shadow-xl" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
+              <img
+                src="/screenshots/cb-voicenote-frame.jpg"
+                alt="Voice note transaction posted via WhatsApp"
+                className="w-full h-auto"
+              />
+            </div>
             <div
               className="hidden md:block absolute shadow-2xl"
               style={{
@@ -192,13 +199,6 @@ export default function CaribBooksPage() {
                 border: "1px solid rgba(0,0,0,0.08)",
               }}
             >
-              <img
-                src="/screenshots/cb-voicenote-frame.jpg"
-                alt="Voice note transaction posted via WhatsApp"
-                className="w-full h-auto"
-              />
-            </div>
-            <div className="md:hidden mt-4 mx-auto w-[240px] shadow-xl" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
               <img
                 src="/screenshots/cb-voicenote-frame.jpg"
                 alt="Voice note transaction posted via WhatsApp"
