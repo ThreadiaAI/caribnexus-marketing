@@ -48,16 +48,38 @@ export function VoiceWidget() {
     return () => window.removeEventListener("open-voice-widget", handler);
   }, []);
 
-  // Create session when widget opens
+  // Cleanup on page unload
   useEffect(() => {
-    if (isOpen && !sessionIdRef.current) {
-      const id = `ses_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-      sessionIdRef.current = id;
-      fetch("/api/voice/session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "create", session_id: id, mode, source_page: window.location.pathname }),
-      }).catch(() => {});
+    const cleanup = () => {
+      voiceClientRef.current?.disconnect();
+    };
+    window.addEventListener("beforeunload", cleanup);
+    return () => {
+      window.removeEventListener("beforeunload", cleanup);
+      cleanup();
+    };
+  }, []);
+
+  // Connect WebSocket + create session when widget opens; disconnect on close
+  useEffect(() => {
+    if (isOpen) {
+      if (!sessionIdRef.current) {
+        const id = `ses_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+        sessionIdRef.current = id;
+        fetch("/api/voice/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "create", session_id: id, mode, source_page: window.location.pathname }),
+        }).catch(() => {});
+      }
+      // Pre-connect WebSocket so it's ready for first "Speak with me"
+      if (!voiceClientRef.current) {
+        const client = new VoiceClient((text) => {
+          setTranscript(text);
+        });
+        voiceClientRef.current = client;
+        client.connect().catch(() => {});
+      }
     }
     if (!isOpen) {
       // Complete session on close
@@ -69,6 +91,11 @@ export function VoiceWidget() {
         }).catch(() => {});
       }
       sessionIdRef.current = "";
+      // Disconnect WebSocket
+      if (voiceClientRef.current) {
+        voiceClientRef.current.disconnect();
+        voiceClientRef.current = null;
+      }
     }
   }, [isOpen]);
 
@@ -120,22 +147,28 @@ export function VoiceWidget() {
         sendToAI(finalText.trim());
       }
     } else {
-      // Start mic with Deepgram
+      // Start mic — WebSocket is already connected
       setIsListening(true);
       setTranscript("");
-      const client = new VoiceClient((text) => {
-        setTranscript(text);
-      });
-      voiceClientRef.current = client;
       try {
-        await client.start();
-        setAudioStream(client.getStream());
+        await voiceClientRef.current!.start();
+        setAudioStream(voiceClientRef.current!.getStream());
       } catch (err) {
         console.error("Mic access denied or Deepgram error:", err);
         setIsListening(false);
         setAudioStream(null);
       }
     }
+  };
+
+  const renderBold = (text: string) => {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return <strong key={i}>{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
   };
 
   const handleSuggestion = (text: string) => {
@@ -179,7 +212,7 @@ export function VoiceWidget() {
         <div className="fixed bottom-6 right-6 z-[90] w-[330px] h-[460px] bg-white rounded-2xl shadow-2xl border border-cn-border flex flex-col overflow-hidden">
           {/* Header */}
           <div className="px-4 py-2 border-b border-cn-border flex items-center justify-between">
-            <span className="text-[11px] font-medium text-cn-dark">CaribNexus AI</span>
+            <span className="text-[9px] font-medium text-cn-dark">CaribNexus AI</span>
             <button
               onClick={() => { setIsOpen(false); setIsListening(false); setTranscript(""); setMessages([]); setMode("ask"); }}
               className="text-cn-muted hover:text-[#FF5733] transition-colors"
@@ -195,7 +228,7 @@ export function VoiceWidget() {
             {!isProcessing && (!isListening && messages.length === 0) ? (
               <div className="h-full flex flex-col items-center justify-center">
                 <GrainyOrb size={72} amplitude={0} />
-                <p className="text-[11px] text-cn-muted text-center mt-4" style={{ lineHeight: "16px" }}>
+                <p className="text-[9px] text-cn-muted text-center mt-4" style={{ lineHeight: "14px" }}>
                   {mode === "ask"
                     ? <>Ask us anything about CaribNexus AI and<br />our products &amp; services.</>
                     : <>Book a consultation. Tell us your name, business name, industry, number of employees, email address,<br />and what you need help with.</>
@@ -207,17 +240,17 @@ export function VoiceWidget() {
                 {/* Message history */}
                 {messages.map((msg, i) => (
                   <div key={i}>
-                    <span className={`text-[8px] font-medium uppercase tracking-wider ${msg.role === "user" ? "text-[#FF5733]" : "text-cn-dark"}`}>
+                    <span className={`text-[7px] font-medium uppercase tracking-wider ${msg.role === "user" ? "text-[#FF5733]" : "text-cn-dark"}`}>
                       {msg.role === "user" ? "You" : "CaribNexus AI"}
                     </span>
-                    <p className="text-[12px] text-cn-dark mt-0.5" style={{ lineHeight: "18px" }}>
-                      {msg.text}
+                    <p className="text-[10px] text-cn-dark mt-0.5" style={{ lineHeight: "16px" }}>
+                      {renderBold(msg.text)}
                     </p>
                   </div>
                 ))}
                 {/* Processing */}
                 {isProcessing && (
-                  <div className="text-[11px] text-cn-muted animate-pulse">Thinking...</div>
+                  <div className="text-[9px] text-cn-muted animate-pulse">Thinking...</div>
                 )}
               </div>
             )}
@@ -227,7 +260,7 @@ export function VoiceWidget() {
           {isListening && (
             <div className="px-3 py-2 flex flex-col items-center border-t border-cn-border" style={{ transform: "scale(0.75)" }}>
               <AudioWaveform stream={audioStream} />
-              <p className="text-[9px] text-cn-muted text-center mt-1">
+              <p className="text-[7px] text-cn-muted text-center mt-1">
                 I&apos;m listening. Tap send when you&apos;re done.
               </p>
             </div>
@@ -249,7 +282,7 @@ export function VoiceWidget() {
                 <path d="M12 17v4" />
                 <path d="M8 21h8" />
               </svg>
-              <span className={`text-[9px] font-medium whitespace-nowrap ${isListening ? "text-[#FF5733]" : "text-cn-muted"}`}>
+              <span className={`text-[7px] font-medium whitespace-nowrap ${isListening ? "text-[#FF5733]" : "text-cn-muted"}`}>
                 {isListening ? "Tap to send" : "Speak with me"}
               </span>
             </button>
@@ -257,13 +290,13 @@ export function VoiceWidget() {
               <div className="flex gap-1 shrink-0">
                 <button
                   onClick={() => { setMode("ask"); setTranscript(""); setMessages([]); }}
-                  className={`text-[8px] font-medium px-2 py-1 rounded-full transition-colors ${mode === "ask" ? "bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] text-white" : "text-cn-muted border border-cn-border"}`}
+                  className={`text-[6px] font-medium px-2 py-1 rounded-full transition-colors ${mode === "ask" ? "bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] text-white" : "text-cn-muted border border-cn-border"}`}
                 >
                   Ask
                 </button>
                 <button
                   onClick={() => { setMode("book"); setTranscript(""); setMessages([]); }}
-                  className={`text-[8px] font-medium px-2 py-1 rounded-full transition-colors ${mode === "book" ? "bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] text-white" : "text-cn-muted border border-cn-border"}`}
+                  className={`text-[6px] font-medium px-2 py-1 rounded-full transition-colors ${mode === "book" ? "bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] text-white" : "text-cn-muted border border-cn-border"}`}
                 >
                   Book
                 </button>

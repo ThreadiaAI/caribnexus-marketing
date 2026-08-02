@@ -11,6 +11,19 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const { action, session_id, mode, messages, lead_info } = body;
 
+  try {
+    return await handleSession(action, session_id, mode, messages, lead_info, body);
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message : "unknown";
+    if (msg.includes("credentials") || msg.includes("CredentialsProvider")) {
+      return NextResponse.json({ ok: true, note: "session_persistence_skipped" });
+    }
+    return NextResponse.json({ error: msg }, { status: 500 });
+  }
+}
+
+async function handleSession(action: string, session_id: string, mode: string, messages: unknown, lead_info: Record<string, string> | undefined, body: Record<string, unknown>) {
+
   if (action === "create") {
     const now = new Date().toISOString();
     await ddb.send(new PutItemCommand({
@@ -82,3 +95,4 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ error: "unknown_action" }, { status: 400 });
 }
+

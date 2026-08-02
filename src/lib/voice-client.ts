@@ -1,87 +1,153 @@
 /**
- * Voice client — handles browser mic → Deepgram WebSocket for live transcription.
+ * Voice client — AudioWorklet captures raw PCM16 → streams to Deepgram.
+ * WebSocket stays open across turns. Mic starts/stops per turn.
  */
 
 export class VoiceClient {
   private socket: WebSocket | null = null;
-  private mediaRecorder: MediaRecorder | null = null;
+  private audioContext: AudioContext | null = null;
+  private workletNode: AudioWorkletNode | null = null;
+  private source: MediaStreamAudioSourceNode | null = null;
   private stream: MediaStream | null = null;
   private onTranscript: (text: string, isFinal: boolean) => void;
   private fullTranscript = "";
+  private latestText = "";
+  private keepAliveInterval: ReturnType<typeof setInterval> | null = null;
+  private socketReady = false;
 
   constructor(onTranscript: (text: string, isFinal: boolean) => void) {
     this.onTranscript = onTranscript;
   }
 
-  async start() {
-    // Get temporary Deepgram key from our server
+  /** Connect the WebSocket once. Call this when the widget opens. */
+  async connect() {
+    if (this.socket && this.socketReady) return;
+
     const tokenRes = await fetch("/api/voice/token");
     const { key } = await tokenRes.json();
 
-    // Get mic access
-    this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const wsUrl =
+      `wss://api.deepgram.com/v1/listen?model=nova-3&encoding=linear16&sample_rate=16000&channels=1&smart_format=true&punctuate=true&interim_results=true&utterance_end_ms=1500&vad_events=true`;
 
-    // Connect to Deepgram WebSocket
-    this.socket = new WebSocket(
-      `wss://api.deepgram.com/v1/listen?model=nova-3&language=en&smart_format=true&punctuate=true&interim_results=true&utterances=true&endpointing=800`,
-      ["token", key]
-    );
+    this.socket = new WebSocket(wsUrl, ["token", key]);
 
-    this.socket.onopen = () => {
-      // Start sending audio — larger chunks for better accuracy
-      this.mediaRecorder = new MediaRecorder(this.stream!, { mimeType: "audio/webm" });
-      this.mediaRecorder.ondataavailable = (e) => {
-        if (this.socket?.readyState === WebSocket.OPEN && e.data.size > 0) {
-          this.socket.send(e.data);
-        }
+    await new Promise<void>((resolve, reject) => {
+      this.socket!.onopen = () => {
+        this.socketReady = true;
+        resolve();
       };
-      this.mediaRecorder.start(250); // send chunks every 250ms
-    };
+      this.socket!.onerror = (e) => {
+        console.error("Deepgram WebSocket error:", e);
+        reject(e);
+      };
+    });
 
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      const transcript = data.channel?.alternatives?.[0]?.transcript;
-      if (!transcript) return;
 
-      const isFinal = data.is_final;
-      if (isFinal) {
-        this.fullTranscript += (this.fullTranscript ? " " : "") + transcript;
-        this.onTranscript(this.fullTranscript, false);
-      } else {
-        // Interim: show full so far + current interim
-        this.onTranscript(this.fullTranscript + (this.fullTranscript ? " " : "") + transcript, false);
+      if (data.type === "Results") {
+        const transcript = data.channel?.alternatives?.[0]?.transcript;
+        if (!transcript) return;
+
+        if (data.is_final) {
+          this.fullTranscript += (this.fullTranscript ? " " : "") + transcript;
+          this.latestText = this.fullTranscript;
+          this.onTranscript(this.fullTranscript, false);
+        } else {
+          this.latestText = this.fullTranscript + (this.fullTranscript ? " " : "") + transcript;
+          this.onTranscript(this.latestText, false);
+        }
       }
     };
 
-    this.socket.onerror = (e) => {
-      console.error("Deepgram WebSocket error:", e);
+    this.socket.onclose = () => {
+      this.socketReady = false;
     };
 
+    // Keep socket alive between turns
+    this.keepAliveInterval = setInterval(() => {
+      if (this.socket?.readyState === WebSocket.OPEN) {
+        this.socket.send(JSON.stringify({ type: "KeepAlive" }));
+      }
+    }, 8000);
+  }
+
+  /** Start mic + worklet. Call on each "Speak with me" tap. */
+  async start() {
+    if (!this.socketReady) {
+      await this.connect();
+    }
+
     this.fullTranscript = "";
+    this.latestText = "";
+
+    this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+    this.audioContext = new AudioContext({ sampleRate: 16000 });
+    await this.audioContext.audioWorklet.addModule("/pcm-worklet.js");
+
+    this.source = this.audioContext.createMediaStreamSource(this.stream);
+    this.workletNode = new AudioWorkletNode(this.audioContext, "pcm-processor");
+    this.source.connect(this.workletNode);
+    this.workletNode.connect(this.audioContext.destination);
+
+    this.workletNode.port.onmessage = (e: MessageEvent) => {
+      if (this.socket?.readyState === WebSocket.OPEN) {
+        this.socket.send(e.data as ArrayBuffer);
+      }
+    };
   }
 
   getStream(): MediaStream | null {
     return this.stream;
   }
 
+  /** Stop mic, return transcript. Socket stays open for next turn. */
   stop(): string {
-    // Stop recording
-    if (this.mediaRecorder && this.mediaRecorder.state !== "inactive") {
-      this.mediaRecorder.stop();
+    if (this.workletNode) {
+      this.workletNode.port.onmessage = null;
+      this.workletNode.disconnect();
+      this.workletNode = null;
     }
-    // Close WebSocket
-    if (this.socket) {
-      this.socket.close();
-      this.socket = null;
+    if (this.source) {
+      this.source.disconnect();
+      this.source = null;
     }
-    // Stop mic
+    if (this.audioContext) {
+      this.audioContext.close();
+      this.audioContext = null;
+    }
     if (this.stream) {
       this.stream.getTracks().forEach((t) => t.stop());
       this.stream = null;
     }
-    const final = this.fullTranscript;
+
+    // Send Finalize to flush any pending audio in Deepgram's buffer
+    if (this.socket?.readyState === WebSocket.OPEN) {
+      this.socket.send(JSON.stringify({ type: "Finalize" }));
+    }
+
+    const final = this.latestText || this.fullTranscript;
     this.fullTranscript = "";
+    this.latestText = "";
     return final;
+  }
+
+  /** Close everything. Call when widget closes. */
+  disconnect() {
+    this.stop();
+    if (this.keepAliveInterval) {
+      clearInterval(this.keepAliveInterval);
+      this.keepAliveInterval = null;
+    }
+    if (this.socket) {
+      if (this.socket.readyState === WebSocket.OPEN) {
+        this.socket.send(JSON.stringify({ type: "CloseStream" }));
+      }
+      this.socket.close();
+      this.socket = null;
+      this.socketReady = false;
+    }
   }
 }
 
