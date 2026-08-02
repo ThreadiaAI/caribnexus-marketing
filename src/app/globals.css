@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Creato Display";
+  src: url("/fonts/CreatoDisplay-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Creato Display";
+  src: url("/fonts/CreatoDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Creato Display";
+  src: url("/fonts/CreatoDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Creato Display";
+  src: url("/fonts/CreatoDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --cn-blue: #0077B6;
+  --cn-teal: #009088;
+  --cn-green: #00A859;
+  --cn-orange: #FF5733;
+  --cn-dark: #0A0A0A;
+  --cn-muted: #6B7280;
+  --cn-border: #E5E7EB;
+  --cn-surface: #FAFAFA;
+
+  --content-max-w: 1200px;
+  --grid-columns: 12;
+  --grid-gap: 24px;
+  --grid-padding: 24px;
+  --nav-h: 48px;
+}
+
+@theme inline {
+  --color-cn-blue: var(--cn-blue);
+  --color-cn-teal: var(--cn-teal);
+  --color-cn-green: var(--cn-green);
+  --color-cn-orange: var(--cn-orange);
+  --color-cn-dark: var(--cn-dark);
+  --color-cn-muted: var(--cn-muted);
+  --color-cn-border: var(--cn-border);
+  --color-cn-surface: var(--cn-surface);
+  --font-sans: "Creato Display", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.page-grid {
+  display: grid;
+  padding-inline: var(--grid-padding);
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+}
+.product-section-mobile {
+  display: block;
+  padding-inline: var(--grid-padding);
+}
+@media (min-width: 768px) {
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--grid-gap);
+  }
+  .product-heading {
+    grid-column: 2 / 11;
+  }
+  .product-section-mobile {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--grid-gap);
+    padding-inline: var(--grid-padding);
+  }
+}
+
+.panel-scale-mobile {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.panel-scale-mobile > * {
+  min-width: 900px;
+}
+@media (min-width: 768px) {
+  .panel-scale-mobile {
+    overflow-x: visible;
+  }
+  .panel-scale-mobile > * {
+    min-width: unset;
+  }
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-5px) translateX(2px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-3px) translateX(-3px); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-6px) translateX(2px); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--cn-dark);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  zoom: 0.92;
+}
