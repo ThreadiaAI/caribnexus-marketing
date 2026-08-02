@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import GrainyOrb from "./GrainyOrb";
+import { AudioWaveform } from "./AudioWaveform";
 import { VoiceClient, streamChat } from "@/lib/voice-client";
 
 const ASK_SUGGESTIONS = [
@@ -25,6 +27,7 @@ export function VoiceWidget() {
   const [transcript, setTranscript] = useState("");
   const [messages, setMessages] = useState<{ role: "user" | "ai"; text: string }[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [audioStream, setAudioStream] = useState<MediaStream | null>(null);
   const voiceClientRef = useRef<VoiceClient | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const sessionIdRef = useRef<string>("");
@@ -111,6 +114,7 @@ export function VoiceWidget() {
       // Stop mic, get final transcript, send to AI
       const finalText = voiceClientRef.current?.stop() || transcript;
       setIsListening(false);
+      setAudioStream(null);
       if (finalText.trim()) {
         setTranscript("");
         sendToAI(finalText.trim());
@@ -125,9 +129,11 @@ export function VoiceWidget() {
       voiceClientRef.current = client;
       try {
         await client.start();
+        setAudioStream(client.getStream());
       } catch (err) {
         console.error("Mic access denied or Deepgram error:", err);
         setIsListening(false);
+        setAudioStream(null);
       }
     }
   };
@@ -186,13 +192,11 @@ export function VoiceWidget() {
 
           {/* Transcript / Response area */}
           <div ref={scrollRef} className="flex-1 px-5 py-4 overflow-y-auto">
-            {messages.length === 0 && !transcript && !isProcessing ? (
+            {!isProcessing && (!isListening && messages.length === 0) ? (
               <div className="h-full flex flex-col items-center justify-center">
-                <GrainyOrb size={72} amplitude={isListening ? 0.6 : 0} />
+                <GrainyOrb size={72} amplitude={0} />
                 <p className="text-[11px] text-cn-muted text-center mt-4" style={{ lineHeight: "16px" }}>
-                  {isListening
-                    ? <>I&apos;m listening. Tap send when you&apos;re done.</>
-                    : mode === "ask"
+                  {mode === "ask"
                     ? <>Ask us anything about CaribNexus AI and<br />our products &amp; services.</>
                     : <>Book a consultation. Tell us your name, business name, industry, number of employees, email address,<br />and what you need help with.</>
                   }
@@ -211,15 +215,6 @@ export function VoiceWidget() {
                     </p>
                   </div>
                 ))}
-                {/* Live transcript */}
-                {isListening && transcript && (
-                  <div>
-                    <span className="text-[8px] font-medium text-[#FF5733] uppercase tracking-wider">You</span>
-                    <p className="text-[12px] text-cn-dark mt-0.5" style={{ lineHeight: "18px" }}>
-                      {transcript}<span className="animate-pulse text-[#FF5733]">|</span>
-                    </p>
-                  </div>
-                )}
                 {/* Processing */}
                 {isProcessing && (
                   <div className="text-[11px] text-cn-muted animate-pulse">Thinking...</div>
@@ -227,6 +222,16 @@ export function VoiceWidget() {
               </div>
             )}
           </div>
+
+          {/* Waveform — always visible when listening */}
+          {isListening && (
+            <div className="px-3 py-2 flex flex-col items-center border-t border-cn-border" style={{ transform: "scale(0.75)" }}>
+              <AudioWaveform stream={audioStream} />
+              <p className="text-[9px] text-cn-muted text-center mt-1">
+                I&apos;m listening. Tap send when you&apos;re done.
+              </p>
+            </div>
+          )}
 
           {/* Bottom: speak button + tabs */}
           <div className="px-3 py-2 border-t border-cn-border flex items-center gap-2">

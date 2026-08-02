@@ -60,6 +60,10 @@ export class VoiceClient {
     this.fullTranscript = "";
   }
 
+  getStream(): MediaStream | null {
+    return this.stream;
+  }
+
   stop(): string {
     // Stop recording
     if (this.mediaRecorder && this.mediaRecorder.state !== "inactive") {
