@@ -155,13 +155,14 @@ export default function HomePage() {
               {/* Left: illustration */}
               <div className="flex items-center justify-center flex-1 pr-8">
                 <img
-                  src="/illustrations/feature-neural-pathway.svg"
+                  src="/illustrations/feature-neural-pathway-transparent.png"
                   alt="AI operations network"
                   style={{
                     height: "380px",
                     width: "auto",
                     objectFit: "contain",
-                    filter: "invert(1) brightness(0.85)",
+                    filter: "invert(1) brightness(1.5)",
+                    opacity: 0.8,
                   }}
                 />
               </div>
