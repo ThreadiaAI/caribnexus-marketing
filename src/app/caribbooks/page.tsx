@@ -48,8 +48,9 @@ export default function CaribBooksPage() {
                   className="w-full h-auto"
                 />
               </div>
-              <svg className="w-5 h-5 text-cn-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 5v14M5 12l7 7 7-7" />
+              <svg className="w-8 h-12 text-cn-muted" viewBox="0 0 32 48" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 4 C9 14, 25 14, 25 24 C25 33, 10 33, 13 37 C14 39, 15 40, 15 42" />
+                <path d="M11 39 L15 44 L19 39" />
               </svg>
               <div className="w-full p-4" style={{ background: "#f5faf7", borderRadius: "4px" }}>
                 <img
@@ -180,43 +181,59 @@ export default function CaribBooksPage() {
         {/* Voice note demo — Transaction Detail report + video overlay */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[80px]">
           <ScaleIn className="relative" style={{ gridColumn: "2 / 12" }}>
-            {/* Dashboard — wrapped in brand stage */}
-            <div
-              className="p-6 md:p-10"
-              style={{ background: "#f0f7fa", borderRadius: "4px" }}
-            >
-              <img
-                src="/screenshots/scrnli_V3sXa5N3o2o9KB.png"
-                alt="CaribBooks dashboard — Transaction Detail report"
-                className="w-full h-auto shadow-lg"
-                style={{ borderRadius: "2px" }}
-              />
+            {/* Mobile: WhatsApp first → then dashboard (flow: voice note → result) */}
+            <div className="md:hidden flex flex-col items-center gap-4">
+              <div className="w-[240px] shadow-xl" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
+                <img
+                  src="/screenshots/cb-voicenote-frame.jpg"
+                  alt="Voice note transaction posted via WhatsApp"
+                  className="w-full h-auto"
+                />
+              </div>
+              <svg className="w-8 h-12 text-cn-muted" viewBox="0 0 32 48" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 4 C9 14, 25 14, 25 24 C25 33, 10 33, 13 37 C14 39, 15 40, 15 42" />
+                <path d="M11 39 L15 44 L19 39" />
+              </svg>
+              <div className="w-full p-4" style={{ background: "#f0f7fa", borderRadius: "4px" }}>
+                <img
+                  src="/screenshots/scrnli_V3sXa5N3o2o9KB.png"
+                  alt="CaribBooks dashboard — Transaction Detail report"
+                  className="w-full h-auto shadow-lg"
+                  style={{ borderRadius: "2px" }}
+                />
+              </div>
             </div>
 
-            {/* Voice note screenshot — mobile: above panel, desktop: absolute overlay */}
-            <div className="md:hidden mb-4 mx-auto w-[240px] shadow-xl" style={{ borderRadius: "12px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
-              <img
-                src="/screenshots/cb-voicenote-frame.jpg"
-                alt="Voice note transaction posted via WhatsApp"
-                className="w-full h-auto"
-              />
-            </div>
-            <div
-              className="hidden md:block absolute shadow-2xl"
-              style={{
-                left: "4px",
-                bottom: "12px",
-                width: "220px",
-                borderRadius: "12px",
-                overflow: "hidden",
-                border: "1px solid rgba(0,0,0,0.08)",
-              }}
-            >
-              <img
-                src="/screenshots/cb-voicenote-frame.jpg"
-                alt="Voice note transaction posted via WhatsApp"
-                className="w-full h-auto"
-              />
+            {/* Desktop: Dashboard with voice note overlay */}
+            <div className="hidden md:block">
+              <div
+                className="p-10"
+                style={{ background: "#f0f7fa", borderRadius: "4px" }}
+              >
+                <img
+                  src="/screenshots/scrnli_V3sXa5N3o2o9KB.png"
+                  alt="CaribBooks dashboard — Transaction Detail report"
+                  className="w-full h-auto shadow-lg"
+                  style={{ borderRadius: "2px" }}
+                />
+              </div>
+              <div
+                className="absolute shadow-2xl"
+                style={{
+                  left: "4px",
+                  bottom: "12px",
+                  width: "220px",
+                  borderRadius: "12px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                }}
+              >
+                <img
+                  src="/screenshots/cb-voicenote-frame.jpg"
+                  alt="Voice note transaction posted via WhatsApp"
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
           </ScaleIn>
         </section>
