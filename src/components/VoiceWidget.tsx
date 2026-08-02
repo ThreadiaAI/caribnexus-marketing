@@ -228,11 +228,8 @@ export function VoiceWidget() {
             )}
           </div>
 
-          {/* Bottom: orb + speak button + tabs */}
-          <div className="px-3 py-2 border-t border-cn-border flex items-center gap-2 flex-wrap">
-            <div className={isListening ? "animate-pulse" : ""}>
-              <GrainyOrb size={32} amplitude={isListening ? 0.8 : 0} />
-            </div>
+          {/* Bottom: speak button + tabs */}
+          <div className="px-3 py-2 border-t border-cn-border flex items-center gap-2">
             <button
               onClick={handleToggleListening}
               className={`flex-1 flex items-center justify-center gap-2 px-3 py-1.5 rounded-full transition-all ${
@@ -247,24 +244,26 @@ export function VoiceWidget() {
                 <path d="M12 17v4" />
                 <path d="M8 21h8" />
               </svg>
-              <span className={`text-[9px] font-medium ${isListening ? "text-[#FF5733]" : "text-cn-muted"}`}>
+              <span className={`text-[9px] font-medium whitespace-nowrap ${isListening ? "text-[#FF5733]" : "text-cn-muted"}`}>
                 {isListening ? "Tap to send" : "Speak with me"}
               </span>
             </button>
-            <div className="flex gap-1">
-              <button
-                onClick={() => { setMode("ask"); setTranscript(""); setMessages([]); }}
-                className={`text-[8px] font-medium px-2 py-1 rounded-full transition-colors ${mode === "ask" ? "bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] text-white" : "text-cn-muted border border-cn-border"}`}
-              >
-                Ask
-              </button>
-              <button
-                onClick={() => { setMode("book"); setTranscript(""); setMessages([]); }}
-                className={`text-[8px] font-medium px-2 py-1 rounded-full transition-colors ${mode === "book" ? "bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] text-white" : "text-cn-muted border border-cn-border"}`}
-              >
-                Book
-              </button>
-            </div>
+            {!isListening && (
+              <div className="flex gap-1 shrink-0">
+                <button
+                  onClick={() => { setMode("ask"); setTranscript(""); setMessages([]); }}
+                  className={`text-[8px] font-medium px-2 py-1 rounded-full transition-colors ${mode === "ask" ? "bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] text-white" : "text-cn-muted border border-cn-border"}`}
+                >
+                  Ask
+                </button>
+                <button
+                  onClick={() => { setMode("book"); setTranscript(""); setMessages([]); }}
+                  className={`text-[8px] font-medium px-2 py-1 rounded-full transition-colors ${mode === "book" ? "bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] text-white" : "text-cn-muted border border-cn-border"}`}
+                >
+                  Book
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
