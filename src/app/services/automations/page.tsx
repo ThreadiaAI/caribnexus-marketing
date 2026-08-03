@@ -17,17 +17,12 @@ export default function AutomationsPage() {
               className="text-[28px] md:text-[40px] font-bold tracking-tight"
               style={{ lineHeight: "1" }}
             >
-              <span className="inline-flex items-baseline gap-1.5 flex-wrap">
-                <span className="text-cn-muted">Introducing</span>
-                <span className="inline-flex items-baseline gap-1 whitespace-nowrap">
-                  <img src="/logo/caribnexus-wordmark.svg" alt="CaribNexus AI" className="inline-block h-[36px] md:h-[58px] self-center" style={{ marginTop: "-10px", marginBottom: "-14px" }} />
-                  <span className="text-[20px] md:text-[35px] font-normal text-[#8A8A8A]">Automations</span><span className="text-cn-muted">,</span>
-                </span>
-              </span>
+              <span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>Introducing</span>{" "}
+              <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[40px] md:h-[60px]" style={{ marginTop: "-12px", marginBottom: "-16px" }} /><span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>,</span>
             </h1>
             <p className="text-[28px] md:text-[40px] font-bold tracking-tight mt-2" style={{ lineHeight: "1" }}>
-              <span className="text-cn-muted">Intelligent agents that run the digital side</span><br className="hidden md:inline" />
-              <span className="text-cn-muted"> of your business.</span>
+              <span className="text-cn-muted" style={{ position: "relative", top: "-3px" }}>Intelligent agents that run the digital side</span><br className="hidden md:inline" />
+              <span className="text-cn-muted" style={{ position: "relative", top: "-3px" }}> of your business.</span>
             </p>
             <p className="text-[13px] text-cn-muted mt-4 max-w-[480px]" style={{ lineHeight: "1.4" }}>
               Social media. Content strategy. Customer service. Appointment booking. All handled by AI agents that see images, hear voice notes, and learn your business over time. Deployed across the channels your customers already use.
@@ -36,7 +31,7 @@ export default function AutomationsPage() {
           <div className="hidden md:flex items-end justify-end" style={{ gridColumn: "10 / 12" }}>
             <button
               onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
-              className="text-[11px] font-medium bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+              className="text-[11px] font-medium bg-gradient-to-r from-[#FF5733] to-[#00A859] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             >
               Interested in this? →
             </button>
@@ -95,8 +90,8 @@ export default function AutomationsPage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
           <FadeIn style={{ gridColumn: "2 / 11" }}>
             <p className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
-              <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">Social media</span><span className="text-cn-muted">. </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">Content</span><span className="text-cn-muted">. </span><span className="bg-gradient-to-r from-[#0077B6] via-[#009088] to-[#FF5733] bg-clip-text text-transparent">Customer service</span><span className="text-cn-muted">. </span><span className="bg-gradient-to-r from-[#FF5733] to-[#FF8C42] bg-clip-text text-transparent">Operations</span><span className="text-cn-muted">.</span><br />
-              <span className="text-cn-muted">Each one, a system built for your business.</span>
+              <span className="text-cn-muted">Whether it&apos;s </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">social media</span><span className="text-cn-muted">, </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">content</span><span className="text-cn-muted">, </span><span className="bg-gradient-to-r from-[#0077B6] via-[#009088] to-[#FF5733] bg-clip-text text-transparent">customer service</span><span className="text-cn-muted">, or </span><span className="bg-gradient-to-r from-[#FF5733] to-[#FF8C42] bg-clip-text text-transparent">operations</span><span className="text-cn-muted">.</span><br />
+              <span className="text-cn-muted">We have a system we can build for your business.</span>
             </p>
           </FadeIn>
         </section>
@@ -118,7 +113,7 @@ export default function AutomationsPage() {
 
         {/* Customer Service — panel */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[80px]">
-          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-scale-mobile">
+          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-peek-mobile">
             <div className="grid grid-cols-2 gap-[1px] bg-cn-border overflow-hidden">
               <div className="p-10 flex items-center justify-center" style={{ minHeight: "480px", background: "linear-gradient(135deg, rgba(0,119,182,0.05), rgba(0,144,136,0.05), rgba(255,87,51,0.05))" }}>
                 <img
@@ -171,7 +166,7 @@ export default function AutomationsPage() {
 
         {/* Social Media — panel (flipped: text left, image right) */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[80px]">
-          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-scale-mobile">
+          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-peek-mobile">
             <div className="grid grid-cols-2 gap-[1px] bg-cn-border overflow-hidden">
               <div className="bg-cn-surface p-10 flex flex-col justify-center" style={{ minHeight: "480px" }}>
                 <div className="space-y-4">
@@ -224,7 +219,7 @@ export default function AutomationsPage() {
 
         {/* Content Strategy — panel */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[80px]">
-          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-scale-mobile">
+          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-peek-mobile">
             <div className="grid grid-cols-2 gap-[1px] bg-cn-border overflow-hidden">
               <div className="p-10 flex items-center justify-center" style={{ minHeight: "480px", background: "linear-gradient(135deg, rgba(0,168,89,0.05), rgba(255,87,51,0.05))" }}>
                 <img
@@ -277,7 +272,7 @@ export default function AutomationsPage() {
 
         {/* Operations — panel (flipped: text left, image right) */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[80px]">
-          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-scale-mobile">
+          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-peek-mobile">
             <div className="grid grid-cols-2 gap-[1px] bg-cn-border overflow-hidden">
               <div className="bg-cn-surface p-10 flex flex-col justify-center" style={{ minHeight: "480px" }}>
                 <div className="space-y-4">

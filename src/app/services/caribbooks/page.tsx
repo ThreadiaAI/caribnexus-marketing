@@ -19,7 +19,7 @@ export default function CaribBooksPage() {
               style={{ lineHeight: "1" }}
             >
               <span className="text-cn-muted">Introducing</span>{" "}
-              <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[24px] md:h-[32px] align-baseline" style={{ marginBottom: "-2px" }} /><span className="text-cn-muted">,</span><br className="hidden md:inline" />
+              <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[28px] md:h-[32px] align-baseline" style={{ marginBottom: "-2px" }} /><span className="text-cn-muted">,</span><br className="hidden md:inline" />
               <span className="text-cn-muted"> your AI bookkeeper that works in WhatsApp</span>
             </h1>
             <p className="text-[13px] text-cn-muted mt-3 max-w-[420px]" style={{ lineHeight: "1.3" }}>

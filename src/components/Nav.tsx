@@ -6,7 +6,7 @@ import Link from "next/link";
 const NAV_LINKS: { label: string; href: string; action?: string }[] = [
   { label: "Services", href: "/services" },
   { label: "CaribBooks", href: "/services/caribbooks" },
-  { label: "Automations", href: "/services/messaging" },
+  { label: "Automations", href: "/services/automations" },
   { label: "Contact", href: "#", action: "open-widget-book" },
 ];
 
@@ -42,7 +42,7 @@ export function Nav() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-baseline gap-4" style={{ gridColumn: "8 / 12", justifySelf: "end" }}>
+          <div className="hidden md:flex items-baseline gap-4" style={{ gridColumn: "8 / 12", justifySelf: "end", position: "relative", top: "3px" }}>
             {NAV_LINKS.map((link) => (
               link.action ? (
                 <button
@@ -62,37 +62,10 @@ export function Nav() {
                 </Link>
               )
             ))}
-            <span className="w-px h-3 bg-cn-border self-center" />
-            <Link
-              href="https://books.caribnexusai.com/login"
-              className="text-[11px] font-medium text-cn-muted hover:text-[#FF5733] transition-colors whitespace-nowrap"
-            >
-              Log in
-            </Link>
-            <Link
-              href="https://books.caribnexusai.com/signup"
-              className="text-[11px] font-medium text-white px-3 py-[3px] rounded-full transition-all hover:bg-[#FF5733] whitespace-nowrap"
-              style={{ background: "linear-gradient(135deg, #0077B6, #009088, #00A859, #FF5733)" }}
-            >
-              Sign up
-            </Link>
           </div>
 
-          {/* Mobile: Log in + Sign up + Hamburger */}
+          {/* Mobile: Hamburger */}
           <div className="md:hidden flex items-center justify-end gap-3" style={{ gridColumn: "7 / 12" }}>
-            <Link
-              href="https://books.caribnexusai.com/login"
-              className="text-[9px] font-medium text-cn-muted hover:text-[#FF5733] transition-colors whitespace-nowrap"
-            >
-              Log in
-            </Link>
-            <Link
-              href="https://books.caribnexusai.com/signup"
-              className="text-[9px] font-medium text-white px-2 py-[2px] rounded-full whitespace-nowrap"
-              style={{ background: "linear-gradient(135deg, #0077B6, #009088, #00A859, #FF5733)" }}
-            >
-              Sign up
-            </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-1.5 hover:bg-gray-100 rounded-md transition relative z-50"
@@ -132,23 +105,6 @@ export function Nav() {
             ))}
           </nav>
 
-          <div className="mt-12 flex flex-col items-center space-y-4 w-full max-w-xs">
-            <Link
-              href="https://books.caribnexusai.com/login"
-              className="w-full py-3 text-center text-lg font-medium text-cn-muted border border-cn-border rounded-full hover:bg-gray-50 transition-all duration-200"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Log in
-            </Link>
-            <Link
-              href="https://books.caribnexusai.com/signup"
-              className="w-full py-3 text-center text-lg font-medium text-white rounded-full transition-all duration-200 hover:opacity-90"
-              style={{ background: "linear-gradient(135deg, #0077B6, #009088, #00A859, #FF5733)" }}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Sign up
-            </Link>
-          </div>
         </div>
       </div>
     </>

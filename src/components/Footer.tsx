@@ -12,7 +12,7 @@ export function Footer() {
               <h4 className="text-[10px] font-bold text-cn-dark" style={{ marginBottom: "10px" }}>Products</h4>
               <ul className="space-y-1.5">
                 <li><a href="/services/caribbooks" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">CaribBooks</a></li>
-                <li><a href="/services/messaging" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Automations</a></li>
+                <li><a href="/services/automations" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Automations</a></li>
                 <li><a href="https://books.caribnexusai.com/login" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Sign in</a></li>
               </ul>
             </div>
@@ -21,7 +21,7 @@ export function Footer() {
               <ul className="space-y-1.5">
                 <li><a href="/services" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Overview</a></li>
                 <li><a href="/services/caribbooks" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">AI Bookkeeping</a></li>
-                <li><a href="/services/messaging" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">AI Automations</a></li>
+                <li><a href="/services/automations" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">AI Automations</a></li>
               </ul>
             </div>
             <div>
@@ -45,7 +45,7 @@ export function Footer() {
           <h4 className="text-[11px] font-bold text-cn-dark" style={{ marginBottom: "16px" }}>Products</h4>
           <ul className="space-y-2">
             <li><a href="/services/caribbooks" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">CaribBooks</a></li>
-            <li><a href="/services/messaging" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Automations</a></li>
+            <li><a href="/services/automations" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Automations</a></li>
             <li><a href="https://books.caribnexusai.com/login" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Sign in</a></li>
           </ul>
         </div>
@@ -55,7 +55,7 @@ export function Footer() {
           <ul className="space-y-2">
             <li><a href="/services" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Overview</a></li>
             <li><a href="/services/caribbooks" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">AI Bookkeeping</a></li>
-            <li><a href="/services/messaging" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">AI Automations</a></li>
+            <li><a href="/services/automations" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">AI Automations</a></li>
           </ul>
         </div>
 

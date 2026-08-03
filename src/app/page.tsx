@@ -51,10 +51,10 @@ export default function HomePage() {
         {/* Product Section — heading left, desc right */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
+            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1.15", position: "relative", top: "-1px" }}>
               <span className="text-cn-muted">Introducing </span>
-              <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[18px] md:h-[24px] align-baseline" style={{ marginBottom: "-2px" }} /><span className="text-cn-muted">,</span><br />
-              <span className="text-cn-muted">our flagship product</span>
+              <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[20px] md:h-[26px] align-baseline" style={{ marginBottom: "-2px" }} /><span className="text-cn-muted">,</span><br />
+              <span className="text-cn-muted" style={{ position: "relative", top: "-3px" }}>our flagship product</span>
             </h2>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
@@ -109,7 +109,7 @@ export default function HomePage() {
         </section>
 
         {/* Mobile cards */}
-        <div className="md:hidden px-4 pb-[40px] mt-[24px]">
+        <div className="md:hidden px-4 pb-[40px] mt-[8px]">
           <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
             <MobileCard fig="FIG 0.1" img="/illustrations/feature-1-message.svg" title="Message to ledger" titleColor="#0077B6" desc="Text your transaction on WhatsApp. CB posts the double-entry journal entry automatically." />
             <MobileCard fig="FIG 0.2" img="/illustrations/feature-2-scales.svg" title="Double-entry by default" titleColor="#00A859" desc="Every transaction creates one debit and one credit of equal amounts. The math is always balanced." />
@@ -123,13 +123,12 @@ export default function HomePage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
             <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
-              <span className="inline-flex items-baseline gap-1">
-                <img src="/logo/caribnexus-wordmark.svg" alt="CaribNexus AI" className="inline-block h-[28px] md:h-[38px] self-center" style={{ marginTop: "-11px", marginBottom: "-10px" }} />
-                <span className="text-[16px] md:text-[22px] font-normal text-[#8A8A8A]">Automations</span>
-              </span>
+              <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[32px] md:h-[44px]" style={{ marginTop: "-8px", marginBottom: "-14px" }} />
 
-              <span className="text-[13px] font-normal text-cn-muted block mt-1">Built for businesses that want to do more without hiring more.</span>
             </h2>
+            <p className="text-[13px] text-cn-muted mt-1 pb-3 border-b border-cn-border" style={{ lineHeight: "1.3", position: "relative", top: "4px" }}>
+              Built for businesses that want to do more without hiring more.
+            </p>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
             <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
@@ -144,7 +143,7 @@ export default function HomePage() {
                 Get started
               </button>
               <a
-                href="/services/messaging"
+                href="/services/automations"
                 className="text-[11px] font-medium text-[#0077B6] px-4 py-[6px] rounded-full border border-[#0077B6]/30 hover:border-[#0077B6] transition-colors"
               >
                 Learn more
@@ -161,7 +160,7 @@ export default function HomePage() {
               img="/illustrations/auto-customer-service-transparent.png"
               title="Customer service, always on"
               titleColor="#0077B6"
-              desc="Every message answered in seconds — voice notes, images, text. Across WhatsApp, Instagram, and Email. Escalates only when needed."
+              desc="Every message answered — voice notes, images, text. Across every channel. Escalates only when needed."
             />
             <div className="bg-cn-border" />
             <Card
@@ -183,7 +182,7 @@ export default function HomePage() {
         </section>
 
         {/* Automations Mobile cards */}
-        <div className="md:hidden px-4 pb-[40px] mt-[24px]">
+        <div className="md:hidden px-4 pb-[40px] mt-[8px]">
           <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
             <MobileCard fig="FIG 1.1" img="/illustrations/auto-customer-service-transparent.png" title="Customer service, always on" titleColor="#0077B6" desc="Every message answered in seconds — voice notes, images, text. Across WhatsApp, Instagram, and Email." />
             <MobileCard fig="FIG 1.2" img="/illustrations/auto-social-media-transparent.png" title="Social media, fully managed" titleColor="#00A859" desc="Posts created, published, and monitored. Comments replied to. DMs handled." />
@@ -288,7 +287,7 @@ function Card({ fig, img, title, titleColor, desc }: { fig: string; img: string;
     <div className="pl-4 pr-2">
       <span className="text-[9px] font-medium text-cn-muted uppercase tracking-wider block" style={{ lineHeight: "16px" }}>{fig}</span>
       <div className="flex items-center justify-center" style={{ height: "180px", marginTop: "16px", marginBottom: "20px" }}>
-        <img src={img} alt="" style={{ height: "220px", width: "auto" }} />
+        <img src={img} alt="" style={{ height: "190px", width: "auto" }} />
       </div>
       <h3 className="text-[13px] font-bold" style={{ lineHeight: "24px", color: titleColor }}>{title}</h3>
       <p className="text-[11px] text-cn-muted" style={{ marginTop: "8px", lineHeight: "16px" }}>{desc}</p>

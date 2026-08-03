@@ -48,13 +48,13 @@ export default function ServicesPage() {
             1.0 CaribBooks
         ═══════════════════════════════════════════════════════════════ */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[40px] pb-[24px]">
-          <FadeIn style={{ gridColumn: "2 / 6" }}>
+          <FadeIn style={{ gridColumn: "2 / 6", position: "relative", top: "5px" }}>
             <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
-              <span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>AI bookkeeping</span><br />
-              <span className="relative" style={{ top: "7px" }}><span className="text-cn-muted">with </span><img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[18px] md:h-[24px] align-baseline" style={{ marginBottom: "-2px" }} /></span>
+              <span className="text-cn-muted" style={{ position: "relative", top: "1px" }}>AI bookkeeping</span><br />
+              <span className="text-cn-muted" style={{ position: "relative", top: "2px" }}>with </span><img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[22px] md:h-[28px] align-baseline" style={{ marginBottom: "-2px", position: "relative", top: "3px" }} />
             </h2>
           </FadeIn>
-          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
+          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12", position: "relative", top: "5px" }} delay={0.1}>
             <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
               Message your transaction in plain English — or patois — and CB posts the journal entry instantly. Every financial report updates in real time. Built for Caribbean compliance.
             </p>
@@ -81,8 +81,7 @@ export default function ServicesPage() {
               <span className="text-cn-muted" style={{ position: "relative", top: "-1px" }}>Intelligent systems</span><br />
               <span className="relative" style={{ top: "-3px" }}>
                 <span className="text-cn-muted">with </span>
-                <img src="/logo/caribnexus-wordmark.svg" alt="CaribNexus AI" className="inline h-[32px] md:h-[42px]" style={{ verticalAlign: "middle", position: "relative", top: "-1px" }} />
-                <span className="text-[16px] md:text-[22px] font-normal text-[#8A8A8A]"> Automations</span>
+                <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline h-[36px] md:h-[46px]" style={{ verticalAlign: "middle", position: "relative", top: "-2px" }} />
               </span>
             </h2>
           </FadeIn>
@@ -92,7 +91,7 @@ export default function ServicesPage() {
             </p>
             <p style={{ marginTop: "16px" }}>
               <span className="text-[10px] font-medium text-cn-muted">2.1</span>{" "}
-              <Link href="/services/messaging" className="text-[11px] font-medium bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+              <Link href="/services/automations" className="text-[11px] font-medium bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
                 Learn more →
               </Link>
             </p>
@@ -101,7 +100,7 @@ export default function ServicesPage() {
 
         {/* Messaging — two bordered cards */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[80px]">
-          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-scale-mobile">
+          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-peek-mobile">
             <div className="grid grid-cols-2 gap-[1px] bg-cn-border overflow-hidden">
               <div className="p-10 flex items-center justify-center" style={{ minHeight: "480px", background: "rgba(0,119,182,0.04)" }}>
                 <img
@@ -169,7 +168,7 @@ export default function ServicesPage() {
 
         {/* Voice — dark panel (image LEFT, text RIGHT) */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[80px]">
-          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-scale-mobile">
+          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-peek-mobile">
             <div
               className="relative overflow-hidden flex flex-col justify-between"
               style={{
@@ -310,87 +309,6 @@ export default function ServicesPage() {
           </FadeInStagger>
         </section>
 
-        <div className="border-t border-cn-border w-full" />
-
-        {/* ═══════════════════════════════════════════════════════════════
-            5.0 Custom AI Builds
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
-          <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
-              <span className="bg-gradient-to-r from-[#0077B6] via-[#FF5733] to-[#00A859] bg-clip-text text-transparent">Custom AI builds,</span><br />
-              <span className="bg-gradient-to-r from-[#0077B6] via-[#FF5733] to-[#00A859] bg-clip-text text-transparent">purpose-built</span>
-            </h2>
-          </FadeIn>
-          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
-            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
-              Bespoke AI systems for your specific workflows. Not off-the-shelf tools — agents that integrate with your existing processes and scale with your business.
-            </p>
-            <p style={{ marginTop: "16px" }}>
-              <span className="text-[10px] font-medium text-cn-muted">5.1</span>{" "}
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
-                className="text-[11px] font-medium bg-gradient-to-r from-[#0077B6] to-[#FF5733] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-              >
-                Discuss your project +
-              </button>
-            </p>
-          </FadeIn>
-        </section>
-
-        {/* Custom builds — dark panel (text LEFT, image RIGHT) */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[80px]">
-          <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-scale-mobile">
-            <div
-              className="relative overflow-hidden flex flex-col justify-between"
-              style={{
-                background: "linear-gradient(160deg, #0a0a1a 0%, #0d1a2e 40%, #1a0d0a 100%)",
-                minHeight: "680px",
-                padding: "48px",
-              }}
-            >
-              <div className="flex h-full flex-1 items-stretch">
-                <div className="flex flex-col justify-center w-[45%] shrink-0 pl-[10%] pr-8 space-y-4">
-                  <p className="text-[12px] font-semibold text-white" style={{ lineHeight: "16px" }}>
-                    We&apos;ve shipped systems that run businesses
-                  </p>
-                  <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
-                    AI bookkeepers that understand Caribbean<br />
-                    patois and post journal entries from WhatsApp.
-                  </p>
-                  <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
-                    Voice agents handling customer service, booking,<br />
-                    and lead qualification — 24/7, no hold music.
-                  </p>
-                  <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
-                    Messaging systems routing 1000+ conversations<br />
-                    daily across WhatsApp, Instagram, and Telegram.
-                  </p>
-                  <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
-                    Agentic systems with safety layers that ensure<br />
-                    the AI never goes off-script or leaks data.
-                  </p>
-                </div>
-
-                <div className="w-px bg-white/10 self-stretch" />
-
-                <div className="flex items-center justify-center flex-1 pl-8">
-                  <img
-                    src="/illustrations/service-custom.png"
-                    alt="Custom AI engineering"
-                    style={{
-                      height: "380px",
-                      width: "auto",
-                      objectFit: "contain",
-                      filter: "invert(1) opacity(0.85)",
-                      mixBlendMode: "screen",
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </ScaleIn>
-        </section>
 
         {/* ═══════════════════════════════════════════════════════════════
             CTA

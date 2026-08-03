@@ -95,11 +95,24 @@
 .panel-scale-mobile > * {
   min-width: 900px;
 }
+.panel-peek-mobile {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.panel-peek-mobile > * {
+  min-width: 700px;
+}
 @media (min-width: 768px) {
   .panel-scale-mobile {
     overflow-x: visible;
   }
   .panel-scale-mobile > * {
+    min-width: unset;
+  }
+  .panel-peek-mobile {
+    overflow-x: visible;
+  }
+  .panel-peek-mobile > * {
     min-width: unset;
   }
 }
