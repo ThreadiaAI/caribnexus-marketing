@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const NAV_LINKS: { label: string; href: string; action?: string }[] = [
   { label: "Services", href: "/services" },
-  { label: "CaribBooks", href: "/caribbooks" },
-  { label: "About", href: "/about" },
+  { label: "CaribBooks", href: "/services/caribbooks" },
+  { label: "Automations", href: "/services/messaging" },
   { label: "Contact", href: "#", action: "open-widget-book" },
 ];
 

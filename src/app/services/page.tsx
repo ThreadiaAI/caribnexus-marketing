@@ -34,7 +34,7 @@ export default function ServicesPage() {
               >
                 <span className="text-cn-muted">AI infrastructure for</span><br />
                 <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">
-                  Caribbean business
+                  Caribbean businesses
                 </span>
               </h1>
             </FadeIn>
@@ -43,14 +43,15 @@ export default function ServicesPage() {
 
         <div className="border-t border-cn-border w-full" />
 
+
         {/* ═══════════════════════════════════════════════════════════════
             1.0 CaribBooks
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[40px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
             <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
-              <span className="bg-gradient-to-r from-[#0077B6] to-[#FF5733] bg-clip-text text-transparent">AI bookkeeping,</span><br />
-              <span className="bg-gradient-to-r from-[#0077B6] to-[#FF5733] bg-clip-text text-transparent">fully automated</span>
+              <span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>AI bookkeeping</span><br />
+              <span className="relative" style={{ top: "7px" }}><span className="text-cn-muted">with </span><img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[18px] md:h-[24px] align-baseline" style={{ marginBottom: "-2px" }} /></span>
             </h2>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
@@ -59,7 +60,7 @@ export default function ServicesPage() {
             </p>
             <p style={{ marginTop: "16px" }}>
               <span className="text-[10px] font-medium text-cn-muted">1.1</span>{" "}
-              <Link href="/caribbooks" className="text-[11px] font-medium bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+              <Link href="/services/caribbooks" className="text-[11px] font-medium bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
                 Learn more →
               </Link>
             </p>
@@ -77,22 +78,23 @@ export default function ServicesPage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
             <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
-              <span className="bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent">Messaging automation,</span><br />
-              <span className="bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent">fully intelligent</span>
+              <span className="text-cn-muted" style={{ position: "relative", top: "-1px" }}>Intelligent systems</span><br />
+              <span className="relative" style={{ top: "-3px" }}>
+                <span className="text-cn-muted">with </span>
+                <img src="/logo/caribnexus-wordmark.svg" alt="CaribNexus AI" className="inline h-[32px] md:h-[42px]" style={{ verticalAlign: "middle", position: "relative", top: "-1px" }} />
+                <span className="text-[16px] md:text-[22px] font-normal text-[#8A8A8A]"> Automations</span>
+              </span>
             </h2>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
             <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
-              Intelligent agents deployed across WhatsApp, Instagram, and Telegram. One knowledge base powers customer support, appointment booking, lead qualification, and FAQ handling.
+              Intelligent agents deployed across WhatsApp, Instagram, and Telegram. Not just text — voice notes transcribed, images read, documents extracted. One knowledge base powers customer support, appointment booking, lead qualification, and FAQ handling.
             </p>
             <p style={{ marginTop: "16px" }}>
               <span className="text-[10px] font-medium text-cn-muted">2.1</span>{" "}
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
-                className="text-[11px] font-medium bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-              >
-                Get started +
-              </button>
+              <Link href="/services/messaging" className="text-[11px] font-medium bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+                Learn more →
+              </Link>
             </p>
           </FadeIn>
         </section>
@@ -101,14 +103,14 @@ export default function ServicesPage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[80px]">
           <ScaleIn style={{ gridColumn: "2 / 12" }} className="panel-scale-mobile">
             <div className="grid grid-cols-2 gap-[1px] bg-cn-border overflow-hidden">
-              <div className="bg-cn-surface p-10 flex items-center justify-center" style={{ minHeight: "480px" }}>
+              <div className="p-10 flex items-center justify-center" style={{ minHeight: "480px", background: "rgba(0,119,182,0.04)" }}>
                 <img
                   src="/illustrations/service-messaging.png"
                   alt="Multi-channel messaging hub"
                   style={{ height: "320px", width: "auto", objectFit: "contain", opacity: 0.8, mixBlendMode: "multiply" }}
                 />
               </div>
-              <div className="bg-cn-surface p-10 flex flex-col justify-center" style={{ minHeight: "480px" }}>
+              <div className="p-10 flex flex-col justify-center" style={{ minHeight: "480px", background: "rgba(0,119,182,0.04)" }}>
                 <div className="space-y-4">
                   <p className="text-[12px] font-semibold bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent" style={{ lineHeight: "16px" }}>
                     One brain, every channel
@@ -117,6 +119,11 @@ export default function ServicesPage() {
                     Your customers message on WhatsApp, Instagram,<br className="hidden md:inline" />
                     and Telegram. One AI agent handles all three —<br className="hidden md:inline" />
                     same knowledge, same tone, same intelligence.
+                  </p>
+                  <p className="text-[11px] text-cn-muted" style={{ lineHeight: "16px" }}>
+                    Customers send voice notes — transcribed instantly.<br className="hidden md:inline" />
+                    Photos of documents — read and extracted. Not just<br className="hidden md:inline" />
+                    text. Every format your customers actually use.
                   </p>
                   <p className="text-[11px] text-cn-muted" style={{ lineHeight: "16px" }}>
                     It books appointments, answers FAQs, qualifies<br />

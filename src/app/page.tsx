@@ -52,8 +52,9 @@ export default function HomePage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
             <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
-              <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">CaribBooks AI,</span><br />
-              <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">our flagship product</span>
+              <span className="text-cn-muted">Introducing </span>
+              <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[18px] md:h-[24px] align-baseline" style={{ marginBottom: "-2px" }} /><span className="text-cn-muted">,</span><br />
+              <span className="text-cn-muted">our flagship product</span>
             </h2>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
@@ -69,7 +70,7 @@ export default function HomePage() {
                 Sign up
               </a>
               <a
-                href="/caribbooks"
+                href="/services/caribbooks"
                 className="text-[11px] font-medium text-cn-muted px-4 py-[6px] rounded-full border border-cn-border hover:text-[#FF5733] transition-colors"
               >
                 Learn more
@@ -113,6 +114,80 @@ export default function HomePage() {
             <MobileCard fig="FIG 0.1" img="/illustrations/feature-1-message.svg" title="Message to ledger" titleColor="#0077B6" desc="Text your transaction on WhatsApp. CB posts the double-entry journal entry automatically." />
             <MobileCard fig="FIG 0.2" img="/illustrations/feature-2-scales.svg" title="Double-entry by default" titleColor="#00A859" desc="Every transaction creates one debit and one credit of equal amounts. The math is always balanced." />
             <MobileCard fig="FIG 0.3" img="/illustrations/feature-3-reports.svg" title="One entry, every report" titleColor="#FF5733" desc="A single journal entry feeds all 11 financial reports. P&L, Balance Sheet, Trial Balance — all live." />
+          </div>
+        </div>
+
+        <div className="border-t border-cn-border w-full" />
+
+        {/* Automations Section — heading left, desc right */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+          <FadeIn style={{ gridColumn: "2 / 6" }}>
+            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
+              <span className="inline-flex items-baseline gap-1">
+                <img src="/logo/caribnexus-wordmark.svg" alt="CaribNexus AI" className="inline-block h-[28px] md:h-[38px] self-center" style={{ marginTop: "-11px", marginBottom: "-10px" }} />
+                <span className="text-[16px] md:text-[22px] font-normal text-[#8A8A8A]">Automations</span>
+              </span>
+
+              <span className="text-[13px] font-normal text-cn-muted block mt-1">Built for businesses that want to do more without hiring more.</span>
+            </h2>
+          </FadeIn>
+          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
+              Intelligent systems that run the digital side of your business. Social media, content, customer service, operations — deployed across WhatsApp, Instagram, and every channel your customers use.
+            </p>
+            <div className="flex items-center gap-3" style={{ marginTop: "16px" }}>
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
+                className="text-[11px] font-medium text-white px-4 py-[6px] rounded-full transition-all hover:opacity-90"
+                style={{ background: "linear-gradient(135deg, #FF5733, #00A859)" }}
+              >
+                Get started
+              </button>
+              <a
+                href="/services/messaging"
+                className="text-[11px] font-medium text-[#0077B6] px-4 py-[6px] rounded-full border border-[#0077B6]/30 hover:border-[#0077B6] transition-colors"
+              >
+                Learn more
+              </a>
+            </div>
+          </FadeIn>
+        </section>
+
+        {/* Automations Cards: desktop = 3 cols inside grid. Mobile = horizontal scroll */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[64px]">
+          <div className="hidden md:grid md:grid-cols-[1fr_1px_1fr_1px_1fr] md:gap-0" style={{ gridColumn: "2 / 12", marginTop: "40px" }}>
+            <Card
+              fig="FIG 1.1"
+              img="/illustrations/auto-customer-service-transparent.png"
+              title="Customer service, always on"
+              titleColor="#0077B6"
+              desc="Every message answered in seconds — voice notes, images, text. Across WhatsApp, Instagram, and Email. Escalates only when needed."
+            />
+            <div className="bg-cn-border" />
+            <Card
+              fig="FIG 1.2"
+              img="/illustrations/auto-social-media-transparent.png"
+              title="Social media, fully managed"
+              titleColor="#00A859"
+              desc="Posts created, published, and monitored. Comments replied to. DMs handled. Your social presence runs without you."
+            />
+            <div className="bg-cn-border" />
+            <Card
+              fig="FIG 1.3"
+              img="/illustrations/auto-content-strategy-transparent.png"
+              title="Content, on autopilot"
+              titleColor="#FF5733"
+              desc="A month of content planned, designed, and scheduled. Sent to you for approval. Published on the date you agreed."
+            />
+          </div>
+        </section>
+
+        {/* Automations Mobile cards */}
+        <div className="md:hidden px-4 pb-[40px] mt-[24px]">
+          <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+            <MobileCard fig="FIG 1.1" img="/illustrations/auto-customer-service-transparent.png" title="Customer service, always on" titleColor="#0077B6" desc="Every message answered in seconds — voice notes, images, text. Across WhatsApp, Instagram, and Email." />
+            <MobileCard fig="FIG 1.2" img="/illustrations/auto-social-media-transparent.png" title="Social media, fully managed" titleColor="#00A859" desc="Posts created, published, and monitored. Comments replied to. DMs handled." />
+            <MobileCard fig="FIG 1.3" img="/illustrations/auto-content-strategy-transparent.png" title="Content, on autopilot" titleColor="#FF5733" desc="A month of content planned, designed, and scheduled. Published on the date you agreed." />
           </div>
         </div>
 
