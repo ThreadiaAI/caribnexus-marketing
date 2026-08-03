@@ -17,8 +17,8 @@ export default function AutomationsPage() {
               className="text-[28px] md:text-[40px] font-bold tracking-tight"
               style={{ lineHeight: "1" }}
             >
-              <span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>Introducing</span>{" "}
-              <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[40px] md:h-[60px]" style={{ marginTop: "-12px", marginBottom: "-16px" }} /><span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>,</span>
+              <span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>Introducing</span><br className="md:hidden" />{" "}
+              <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[24px] md:h-[34px]" style={{ marginTop: "-7px", marginBottom: "-9px" }} /><span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>,</span>
             </h1>
             <p className="text-[28px] md:text-[40px] font-bold tracking-tight mt-2" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted" style={{ position: "relative", top: "-3px" }}>Intelligent agents that run the digital side</span><br className="hidden md:inline" />

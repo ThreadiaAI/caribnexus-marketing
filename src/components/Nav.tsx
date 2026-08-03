@@ -26,18 +26,18 @@ export function Nav() {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-cn-border">
         <div
-          className="mx-auto max-w-[var(--content-max-w)] h-[36px] md:h-[var(--nav-h)] grid items-center"
+          className="mx-auto max-w-[var(--content-max-w)] py-3 md:h-[var(--nav-h)] grid items-center"
           style={{
             gridTemplateColumns: "repeat(12, 1fr)",
             columnGap: "var(--grid-gap)",
             paddingInline: "var(--grid-padding)",
           }}
         >
-          <Link href="/" className="flex items-center" style={{ gridColumn: "2 / 5" }}>
+          <Link href="/" className="flex items-center" style={{ gridColumn: "2 / 6" }}>
             <img
               src="/logo/caribnexus-wordmark.svg"
               alt="CaribNexus AI"
-              style={{ height: "33px", width: "auto" }}
+              className="w-[140px] md:w-[120px] h-auto"
             />
           </Link>
 
@@ -72,11 +72,11 @@ export function Nav() {
               aria-label="Toggle menu"
             >
               {!mobileMenuOpen ? (
-                <svg className="w-5 h-5" fill="none" stroke="#1C1C1C" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="none" stroke="#1C1C1C" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               ) : (
-                <svg className="w-5 h-5" fill="none" stroke="#1C1C1C" viewBox="0 0 24 24">
+                <svg className="w-6 h-6" fill="none" stroke="#1C1C1C" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               )}

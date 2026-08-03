@@ -79,9 +79,9 @@ export default function ServicesPage() {
           <FadeIn style={{ gridColumn: "2 / 6" }}>
             <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted" style={{ position: "relative", top: "-1px" }}>Intelligent systems</span><br />
-              <span className="relative" style={{ top: "-3px" }}>
+              <span className="relative" style={{ top: "-1px" }}>
                 <span className="text-cn-muted">with </span>
-                <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline h-[36px] md:h-[46px]" style={{ verticalAlign: "middle", position: "relative", top: "-2px" }} />
+                <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline h-[20px] md:h-[26px] relative top-[1px] md:top-[2px]" style={{ verticalAlign: "baseline", marginBottom: "-2px" }} />
               </span>
             </h2>
           </FadeIn>

@@ -123,7 +123,7 @@ export default function HomePage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
             <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
-              <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[32px] md:h-[44px]" style={{ marginTop: "-8px", marginBottom: "-14px" }} />
+              <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[24px] md:h-[32px]" style={{ marginBottom: "-4px" }} />
 
             </h2>
             <p className="text-[13px] text-cn-muted mt-1 pb-3 border-b border-cn-border" style={{ lineHeight: "1.3", position: "relative", top: "4px" }}>
