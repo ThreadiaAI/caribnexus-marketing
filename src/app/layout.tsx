@@ -4,7 +4,7 @@ import { VoiceWidget } from "@/components/VoiceWidget";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CaribNexus AI — Caribbean Applied Artificial Intelligence",
+  title: "CaribNexus AI",
   description: "Building intelligent systems for Caribbean businesses. CaribBooks: AI-powered bookkeeping via WhatsApp.",
 };
 
