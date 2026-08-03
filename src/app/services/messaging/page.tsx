@@ -17,10 +17,12 @@ export default function AutomationsPage() {
               className="text-[28px] md:text-[40px] font-bold tracking-tight"
               style={{ lineHeight: "1" }}
             >
-              <span className="inline-flex items-baseline gap-1.5">
+              <span className="inline-flex items-baseline gap-1.5 flex-wrap">
                 <span className="text-cn-muted">Introducing</span>
-                <img src="/logo/caribnexus-wordmark.svg" alt="CaribNexus AI" className="inline-block h-[44px] md:h-[58px] self-center" style={{ marginTop: "-12px", marginBottom: "-16px" }} />
-                <span className="text-[23px] md:text-[35px] font-normal text-[#8A8A8A]">Automations</span><span className="text-cn-muted">,</span>
+                <span className="inline-flex items-baseline gap-1 whitespace-nowrap">
+                  <img src="/logo/caribnexus-wordmark.svg" alt="CaribNexus AI" className="inline-block h-[36px] md:h-[58px] self-center" style={{ marginTop: "-10px", marginBottom: "-14px" }} />
+                  <span className="text-[20px] md:text-[35px] font-normal text-[#8A8A8A]">Automations</span><span className="text-cn-muted">,</span>
+                </span>
               </span>
             </h1>
             <p className="text-[28px] md:text-[40px] font-bold tracking-tight mt-2" style={{ lineHeight: "1" }}>
