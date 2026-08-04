@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -64,7 +64,7 @@ const TIERS = {
   ],
 };
 
-export default function PricingPage() {
+function PricingContent() {
   const searchParams = useSearchParams();
   const [tab, setTab] = useState<"business" | "partner">(
     searchParams.get("tab") === "partner" ? "partner" : "business"
@@ -200,5 +200,13 @@ export default function PricingPage() {
         <Footer />
       </main>
     </>
+  );
+}
+
+export default function PricingPage() {
+  return (
+    <Suspense>
+      <PricingContent />
+    </Suspense>
   );
 }
