@@ -49,7 +49,13 @@ export default function DemoPage() {
       <style dangerouslySetInnerHTML={{ __html: `[class*="fixed bottom-6 right-6"] { display: none !important; }` }} />
       <main
         className="bg-black fixed inset-0 w-full h-full overflow-hidden"
-        onClick={showAndHideControls}
+        onClick={() => {
+          if (isMuted && videoRef.current) {
+            videoRef.current.muted = false;
+            setIsMuted(false);
+          }
+          showAndHideControls();
+        }}
       >
         <video
           ref={videoRef}
@@ -74,7 +80,7 @@ export default function DemoPage() {
 
         {/* Right side actions — fades */}
         <div className={`absolute right-4 bottom-[120px] flex flex-col items-center gap-3 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`}>
-          <button onClick={toggleMute} className="flex flex-col items-center gap-1">
+          <button onClick={(e) => { e.stopPropagation(); toggleMute(); }} className="flex flex-col items-center gap-1">
             <div className="w-16 h-16 rounded-full bg-[#6B7280]/40 flex items-center justify-center">
               {isMuted ? (
                 <svg className="w-8 h-8 text-[#6B7280]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -91,7 +97,7 @@ export default function DemoPage() {
             </div>
             <span className="text-[9px] text-[#6B7280] font-medium">{isMuted ? "Unmute" : "Mute"}</span>
           </button>
-          <button onClick={handleShare} className="flex flex-col items-center gap-1">
+          <button onClick={(e) => { e.stopPropagation(); handleShare(); }} className="flex flex-col items-center gap-1">
             <div className="w-16 h-16 rounded-full bg-[#6B7280]/40 flex items-center justify-center">
               <svg className="w-8 h-8 text-[#6B7280]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8" />
