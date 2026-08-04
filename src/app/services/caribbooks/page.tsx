@@ -265,7 +265,7 @@ export default function CaribBooksPage() {
         {/* Built for */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 12" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight text-cn-muted">Built for how you work</h2>
+            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight text-cn-muted">Built for how you <span className="bg-gradient-to-r from-[#0077B6] to-[#FF5733] bg-clip-text text-transparent">work</span></h2>
           </FadeIn>
         </section>
 
