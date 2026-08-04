@@ -262,22 +262,81 @@ export default function CaribBooksPage() {
 
         <div className="border-t border-cn-border w-full" />
 
-        {/* CTA */}
-        <section className="mx-auto max-w-[var(--content-max-w)] px-[var(--grid-padding)] py-[80px] text-center">
-          <FadeIn>
-          <h2 className="text-[24px] md:text-[30px] font-bold tracking-tight text-cn-muted">Get started</h2>
-          <p className="text-[13px] text-cn-muted mt-2">
-            Sign up, describe your business, connect WhatsApp, and send your first transaction.
-          </p>
-          <div className="mt-3">
-            <Link
-              href="https://books.caribnexusai.com/signup"
-              className="inline-block text-[12px] font-medium text-white px-6 py-2.5 rounded-full transition-all hover:opacity-90"
-              style={{ background: "linear-gradient(135deg, #0077B6, #009088, #00A859)" }}
-            >
-              Sign up →
-            </Link>
+        {/* Built for */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+          <FadeIn style={{ gridColumn: "2 / 12" }}>
+            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight text-cn-muted">Built for how you work</h2>
+          </FadeIn>
+        </section>
+
+        {/* Cards — mobile: swipeable squares. Desktop: side by side in panel */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[80px]">
+          {/* Mobile — edge-to-edge, first card dominant, second peeks */}
+          <div className="md:hidden">
+            <div className="flex overflow-x-auto gap-3 pl-4 no-scrollbar">
+              <Link href="/services/caribbooks/pricing" className="shrink-0 w-[80vw] min-h-[380px] rounded-2xl p-7 flex flex-col justify-between relative overflow-hidden" style={{ background: "linear-gradient(160deg, #f5f5f5 0%, #ebebeb 100%)" }}>
+                <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 85% 20%, rgba(0,119,182,0.35) 0%, transparent 50%), radial-gradient(circle at 15% 80%, rgba(0,119,182,0.28) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(0,168,89,0.20) 0%, transparent 40%), radial-gradient(circle at 60% 55%, rgba(0,119,182,0.20) 0%, transparent 40%)" }} />
+                <p className="text-[18px] font-bold text-cn-muted" style={{ lineHeight: "1.3" }}>
+                  Are you a business owner doing your own books after hours? Or paying someone monthly for work that takes them minutes?
+                </p>
+                <div className="flex items-center gap-3">
+                  <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[16px] w-auto" />
+                  <div className="w-px h-[28px] bg-cn-border" />
+                  <div>
+                    <p className="text-[12px] font-bold text-cn-muted leading-tight">For Businesses</p>
+                    <p className="text-[11px] text-cn-muted/60 leading-tight mt-0.5">View our pricing</p>
+                  </div>
+                </div>
+              </Link>
+              <Link href="/services/caribbooks/pricing?tab=partner" className="shrink-0 w-[80vw] min-h-[380px] rounded-2xl p-7 flex flex-col justify-between mr-4 relative overflow-hidden" style={{ background: "linear-gradient(160deg, #f5f5f5 0%, #ebebeb 100%)" }}>
+                <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 20% 30%, rgba(255,87,51,0.35) 0%, transparent 50%), radial-gradient(circle at 80% 75%, rgba(255,87,51,0.28) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(0,168,89,0.20) 0%, transparent 40%), radial-gradient(circle at 50% 10%, rgba(255,87,51,0.20) 0%, transparent 40%)" }} />
+                <p className="text-[18px] font-bold text-cn-muted" style={{ lineHeight: "1.3" }}>
+                  Are you an accounting firm managing multiple clients&apos; books manually?
+                </p>
+                <div className="flex items-center gap-3">
+                  <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[16px] w-auto" />
+                  <div className="w-px h-[28px] bg-cn-border" />
+                  <div>
+                    <p className="text-[12px] font-bold text-cn-muted leading-tight">For Partners</p>
+                    <p className="text-[11px] text-cn-muted/60 leading-tight mt-0.5">View our pricing</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
+
+          {/* Desktop */}
+          <FadeIn className="hidden md:block" style={{ gridColumn: "2 / 12" }}>
+            <div className="rounded-2xl border border-cn-border p-3 flex flex-row gap-3">
+              <Link href="/services/caribbooks/pricing" className="overflow-hidden rounded-2xl p-10 flex flex-col justify-between flex-[2] hover:opacity-95 transition-opacity relative" style={{ background: "linear-gradient(160deg, #f5f5f5 0%, #ebebeb 100%)", minHeight: "380px" }}>
+                <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 90% 15%, rgba(0,119,182,0.35) 0%, transparent 50%), radial-gradient(circle at 10% 85%, rgba(0,119,182,0.28) 0%, transparent 45%), radial-gradient(circle at 55% 50%, rgba(0,119,182,0.20) 0%, transparent 40%)" }} />
+                <p className="text-[20px] font-bold text-cn-muted" style={{ lineHeight: "1.3" }}>
+                  Are you a business owner doing your own books after hours? Or paying someone monthly for work that takes them minutes?
+                </p>
+                <div className="flex items-center gap-3">
+                  <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[14px] w-auto" />
+                  <div className="w-px h-[28px] bg-cn-border" />
+                  <div>
+                    <p className="text-[11px] font-bold text-cn-muted leading-tight">For Businesses</p>
+                    <p className="text-[10px] text-cn-muted/60 leading-tight mt-1">View our pricing</p>
+                  </div>
+                </div>
+              </Link>
+              <Link href="/services/caribbooks/pricing?tab=partner" className="overflow-hidden rounded-2xl p-10 flex flex-col justify-between flex-[1] hover:opacity-95 transition-opacity relative" style={{ background: "linear-gradient(160deg, #f5f5f5 0%, #ebebeb 100%)", minHeight: "380px" }}>
+                <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 25% 25%, rgba(255,87,51,0.35) 0%, transparent 50%), radial-gradient(circle at 75% 80%, rgba(255,87,51,0.28) 0%, transparent 45%), radial-gradient(circle at 50% 15%, rgba(255,87,51,0.20) 0%, transparent 40%)" }} />
+                <p className="text-[20px] font-bold text-cn-muted" style={{ lineHeight: "1.3" }}>
+                  Are you an accounting firm managing multiple clients&apos; books manually?
+                </p>
+                <div className="flex items-center gap-3">
+                  <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[14px] w-auto" />
+                  <div className="w-px h-[28px] bg-cn-border" />
+                  <div>
+                    <p className="text-[11px] font-bold text-cn-muted leading-tight">For Partners</p>
+                    <p className="text-[10px] text-cn-muted/60 leading-tight mt-1">View our pricing</p>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </FadeIn>
         </section>
 
