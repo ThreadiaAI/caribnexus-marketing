@@ -64,42 +64,42 @@ export default function DemoPage() {
         </video>
 
         {/* Bottom overlay — fades */}
-        <div className={`absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`}>
-          <div className="flex items-center gap-2 mb-2">
-            <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[20px] w-auto brightness-0 invert" />
+        <div className={`absolute left-0 right-0 px-5 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`} style={{ bottom: "12%" }}>
+          <div className="flex items-center gap-2 mb-1.5">
+            <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[22px] w-auto" />
           </div>
-          <p className="text-[16px] font-bold text-white">Introducing CaribBooks</p>
-          <p className="text-[11px] text-white/60 mt-1">AI bookkeeping via WhatsApp</p>
+          <p className="text-[18px] font-bold text-cn-muted">Introducing CaribBooks</p>
+          <p className="text-[12px] text-cn-muted/60 mt-0.5">AI bookkeeping via WhatsApp</p>
         </div>
 
         {/* Right side actions — fades */}
-        <div className={`absolute right-4 bottom-[120px] flex flex-col items-center gap-6 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`}>
+        <div className={`absolute right-4 bottom-[120px] flex flex-col items-center gap-3 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`}>
           <button onClick={toggleMute} className="flex flex-col items-center gap-1">
-            <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-[#6B7280]/40 flex items-center justify-center">
               {isMuted ? (
-                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-8 h-8 text-[#6B7280]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M11 5L6 9H2v6h4l5 4V5z" />
                   <line x1="23" y1="9" x2="17" y2="15" />
                   <line x1="17" y1="9" x2="23" y2="15" />
                 </svg>
               ) : (
-                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-8 h-8 text-[#6B7280]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M11 5L6 9H2v6h4l5 4V5z" />
                   <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
                 </svg>
               )}
             </div>
-            <span className="text-[9px] text-white/70">{isMuted ? "Unmute" : "Mute"}</span>
+            <span className="text-[9px] text-[#6B7280] font-medium">{isMuted ? "Unmute" : "Mute"}</span>
           </button>
           <button onClick={handleShare} className="flex flex-col items-center gap-1">
-            <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <div className="w-16 h-16 rounded-full bg-[#6B7280]/40 flex items-center justify-center">
+              <svg className="w-8 h-8 text-[#6B7280]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8" />
                 <polyline points="16 6 12 2 8 6" />
                 <line x1="12" y1="2" x2="12" y2="15" />
               </svg>
             </div>
-            <span className="text-[9px] text-white/70">Share</span>
+            <span className="text-[9px] text-[#6B7280] font-medium">Share</span>
           </button>
         </div>
       </main>
