@@ -141,7 +141,7 @@ function PricingContent() {
                 {FEATURES[0].map((f) => (<li key={f} className="flex items-start gap-2"><svg className="w-4 h-4 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#E5E7EB" /><path d="M6 10l3 3 5-5" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg><span className="text-[12px] text-cn-muted">{f}</span></li>))}
               </ul>
               <div className="mt-auto pt-8">
-                <button className="w-full py-2 text-[12px] font-medium text-cn-muted border border-cn-border rounded-full hover:border-cn-muted transition-all">Get started</button>
+                <a href="https://books.caribnexusai.com/signup" className="block w-full py-2 text-[12px] font-medium text-cn-muted border border-cn-border rounded-full hover:border-cn-muted transition-all text-center">Get started</a>
               </div>
             </div>
 
@@ -165,7 +165,7 @@ function PricingContent() {
                 {FEATURES[1].map((f) => (<li key={f} className="flex items-start gap-2"><svg className="w-4 h-4 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#E5E7EB" /><path d="M6 10l3 3 5-5" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg><span className="text-[12px] text-cn-muted">{f}</span></li>))}
               </ul>
               <div className="mt-auto pt-8">
-                <button className="w-full py-2 text-[12px] font-medium text-cn-muted border border-cn-border rounded-full hover:border-cn-muted transition-all">Get started</button>
+                <a href="https://books.caribnexusai.com/signup" className="block w-full py-2 text-[12px] font-medium text-cn-muted border border-cn-border rounded-full hover:border-cn-muted transition-all text-center">Get started</a>
               </div>
             </div>
 
@@ -189,7 +189,7 @@ function PricingContent() {
                 {FEATURES[2].map((f) => (<li key={f} className="flex items-start gap-2"><svg className="w-4 h-4 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#E5E7EB" /><path d="M6 10l3 3 5-5" stroke="#6B7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg><span className="text-[12px] text-cn-muted">{f}</span></li>))}
               </ul>
               <div className="mt-auto pt-8">
-                <button className="w-full py-2 text-[12px] font-medium text-cn-muted border border-cn-border rounded-full hover:border-cn-muted transition-all">Get started</button>
+                <a href="https://books.caribnexusai.com/signup" className="block w-full py-2 text-[12px] font-medium text-cn-muted border border-cn-border rounded-full hover:border-cn-muted transition-all text-center">Get started</a>
               </div>
             </div>
           </div>
