@@ -59,8 +59,8 @@ const TIERS = {
   ],
   partner: [
     { name: "Starter", monthly: 99, unit: "Up to 300 transactions pooled", desc: "For firms with a handful of clients." },
-    { name: "Growth", monthly: 129, unit: "Up to 1,000 transactions pooled", desc: "For firms scaling their client base." },
-    { name: "Professional", monthly: 259, unit: "Up to 3,000 transactions pooled", desc: "For established firms with 15+ clients." },
+    { name: "Growth", monthly: 169, unit: "Up to 1,000 transactions pooled", desc: "For firms scaling their client base." },
+    { name: "Professional", monthly: 329, unit: "Up to 3,000 transactions pooled", desc: "For established firms with 15+ clients." },
   ],
 };
 

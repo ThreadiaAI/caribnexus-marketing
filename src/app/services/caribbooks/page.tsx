@@ -291,7 +291,7 @@ export default function CaribBooksPage() {
               <Link href="/services/caribbooks/pricing?tab=partner" className="shrink-0 w-[80vw] min-h-[380px] rounded-2xl p-7 flex flex-col justify-between mr-4 relative overflow-hidden" style={{ background: "linear-gradient(160deg, #f5f5f5 0%, #ebebeb 100%)" }}>
                 <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 20% 30%, rgba(255,87,51,0.35) 0%, transparent 50%), radial-gradient(circle at 80% 75%, rgba(255,87,51,0.28) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(0,168,89,0.20) 0%, transparent 40%), radial-gradient(circle at 50% 10%, rgba(255,87,51,0.20) 0%, transparent 40%)" }} />
                 <p className="text-[18px] font-bold text-cn-muted" style={{ lineHeight: "1.3" }}>
-                  Are you an accounting firm managing multiple clients&apos; books manually?
+                  Do you manage clients who need their books kept?
                 </p>
                 <div className="flex items-center gap-3">
                   <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[16px] w-auto" />
@@ -325,7 +325,7 @@ export default function CaribBooksPage() {
               <Link href="/services/caribbooks/pricing?tab=partner" className="overflow-hidden rounded-2xl p-10 flex flex-col justify-between flex-[1] hover:opacity-95 transition-opacity relative" style={{ background: "linear-gradient(160deg, #f5f5f5 0%, #ebebeb 100%)", minHeight: "380px" }}>
                 <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(circle at 25% 25%, rgba(255,87,51,0.35) 0%, transparent 50%), radial-gradient(circle at 75% 80%, rgba(255,87,51,0.28) 0%, transparent 45%), radial-gradient(circle at 50% 15%, rgba(255,87,51,0.20) 0%, transparent 40%)" }} />
                 <p className="text-[20px] font-bold text-cn-muted" style={{ lineHeight: "1.3" }}>
-                  Are you an accounting firm managing multiple clients&apos; books manually?
+                  Do you manage clients who need their books kept?
                 </p>
                 <div className="flex items-center gap-3">
                   <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[14px] w-auto" />
