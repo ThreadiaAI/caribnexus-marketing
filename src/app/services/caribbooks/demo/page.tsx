@@ -45,13 +45,15 @@ export default function DemoPage() {
 
   if (isMobile) {
     return (
+      <>
+      <style dangerouslySetInnerHTML={{ __html: `[class*="fixed bottom-6 right-6"] { display: none !important; }` }} />
       <main
         className="bg-black fixed inset-0 w-full h-full overflow-hidden"
         onClick={showAndHideControls}
       >
         <video
           ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover bg-black"
+          className="absolute inset-0 w-full h-full object-contain bg-black"
           playsInline
           autoPlay
           muted
@@ -101,6 +103,7 @@ export default function DemoPage() {
           </button>
         </div>
       </main>
+      </>
     );
   }
 
