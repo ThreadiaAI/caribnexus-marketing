@@ -7,3 +7,9 @@ node_modules/
 .env*
 public/videos/*.mp4
 public/videos/*.mov
+
+# Working artwork for social posts. These are 2MB generation intermediates
+# (four raw stencils alone are 8MB) and everything under public/ is deployed,
+# so committing them would put working files on caribnexusai.com for no reason.
+# Regenerate with scripts/build_shards.py and scripts/build_post.py.
+public/artwork/
