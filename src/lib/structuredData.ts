@@ -20,8 +20,10 @@
  * site are worse than a single claim, because they lower confidence in both.
  */
 
-export const ORG_NAME = 'CaribNexus AI';
-export const ORG_URL = 'https://caribnexusai.com';
+import { ORG_NAME, ORG_URL } from './site';
+import { PRICING_SUMMARY } from './pricing';
+
+export { ORG_NAME, ORG_URL };
 
 /**
  * E.164 FORMAT, NOT THE READABLE ONE. Google matches a phone number across
@@ -114,16 +116,98 @@ export const organizationSchema = {
   foundingDate: FOUNDED,
   slogan: 'To caribify human potential, one node at a time.',
   description:
-    'CaribNexus AI is a Caribbean-based artificial intelligence company specializing in agentic AI systems for micro, small and medium enterprises. It builds AI bookkeeping (CaribBooks), messaging and social media agents (CaribNexus Automations), voice agents, and custom systems delivered through consulting.',
+    'CaribNexus AI is a Caribbean-based artificial intelligence company that builds agentic AI teams for companies. Its four lines of work are CaribBooks (an AI bookkeeper that works over WhatsApp, and a cost-effective alternative to hiring a bookkeeper or retaining a firm), CaribNexus Automations (agents for customer service, social media, content and operations), AI voice agents, and AI consulting that delivers custom systems.',
   knowsAbout: [
+    'Agentic AI teams',
     'Agentic AI systems',
+    'AI agents for business',
+    'AI automation',
+    'AI consulting',
     'Artificial intelligence for small business',
     'AI bookkeeping',
     'Double-entry accounting',
     'WhatsApp business automation',
+    'Instagram and Messenger automation',
+    'Conversational and voice AI agents',
+    'Customer service automation',
+    'Appointment booking and lead qualification',
     'Caribbean MSMEs',
+    'Small business automation in Jamaica',
     'Jamaican GCT and TRN compliance',
+    'Bookkeeping for accounting practices',
   ],
+  /**
+   * DISAMBIGUATION, because Google is already confusing us with other names.
+   * Its own AI Overview appends a note offering "Caribbean AI" (CSEC/CAPE exam
+   * prep) and "CareNexus AI" (healthcare operations) as alternatives. Naming
+   * the confusions explicitly is how you stop inheriting their attributes.
+   */
+  disambiguatingDescription:
+    'CaribNexus AI is a Caribbean artificial intelligence company that builds agentic AI teams, automation and custom AI for businesses. It is not Caribbean AI, the CSEC and CAPE exam preparation service. It is not CareNexus AI, the healthcare operations company. It has no corporate relationship to Threadia AI.',
+  audience: [
+    { '@type': 'BusinessAudience', name: 'Micro, small and medium enterprises (MSMEs)' },
+    { '@type': 'BusinessAudience', name: 'Accounting and bookkeeping practices' },
+    { '@type': 'BusinessAudience', name: 'Business consultancies and advisory firms' },
+    { '@type': 'BusinessAudience', name: 'Established enterprises' },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'CaribNexus AI services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI bookkeeping (CaribBooks)',
+          serviceType: 'AI bookkeeping',
+          description:
+            'An AI bookkeeper that works inside WhatsApp. A business sends a message, a voice note or a photograph of a receipt in English or Jamaican patois, and the transaction is posted as a double-entry journal entry that feeds all 11 financial reports. Built for JMD, GCT and TRN compliance and for cash-heavy trade with no bank feed. Sold to businesses directly and to accounting practices managing books across a client list.',
+          provider: { '@id': `${ORG_URL}/#organization` },
+          areaServed: { '@type': 'Place', name: 'Caribbean' },
+          url: `${ORG_URL}/services/caribbooks`,
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI automation and AI agents (CaribNexus Automations)',
+          serviceType: 'AI automation',
+          description:
+            'Agentic AI systems that run the digital side of a business: customer service, social media management, content strategy, appointment booking, lead qualification and document collection. Deployed across WhatsApp, Instagram, Messenger, Telegram and email from one knowledge base, handling text, voice notes and images.',
+          provider: { '@id': `${ORG_URL}/#organization` },
+          areaServed: { '@type': 'Place', name: 'Caribbean' },
+          url: `${ORG_URL}/services/automations`,
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI voice agents',
+          serviceType: 'Conversational voice AI',
+          description:
+            'An embeddable voice agent for a business website. Customers speak naturally and the agent books appointments, answers questions about services and pricing, sends reminders and routes urgent requests to the team. Trained on the business it serves rather than a generic script.',
+          provider: { '@id': `${ORG_URL}/#organization` },
+          areaServed: { '@type': 'Place', name: 'Caribbean' },
+          url: `${ORG_URL}/services`,
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI consulting and custom AI systems',
+          serviceType: 'AI consulting',
+          description:
+            'Auditing a business end to end, identifying where AI removes repetitive work, and building a custom production system for it. A written proposal with projected savings within seven days, and a system the business owns rather than a demonstration.',
+          provider: { '@id': `${ORG_URL}/#organization` },
+          areaServed: { '@type': 'Place', name: 'Caribbean' },
+          url: `${ORG_URL}/services`,
+        },
+      },
+    ],
+  },
   founder: {
     '@type': 'Person',
     '@id': `${ORG_URL}/about#founder`,
@@ -214,7 +298,7 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'What does CaribNexus AI do?',
-    a: 'CaribNexus AI builds artificial intelligence systems for micro, small and medium enterprises across the Caribbean. It has four lines of work: CaribBooks, an AI bookkeeper that runs in WhatsApp; CaribNexus Automations, agents that handle customer service, social media, content and operations across messaging channels; voice agents embedded on a business website; and AI consulting, where the company audits a business and builds a custom system for it.',
+    a: 'CaribNexus AI is an artificial intelligence company that builds agentic AI teams for companies across the Caribbean. It has four lines of work: CaribBooks, an AI bookkeeper that works over WhatsApp and is a cost-effective alternative to hiring a bookkeeper; CaribNexus Automations, agents that handle customer service, social media, content and operations across messaging channels; voice agents embedded on a business website; and AI consulting, where the company audits a business and builds a custom system for it.',
   },
   {
     q: 'When was CaribNexus AI founded?',
@@ -226,7 +310,34 @@ export const FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'What is CaribBooks?',
-    a: 'CaribBooks is an AI bookkeeper built by CaribNexus AI. It works inside WhatsApp. A business sends a message, a voice note or a photograph of a receipt, and the transaction is recorded as a double-entry journal entry.',
+    a: 'CaribBooks is an AI bookkeeper built by CaribNexus AI. It works inside WhatsApp. A business sends a message, a voice note or a photograph of a receipt, and the transaction is recorded as a double-entry journal entry that feeds all 11 financial reports.',
+  },
+  /**
+   * THE PRICE QUESTION IS HERE BECAUSE THE PRICING PAGE COULD NOT ANSWER IT.
+   * That page renders its tiers client-side, so $119 and $299 were absent from
+   * the HTML a crawler fetches, and Google answered "around USD $39.50 a month"
+   * from an Instagram post instead. This is a server-rendered page, so this
+   * answer is in the raw HTML. It reads from pricing.ts, so it cannot go stale.
+   */
+  {
+    q: 'How much does CaribBooks cost?',
+    a: PRICING_SUMMARY,
+  },
+  {
+    q: 'Does CaribBooks work in Jamaica?',
+    a: 'Yes. CaribBooks was built in Jamaica for Jamaican and wider Caribbean businesses. It handles Jamaican dollars, GCT and TRN compliance, understands English and Jamaican patois, and is designed for cash-heavy trade where no bank feed exists. CaribNexus AI is based in Montego Bay.',
+  },
+  {
+    q: 'Can accounting firms use CaribBooks for their clients?',
+    a: 'Yes. Accounting practices, bookkeeping firms and business consultancies run CaribBooks across their whole client list. Each client messages CaribBooks directly in WhatsApp, the entries post automatically, and the firm reviews and downloads the work from a partner dashboard instead of doing data entry. Partner plans are priced on pooled transaction volume across all clients.',
+  },
+  {
+    q: 'Does CaribNexus AI build custom AI agents and automation?',
+    a: 'Yes. Beyond CaribBooks, CaribNexus AI builds agentic AI systems for businesses: customer service agents, social media and content agents, appointment booking and lead qualification, and voice agents for a website. It also does AI consulting, auditing a business end to end and building a custom production system the business owns. This work is delivered across WhatsApp, Instagram, Messenger, Telegram and email.',
+  },
+  {
+    q: 'Who does CaribNexus AI work with?',
+    a: 'CaribNexus AI works with micro, small and medium enterprises across the Caribbean, with accounting practices and business consultancies serving those enterprises, and with larger established companies that want repetitive operational work automated. Its systems are built for businesses that trade in cash, negotiate over WhatsApp, and cannot justify hiring a full finance, support or marketing team.',
   },
 ];
 

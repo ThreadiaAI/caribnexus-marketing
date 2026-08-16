@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { TIERS } from "@/lib/pricing";
 
 function AnimatedPrice({ value, duration = 400 }: { value: number; duration?: number }) {
   const [display, setDisplay] = useState(value);
@@ -51,18 +52,6 @@ const FEATURES = {
   ],
 } as const;
 
-const TIERS = {
-  business: [
-    { name: "Micro", monthly: 69, unit: "Up to 100 transactions/mo", desc: "For solo operators, freelancers, and side hustles." },
-    { name: "Small", monthly: 119, unit: "Up to 300 transactions/mo", desc: "For restaurants, salons, and small contractors." },
-    { name: "Medium", monthly: 299, unit: "Up to 2,000 transactions/mo", desc: "For growing companies with real operational volume." },
-  ],
-  partner: [
-    { name: "Starter", monthly: 99, unit: "Up to 300 transactions pooled", desc: "For firms with a handful of clients." },
-    { name: "Growth", monthly: 169, unit: "Up to 1,000 transactions pooled", desc: "For firms scaling their client base." },
-    { name: "Professional", monthly: 329, unit: "Up to 3,000 transactions pooled", desc: "For established firms with 15+ clients." },
-  ],
-};
 
 function PricingContent() {
   const searchParams = useSearchParams();

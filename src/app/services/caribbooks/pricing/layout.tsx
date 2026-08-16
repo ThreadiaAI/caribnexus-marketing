@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { caribbooksOffersSchema } from "@/lib/pricing";
+import { jsonLd } from "@/lib/structuredData";
 
 /**
  * Metadata-only layout.
@@ -27,5 +29,13 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  /* The tier list on the page itself renders client-side, so these Offers are
+     the only prices present in the HTML a crawler fetches. Emitted from the
+     layout because a layout is a server component. */
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(caribbooksOffersSchema)} />
+      {children}
+    </>
+  );
 }
