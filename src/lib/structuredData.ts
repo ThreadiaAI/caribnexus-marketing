@@ -82,8 +82,19 @@ export const FOUNDER_ROLE = 'Founder and Chief Executive Officer';
  *   - personal GitHub          https://github.com/...
  *   - Crunchbase, X, anywhere else the same person or company is named
  */
+/**
+ * THE NEW VANITY URL. The old auto-generated slug was
+ * "dominic-a-w-89830b12b" — LinkedIn built it from an abbreviated display name,
+ * and Google reading it is the likeliest source of the "Dominic A. W." it has
+ * been answering with. The slug is now the name, so the URL stops arguing with
+ * the record it is meant to corroborate.
+ *
+ * NOT VERIFIED FROM HERE. LinkedIn answers 999 to any non-Google crawler for
+ * /in/ URLs, identically for a live profile and a dead one, so this cannot be
+ * checked server-side. Confirmed by the founder, 2026-08-16.
+ */
 export const FOUNDER_PROFILES: string[] = [
-  'https://www.linkedin.com/in/dominic-a-w-89830b12b/',
+  'https://www.linkedin.com/in/dominicarwaite',
 ];
 /**
  * EMPTY, AND THAT IS A CORRECTION.
