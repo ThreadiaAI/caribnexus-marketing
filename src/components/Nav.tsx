@@ -7,6 +7,7 @@ const NAV_LINKS: { label: string; href: string; action?: string }[] = [
   { label: "Services", href: "/services" },
   { label: "CaribBooks", href: "/services/caribbooks" },
   { label: "Automations", href: "/services/automations" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "#", action: "open-widget-book" },
 ];
 

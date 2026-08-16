@@ -1,5 +1,7 @@
 "use client";
 
+import { ORG_LINKEDIN } from "@/lib/structuredData";
+
 export function Footer() {
   return (
     <>
@@ -27,7 +29,10 @@ export function Footer() {
             <div>
               <h4 className="text-[10px] font-bold text-cn-dark" style={{ marginBottom: "10px" }}>Company</h4>
               <ul className="space-y-1.5">
+                <li><a href="/about" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">About</a></li>
                 <li><button onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))} className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Contact</button></li>
+                <li><a href={ORG_LINKEDIN} target="_blank" rel="me noopener noreferrer" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">LinkedIn</a></li>
+                <li><a href="tel:+18767706900" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">1 876 770-6900</a></li>
                 <li><a href="mailto:hello@caribnexusai.com" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Email</a></li>
               </ul>
             </div>
@@ -62,14 +67,19 @@ export function Footer() {
         <div style={{ gridColumn: "8 / 10" }}>
           <h4 className="text-[11px] font-bold text-cn-dark" style={{ marginBottom: "16px" }}>Company</h4>
           <ul className="space-y-2">
+            <li><a href="/about" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">About</a></li>
             <li><button onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))} className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Contact</button></li>
             <li><a href="mailto:hello@caribnexusai.com" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Email</a></li>
           </ul>
         </div>
 
+        {/* The number lives here on desktop, not in Company as well. Mobile has
+            no Connect column, so it carries the number under Company instead. */}
         <div style={{ gridColumn: "10 / 12" }}>
           <h4 className="text-[11px] font-bold text-cn-dark" style={{ marginBottom: "16px" }}>Connect</h4>
           <ul className="space-y-2">
+            <li><a href={ORG_LINKEDIN} target="_blank" rel="me noopener noreferrer" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">LinkedIn</a></li>
+            <li><a href="tel:+18767706900" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">1 876 770-6900</a></li>
             <li><a href="mailto:hello@caribnexusai.com" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Email</a></li>
           </ul>
         </div>
