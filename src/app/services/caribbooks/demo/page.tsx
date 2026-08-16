@@ -2,6 +2,8 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
+import { TRANSCRIPT } from "@/lib/videoTranscript";
 
 export default function DemoPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -182,7 +184,57 @@ export default function DemoPage() {
             </a>
           </div>
         </div>
+
+        {/*
+          THE TRANSCRIPT, VISIBLE.
+
+          It is here rather than only in the VideoObject because Google's own
+          guidance is explicit that content people can see counts for more than
+          markup they cannot. It is also the honest version of useful: someone
+          scrolling with the sound off, on a metered connection, or using a
+          screen reader gets the whole pitch without playing anything.
+
+          The desktop branch is what the SERVER renders, because isMobile starts
+          false and only flips in an effect. So these words are in the HTML a
+          crawler fetches, which is the entire reason for writing them down.
+        */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[64px] pb-[80px] border-t border-cn-border">
+          <div style={{ gridColumn: "2 / 6" }}>
+            <span className="text-[10px] font-medium text-cn-muted tracking-wide uppercase">
+              Transcript
+            </span>
+            <h2 className="mt-2 text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+              <span className="text-cn-muted">Introducing</span>
+              <br />
+              <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">
+                CaribBooks
+              </span>
+            </h2>
+            <p className="text-[13px] text-cn-muted mt-3" style={{ lineHeight: "1.3" }}>
+              The full script of the film above, for reading with the sound off.
+            </p>
+          </div>
+          <div className="mt-6 md:mt-0" style={{ gridColumn: "7 / 12" }}>
+            {TRANSCRIPT.map(({ part, lines }) => (
+              <div key={part} style={{ marginBottom: "24px" }}>
+                <h3 className="text-[10px] font-medium text-cn-muted tracking-wide uppercase">
+                  {part}
+                </h3>
+                {lines.map((line) => (
+                  <p
+                    key={line}
+                    className="text-[13px] text-cn-muted"
+                    style={{ lineHeight: "1.4", marginTop: "6px" }}
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
+      <Footer />
     </>
   );
 }
