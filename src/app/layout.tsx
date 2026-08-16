@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GridlinesGate } from "@/components/dev/Gridlines";
 import { VoiceWidget } from "@/components/VoiceWidget";
 import { FOUNDED, FOUNDER_NAME, jsonLd, organizationSchema, productSchema } from "@/lib/structuredData";
+import { ORG_URL } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
      that gives an entity resolver two people to choose between. */
   description:
     `Caribbean-based artificial intelligence company building agentic AI systems for small and medium businesses. Founded in ${FOUNDED} by ${FOUNDER_NAME}.`,
-  metadataBase: new URL("https://caribnexusai.com"),
+  metadataBase: new URL(ORG_URL),
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "CaribNexus AI",
     description: "Building intelligent systems for Caribbean businesses.",
-    url: "https://caribnexusai.com",
+    url: ORG_URL,
     siteName: "CaribNexus AI",
     images: [{ url: "/logo/caribnexus-main.png", width: 1500, height: 1500 }],
     type: "website",

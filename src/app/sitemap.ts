@@ -8,7 +8,7 @@ import type { MetadataRoute } from 'next';
  * to be the citable answer to "who founded CaribNexus AI", and the one worth
  * crawling before anything else.
  */
-const BASE = 'https://caribnexusai.com';
+import { ORG_URL as BASE } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = [

@@ -8,6 +8,7 @@ import {
   founderSchema,
   jsonLd,
 } from "@/lib/structuredData";
+import { ORG_URL } from "@/lib/site";
 
 /**
  * THE SPLIT IS NOT DECORATIVE. `export const metadata` only exists in a server
@@ -32,11 +33,11 @@ export const metadata: Metadata = {
     absolute: `About CaribNexus AI | Founded ${FOUNDED} by ${FOUNDER_NAME}`,
   },
   description: SUMMARY,
-  alternates: { canonical: "https://caribnexusai.com/about" },
+  alternates: { canonical: `${ORG_URL}/about` },
   openGraph: {
     title: `About CaribNexus AI | Founded ${FOUNDED} by ${FOUNDER_NAME}`,
     description: SUMMARY,
-    url: "https://caribnexusai.com/about",
+    url: `${ORG_URL}/about`,
     type: "profile",
     images: ["/about/dominic-waite.png"],
   },

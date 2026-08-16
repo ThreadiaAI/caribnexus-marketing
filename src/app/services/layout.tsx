@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ORG_URL } from "@/lib/site";
 
 /**
  * Metadata-only layout.
@@ -18,11 +19,11 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "CaribNexus AI builds four things for Caribbean businesses: AI bookkeeping, messaging and social agents, voice agents, and custom AI systems.",
-  alternates: { canonical: "https://caribnexusai.com/services" },
+  alternates: { canonical: `${ORG_URL}/services` },
   openGraph: {
     title: "Services | CaribNexus AI",
     description: "CaribNexus AI builds four things for Caribbean businesses: AI bookkeeping, messaging and social agents, voice agents, and custom AI systems.",
-    url: "https://caribnexusai.com/services",
+    url: `${ORG_URL}/services`,
   },
 };
 

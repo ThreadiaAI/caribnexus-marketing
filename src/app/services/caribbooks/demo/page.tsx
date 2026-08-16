@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { TRANSCRIPT } from "@/lib/videoTranscript";
+import { ORG_URL } from "@/lib/site";
 
 export default function DemoPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -32,7 +33,7 @@ export default function DemoPage() {
   }, [isMobile, showAndHideControls]);
 
   const handleShare = async () => {
-    const url = "https://caribnexusai.com/services/caribbooks/demo";
+    const url = `${ORG_URL}/services/caribbooks/demo`;
     if (navigator.share) {
       await navigator.share({ title: "Introducing CaribBooks", url });
     } else {

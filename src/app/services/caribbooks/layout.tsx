@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ORG_URL } from "@/lib/site";
 
 /**
  * Metadata-only layout.
@@ -18,11 +19,11 @@ export const metadata: Metadata = {
   title: "CaribBooks",
   description:
     "CaribBooks is an AI bookkeeper that works inside WhatsApp. Send a message, a voice note or a photo of a receipt and it posts a double-entry journal entry.",
-  alternates: { canonical: "https://caribnexusai.com/services/caribbooks" },
+  alternates: { canonical: `${ORG_URL}/services/caribbooks` },
   openGraph: {
     title: "CaribBooks | CaribNexus AI",
     description: "CaribBooks is an AI bookkeeper that works inside WhatsApp. Send a message, a voice note or a photo of a receipt and it posts a double-entry journal entry.",
-    url: "https://caribnexusai.com/services/caribbooks",
+    url: `${ORG_URL}/services/caribbooks`,
   },
 };
 

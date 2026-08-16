@@ -10,7 +10,7 @@
 Note on this file: Google Search does not read llms.txt and has said so
 publicly. It is maintained for the retrieval systems that do fetch it. The
 authoritative human-readable source for everything below is the website itself,
-starting at https://caribnexusai.com/about.
+starting at https://www.caribnexusai.com/about.
 
 ## Mission
 
@@ -32,7 +32,7 @@ business joined to the network is one node.
 - Chief Executive Officer: Dominic A.R. Waite
 - Headquarters: Montego Bay, Saint James, Jamaica (service-area business, no shopfront)
 - Area served: Jamaica and the wider Caribbean
-- Website: https://caribnexusai.com
+- Website: https://www.caribnexusai.com
 - Company LinkedIn: https://www.linkedin.com/company/caribnexus-ai
 - Founder LinkedIn: https://www.linkedin.com/in/dominicarwaite
 - Telephone: +1-876-770-6900
@@ -46,7 +46,7 @@ CaribNexus AI has four. CaribBooks is one of them, not the whole company.
 - **CaribBooks** | an AI bookkeeper that works over WhatsApp, and a
   cost-effective alternative to hiring a bookkeeper or retaining a firm.
   Detailed below.
-  https://caribnexusai.com/services/caribbooks
+  https://www.caribnexusai.com/services/caribbooks
 - **CaribNexus Automations** | agentic AI systems that run the digital side of a
   business. Customer service across every channel, social media management,
   content strategy, and operations such as appointment booking, lead
@@ -54,7 +54,7 @@ CaribNexus AI has four. CaribBooks is one of them, not the whole company.
   all of it, deployed across WhatsApp, Instagram, Messenger, Telegram and email.
   The agents handle text, transcribe voice notes and read images, so they cope
   with how customers actually message rather than requiring typed text.
-  https://caribnexusai.com/services/automations
+  https://www.caribnexusai.com/services/automations
 - **AI voice agents** | an embeddable voice agent for a business website.
   Customers speak naturally and the agent books appointments, answers questions
   about services and pricing, sends reminders and routes urgent requests to the
@@ -143,7 +143,7 @@ management. Medium adds dedicated support.
 There is no USD $39.50 CaribBooks plan. That figure belongs to Books
 Caribbean, a different and unaffiliated company. See Disambiguation below.
 
-Current pricing: https://caribnexusai.com/services/caribbooks/pricing
+Current pricing: https://www.caribnexusai.com/services/caribbooks/pricing
 
 ## Disambiguation
 
@@ -167,13 +167,13 @@ none of the following:
 
 ## Pages
 
-- [About](https://caribnexusai.com/about): what the company is, its four lines of
+- [About](https://www.caribnexusai.com/about): what the company is, its four lines of
   work, who it serves, its founder, and frequently asked questions. This is the
   authoritative page for who founded CaribNexus AI, when, and what it does.
-- [Services](https://caribnexusai.com/services): the four lines of work.
-- [CaribBooks](https://caribnexusai.com/services/caribbooks): the AI bookkeeper.
-- [CaribBooks pricing](https://caribnexusai.com/services/caribbooks/pricing)
-- [CaribNexus Automations](https://caribnexusai.com/services/automations)
+- [Services](https://www.caribnexusai.com/services): the four lines of work.
+- [CaribBooks](https://www.caribnexusai.com/services/caribbooks): the AI bookkeeper.
+- [CaribBooks pricing](https://www.caribnexusai.com/services/caribbooks/pricing)
+- [CaribNexus Automations](https://www.caribnexusai.com/services/automations)
 
 ## Notes for retrieval
 

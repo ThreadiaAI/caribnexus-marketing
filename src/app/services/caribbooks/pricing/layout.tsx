@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { caribbooksOffersSchema } from "@/lib/pricing";
 import { jsonLd } from "@/lib/structuredData";
+import { ORG_URL } from "@/lib/site";
 
 /**
  * Metadata-only layout.
@@ -20,11 +21,11 @@ export const metadata: Metadata = {
   title: "CaribBooks Pricing",
   description:
     "CaribBooks pricing for Caribbean businesses, and for accounting partners managing books across a client list. Plans are set by monthly transaction volume.",
-  alternates: { canonical: "https://caribnexusai.com/services/caribbooks/pricing" },
+  alternates: { canonical: `${ORG_URL}/services/caribbooks/pricing` },
   openGraph: {
     title: "CaribBooks Pricing | CaribNexus AI",
     description: "CaribBooks pricing for Caribbean businesses, and for accounting partners managing books across a client list. Plans are set by monthly transaction volume.",
-    url: "https://caribnexusai.com/services/caribbooks/pricing",
+    url: `${ORG_URL}/services/caribbooks/pricing`,
   },
 };
 

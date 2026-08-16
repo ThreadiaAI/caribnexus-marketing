@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { ORG_URL } from '@/lib/site';
 
 /**
  * Permissive on purpose, including to AI crawlers.
@@ -11,7 +12,7 @@ import type { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [{ userAgent: '*', allow: '/' }],
-    sitemap: 'https://caribnexusai.com/sitemap.xml',
-    host: 'https://caribnexusai.com',
+    sitemap: `${ORG_URL}/sitemap.xml`,
+    host: ORG_URL,
   };
 }
