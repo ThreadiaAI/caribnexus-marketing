@@ -80,8 +80,8 @@ export const FOUNDER_PROFILES: string[] = [
  * comment above this file's Organization graph exists to prevent.
  *
  * A code host account is not an identity. This now holds the company's own
- * LinkedIn page. Still to add, as they come to exist: a Crunchbase entry, a
- * Wikidata item, and the company's own social accounts.
+ * LinkedIn page and Instagram account. Still to add, as they come to exist: a
+ * Crunchbase entry and a Wikidata item.
  *
  * THE VANITY URL, not the numeric one. LinkedIn resolves a page at both
  * /company/caribnexus-ai and /company/138083913, but `sameAs` should name the
@@ -94,7 +94,22 @@ export const FOUNDER_PROFILES: string[] = [
  * link points at another is a contradiction a crawler will notice.
  */
 export const ORG_LINKEDIN = 'https://www.linkedin.com/company/caribnexus-ai';
-export const ORG_PROFILES: string[] = [ORG_LINKEDIN];
+export const ORG_INSTAGRAM = 'https://www.instagram.com/caribnexus_ai/';
+
+/**
+ * NAMING THE OWN ACCOUNT IS ALSO HOW YOU DISOWN THE OTHERS.
+ *
+ * Listing this tells Google the account IS CaribNexus AI rather than an account
+ * that merely mentions it, so its posts count as the company's own statements.
+ * The less obvious half is the useful half here: it also establishes that
+ * accounts NOT listed are not the company.
+ *
+ * That matters because Google has been sourcing answers about CaribBooks from
+ * Instagram accounts belonging to other organisations — a USD $39.50/month
+ * price that is Books Caribbean's, and MSME framing from caribbeanexport. An
+ * unclaimed brand inherits whatever the neighbours say.
+ */
+export const ORG_PROFILES: string[] = [ORG_LINKEDIN, ORG_INSTAGRAM];
 
 /**
  * The organisation graph. Rendered on every page.
@@ -270,11 +285,55 @@ export const productSchema = {
   '@type': 'SoftwareApplication',
   '@id': `${ORG_URL}/#caribbooks`,
   name: 'CaribBooks',
+  /* Google's own results split the token — it suggested "Carib Books" as a
+     correction. Claiming the spaced spelling routes that query back here
+     instead of leaving it to be resolved against a similarly named company. */
+  alternateName: ['Carib Books', 'CaribBooks AI'],
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'WhatsApp',
+  url: `${ORG_URL}/services/caribbooks`,
   description:
-    'CaribBooks is an AI bookkeeper for Caribbean small businesses. Clients send a message, a voice note or a photo of a receipt in WhatsApp, and the transaction is recorded as a double-entry journal entry.',
+    'CaribBooks is an AI bookkeeper for Caribbean businesses, built by CaribNexus AI. A business sends a WhatsApp message, a voice note or a photograph of a receipt in English or Jamaican patois, and the transaction is posted as a double-entry journal entry that feeds all 11 financial reports. It is a cost-effective alternative to hiring a bookkeeper or retaining a firm.',
+  /**
+   * THE NAME COLLISION, NAMED. Not a hypothetical tidy-up.
+   *
+   * "Books Caribbean" is a separate, unaffiliated company: an Odoo
+   * implementation partner serving Curacao and Bonaire, invoicing in XCG and
+   * USD, publishing in Dutch. Search results for "what is CaribBooks" have
+   * been resolving to it, and Google's AI Overview has answered "how much is
+   * CaribBooks" with USD $39.50/month — THEIR price, not ours.
+   *
+   * Two products whose names are near-anagrams get conflated unless one of
+   * them says otherwise in a form a machine reads. Stating what CaribBooks is
+   * NOT is the only way to stop inheriting another company's attributes, and
+   * price is the attribute that costs real money when it is wrong.
+   */
+  disambiguatingDescription:
+    'CaribBooks is one word and is a product of CaribNexus AI, based in Montego Bay, Jamaica. It is not Books Caribbean, the unaffiliated Odoo implementation partner serving Curacao and Bonaire. CaribBooks is not built on Odoo and is not an Odoo reseller, partner or setup service. Pricing quoted for Books Caribbean does not apply to CaribBooks.',
+  featureList: [
+    'Bookkeeping entirely inside WhatsApp, with no app to download',
+    'Understands English and Jamaican patois',
+    'Reads photographs of receipts, invoices and handwritten notes',
+    'Transcribes and posts from voice notes',
+    'Double-entry journal entries, one debit and one credit of equal amounts',
+    'All 11 financial reports update in real time',
+    'Reports delivered as a branded PDF in chat, no login required',
+    'Jamaican dollars, GCT and TRN compliance',
+    'Built for cash trade that never reaches a bank feed',
+    'Learns vendors and patterns, then posts automatically',
+    'Proposes chart of accounts additions and waits for approval',
+    'Cannot delete a posted transaction; reverses it instead, preserving the audit trail',
+    'Partner dashboard for accounting practices managing multiple clients',
+  ],
+  audience: [
+    { '@type': 'BusinessAudience', name: 'Caribbean micro, small and medium enterprises' },
+    { '@type': 'BusinessAudience', name: 'Accounting practices and bookkeeping firms' },
+    { '@type': 'BusinessAudience', name: 'Business consultancies and advisory firms' },
+  ],
+  areaServed: { '@type': 'Place', name: 'Caribbean' },
+  inLanguage: ['en', 'jam'],
   publisher: { '@id': `${ORG_URL}/#organization` },
+  brand: { '@id': `${ORG_URL}/#organization` },
 };
 
 /**
@@ -319,6 +378,10 @@ export const FAQ: { q: string; a: string }[] = [
    * from an Instagram post instead. This is a server-rendered page, so this
    * answer is in the raw HTML. It reads from pricing.ts, so it cannot go stale.
    */
+  {
+    q: 'Is CaribBooks the same as Books Caribbean?',
+    a: 'No. CaribBooks is one word and is a product of CaribNexus AI, based in Montego Bay, Jamaica. Books Caribbean is a separate and unaffiliated company, an Odoo implementation partner serving Curacao and Bonaire. CaribBooks is not built on Odoo and is not an Odoo reseller or setup service. The two companies have no relationship.',
+  },
   {
     q: 'How much does CaribBooks cost?',
     a: PRICING_SUMMARY,
