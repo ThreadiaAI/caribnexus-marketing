@@ -69,6 +69,31 @@ const STANDARDS: { n: string; standard: string; how: string }[] = [
   },
 ];
 
+/** The three cards, rendered twice: three-across on desktop, a swipe on mobile. */
+const CARDS = [
+  {
+    fig: "FIG 2.1",
+    img: "/illustrations/dp-encryption.png",
+    title: "Encrypted, both ways",
+    color: "#0077B6",
+    desc: "AES-256 at rest across every database and file store. TLS 1.2 and 1.3 in transit, with no plaintext path anywhere in the chain. Requests over plain HTTP are refused rather than upgraded.",
+  },
+  {
+    fig: "FIG 2.2",
+    img: "/illustrations/dp-residency.png",
+    title: "Named jurisdictions",
+    color: "#00A859",
+    desc: "The books sit with Amazon Web Services in the United States. WhatsApp message content sits with Unipile in France, inside the European Union, under the GDPR. No Caribbean provider offers a local region, so we name the real ones.",
+  },
+  {
+    fig: "FIG 2.3",
+    img: "/illustrations/dp-access.png",
+    title: "No password to steal",
+    color: "#FF5733",
+    desc: "Sign-in is a one-time code to a verified address; no password exists to be reused or leaked. Access is scoped by role, and a staff seat at a practice cannot delete a client's history.",
+  },
+];
+
 /** Jurisdictions we serve and the instrument that governs each. */
 const JURISDICTIONS: { place: string; law: string }[] = [
   { place: "Jamaica", law: "Data Protection Act, 2020" },
@@ -231,7 +256,12 @@ export function DataProtectionContent() {
                       <p className="text-[13px] font-semibold text-white" style={{ lineHeight: "18px" }}>{r.event}</p>
                       <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)", lineHeight: "16px", marginTop: "3px" }}>{r.sub}</p>
                     </div>
-                    <p className="text-[12px] mt-2 md:mt-0" style={{ color: "rgba(255,255,255,0.62)", lineHeight: "18px" }}>{r.known}</p>
+                    <div className="mt-2 md:mt-0">
+                      <span className="md:hidden text-[9px] font-medium uppercase tracking-wider block" style={{ color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>
+                        Known after
+                      </span>
+                      <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.62)", lineHeight: "18px" }}>{r.known}</p>
+                    </div>
                   </div>
                 ))}
 
@@ -257,9 +287,14 @@ export function DataProtectionContent() {
                       it cannot change it, name another, or ask
                     </p>
                   </div>
-                  <p className="text-[12px] mt-2 md:mt-0" style={{ color: "rgba(255,255,255,0.62)", lineHeight: "18px" }}>
-                    one business, and only that one
-                  </p>
+                  <div className="mt-2 md:mt-0">
+                    <span className="md:hidden text-[9px] font-medium uppercase tracking-wider block" style={{ color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>
+                      Known after
+                    </span>
+                    <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.62)", lineHeight: "18px" }}>
+                      one business, and only that one
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -301,31 +336,10 @@ export function DataProtectionContent() {
           </FadeIn>
         </section>
 
+        {/* Desktop: three across on the grid with hairline separators. */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[64px]">
           <div className="hidden md:grid md:grid-cols-[1fr_1px_1fr_1px_1fr] md:gap-0" style={{ gridColumn: "2 / 12", marginTop: "24px" }}>
-            {[
-              {
-                fig: "FIG 2.1",
-                title: "Encrypted, both ways",
-                img: "/illustrations/dp-encryption.png",
-                color: "#0077B6",
-                desc: "AES-256 at rest across every database and file store. TLS 1.2 and 1.3 in transit, with no plaintext path anywhere in the chain. Requests over plain HTTP are refused rather than upgraded.",
-              },
-              {
-                fig: "FIG 2.2",
-                title: "Named jurisdictions",
-                img: "/illustrations/dp-residency.png",
-                color: "#00A859",
-                desc: "The books sit with Amazon Web Services in the United States. WhatsApp message content sits with Unipile in France, inside the European Union, under the GDPR. No Caribbean provider offers a local region, so we name the real ones.",
-              },
-              {
-                fig: "FIG 2.3",
-                title: "No password to steal",
-                img: "/illustrations/dp-access.png",
-                color: "#FF5733",
-                desc: "Sign-in is a one-time code to a verified address; no password exists to be reused or leaked. Access is scoped by role, and a staff seat at a practice cannot delete a client's history.",
-              },
-            ].map((c, i) => (
+            {CARDS.map((c, i) => (
               <Fragment key={c.fig}>
                 {i > 0 && <div className="bg-cn-border" />}
                 <div className="pl-4 pr-2">
@@ -346,6 +360,40 @@ export function DataProtectionContent() {
             ))}
           </div>
         </section>
+
+        {/*
+          MOBILE: THE SAME CARDS, AS A SWIPE.
+
+          These were `hidden md:grid` with no counterpart, so on a phone the
+          three of them simply did not exist — encryption, residency and access
+          were desktop-only facts. Same horizontal-scroll pattern the home page
+          uses for the CaribBooks cards, so the gesture is one a visitor has
+          already learned on this site.
+
+          Taller than the home page's 320px because this copy is longer, and the
+          illustration sits at the foot where it does there.
+        */}
+        <div className="md:hidden px-4 pb-[48px] mt-[8px]">
+          <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+            {CARDS.map((c) => (
+              <div
+                key={c.fig}
+                className="flex flex-col border border-cn-border rounded-none p-4 shadow-sm min-w-[240px] max-w-[240px] h-[380px] snap-start shrink-0 bg-white"
+              >
+                <div className="flex-1 mb-3">
+                  <span className="text-[9px] font-medium text-cn-muted uppercase tracking-wider block mb-2">
+                    {c.fig}
+                  </span>
+                  <h3 className="text-[13px] font-bold" style={{ color: c.color }}>{c.title}</h3>
+                  <p className="text-[11px] text-cn-muted mt-1 leading-relaxed">{c.desc}</p>
+                </div>
+                <div className="flex items-center justify-center mt-auto mb-1">
+                  <img src={c.img} alt="" style={{ height: "110px", width: "auto", objectFit: "contain", mixBlendMode: "multiply" }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="border-t border-cn-border w-full" />
 

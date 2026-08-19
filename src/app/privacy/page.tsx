@@ -167,6 +167,21 @@ export default function PrivacyPage() {
               from the document. It also narrows the measure from roughly 100
               characters to 88, which is the direction a 5,700-word read wants to
               go anyway. The right edge is unchanged. */}
+          <details className="md:hidden no-print col-span-full" style={{ marginBottom: "24px", borderTop: "1px solid var(--cn-border)", borderBottom: "1px solid var(--cn-border)", padding: "12px 0" }}>
+            <summary className="text-[10px] font-medium text-cn-muted tracking-wide uppercase" style={{ cursor: "pointer" }}>
+              Contents &mdash; 15 sections
+            </summary>
+            <ol style={{ marginTop: "12px" }}>
+              {SECTIONS.map((sec) => (
+                <li key={sec.id} style={{ marginBottom: "8px" }}>
+                  <a href={`#${sec.id}`} className="text-[13px] text-cn-muted">
+                    <span className="tabular-nums">{sec.n}.</span> {sec.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </details>
+
           <div className="print-full" style={{ gridColumn: "5 / 12" }}>
             <p className={BODY} style={LEAD}>
               {ORG_NAME} builds artificial intelligence systems for businesses across the
