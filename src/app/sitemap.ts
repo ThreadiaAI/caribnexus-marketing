@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/services/caribbooks/pricing', priority: 0.7 },
     { path: '/services/caribbooks/demo', priority: 0.6 },
     { path: '/services/automations', priority: 0.7 },
+    { path: '/data-protection', priority: 0.6 },
+    { path: '/privacy', priority: 0.3 },
   ];
   return pages.map(({ path, priority }) => ({
     url: `${BASE}${path}`,

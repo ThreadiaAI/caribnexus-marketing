@@ -262,6 +262,48 @@ export default function CaribBooksPage() {
 
         <div className="border-t border-cn-border w-full" />
 
+        {/*
+          ISOLATION, PLACED IMMEDIATELY BEFORE THE AUDIENCE SPLIT.
+
+          The next thing on this page is a card asking "do you manage clients
+          who need their books kept?" A partner reading that has one unspoken
+          question, which is whether their clients' books are safe with us.
+          Answering it one beat before they are asked to click is the whole
+          reason this section sits here rather than at the foot of the page.
+        */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
+          <FadeIn style={{ gridColumn: "2 / 6" }}>
+            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+              <span className="text-cn-muted">Every client&rsquo;s books</span><br />
+              <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">stay their own.</span>
+            </h2>
+          </FadeIn>
+          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
+              CB cannot name another business. The client is bound by the system from the number
+              their message arrived on, before the agent runs at all, so there is no field and no
+              phrasing through which it could ask for someone else&rsquo;s ledger. It is not a
+              rule CB follows. It is a capability it was never given.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              It cannot delete a posted transaction either. To undo one it posts a reversing
+              entry, so the original stays in the ledger and the audit trail survives the
+              correction.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              Encrypted in transit and at rest, and deleted when you ask for it.
+            </p>
+            <p style={{ marginTop: "16px" }}>
+              <span className="text-[10px] font-medium text-cn-muted">4.0</span>{" "}
+              <Link href="/data-protection" className="text-[11px] font-medium bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+                How we protect your data +
+              </Link>
+            </p>
+          </FadeIn>
+        </section>
+
+        <div className="border-t border-cn-border w-full" />
+
         {/* Built for */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 12" }}>

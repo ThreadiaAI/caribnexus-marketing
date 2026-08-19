@@ -306,6 +306,46 @@ export default function AutomationsPage() {
           </ScaleIn>
         </section>
 
+        <div className="border-t border-cn-border w-full" />
+
+        {/*
+          THE DATA QUESTION, ANSWERED ON THIS PAGE TOO.
+
+          An agent that reads a customer's DMs, listens to their voice notes and
+          answers on a business's behalf touches more personal data than the
+          bookkeeper does, not less. Leaving the governance to the CaribBooks
+          page would imply it only applies there.
+
+          Automations isolates differently and the copy says so rather than
+          borrowing CaribBooks' argument: each system is built for one business,
+          so there is no second tenant in it to reach.
+        */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
+          <FadeIn style={{ gridColumn: "2 / 6" }}>
+            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+              <span className="text-cn-muted">Your customers&rsquo; messages</span><br />
+              <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">stay yours.</span>
+            </h2>
+          </FadeIn>
+          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
+              An agent that answers your customers reads what they send you. We hold that to the
+              same rules as everything else we build: encrypted in transit and at rest, held in
+              jurisdictions we name, kept to a published schedule, and deleted when you ask.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              Each system we build serves one business. There is no shared pool, no second
+              client inside it, and nothing of yours is used to train foundation models.
+            </p>
+            <p style={{ marginTop: "16px" }}>
+              <span className="text-[10px] font-medium text-cn-muted">5.0</span>{" "}
+              <a href="/data-protection" className="text-[11px] font-medium bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+                How we protect your data +
+              </a>
+            </p>
+          </FadeIn>
+        </section>
+
         {/* Segue */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[48px] pb-[80px]">
           <FadeIn style={{ gridColumn: "2 / 12" }}>

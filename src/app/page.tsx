@@ -61,6 +61,7 @@ export default function HomePage() {
             <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
               AI bookkeeping via WhatsApp. One message posts a journal entry. Every report updates in real time. Built for JMD, GCT, and TRN compliance.
             </p>
+
             <div className="flex items-center gap-3" style={{ marginTop: "16px" }}>
               <a
                 href="https://books.caribnexusai.com/signup"
@@ -270,6 +271,87 @@ export default function HomePage() {
         </section>
 
         <div className="border-t border-cn-border w-full" />
+
+        <div className="border-t border-cn-border w-full" />
+
+        {/*
+          DATA PROTECTION, LAST AND SHORT.
+
+          It sits here rather than beside CaribBooks because the objection forms
+          on its own by this point: the reader has seen we would hold their
+          clients' books. Answering it after the case is made reads as
+          confidence; answering it during reads as pre-emptive defence.
+
+          One section, no cards, no badges. A home page that starts listing
+          security features sounds like one that expects to be doubted.
+        */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+          <FadeIn style={{ gridColumn: "2 / 6" }}>
+            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
+              <span className="text-cn-muted">Your clients&apos; books are</span><br />
+              <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">isolated by design.</span>
+            </h2>
+          </FadeIn>
+          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
+              CaribBooks cannot name another business. Not as a rule the agent follows, but as
+              a capability it was never given: the business is bound by the system from the
+              number a message arrived on, before the agent runs at all.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              Encrypted in transit and at rest. Held on your instruction, and deleted when you
+              ask for it.
+            </p>
+            <p style={{ marginTop: "16px" }}>
+              <span className="text-[10px] font-medium text-cn-muted">2.0</span>{" "}
+              <a href="/data-protection" className="text-[11px] font-medium bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+                How we protect your data +
+              </a>
+            </p>
+          </FadeIn>
+        </section>
+
+        <div className="border-t border-cn-border w-full" />
+
+        {/*
+          GOVERNANCE IS COMPANY LEVEL, NOT PRODUCT LEVEL.
+
+          An earlier draft put this line inside the CaribBooks block, which
+          quietly said the rules were a bookkeeping feature. They are not. The
+          same handling applies to every system we build, and this section sits
+          after both product lines for that reason.
+
+          The two lines isolate differently and the copy says so rather than
+          flattening it. CaribBooks is one multi-tenant system, so isolation is
+          a property of its architecture. An Automations system is built for a
+          single business, so there is no second tenant for it to reach.
+        */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+          <FadeIn style={{ gridColumn: "2 / 6" }}>
+            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
+              <span className="text-cn-muted">Your data, and what</span><br />
+              <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">we do with it.</span>
+            </h2>
+          </FadeIn>
+          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
+              The same rules govern everything we build. Encrypted in transit and at rest, held
+              in jurisdictions we name rather than gesture at, kept to a published schedule, and
+              deleted when you ask. We do not train foundation models on your data.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              In CaribBooks, every business sits in its own partition and the agent has no way to
+              name another one. In CaribNexus Automations, each system is built for a single
+              business, so there is no second business for it to reach.
+            </p>
+            <p style={{ marginTop: "16px" }}>
+              <span className="text-[10px] font-medium text-cn-muted">2.0</span>{" "}
+              <a href="/data-protection" className="text-[11px] font-medium bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+                How we protect your data +
+              </a>
+            </p>
+          </FadeIn>
+        </section>
 
         {/* Closing CTA */}
         <section className="py-[80px] text-center">

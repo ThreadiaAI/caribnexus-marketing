@@ -142,3 +142,38 @@ body {
   -moz-osx-font-smoothing: grayscale;
   zoom: 0.92;
 }
+
+/* ── Print ────────────────────────────────────────────────────────────
+   Legal pages get printed. A compliance officer reviewing a vendor puts
+   the privacy policy in a file, and a partner's accountant will do the
+   same before routing client books to us. So the printed artefact is a
+   real deliverable, not an afterthought.
+
+   Chrome and Safari drop backgrounds by default, so anything carrying
+   meaning through colour has to survive as text. Link URLs are printed
+   after the anchor for the same reason: on paper a link is invisible.  */
+@media print {
+  nav, footer, .no-print { display: none !important; }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 11pt;
+  }
+
+  main { padding-top: 0 !important; }
+
+  /* The sticky contents rail is navigation, and navigation does not
+     print. Give the document the full measure instead. */
+  .print-full { grid-column: 1 / -1 !important; }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #444;
+  }
+
+  /* Never orphan a section heading at the foot of a page. */
+  h2, h3 { break-after: avoid-page; page-break-after: avoid; }
+  section { break-inside: auto; }
+}

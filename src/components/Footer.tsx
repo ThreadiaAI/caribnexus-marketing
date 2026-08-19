@@ -30,6 +30,8 @@ export function Footer() {
               <h4 className="text-[10px] font-bold text-cn-dark" style={{ marginBottom: "10px" }}>Company</h4>
               <ul className="space-y-1.5">
                 <li><a href="/about" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">About</a></li>
+                <li><a href="/privacy" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Privacy</a></li>
+                <li><a href="/data-protection" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Data protection</a></li>
                 <li><button onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))} className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">Contact</button></li>
                 <li><a href={ORG_LINKEDIN} target="_blank" rel="me noopener noreferrer" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">LinkedIn</a></li>
                 <li><a href="tel:+18767706900" className="text-[9px] text-cn-muted hover:text-[#FF5733] transition-colors">1 876 770-6900</a></li>
@@ -68,6 +70,8 @@ export function Footer() {
           <h4 className="text-[11px] font-bold text-cn-dark" style={{ marginBottom: "16px" }}>Company</h4>
           <ul className="space-y-2">
             <li><a href="/about" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">About</a></li>
+            <li><a href="/privacy" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Privacy</a></li>
+            <li><a href="/data-protection" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Data protection</a></li>
             <li><button onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))} className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Contact</button></li>
             <li><a href="mailto:hello@caribnexusai.com" className="text-[11px] text-cn-muted hover:text-[#FF5733] transition-colors">Email</a></li>
           </ul>
