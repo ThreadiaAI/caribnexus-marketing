@@ -200,21 +200,7 @@ export default function PrivacyPage() {
                 not change from one to the next.
               </P>
               <P>
-                The lines isolate differently, and it is worth saying how rather than flattening
-                it. CaribBooks is one system serving many businesses, so isolation is a property
-                of its architecture: each business is a separate partition and the agent has no
-                means of naming another. An Automations system is built for a single business,
-                so there is no second business inside it to reach.
-              </P>
-              <P>
-                <strong>This policy governs everything we build.</strong>{" "}
-                That is CaribBooks, the AI bookkeeper; CaribNexus Automations, the agents we
-                deploy across messaging channels; the voice agents we embed on business
-                websites; and any custom system we build through consulting. The rules below do
-                not change from one to the next.
-              </P>
-              <P>
-                The two lines isolate differently, and it is worth saying how. CaribBooks is a
+                The lines isolate differently, and it is worth saying how. CaribBooks is a
                 single system serving many businesses, so isolation is a property of its
                 architecture: each business is a separate partition and the agent has no means
                 of naming another. An Automations system is built for one business, so there is

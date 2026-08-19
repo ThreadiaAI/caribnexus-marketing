@@ -346,8 +346,14 @@ export function DataProtectionContent() {
                   <span className="text-[9px] font-medium text-cn-muted uppercase tracking-wider block" style={{ lineHeight: "16px" }}>
                     {c.fig}
                   </span>
-                  <div className="flex items-center justify-center" style={{ height: "150px", marginTop: "12px", marginBottom: "8px" }}>
-                    <img src={c.img} alt="" style={{ height: "150px", width: "auto", objectFit: "contain", mixBlendMode: "multiply" }} />
+                  {/* Width-driven, not height-driven. The three assets share a
+                      3:2 canvas with the ink at a fixed 80% of height (see
+                      scripts/trim_illustrations.py), so filling the column
+                      width gives all three an identical box and an identical
+                      ink height at every viewport — matching the home page's
+                      FIG 0.x cards, which is the size these should have had. */}
+                  <div style={{ marginTop: "16px", marginBottom: "20px" }}>
+                    <img src={c.img} alt="" style={{ width: "100%", height: "auto", display: "block", mixBlendMode: "multiply" }} />
                   </div>
                   <h3 className="text-[13px] font-bold" style={{ lineHeight: "24px", color: c.color }}>
                     {c.title}
@@ -370,15 +376,21 @@ export function DataProtectionContent() {
           uses for the CaribBooks cards, so the gesture is one a visitor has
           already learned on this site.
 
-          Taller than the home page's 320px because this copy is longer, and the
-          illustration sits at the foot where it does there.
+          Wider and taller than the home page's 220x320 because this copy is
+          longer, and the illustration sits at the foot where it does there so
+          the three line up with each other as you swipe.
+
+          The height is tuned to the longest of the three captions: fixed-height
+          cards are what keeps the illustrations on a common baseline, and any
+          slack beyond what the longest caption needs shows up as dead space
+          above every illustration.
         */}
         <div className="md:hidden px-4 pb-[48px] mt-[8px]">
           <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
             {CARDS.map((c) => (
               <div
                 key={c.fig}
-                className="flex flex-col border border-cn-border rounded-none p-4 shadow-sm min-w-[240px] max-w-[240px] h-[380px] snap-start shrink-0 bg-white"
+                className="flex flex-col border border-cn-border rounded-none p-4 shadow-sm min-w-[280px] max-w-[280px] h-[350px] snap-start shrink-0 bg-white"
               >
                 <div className="flex-1 mb-3">
                   <span className="text-[9px] font-medium text-cn-muted uppercase tracking-wider block mb-2">
@@ -387,8 +399,8 @@ export function DataProtectionContent() {
                   <h3 className="text-[13px] font-bold" style={{ color: c.color }}>{c.title}</h3>
                   <p className="text-[11px] text-cn-muted mt-1 leading-relaxed">{c.desc}</p>
                 </div>
-                <div className="flex items-center justify-center mt-auto mb-1">
-                  <img src={c.img} alt="" style={{ height: "110px", width: "auto", objectFit: "contain", mixBlendMode: "multiply" }} />
+                <div className="mt-auto mb-1">
+                  <img src={c.img} alt="" style={{ width: "100%", height: "auto", display: "block", mixBlendMode: "multiply" }} />
                 </div>
               </div>
             ))}
