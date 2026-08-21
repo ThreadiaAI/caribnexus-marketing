@@ -13,6 +13,30 @@ export default function DemoPage() {
   const [showControls, setShowControls] = useState(true);
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  /**
+   * NOTHING IS FETCHED UNTIL SOMEBODY ASKS FOR IT.
+   *
+   * This was autoPlay + preload="auto" + loop, which was the right call when
+   * the file was a 63-second loop. The demo is now nine and a half minutes and
+   * 49MB, and that combination means every visitor downloads all of it before
+   * deciding whether they care, then downloads it again on each loop. The
+   * partner deck's QR code lands here, so that cost falls on someone opening it
+   * on mobile data in a meeting.
+   *
+   * preload="metadata" fetches only the header, the poster carries the frame
+   * until then, and play() is called on the first interaction.
+   */
+  const [hasStarted, setHasStarted] = useState(false);
+
+  const start = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = false;
+    setIsMuted(false);
+    setHasStarted(true);
+    void v.play();
+  }, []);
+
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -53,7 +77,9 @@ export default function DemoPage() {
       <main
         className="bg-black fixed inset-0 w-full h-full overflow-hidden"
         onClick={() => {
-          if (isMuted && videoRef.current) {
+          if (!hasStarted) {
+            start();
+          } else if (isMuted && videoRef.current) {
             videoRef.current.muted = false;
             setIsMuted(false);
           }
@@ -64,13 +90,24 @@ export default function DemoPage() {
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-contain bg-black"
           playsInline
-          autoPlay
           muted
-          loop
-          preload="auto"
+          poster="/demo-poster.jpg"
+          preload="metadata"
         >
           <source src="https://darjazmh8n7xf.cloudfront.net/videos/introducing-caribbooks.mp4" type="video/mp4" />
         </video>
+
+        {/* Play affordance. Without autoplay the poster alone gives no signal
+            that this is a video, so it stays until the first tap. */}
+        {!hasStarted && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-20 h-20 rounded-full bg-black/45 backdrop-blur-sm flex items-center justify-center">
+              <svg className="w-9 h-9 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        )}
 
         {/* Bottom overlay — fades */}
         <div className={`absolute left-0 right-0 px-5 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`} style={{ bottom: "12%" }}>
@@ -127,13 +164,25 @@ export default function DemoPage() {
               ref={videoRef}
               className="w-full h-full rounded-2xl object-contain bg-white"
               playsInline
-              autoPlay
               muted
-              loop
-              preload="auto"
+              poster="/demo-poster.jpg"
+              preload="metadata"
             >
               <source src="https://darjazmh8n7xf.cloudfront.net/videos/introducing-caribbooks.mp4" type="video/mp4" />
             </video>
+            {!hasStarted && (
+              <button
+                onClick={start}
+                aria-label="Play the CaribBooks demo"
+                className="absolute inset-0 flex items-center justify-center rounded-2xl group"
+              >
+                <div className="w-20 h-20 rounded-full bg-black/45 backdrop-blur-sm flex items-center justify-center transition-transform group-hover:scale-105">
+                  <svg className="w-9 h-9 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </button>
+            )}
             {/* Unmute button */}
             <button
               onClick={toggleMute}
