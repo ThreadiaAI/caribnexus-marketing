@@ -3,7 +3,8 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { TRANSCRIPT } from "@/lib/videoTranscript";
+import { TRANSCRIPT, CHAPTERS } from "@/lib/videoTranscript";
+import VideoScrubber from "@/components/VideoScrubber";
 import { ORG_URL } from "@/lib/site";
 
 export default function DemoPage() {
@@ -95,6 +96,7 @@ export default function DemoPage() {
           preload="metadata"
         >
           <source src="https://darjazmh8n7xf.cloudfront.net/videos/introducing-caribbooks.mp4" type="video/mp4" />
+          <track kind="captions" src="/demo-captions.vtt" srcLang="en" label="English" default />
         </video>
 
         {/* Play affordance. Without autoplay the poster alone gives no signal
@@ -106,6 +108,15 @@ export default function DemoPage() {
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
+          </div>
+        )}
+
+        {/* Transport. Only after the first tap: before that the poster and
+            the play affordance are the whole interface, and a scrubber sitting
+            on a still that has not started reads as chrome for nothing. */}
+        {hasStarted && (
+          <div className={`absolute left-0 right-0 px-5 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`} style={{ bottom: "3%" }}>
+            <VideoScrubber videoRef={videoRef} chapters={CHAPTERS} tone="dark" accent="#FFFFFF" />
           </div>
         )}
 
@@ -158,8 +169,23 @@ export default function DemoPage() {
       <Nav />
       <main className="bg-white min-h-screen pt-[var(--nav-h)]">
         <div className="flex items-center justify-center gap-12 px-8" style={{ height: "calc(100vh - var(--nav-h))" }}>
-          {/* Video panel */}
-          <div className="relative shrink-0" style={{ height: "calc(100vh - var(--nav-h) - 40px)", aspectRatio: "9 / 16", maxHeight: "800px" }}>
+          {/* Video panel. Column, so the transport sits under the frame
+              rather than over the picture — on desktop there is room for it. */}
+          <div
+            className="shrink-0 flex flex-col"
+            style={{
+              height: "calc(100vh - var(--nav-h) - 40px)",
+              maxHeight: "800px",
+              // Width is stated rather than inherited from the child's aspect
+              // ratio. Putting the frame in a column to make room for the
+              // transport removed the constraint that used to size it, so the
+              // column stretched and the scrubber ran the full viewport.
+              // Frame height is the column minus the transport (~56px); width
+              // is that at 9:16.
+              width: "min(calc((100vh - var(--nav-h) - 96px) * 9 / 16), 418px)",
+            }}
+          >
+          <div className="relative w-full" style={{ flex: "1 1 auto", minHeight: 0 }}>
             <video
               ref={videoRef}
               className="w-full h-full rounded-2xl object-contain bg-white"
@@ -169,6 +195,7 @@ export default function DemoPage() {
               preload="metadata"
             >
               <source src="https://darjazmh8n7xf.cloudfront.net/videos/introducing-caribbooks.mp4" type="video/mp4" />
+              <track kind="captions" src="/demo-captions.vtt" srcLang="en" label="English" default />
             </video>
             {!hasStarted && (
               <button
@@ -201,6 +228,14 @@ export default function DemoPage() {
                 </svg>
               )}
             </button>
+          </div>
+          <VideoScrubber
+            videoRef={videoRef}
+            chapters={CHAPTERS}
+            tone="light"
+            accent="#0077B6"
+            className="mt-1"
+          />
           </div>
 
           {/* Info panel */}
@@ -254,14 +289,14 @@ export default function DemoPage() {
               Transcript
             </span>
             <h2 className="mt-2 text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
-              <span className="text-cn-muted">Introducing</span>
+              <span className="text-cn-muted">The full</span>
               <br />
               <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">
-                CaribBooks
+                walkthrough
               </span>
             </h2>
             <p className="text-[13px] text-cn-muted mt-3" style={{ lineHeight: "1.3" }}>
-              The full script of the film above, for reading with the sound off.
+              Every word of the walkthrough above, for reading with the sound off. Captions play over the video too.
             </p>
           </div>
           <div className="mt-6 md:mt-0" style={{ gridColumn: "7 / 12" }}>

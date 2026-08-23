@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ORG_URL, jsonLd } from "@/lib/structuredData";
-import { TRANSCRIPT_TEXT, VIDEO_DESCRIPTION, VIDEO_TITLE } from "@/lib/videoTranscript";
+import { TRANSCRIPT_TEXT, VIDEO_DESCRIPTION, VIDEO_DURATION_SECONDS, VIDEO_TITLE } from "@/lib/videoTranscript";
 
 /**
  * Metadata-only layout, plus the VideoObject.
@@ -56,7 +56,11 @@ const videoSchema = {
   name: VIDEO_TITLE,
   description: VIDEO_DESCRIPTION,
   thumbnailUrl: [`${ORG_URL}/brand/spiral-startframe-1080x1920.png`],
-  uploadDate: "2026-08-13",
+  uploadDate: "2026-08-23",
+  // ISO 8601. Google treats a VideoObject without a duration as
+  // incomplete, and at twelve minutes the runtime is information a
+  // searcher wants before they commit to playing anything.
+  duration: `PT${Math.floor(VIDEO_DURATION_SECONDS / 60)}M${VIDEO_DURATION_SECONDS % 60}S`,
   contentUrl: "https://darjazmh8n7xf.cloudfront.net/videos/introducing-caribbooks.mp4",
   embedUrl: `${ORG_URL}/services/caribbooks/demo`,
   transcript: TRANSCRIPT_TEXT,

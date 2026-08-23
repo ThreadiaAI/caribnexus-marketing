@@ -1,0 +1,721 @@
+WEBVTT
+
+NOTE
+Captions for the CaribBooks walkthrough.
+Machine-transcribed, then corrected for proper nouns by hand.
+
+1
+00:00:01.000 --> 00:00:05.999
+Hi, I'm Dominic Wade, founder of
+CaribNexus AI and this is CaribBooks.
+
+2
+00:00:06.000 --> 00:00:09.999
+CaribBooks is an AI bookkeeper
+that lives entirely in WhatsApp.
+
+3
+00:00:10.000 --> 00:00:14.470
+We built CaribBooks because we've noticed
+a general problem with bookkeeping
+
+4
+00:00:14.471 --> 00:00:18.940
+services not only within Jamaica but
+the wider Caribbean for where MSMEs are
+
+5
+00:00:18.941 --> 00:00:20.999
+concerned and accounting practices.
+
+6
+00:00:21.000 --> 00:00:24.999
+MSME stands for micro, small,
+medium-sized enterprises.
+
+7
+00:00:25.000 --> 00:00:26.819
+For these types of companies,
+
+8
+00:00:26.820 --> 00:00:32.028
+most of them do not have an internal system
+of recording their transactions that is
+
+9
+00:00:32.029 --> 00:00:35.480
+always reliable, that is
+always available to them 24-7,
+
+10
+00:00:35.481 --> 00:00:39.999
+that can adequately take in all of
+their transactions wherever they are.
+
+11
+00:00:40.000 --> 00:00:42.029
+As for an accounting practice,
+
+12
+00:00:42.030 --> 00:00:46.495
+we've realised that they spend a
+lot of time posting transactions,
+
+13
+00:00:46.496 --> 00:00:47.713
+doing bookkeeping,
+
+14
+00:00:47.714 --> 00:00:53.262
+valuable time that they could spend on
+higher value work such as advisory services
+
+15
+00:00:53.263 --> 00:00:57.999
+where tax planning is concerned and
+even cases of financial reporting.
+
+16
+00:00:58.000 --> 00:01:01.183
+Without anything further to
+say, as an introduction,
+
+17
+00:01:01.184 --> 00:01:06.999
+I'm going to head into how exactly CaribBooks
+could work for the typical MSME through WhatsApp.
+
+18
+00:01:07.000 --> 00:01:13.000
+First things first, I can be able
+to specify a transaction via text.
+
+19
+00:01:14.000 --> 00:01:19.777
+What I can do is to say,
+for example, Hi CB,
+
+20
+00:01:19.778 --> 00:01:25.778
+I have received a payment
+for an AI automation service.
+
+21
+00:01:28.000 --> 00:01:34.000
+Automation service for the amount
+of, let us specify an amount,
+
+22
+00:01:41.938 --> 00:01:47.938
+$180,000 JMD amount was
+received via NCB transfer.
+
+23
+00:01:53.000 --> 00:01:59.000
+Additionally, I can say the service was
+for an AI marketing system that was built.
+
+24
+00:02:08.000 --> 00:02:13.666
+Sending this as a message to CB, CB
+will be able to see the message,
+
+25
+00:02:13.667 --> 00:02:17.000
+acknowledge it and post the transaction.
+
+26
+00:02:23.000 --> 00:02:28.999
+There we go, so CB posted, debited NCB
+and credited custom development revenue.
+
+27
+00:02:29.000 --> 00:02:31.999
+What I can do next is to attach a receipt.
+
+28
+00:02:32.000 --> 00:02:36.999
+This is a receipt of things that I've
+purchased via cash from my office.
+
+29
+00:02:37.000 --> 00:02:41.617
+I can send this as a message to CB,
+CB will be able to see the receipt,
+
+30
+00:02:41.618 --> 00:02:44.999
+acknowledge it and post the
+transaction accordingly.
+
+31
+00:02:45.000 --> 00:02:47.000
+Let us wait for that.
+
+32
+00:02:53.000 --> 00:02:59.000
+There we go, it acknowledged
+via receipt, posted,
+
+33
+00:03:01.018 --> 00:03:07.018
+made a debit entry to office
+supplies, credited cash on hand.
+
+34
+00:03:11.000 --> 00:03:17.000
+The next thing that I can do is to specify a
+transaction via voice note or a voice message.
+
+35
+00:03:20.000 --> 00:03:22.726
+What I can do is to
+specifically say, hey CB,
+
+36
+00:03:22.727 --> 00:03:27.999
+so I've just recently made a payment to one
+of my employees for their bi-weekly salary.
+
+37
+00:03:28.000 --> 00:03:33.999
+So the total was for the
+amount of $52,000 JMD.
+
+38
+00:03:34.000 --> 00:03:37.999
+The amount was made via
+an NCB ACH transfer.
+
+39
+00:03:38.000 --> 00:03:39.762
+Sending this across to CB,
+
+40
+00:03:39.763 --> 00:03:45.763
+CB will be able to hear the voice note and
+acknowledge accordingly and post the transaction.
+
+41
+00:03:51.000 --> 00:03:55.000
+Give it some time.
+
+42
+00:04:04.000 --> 00:04:10.000
+As you can see, it posted the transaction,
+debited miscellaneous expense, credited NCB.
+
+43
+00:04:11.000 --> 00:04:17.000
+It realised that there wasn't any dedicated wages
+or salaries accounts in the chart of accounts.
+
+44
+00:04:18.000 --> 00:04:24.000
+If it is a case that we want to make
+a wages or salaries expense account,
+
+45
+00:04:25.509 --> 00:04:27.565
+the accounting firm,
+
+46
+00:04:27.566 --> 00:04:33.566
+if they're using this solution as a white
+label solution for the MSMEs they serve,
+
+47
+00:04:36.000 --> 00:04:42.000
+they can create in the chart of accounts
+a book for wages and salaries for CB to
+
+48
+00:04:42.275 --> 00:04:44.000
+make those entries to.
+
+49
+00:04:45.000 --> 00:04:51.000
+The next thing that I can do is to
+specify a transaction reminder.
+
+50
+00:04:52.000 --> 00:04:56.999
+Not all of the time we will
+know how we will make payments.
+
+51
+00:04:57.000 --> 00:05:00.999
+Maybe we make payments via card or
+maybe we make payments via cash.
+
+52
+00:05:01.000 --> 00:05:02.999
+We do not know.
+
+53
+00:05:03.000 --> 00:05:08.249
+But if it is a case that you remember
+now that you want to be reminded about a
+
+54
+00:05:08.250 --> 00:05:09.999
+transaction down the road,
+
+55
+00:05:10.000 --> 00:05:14.423
+maybe in the next 30 minutes,
+maybe in the next two hours,
+
+56
+00:05:14.424 --> 00:05:18.999
+maybe in the next five days,
+bi-weekly, you get the picture.
+
+57
+00:05:19.000 --> 00:05:24.066
+What I can do is to specify a reminder for
+CB to check in with me so that I can be
+
+58
+00:05:24.067 --> 00:05:28.825
+able to go ahead and record that
+transaction for it to be able to record that
+
+59
+00:05:28.826 --> 00:05:29.999
+transaction for me.
+
+60
+00:05:30.000 --> 00:05:36.000
+For example, can you remind me in the next two minutes if
+I have made a payment for fuel expense via cash or card?
+
+61
+00:05:54.000 --> 00:05:56.999
+Of course, you can span
+this across five days.
+
+62
+00:05:57.000 --> 00:05:58.599
+Let us say by the end of the week,
+
+63
+00:05:58.600 --> 00:06:00.999
+normally you go ahead and
+get gas for your vehicle.
+
+64
+00:06:01.000 --> 00:06:05.999
+And normally you're indifferent between
+paying for between cash or card.
+
+65
+00:06:06.000 --> 00:06:09.516
+You can always ask CB to check in
+with you, send a reminder message,
+
+66
+00:06:09.517 --> 00:06:11.999
+and then you will be able
+to follow up with you.
+
+67
+00:06:12.000 --> 00:06:15.897
+And then after you clarify,
+after that follow up,
+
+68
+00:06:15.898 --> 00:06:18.999
+it makes that transaction post for you.
+
+69
+00:06:19.000 --> 00:06:19.999
+There we go.
+
+70
+00:06:20.000 --> 00:06:22.999
+So I'm sending this as a message to CB.
+
+71
+00:06:23.000 --> 00:06:26.999
+CB will be able to see the
+message, create the reminder.
+
+72
+00:06:27.000 --> 00:06:30.999
+I'll ping in about two minutes to check in
+whether you made a fuel payment via cash or card.
+
+73
+00:06:31.000 --> 00:06:33.999
+I just do two minutes just
+for the sake of this demo.
+
+74
+00:06:34.000 --> 00:06:38.999
+In the meantime, while we wait, we can
+always go ahead and request reports.
+
+75
+00:06:39.000 --> 00:06:45.000
+Of course, the MSME can be able to
+request reports through WhatsApp.
+
+76
+00:06:46.000 --> 00:06:52.000
+Can you send me copies of my balance
+sheet and my transaction ledger?
+
+77
+00:06:57.000 --> 00:07:01.999
+I can always say general ledger.
+
+78
+00:07:02.000 --> 00:07:02.999
+There we go.
+
+79
+00:07:03.000 --> 00:07:04.999
+Sending this across to CB.
+
+80
+00:07:05.000 --> 00:07:09.999
+CB will be able to see this message
+and send me copies of those documents.
+
+81
+00:07:10.000 --> 00:07:14.999
+We can request up to 11 reports
+within the transaction ledger.
+
+82
+00:07:15.000 --> 00:07:15.999
+So there we go.
+
+83
+00:07:16.000 --> 00:07:16.999
+It's sending a message.
+
+84
+00:07:17.000 --> 00:07:18.999
+So this is a copy of my balance sheet.
+
+85
+00:07:19.000 --> 00:07:20.999
+There we go.
+
+86
+00:07:21.000 --> 00:07:24.999
+And then, of course, this is
+a copy of my GL register.
+
+87
+00:07:25.000 --> 00:07:27.999
+These are for all of the
+transactions that I would have done.
+
+88
+00:07:28.000 --> 00:07:32.999
+For the sake of this, I'm showing you
+the last set of transactions that we did.
+
+89
+00:07:33.000 --> 00:07:36.999
+This is 180,000 NCB transfer
+for AI marketing system.
+
+90
+00:07:37.000 --> 00:07:38.999
+Remember that transaction that we did?
+
+91
+00:07:39.000 --> 00:07:40.999
+The office supplies the cash on hand.
+
+92
+00:07:41.000 --> 00:07:43.999
+It debited and credited those entries.
+
+93
+00:07:44.000 --> 00:07:48.999
+We're also seeing for miscellaneous expense
+and NCB for the bi-weekly salary payments.
+
+94
+00:07:49.000 --> 00:07:50.999
+So those are there specifically.
+
+95
+00:07:51.000 --> 00:07:55.999
+You can request up to 11 different
+documents through the chat,
+
+96
+00:07:56.000 --> 00:07:58.999
+and then it will be able to
+send those documents for you.
+
+97
+00:07:59.000 --> 00:08:02.999
+Of course, if you're an accounting firm,
+you'll be given your own dashboard.
+
+98
+00:08:03.000 --> 00:08:06.999
+You can be able to filter for whichever
+specific client you're serving
+
+99
+00:08:07.000 --> 00:08:11.999
+and actually request the
+reports, download the reports,
+
+100
+00:08:12.000 --> 00:08:16.999
+as they're always up to date, up to
+the last message that CB handled
+
+101
+00:08:17.000 --> 00:08:18.999
+for any one of your specific clients.
+
+102
+00:08:19.000 --> 00:08:21.999
+You'll be able to go ahead
+and pull those records,
+
+103
+00:08:22.000 --> 00:08:26.999
+circumventing the need for
+doing the bookkeeping yourself.
+
+104
+00:08:27.000 --> 00:08:29.999
+You can be able to follow
+through specifically with that.
+
+105
+00:08:30.000 --> 00:08:32.999
+I'm going to be waiting
+on the next two minutes.
+
+106
+00:08:33.000 --> 00:08:36.999
+It should be less than one minute
+remaining for that message to come in.
+
+107
+00:08:37.000 --> 00:08:38.999
+There we go. It just came in.
+
+108
+00:08:39.000 --> 00:08:40.999
+Have you made a fuel payment recently?
+
+109
+00:08:41.000 --> 00:08:43.999
+Please let me know if it
+was made by a cash or card.
+
+110
+00:08:44.000 --> 00:08:48.999
+I made the payment $9,000.
+
+111
+00:08:49.000 --> 00:08:55.000
+I should say 9K cash sending this.
+
+112
+00:08:59.000 --> 00:09:04.999
+I didn't specify the vendor, but
+I'll go ahead and specify that.
+
+113
+00:09:05.000 --> 00:09:09.999
+CB will be able to see that
+message and make that entry.
+
+114
+00:09:10.000 --> 00:09:12.999
+It made it via a miscellaneous expense.
+
+115
+00:09:13.000 --> 00:09:18.999
+Of course, because of the fact that
+there is no dedicated fuel expense,
+
+116
+00:09:19.000 --> 00:09:25.000
+what we're expecting is that it will make
+that payment via miscellaneous expense.
+
+117
+00:09:26.000 --> 00:09:29.999
+As stated before, if it is the case
+that you're an accounting firm
+
+118
+00:09:30.000 --> 00:09:34.999
+and you want to make a dedicated
+entry for fuel expense,
+
+119
+00:09:35.000 --> 00:09:36.999
+you can for your clients.
+
+120
+00:09:37.000 --> 00:09:43.000
+We're going to go ahead and
+request updated transaction sheet.
+
+121
+00:09:49.000 --> 00:09:52.999
+Send it to me.
+
+122
+00:09:53.000 --> 00:09:57.999
+Sending that message across to CB so that you
+can be able to see that entry that it made.
+
+123
+00:09:58.000 --> 00:10:01.999
+Of course, if you're an accounting
+firm, you'll be able to go inside,
+
+124
+00:10:02.000 --> 00:10:06.999
+see that specific payment and
+understand the description of it
+
+125
+00:10:07.000 --> 00:10:12.999
+so that for your own analytics or when you want
+to go back through the actions that CB did,
+
+126
+00:10:13.000 --> 00:10:19.000
+it can always read those descriptions via
+the description in the transaction ledger,
+
+127
+00:10:20.000 --> 00:10:21.999
+in the general ledger.
+
+128
+00:10:22.000 --> 00:10:24.999
+Fuel payment, $9,000 in cash,
+no dedicated fuel expense.
+
+129
+00:10:25.000 --> 00:10:27.999
+Accounting COA posted to
+miscellaneous expense.
+
+130
+00:10:28.000 --> 00:10:29.999
+Vendor not specified by owner.
+
+131
+00:10:30.000 --> 00:10:31.578
+Let us say for month one,
+
+132
+00:10:31.579 --> 00:10:35.999
+you're looking at this and you want
+to create a specific fuel expense,
+
+133
+00:10:36.000 --> 00:10:36.999
+you can create it.
+
+134
+00:10:37.000 --> 00:10:39.636
+Or if you're already
+working with this customer,
+
+135
+00:10:39.637 --> 00:10:41.999
+you already hand the
+transactions for them,
+
+136
+00:10:42.000 --> 00:10:44.999
+and you know this is a typical
+transaction that they do,
+
+137
+00:10:45.000 --> 00:10:48.999
+you can create that entry in
+the chart of accounts for them.
+
+138
+00:10:49.000 --> 00:10:50.999
+So that is exactly how CB works.
+
+139
+00:10:51.000 --> 00:10:57.000
+You can be able to specify a transaction via
+text, via voice note message, via an image,
+
+140
+00:10:59.000 --> 00:11:02.231
+or you can set reminders, and of course,
+
+141
+00:11:02.232 --> 00:11:06.999
+you can request up to 11 reports
+directly within the chart.
+
+142
+00:11:07.000 --> 00:11:10.999
+And that is exactly how CB
+works for your accounting firm.
+
+143
+00:11:11.000 --> 00:11:15.999
+Of course, you can see here where
+it could be able to save you time
+
+144
+00:11:16.000 --> 00:11:19.999
+and, of course, help make
+processes flow much more efficient.
+
+145
+00:11:20.000 --> 00:11:23.999
+That being said, if you are
+interested in reaching out to us,
+
+146
+00:11:24.000 --> 00:11:29.999
+you can visit our website
+at www.caribnexusai.com.
+
+147
+00:11:30.000 --> 00:11:36.000
+You can view our specific page,
+caribnexusai.com/services/caribbooks.
+
+148
+00:11:38.000 --> 00:11:44.000
+You can also send us a WhatsApp
+message at the number 1-876-770-6900.
+
+149
+00:11:48.000 --> 00:11:54.000
+And you can reach out to us
+on Instagram @caribnexus_ai.
+
+150
+00:11:55.000 --> 00:11:57.999
+And you can also reach out
+to us on LinkedIn as well.
+
+151
+00:11:58.000 --> 00:12:03.999
+With that said, thank you again for
+taking the time to look at this video.
+
+152
+00:12:04.000 --> 00:12:06.000
+Have yourself a wonderful day.
