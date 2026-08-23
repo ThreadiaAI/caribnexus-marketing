@@ -32,6 +32,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * The hit area is taller than the bar. The visible track is 4px because a fat
  * bar looks clumsy over video, but 4px is an unfair target on a phone, so
  * padding gives it a ~28px hit area without changing how it looks.
+ *
+ * Play, pause and skip are NOT here. They sit centred over the picture in
+ * VideoCenterControls, because a button row under the bar occupies the same
+ * band the browser renders WebVTT cues into, and the two collided.
  */
 
 export type Chapter = { label: string; at: number };
@@ -42,6 +46,8 @@ type Props = {
   /** Tint for the played portion and the handle. */
   accent?: string;
   className?: string;
+  /** Lets the page drive the centred transport from the same state. */
+  onPlayingChange?: (playing: boolean) => void;
   /** Light chrome sits on white; dark chrome sits on the video itself. */
   tone?: "light" | "dark";
 };
@@ -59,6 +65,7 @@ export default function VideoScrubber({
   accent = "#0077B6",
   className = "",
   tone = "dark",
+  onPlayingChange,
 }: Props) {
   const barRef = useRef<HTMLDivElement>(null);
   const [duration, setDuration] = useState(0);
@@ -75,8 +82,8 @@ export default function VideoScrubber({
 
     const onMeta = () => setDuration(v.duration || 0);
     const onTime = () => setCurrent(v.currentTime);
-    const onPlay = () => setPlaying(true);
-    const onPause = () => setPlaying(false);
+    const onPlay = () => { setPlaying(true); onPlayingChange?.(true); };
+    const onPause = () => { setPlaying(false); onPlayingChange?.(false); };
     const onProgress = () => {
       // The range under the playhead, not range 0 — after a seek the browser
       // opens a second range and range 0 is the one you already left.
@@ -105,7 +112,7 @@ export default function VideoScrubber({
       v.removeEventListener("play", onPlay);
       v.removeEventListener("pause", onPause);
     };
-  }, [videoRef]);
+  }, [videoRef, onPlayingChange]);
 
   const timeAt = useCallback(
     (clientX: number) => {
@@ -160,7 +167,6 @@ export default function VideoScrubber({
   const trackBg = light ? "rgba(0,0,0,0.10)" : "rgba(255,255,255,0.22)";
   const bufBg = light ? "rgba(0,0,0,0.18)" : "rgba(255,255,255,0.40)";
   const textCol = light ? "var(--cn-muted, #6B7280)" : "rgba(255,255,255,0.92)";
-  const btnBg = light ? "rgba(0,0,0,0.06)" : "rgba(0,0,0,0.45)";
 
   const activeChapter = chapters.length
     ? chapters.reduce((best, c) => (shown >= c.at ? c : best), chapters[0])
@@ -247,44 +253,9 @@ export default function VideoScrubber({
       </div>
 
       <div className="flex items-center gap-3" style={{ color: textCol }}>
-        <button aria-label="Back 10 seconds" onClick={() => nudge(-10)}
-                className="w-7 h-7 rounded-full flex items-center justify-center"
-                style={{ background: btnBg }}>
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="11 17 6 12 11 7" /><polyline points="18 17 13 12 18 7" />
-          </svg>
-        </button>
-
-        <button aria-label={playing ? "Pause" : "Play"}
-                onClick={() => { const v = videoRef.current; if (v) (v.paused ? v.play() : v.pause()); }}
-                className="w-8 h-8 rounded-full flex items-center justify-center"
-                style={{ background: btnBg }}>
-          {playing ? (
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <rect x="6" y="5" width="4" height="14" rx="1" />
-              <rect x="14" y="5" width="4" height="14" rx="1" />
-            </svg>
-          ) : (
-            <svg className="w-4 h-4 ml-0.5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          )}
-        </button>
-
-        <button aria-label="Forward 10 seconds" onClick={() => nudge(10)}
-                className="w-7 h-7 rounded-full flex items-center justify-center"
-                style={{ background: btnBg }}>
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="13 17 18 12 13 7" /><polyline points="6 17 11 12 6 7" />
-          </svg>
-        </button>
-
         <span className="text-[11px] tabular-nums">
           {fmt(shown)} / {fmt(duration)}
         </span>
-
         {activeChapter && (
           <span className="text-[11px] truncate opacity-70 ml-auto" title={activeChapter.label}>
             {activeChapter.label}

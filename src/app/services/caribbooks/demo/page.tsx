@@ -5,6 +5,12 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { TRANSCRIPT, CHAPTERS } from "@/lib/videoTranscript";
 import VideoScrubber from "@/components/VideoScrubber";
+import VideoCenterControls from "@/components/VideoCenterControls";
+import { useHlsVideo } from "@/lib/useHlsVideo";
+
+// Segmented stream for playback; the progressive MP4 stays as the <source> so
+// anything without HLS support still gets the film.
+const HLS_SRC = "https://darjazmh8n7xf.cloudfront.net/videos/hls/master.m3u8";
 import { ORG_URL } from "@/lib/site";
 
 export default function DemoPage() {
@@ -28,6 +34,19 @@ export default function DemoPage() {
    * until then, and play() is called on the first interaction.
    */
   const [hasStarted, setHasStarted] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [hovering, setHovering] = useState(false);
+
+  const playPause = useCallback(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    void (v.paused ? v.play() : v.pause());
+  }, []);
+  const skip = useCallback((delta: number) => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.currentTime = Math.min(Math.max(v.currentTime + delta, 0), v.duration || 0);
+  }, []);
 
   const start = useCallback(() => {
     const v = videoRef.current;
@@ -37,6 +56,8 @@ export default function DemoPage() {
     setHasStarted(true);
     void v.play();
   }, []);
+
+  useHlsVideo(videoRef, HLS_SRC);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -111,12 +132,20 @@ export default function DemoPage() {
           </div>
         )}
 
+        <VideoCenterControls
+          playing={playing}
+          onPlayPause={playPause}
+          onSkip={skip}
+          visible={showControls}
+          enabled={hasStarted}
+        />
+
         {/* Transport. Only after the first tap: before that the poster and
             the play affordance are the whole interface, and a scrubber sitting
             on a still that has not started reads as chrome for nothing. */}
         {hasStarted && (
           <div className={`absolute left-0 right-0 px-5 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`} style={{ bottom: "3%" }}>
-            <VideoScrubber videoRef={videoRef} chapters={CHAPTERS} tone="dark" accent="#FFFFFF" />
+            <VideoScrubber videoRef={videoRef} chapters={CHAPTERS} tone="dark" accent="#FFFFFF" onPlayingChange={setPlaying} />
           </div>
         )}
 
@@ -185,7 +214,12 @@ export default function DemoPage() {
               width: "min(calc((100vh - var(--nav-h) - 96px) * 9 / 16), 418px)",
             }}
           >
-          <div className="relative w-full" style={{ flex: "1 1 auto", minHeight: 0 }}>
+          <div
+            className="relative w-full"
+            style={{ flex: "1 1 auto", minHeight: 0 }}
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
+          >
             <video
               ref={videoRef}
               className="w-full h-full rounded-2xl object-contain bg-white"
@@ -210,6 +244,14 @@ export default function DemoPage() {
                 </div>
               </button>
             )}
+            <VideoCenterControls
+              playing={playing}
+              onPlayPause={playPause}
+              onSkip={skip}
+              visible={hovering || !playing}
+              enabled={hasStarted}
+            />
+
             {/* Unmute button */}
             <button
               onClick={toggleMute}
@@ -235,6 +277,7 @@ export default function DemoPage() {
             tone="light"
             accent="#0077B6"
             className="mt-1"
+            onPlayingChange={setPlaying}
           />
           </div>
 

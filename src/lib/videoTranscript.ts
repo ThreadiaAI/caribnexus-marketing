@@ -45,7 +45,7 @@
 export const VIDEO_TITLE = 'CaribBooks: the full walkthrough';
 
 export const VIDEO_DESCRIPTION =
-  'Dominic Wade, founder of CaribNexus AI, walks through CaribBooks — an AI bookkeeper that lives entirely in WhatsApp. Post a transaction by text, by photographed receipt, or by voice note; set a reminder for a payment you have not made yet; and pull any of 11 reports straight from the chat. Built for Caribbean MSMEs, and for the accounting practices that keep their books.';
+  'Dominic Waite, founder of CaribNexus AI, walks through CaribBooks — an AI bookkeeper that lives entirely in WhatsApp. Post a transaction by text, by photographed receipt, or by voice note; set a reminder for a payment you have not made yet; and pull any of 11 reports straight from the chat. Built for Caribbean MSMEs, and for the accounting practices that keep their books.';
 
 /** Runtime of the file served at contentUrl, for VideoObject.duration. */
 export const VIDEO_DURATION_SECONDS = 726;
@@ -58,7 +58,7 @@ export const TRANSCRIPT: TranscriptPart[] = [
     part: 'Why CaribBooks exists',
     at: 1,
     lines: [
-      'Hi, I’m Dominic Wade, founder of CaribNexus AI, and this is CaribBooks.',
+      'Hi, I’m Dominic Waite, founder of CaribNexus AI, and this is CaribBooks.',
       'CaribBooks is an AI bookkeeper that lives entirely in WhatsApp.',
       'We built CaribBooks because we’ve noticed a general problem with bookkeeping services, not only within Jamaica but the wider Caribbean, where MSMEs and accounting practices are concerned.',
       'MSME stands for micro, small, medium-sized enterprises.',
