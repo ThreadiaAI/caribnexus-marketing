@@ -107,7 +107,7 @@ us specify an amount,
 
 22
 00:01:36.240 --> 00:01:42.240
-180 000 JMD amount was received
+180,000 JMD amount was received
 via NCB transfer. Additionally,
 
 23
@@ -179,11 +179,11 @@ is to specifically say, Hey CB, so
 38
 00:03:24.260 --> 00:03:28.859
 I've just recently made a payment to one of
-my employees for their bi weekly salary.
+my employees for their bi-weekly salary.
 
 39
 00:03:28.860 --> 00:03:33.939
-Subtotal was for the amount of 52 000 JMD.
+Subtotal was for the amount of 52,000 JMD.
 
 40
 00:03:33.940 --> 00:03:37.899
@@ -266,7 +266,7 @@ maybe in the next 5 days,
 
 57
 00:05:17.640 --> 00:05:19.339
-bi weekly you get the picture.
+bi-weekly you get the picture.
 
 58
 00:05:19.340 --> 00:05:24.899
@@ -407,8 +407,8 @@ of transactions that we did.
 
 87
 00:07:33.920 --> 00:07:37.739
-This is 180 000 NCB transfer
-for AR marketing system.
+This is 180,000 NCB transfer
+for AI marketing system.
 
 88
 00:07:37.740 --> 00:07:39.579
@@ -425,7 +425,7 @@ it debited and credited those entries.
 91
 00:07:44.660 --> 00:07:49.519
 We're also seeing for miscellaneous expense
-and NCB for the bi weekly salary payments.
+and NCB for the bi-weekly salary payments.
 
 92
 00:07:49.520 --> 00:07:51.459
@@ -462,7 +462,7 @@ they're always up to date.
 
 99
 00:08:14.880 --> 00:08:19.659
-Up to the last message that NCB handled
+Up to the last message that CB handled
 for any one of your specific clients.
 
 100
@@ -505,7 +505,7 @@ a cash or card. I made the payment.
 
 108
 00:08:48.000 --> 00:08:54.000
-9 000 I should say 9K cash. Sending this.
+9,000 I should say 9K cash. Sending this.
 
 109
 00:08:58.960 --> 00:09:01.639
@@ -517,7 +517,7 @@ But I'll go ahead and specify that.
 
 111
 00:09:05.420 --> 00:09:07.420
-NCB will be able to see that message.
+CB will be able to see that message.
 
 112
 00:09:07.740 --> 00:09:09.600
@@ -603,7 +603,7 @@ In the general ledger. Fuel payment.
 
 130
 00:10:23.560 --> 00:10:25.899
-9 000 in cash. No dedicated fuel expense.
+9,000 in cash. No dedicated fuel expense.
 
 131
 00:10:25.900 --> 00:10:28.519
