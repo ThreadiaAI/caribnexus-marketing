@@ -27,6 +27,28 @@ export const metadata: Metadata = {
       "Watch Introducing CaribBooks: the AI bookkeeper that works inside WhatsApp. Full transcript on the page.",
     url: `${ORG_URL}/services/caribbooks/demo`,
     type: "video.other",
+    // Stated here, not inherited. Next REPLACES the openGraph object rather
+    // than merging into the root one, so declaring this block without images
+    // meant the page emitted no og:image at all — every share of the demo
+    // link, on LinkedIn, WhatsApp, Slack or iMessage, rendered with no
+    // picture. Verified against the live page before fixing.
+    //
+    // 1200x630 is the 1.91:1 ratio those platforms crop to. It deliberately
+    // carries no QR: a link preview is already a link, and asking someone to
+    // scan what they could tap reads as a mistake.
+    images: [{
+      url: "/og-caribbooks-demo.png",
+      width: 1200,
+      height: 630,
+      alt: "CaribBooks posting a journal entry from a photographed receipt inside WhatsApp",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CaribBooks Demo | CaribNexus AI",
+    description:
+      "An AI bookkeeper that works inside WhatsApp, built for Caribbean MSMEs.",
+    images: ["/og-caribbooks-demo.png"],
   },
 };
 
