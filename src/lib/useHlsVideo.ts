@@ -112,18 +112,65 @@ export function useHlsVideo(
         // stalling, and dropping — which is exactly the stutter we are here
         // to remove. The first segment is ~190KB at 480p.
         startLevel: 0,
-        // Do not hoard. 30s ahead is plenty for a talking-head walkthrough and
-        // keeps the player responsive instead of committed to data the viewer
-        // may skip past.
-        maxBufferLength: 30,
-        maxMaxBufferLength: 60,
-        backBufferLength: 30,
-        // Abandon a segment request that is running slower than the rung needs,
-        // rather than waiting for it and stalling.
-        abrBandWidthFactor: 0.95,
-        abrBandWidthUpFactor: 0.7,
-        // A seek should not wait for the in-flight request for somewhere else.
-        maxFragLookUpTolerance: 0.2,
+        // Begin fetching before play is pressed, so the first frame is not
+        // waiting on a round trip that could have happened already.
+        startFragPrefetch: true,
+
+        // NEVER FETCH A RUNG BIGGER THAN THE PICTURE.
+        //
+        // The dashboard ladder tops out at 1790x844 / 1.43 Mbps, but the frame
+        // renders about 1143px wide on a laptop and far less on a phone. Left
+        // alone, ABR climbs to that top rung and every seek then has to pull
+        // the most expensive segment in the ladder before anything appears —
+        // which is the stall on scrubbing. Capping to the displayed size holds
+        // it at 1280 on a laptop and 854 on a phone, roughly halving the bytes
+        // a seek must wait for, with no visible loss: the extra pixels were
+        // being thrown away by the scaler anyway.
+        capLevelToPlayerSize: true,
+
+        // BUFFER GENEROUSLY. This was the stutter.
+        //
+        // The previous values here were maxBufferLength 30 with
+        // maxMaxBufferLength 60 — chosen to "stay responsive" rather than
+        // hoard. That reasoning was wrong for what this actually is: a twelve
+        // minute VOD watched over Caribbean broadband. hls.js treats
+        // maxMaxBufferLength as a hard ceiling, so 60 meant the player was
+        // never allowed more than a minute of runway no matter how much
+        // bandwidth was going spare. Any dip below the bitrate then drained it
+        // faster than it could refill, which is the stutter-freeze-play-stutter
+        // cycle, on both films.
+        //
+        // 600 is the library default and the right one for VOD: fill when the
+        // network is willing, so a slow patch is absorbed instead of watched.
+        // Seek responsiveness does not come from a small buffer — it comes
+        // from small segments, which the 4s ladder already provides.
+        maxBufferLength: 60,
+        maxMaxBufferLength: 600,
+        // Scrubbing back a few seconds to re-read a figure is the commonest
+        // thing viewers do here, and at these bitrates a minute costs little.
+        backBufferLength: 60,
+
+        // Tolerate a small hole rather than treating it as a stall. The
+        // default 0.1s is tight enough that ordinary segment boundaries can
+        // trip it, and the recovery for a "stall" is a visible nudge.
+        maxBufferHole: 0.5,
+        nudgeMaxRetry: 5,
+
+        // A slow segment should be retried, not surrendered to. These are long
+        // files on Caribbean connections; the default timeout gives up while
+        // the request would still have completed.
+        fragLoadingTimeOut: 30000,
+        fragLoadingMaxRetry: 6,
+        manifestLoadingTimeOut: 20000,
+        manifestLoadingMaxRetry: 4,
+        levelLoadingTimeOut: 20000,
+
+        // abrBandWidthFactor and abrBandWidthUpFactor used to be set here to
+        // 0.95 and 0.7 — which are the library's own defaults. Restating a
+        // default as though it were a decision is how the genuinely harmful
+        // value next to it (a 60s buffer ceiling) went unquestioned for so
+        // long. Everything left in this object is a deliberate deviation with
+        // a reason written next to it; anything absent is the default.
         lowLatencyMode: false,
         enableWorker: true,
       });

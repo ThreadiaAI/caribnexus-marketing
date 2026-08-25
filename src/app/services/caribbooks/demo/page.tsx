@@ -8,7 +8,9 @@ import VideoScrubber from "@/components/VideoScrubber";
 import VideoCenterControls from "@/components/VideoCenterControls";
 import DemoMenu from "@/components/DemoMenu";
 import RotatePrompt from "@/components/RotatePrompt";
+import VideoBuffering from "@/components/VideoBuffering";
 import { useHlsVideo } from "@/lib/useHlsVideo";
+import { useVideoQoE } from "@/lib/useVideoQoE";
 import { DEMOS } from "@/lib/demos";
 import { ORG_URL } from "@/lib/site";
 
@@ -190,6 +192,7 @@ export default function DemoPage() {
   }, [requestPlay]);
 
   useHlsVideo(videoEl, demo.hls, demo.mp4);
+  useVideoQoE(videoEl, demo.id);
 
   // Autoplay the second film, and reset the ended flag when a new one loads.
   useEffect(() => {
@@ -323,6 +326,8 @@ export default function DemoPage() {
         >
           <track kind="captions" src={demo.captions} srcLang="en" label="English" default />
         </video>
+
+        <VideoBuffering video={videoEl} active={hasStarted && !menuOpen} />
 
         {menuOpen && (
           <DemoMenu
@@ -497,6 +502,8 @@ export default function DemoPage() {
                 </div>
               </button>
             )}
+            <VideoBuffering video={videoEl} active={hasStarted && !menuOpen} />
+
             {menuOpen && (
               <DemoMenu
                 demos={DEMOS}
