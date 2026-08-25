@@ -13,6 +13,13 @@
  * is a walkthrough where the interesting unit is a sentence or a single posted
  * entry, so five lands you a beat earlier rather than a paragraph earlier.
  *
+ * WHY THE SKIP ARROWS SIT ON A DISC. Netflix draws them bare because Netflix
+ * plays films, which are mostly dark. Both of these are screen recordings of
+ * white UI. Measured over a white frame, a bare white arrow with a drop shadow
+ * reached 1.41:1 against what was behind it — WCAG asks 3:1 of a control you
+ * are meant to be able to find. The same black/45 disc the play button already
+ * used takes it to 4:1 and makes the three read as one instrument.
+ *
  * THE ICONS are drawn rather than imported: a near-complete circle with a gap
  * at the top, an arrowhead on the moving end, and the number inside. The
  * direction of the arc is the whole affordance — anticlockwise reads as going
@@ -29,6 +36,11 @@ type Props = {
   /** Hidden until the film is actually running. */
   enabled?: boolean;
   step?: number;
+  /**
+   * Opens the chooser. When given, a slender pill sits under the transport
+   * WHILE PAUSED — see the note on the wrapper for why only then.
+   */
+  onMenu?: () => void;
 };
 
 function SkipIcon({ back, step }: { back: boolean; step: number }) {
@@ -42,7 +54,7 @@ function SkipIcon({ back, step }: { back: boolean; step: number }) {
         }
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.7"
+        strokeWidth="2"
         strokeLinecap="round"
       />
       <path
@@ -53,7 +65,7 @@ function SkipIcon({ back, step }: { back: boolean; step: number }) {
         x="12"
         y="16.1"
         textAnchor="middle"
-        fontSize="8.4"
+        fontSize="9"
         fontWeight="700"
         fill="currentColor"
         style={{ fontFamily: "inherit" }}
@@ -71,6 +83,7 @@ export default function VideoCenterControls({
   visible,
   enabled = true,
   step = 5,
+  onMenu,
 }: Props) {
   if (!enabled) return null;
 
@@ -78,15 +91,15 @@ export default function VideoCenterControls({
   // for reveal; the buttons themselves opt back in.
   return (
     <div
-      className={`absolute inset-0 flex items-center justify-center gap-7 sm:gap-9 pointer-events-none transition-opacity duration-300 ${
+      className={`absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-300 ${
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
+      <div className="flex items-center justify-center gap-7 sm:gap-9">
       <button
         aria-label={`Back ${step} seconds`}
         onClick={(e) => { e.stopPropagation(); onSkip(-step); }}
-        className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 text-white/90 hover:text-white active:scale-90 transition-transform"
-        style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.55))" }}
+        className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 p-[9px] rounded-full bg-black/45 backdrop-blur-sm text-white/90 hover:bg-black/60 hover:text-white active:scale-90 transition-all"
       >
         <SkipIcon back step={step} />
       </button>
@@ -111,11 +124,41 @@ export default function VideoCenterControls({
       <button
         aria-label={`Forward ${step} seconds`}
         onClick={(e) => { e.stopPropagation(); onSkip(step); }}
-        className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 text-white/90 hover:text-white active:scale-90 transition-transform"
-        style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.55))" }}
+        className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 p-[9px] rounded-full bg-black/45 backdrop-blur-sm text-white/90 hover:bg-black/60 hover:text-white active:scale-90 transition-all"
       >
         <SkipIcon back={false} step={step} />
       </button>
+      </div>
+
+      {/*
+        THE WAY OUT, and it only exists while paused.
+
+        The chooser used to open by itself the moment the film stopped, which
+        conflated two different reasons for pausing. Someone who stops to read
+        a posted journal entry wants the frame held, not swapped for a menu.
+        Someone who is done wants somewhere to go. Offering the door instead of
+        walking them through it serves both: the picture stays put, and the
+        menu is one deliberate tap away.
+
+        Hidden while playing, even on hover — nothing about a running film
+        needs a menu button hanging under the transport.
+      */}
+      {onMenu && !playing && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onMenu(); }}
+          className="pointer-events-auto mt-5 sm:mt-6 flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-sm pl-3 pr-4 py-1.5 text-white/90 hover:bg-black/60 hover:text-white active:scale-95 transition-all"
+        >
+          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor"
+               strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="14" y2="18" />
+          </svg>
+          <span className="text-[11.5px] font-medium tracking-tight whitespace-nowrap">
+            Back to main menu
+          </span>
+        </button>
+      )}
     </div>
   );
 }

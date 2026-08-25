@@ -101,22 +101,20 @@ export default function DemoPage() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    // The menu is the destination for every stop: pause and end both land
-    // there, so the viewer is never holding a paused frame with nowhere to go.
+    // The menu opens on arrival and at the end. Pausing does NOT open it —
+    // it offers "Back to main menu" under the transport instead, so stopping
+    // to read the screen holds the frame rather than swapping it for a list.
     const onEnded = () => {
       setEnded(true);
       setWatched((w) => new Set(w).add(DEMOS[index].id));
       setMenuOpen(true);
     };
     const onPlay = () => { setEnded(false); setMenuOpen(false); };
-    const onPause = () => { if (!v.ended) setMenuOpen(true); };
     v.addEventListener("ended", onEnded);
     v.addEventListener("play", onPlay);
-    v.addEventListener("pause", onPause);
     return () => {
       v.removeEventListener("ended", onEnded);
       v.removeEventListener("play", onPlay);
-      v.removeEventListener("pause", onPause);
     };
   }, [index]);
 
@@ -211,8 +209,14 @@ export default function DemoPage() {
           playing={playing}
           onPlayPause={playPause}
           onSkip={skip}
-          visible={showControls && !ended}
+          // A paused film keeps its controls. The 3s auto-hide exists to get
+          // the transport out of the way of a film that is running; while it
+          // is stopped there is nothing to get out of the way of, and hiding
+          // them would take the menu button with it three seconds after the
+          // one moment the viewer is most likely to want it.
+          visible={(showControls || !playing) && !ended}
           enabled={hasStarted}
+          onMenu={() => setMenuOpen(true)}
         />
 
         {/* Transport. Only after the first tap: before that the poster and
@@ -359,6 +363,7 @@ export default function DemoPage() {
               onSkip={skip}
               visible={(hovering || !playing) && !ended}
               enabled={hasStarted}
+              onMenu={() => setMenuOpen(true)}
             />
 
             {/* Unmute button */}
