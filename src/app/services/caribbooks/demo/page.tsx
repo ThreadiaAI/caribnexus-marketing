@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { TRANSCRIPT } from "@/lib/videoTranscript";
 import VideoScrubber from "@/components/VideoScrubber";
 import VideoCenterControls from "@/components/VideoCenterControls";
-import DemoNextUp from "@/components/DemoNextUp";
+import DemoMenu from "@/components/DemoMenu";
 import RotatePrompt from "@/components/RotatePrompt";
 import { useHlsVideo } from "@/lib/useHlsVideo";
 import { DEMOS } from "@/lib/demos";
@@ -43,16 +43,30 @@ export default function DemoPage() {
    */
   const [index, setIndex] = useState(0);
   const [ended, setEnded] = useState(false);
+  const [watched, setWatched] = useState<Set<string>>(new Set());
+  const [menuOpen, setMenuOpen] = useState(true);   // the page opens on the choice
   const demo = DEMOS[index];
-  const nextDemo = DEMOS[index + 1];
+  /** The desktop layout follows the film's shape, not the viewport's. */
+  const wide = demo.orientation === "landscape";
 
-  const goNext = useCallback(() => {
-    if (!nextDemo) return;
-    setIndex((i) => i + 1);
+  /** Pick a film from the menu. The same film resumes; a different one starts. */
+  const pick = useCallback((i: number) => {
+    setMenuOpen(false);
     setEnded(false);
-    // hasStarted stays true: the viewer has already opted in once, so the
-    // second film should roll rather than make them press play again.
-  }, [nextDemo]);
+    setHasStarted(true);
+    if (i === index) {
+      const v = videoRef.current;
+      if (v) { v.muted = false; setIsMuted(false); void v.play(); }
+      return;
+    }
+    setIndex(i);
+  }, [index]);
+
+  const resume = useCallback(() => {
+    setMenuOpen(false);
+    const v = videoRef.current;
+    if (v) { v.muted = false; setIsMuted(false); void v.play(); }
+  }, []);
 
   const playPause = useCallback(() => {
     const v = videoRef.current;
@@ -87,18 +101,39 @@ export default function DemoPage() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    const onEnded = () => setEnded(true);
-    const onPlay = () => setEnded(false);
+    // The menu is the destination for every stop: pause and end both land
+    // there, so the viewer is never holding a paused frame with nowhere to go.
+    const onEnded = () => {
+      setEnded(true);
+      setWatched((w) => new Set(w).add(DEMOS[index].id));
+      setMenuOpen(true);
+    };
+    const onPlay = () => { setEnded(false); setMenuOpen(false); };
+    const onPause = () => { if (!v.ended) setMenuOpen(true); };
     v.addEventListener("ended", onEnded);
     v.addEventListener("play", onPlay);
+    v.addEventListener("pause", onPause);
     return () => {
       v.removeEventListener("ended", onEnded);
       v.removeEventListener("play", onPlay);
+      v.removeEventListener("pause", onPause);
     };
   }, [index]);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    // Measure the SHORT edge, not the width. A phone turned sideways reports
+    // innerWidth of ~850, which sailed past a width<768 test and dropped the
+    // viewer into the desktop layout — the exact opposite of what rotating
+    // should do, since landscape is when the wide film finally fits.
+    //
+    // Pairing it with pointer:coarse keeps a narrow desktop window on the
+    // desktop layout, where a mouse is available and the fullscreen phone
+    // player would be wrong.
+    const check = () => {
+      const shortEdge = Math.min(window.innerWidth, window.innerHeight);
+      const touch = window.matchMedia("(pointer: coarse)").matches;
+      setIsMobile(touch ? shortEdge < 768 : window.innerWidth < 768);
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -159,19 +194,18 @@ export default function DemoPage() {
           <track kind="captions" src={demo.captions} srcLang="en" label="English" default />
         </video>
 
-        {/* Play affordance. Without autoplay the poster alone gives no signal
-            that this is a video, so it stays until the first tap. */}
-        {!hasStarted && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-20 h-20 rounded-full bg-black/45 backdrop-blur-sm flex items-center justify-center">
-              <svg className="w-9 h-9 text-white ml-1" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </div>
+        {menuOpen && (
+          <DemoMenu
+            demos={DEMOS}
+            activeIndex={index}
+            watched={watched}
+            canResume={hasStarted && !ended}
+            onPick={pick}
+            onResume={resume}
+          />
         )}
 
-        <RotatePrompt active={hasStarted && demo.orientation === "landscape"} />
+        <RotatePrompt active={hasStarted && !menuOpen && demo.orientation === "landscape"} />
 
         <VideoCenterControls
           playing={playing}
@@ -180,20 +214,6 @@ export default function DemoPage() {
           visible={showControls && !ended}
           enabled={hasStarted}
         />
-
-        {/* Offered when the viewer stops, or when the film runs out. Not while
-            it is playing — an exit sitting over the picture the whole way
-            through invites leaving something they chose to watch. */}
-        {hasStarted && nextDemo && (playing === false || ended) && (
-          <div className="absolute left-0 right-0 flex justify-center px-5" style={{ bottom: "22%" }}>
-            <DemoNextUp
-              title={nextDemo.title}
-              mode={ended ? "ended" : "paused"}
-              onNext={goNext}
-              needsLandscape={nextDemo.orientation === "landscape"}
-            />
-          </div>
-        )}
 
         {/* Transport. Only after the first tap: before that the poster and
             the play affordance are the whole interface, and a scrubber sitting
@@ -209,7 +229,7 @@ export default function DemoPage() {
           <div className="flex items-center gap-2 mb-1.5">
             <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[22px] w-auto" />
           </div>
-          <p className="text-[18px] font-bold text-cn-muted">Introducing CaribBooks</p>
+          <p className="text-[18px] font-bold text-cn-muted">{demo.title}</p>
           <p className="text-[12px] text-cn-muted/60 mt-0.5">AI bookkeeping via WhatsApp</p>
         </div>
 
@@ -252,21 +272,41 @@ export default function DemoPage() {
     <>
       <Nav />
       <main className="bg-white min-h-screen pt-[var(--nav-h)]">
-        <div className="flex items-center justify-center gap-12 px-8" style={{ height: "calc(100vh - var(--nav-h))" }}>
+        {/*
+          TWO SHAPES, TWO LAYOUTS.
+
+          The WhatsApp film is a 9:16 phone screen, so it sits in a tall column
+          with the copy beside it — a portrait frame leaves most of a widescreen
+          monitor empty, and the info panel fills it.
+
+          The dashboard film is 2.12:1, wider than the monitor's own ratio. Side
+          by side it would be squeezed to a strip: at 800px tall it wants 1700px
+          of width, which does not exist next to a 300px column. So it goes
+          full-width with the copy stacked underneath. Same components, the row
+          just turns into a column. */}
+        <div
+          className={`flex justify-center px-8 ${wide ? "flex-col items-center gap-6 py-8" : "flex-row items-center gap-12"}`}
+          style={{ minHeight: "calc(100vh - var(--nav-h))" }}
+        >
           {/* Video panel. Column, so the transport sits under the frame
               rather than over the picture — on desktop there is room for it. */}
           <div
             className="shrink-0 flex flex-col"
             style={{
-              height: "calc(100vh - var(--nav-h) - 40px)",
-              maxHeight: "800px",
+              height: wide
+                // Transport (~56px) plus the stacked copy below it.
+                ? "min(calc((100vw - 64px) / 2.121 + 56px), calc(100vh - var(--nav-h) - 210px))"
+                : "calc(100vh - var(--nav-h) - 40px)",
+              maxHeight: wide ? "760px" : "800px",
               // Width is stated rather than inherited from the child's aspect
               // ratio. Putting the frame in a column to make room for the
               // transport removed the constraint that used to size it, so the
               // column stretched and the scrubber ran the full viewport.
               // Frame height is the column minus the transport (~56px); width
               // is that at 9:16.
-              width: "min(calc((100vh - var(--nav-h) - 96px) * 9 / 16), 418px)",
+              width: wide
+                ? "min(calc((100vh - var(--nav-h) - 266px) * 2.121), calc(100vw - 64px), 1400px)"
+                : "min(calc((100vh - var(--nav-h) - 96px) * 9 / 16), 418px)",
             }}
           >
           <div
@@ -287,7 +327,7 @@ export default function DemoPage() {
               {demo.mp4 && <source src={demo.mp4} type="video/mp4" />}
               <track kind="captions" src={demo.captions} srcLang="en" label="English" default />
             </video>
-            {!hasStarted && (
+            {!hasStarted && !menuOpen && (
               <button
                 onClick={start}
                 aria-label="Play the CaribBooks demo"
@@ -300,7 +340,18 @@ export default function DemoPage() {
                 </div>
               </button>
             )}
-            <RotatePrompt active={false} />
+            {menuOpen && (
+              <DemoMenu
+                demos={DEMOS}
+                activeIndex={index}
+                watched={watched}
+                canResume={hasStarted && !ended}
+                onPick={pick}
+                onResume={resume}
+              />
+            )}
+
+            {/* desktop never needs the rotate prompt */}
 
             <VideoCenterControls
               playing={playing}
@@ -309,17 +360,6 @@ export default function DemoPage() {
               visible={(hovering || !playing) && !ended}
               enabled={hasStarted}
             />
-
-            {hasStarted && nextDemo && (playing === false || ended) && (
-              <div className="absolute left-0 right-0 flex justify-center px-4" style={{ bottom: 24 }}>
-                <DemoNextUp
-                  title={nextDemo.title}
-                  mode={ended ? "ended" : "paused"}
-                  onNext={goNext}
-                  needsLandscape={false}
-                />
-              </div>
-            )}
 
             {/* Unmute button */}
             <button
@@ -351,22 +391,22 @@ export default function DemoPage() {
           </div>
 
           {/* Info panel */}
-          <div className="max-w-[300px]">
-            <div className="flex items-center gap-3">
+          <div className={wide ? "max-w-[620px] text-center" : "max-w-[300px]"}>
+            <div className={`flex items-center gap-3 ${wide ? "justify-center" : ""}`}>
               <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[22px] w-auto" />
               <div className="w-px h-[20px] bg-cn-border" />
               <span className="text-[11px] text-cn-muted">Demo</span>
             </div>
             <h1 className="text-[18px] font-bold tracking-tight text-cn-muted mt-1.5">
-              Introducing CaribBooks
+              {demo.title}
             </h1>
             <p className="text-[11px] text-cn-muted/70 mt-1" style={{ lineHeight: "1.4" }}>
-              AI bookkeeping via WhatsApp. Text your transactions, send voice notes, snap receipts — your books update automatically.
+              {demo.blurb}
             </p>
 
             <button
               onClick={handleShare}
-              className="mt-4 flex items-center gap-2 px-4 py-2 text-[11px] font-medium text-cn-muted border border-cn-border rounded-full hover:border-cn-muted transition-all"
+              className={`${wide ? "mt-4 mx-auto" : "mt-4"} flex items-center gap-2 px-4 py-2 text-[11px] font-medium text-cn-muted border border-cn-border rounded-full hover:border-cn-muted transition-all`}
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8" />

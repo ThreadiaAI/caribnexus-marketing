@@ -19,6 +19,8 @@ export type Demo = {
   /** Shown in the "Next" affordance and the chapter rail. */
   title: string;
   subtitle: string;
+  /** A sentence of context, shown beside the player on desktop. */
+  blurb: string;
   hls: string;
   /** Progressive fallback for anything without Media Source Extensions. */
   mp4?: string;
@@ -63,6 +65,8 @@ export const DEMOS: Demo[] = [
     id: "whatsapp",
     title: "CaribBooks in WhatsApp",
     subtitle: "How a business posts a transaction",
+    blurb:
+      "AI bookkeeping via WhatsApp. Text your transactions, send voice notes, snap receipts — your books update automatically.",
     hls: `${CDN}/hls/master.m3u8`,
     mp4: `${CDN}/introducing-caribbooks.mp4`,
     poster: "/demo-poster.jpg",
@@ -75,6 +79,8 @@ export const DEMOS: Demo[] = [
     id: "dashboard",
     title: "CaribBooks Dashboard",
     subtitle: "What the accounting practice sees",
+    blurb:
+      "The other side of the same books. Every client, every transaction, and any of 11 reports — reviewed by the practice, not re-keyed by it.",
     hls: `${CDN}/dashboard-hls/master.m3u8`,
     poster: "/dashboard-poster.jpg",
     captions: "/dashboard-captions.vtt",
