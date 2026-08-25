@@ -133,6 +133,7 @@ export default function DemoPage() {
             onEnded={onEnded}
             onPlayingChange={setPlaying}
             onReady={(p) => { playerRef.current = p; }}
+            onMenu={() => setMenuOpen(true)}
           />
           {menu}
           <RotatePrompt active={hasStarted && !menuOpen && wide} />
@@ -185,6 +186,7 @@ export default function DemoPage() {
               onEnded={onEnded}
               onPlayingChange={setPlaying}
               onReady={(p) => { playerRef.current = p; }}
+            onMenu={() => setMenuOpen(true)}
             />
             {hasStarted && !menuOpen && !playing && (
             <button
