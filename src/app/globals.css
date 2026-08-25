@@ -203,28 +203,3 @@ body {
   border-radius: 6px;
 }
 
-/* The "Back to main menu" control, built from Video.js's own tokens so it
-   belongs to the player rather than sitting on top of it: the same
-   rgba(43,51,63,0.7) fill and white border as the big play button it sits
-   under, at a weight suited to a secondary control. */
-.cn-menu-link {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  color: #fff;
-  background-color: rgba(43, 51, 63, 0.7);
-  border: 2px solid #fff;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.cn-menu-link:hover { background-color: rgba(43, 51, 63, 0.95); }

@@ -137,23 +137,6 @@ export default function DemoPage() {
           />
           {menu}
           <RotatePrompt active={hasStarted && !menuOpen && wide} />
-          {hasStarted && !menuOpen && !playing && (
-            <button
-              onClick={() => setMenuOpen(true)}
-              /* Directly beneath the big play button, which Video.js now shows
-                 while paused. A viewer who has stopped is looking at the centre
-                 of the picture, not hunting the corners. */
-              className="cn-menu-link"
-              /* Clear of the big play button, which is ~49px tall and centred. */
-              style={{ top: "calc(50% + 48px)" }}
-            >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                   strokeWidth="2" strokeLinecap="round" aria-hidden>
-                <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="14" y2="18" />
-              </svg>
-              <span>Back to main menu</span>
-            </button>
-          )}
         </main>
       </>
     );
@@ -188,23 +171,6 @@ export default function DemoPage() {
               onReady={(p) => { playerRef.current = p; }}
             onMenu={() => setMenuOpen(true)}
             />
-            {hasStarted && !menuOpen && !playing && (
-            <button
-              onClick={() => setMenuOpen(true)}
-              /* Directly beneath the big play button, which Video.js now shows
-                 while paused. A viewer who has stopped is looking at the centre
-                 of the picture, not hunting the corners. */
-              className="cn-menu-link"
-              /* Clear of the big play button, which is ~49px tall and centred. */
-              style={{ top: "calc(50% + 48px)" }}
-            >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                   strokeWidth="2" strokeLinecap="round" aria-hidden>
-                <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="14" y2="18" />
-              </svg>
-              <span>Back to main menu</span>
-            </button>
-          )}
             {menu}
           </div>
 
