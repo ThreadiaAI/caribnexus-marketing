@@ -92,7 +92,12 @@ export default function DemoPlayer({
         // code lands here, so a visitor on mobile data in a meeting should not
         // be made to download a twelve minute film to find out if they care.
         preload: "metadata",
-        fluid: false,
+        // FILL THE BOX WE GIVE IT. Without this the player keeps Video.js's
+        // own default size and sits small in the top-left of its container,
+        // needing the expand button pressed before it is watchable. The host
+        // <div> already describes the right box in both layouts: inset-0 on a
+        // phone, a stated width at the film's aspect ratio on desktop.
+        fill: true,
         responsive: true,
         playsinline: true,
         controlBar: { pictureInPictureToggle: false },
