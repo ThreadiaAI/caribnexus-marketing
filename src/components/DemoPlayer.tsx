@@ -49,12 +49,12 @@ type Props = {
   /** Exposes the player so the page can start it from inside a tap handler. */
   onReady?: (player: Player) => void;
   /**
-   * Return to the chooser. Rendered as a button in the player's OWN control
-   * bar rather than as an overlay of ours — an overlay has to solve when it
-   * appears, what it sits above and how taps reach the picture behind it, and
-   * getting that wrong is what stopped the controls responding at all.
+   * The underlying <video>. The custom transport and scrubber are drawn over
+   * the picture and read this directly; Video.js guarantees it is the same
+   * element for the life of the player, which is what they need and what a
+   * hand-rolled version could not promise.
    */
-  onMenu?: () => void;
+  onMedia?: (el: HTMLVideoElement | null) => void;
 };
 
 export default function DemoPlayer({
@@ -64,12 +64,9 @@ export default function DemoPlayer({
   onEnded,
   onPlayingChange,
   onReady,
-  onMenu,
+  onMedia,
 }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
-  /** Read at click time, so the registered component never holds a stale one. */
-  const menuHandler = useRef<(() => void) | undefined>(undefined);
-  menuHandler.current = onMenu;
   const playerRef = useRef<Player | null>(null);
   /**
    * Readiness has to be STATE, not just a ref.
@@ -81,8 +78,8 @@ export default function DemoPlayer({
    */
   const [ready, setReady] = useState(false);
   // Callbacks live in a ref so changing them never tears the player down.
-  const cbs = useRef({ onEnded, onPlayingChange, onReady, onMenu });
-  cbs.current = { onEnded, onPlayingChange, onReady, onMenu };
+  const cbs = useRef({ onEnded, onPlayingChange, onReady, onMedia });
+  cbs.current = { onEnded, onPlayingChange, onReady, onMedia };
 
   // Create ONCE. The player outlives every source change; see the note above.
   useEffect(() => {
@@ -93,40 +90,19 @@ export default function DemoPlayer({
       const videojs = (await import("video.js")).default;
       if (disposed || !hostRef.current) return;
 
-      // A control-bar button that returns to the chooser. Registered once,
-      // globally, because Video.js keys components by name.
-      if (!videojs.getComponent("BackToMenuButton")) {
-        const VjsButton = videojs.getComponent("Button") as unknown as {
-          new (p: unknown, o?: unknown): {
-            el(): HTMLElement;
-            addClass(c: string): void;
-            controlText(t: string): void;
-          };
-        };
-        class BackToMenuButton extends VjsButton {
-          constructor(p: unknown, o?: unknown) {
-            super(p, o);
-            this.addClass("vjs-back-to-menu");
-            this.controlText("Back to main menu");
-            this.el().innerHTML =
-              '<span class="vjs-icon-placeholder" aria-hidden="true">' +
-              '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" ' +
-              'stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/>' +
-              '<line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="14" y2="18"/></svg></span>';
-          }
-          handleClick() {
-            menuHandler.current?.();
-          }
-        }
-        videojs.registerComponent("BackToMenuButton", BackToMenuButton as never);
-      }
-
       const el = document.createElement("video-js");
       el.classList.add("vjs-big-play-centered");
       hostRef.current.appendChild(el);
 
       const player = videojs(el, {
-        controls: true,
+        // OUR CHROME, THEIR ENGINE.
+        //
+        // Video.js runs playback — HLS, the native path on iOS, one element
+        // across source changes — but the controls are ours: the circular 5s
+        // arrows, the centre transport and the timeline that were designed for
+        // this page. Swapping the engine was never meant to swap the look, and
+        // doing both at once was the mistake.
+        controls: false,
         // Only the header until someone presses play. The partner deck's QR
         // code lands here, so a visitor on mobile data in a meeting should not
         // be made to download a twelve minute film to find out if they care.
@@ -149,20 +125,13 @@ export default function DemoPlayer({
       });
 
       playerRef.current = player;
-      // Sits just left of fullscreen, where a viewer already looks for the
-      // player's own secondary controls.
-      const bar = player.getChild("ControlBar");
-      if (bar) {
-        const fs = bar.getChild("FullscreenToggle");
-        const at = fs ? bar.children().indexOf(fs) : undefined;
-        bar.addChild("BackToMenuButton", {}, at);
-      }
       player.on("ended", () => cbs.current.onEnded?.());
       player.on("play", () => cbs.current.onPlayingChange?.(true));
       player.on("pause", () => cbs.current.onPlayingChange?.(false));
       player.ready(() => {
         setReady(true);
         cbs.current.onReady?.(player);
+        cbs.current.onMedia?.(player.el().querySelector("video"));
       });
     })();
 
