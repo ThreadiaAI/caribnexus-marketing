@@ -3,14 +3,13 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { TRANSCRIPT, CHAPTERS } from "@/lib/videoTranscript";
+import { TRANSCRIPT } from "@/lib/videoTranscript";
 import VideoScrubber from "@/components/VideoScrubber";
 import VideoCenterControls from "@/components/VideoCenterControls";
+import DemoNextUp from "@/components/DemoNextUp";
+import RotatePrompt from "@/components/RotatePrompt";
 import { useHlsVideo } from "@/lib/useHlsVideo";
-
-// Segmented stream for playback; the progressive MP4 stays as the <source> so
-// anything without HLS support still gets the film.
-const HLS_SRC = "https://darjazmh8n7xf.cloudfront.net/videos/hls/master.m3u8";
+import { DEMOS } from "@/lib/demos";
 import { ORG_URL } from "@/lib/site";
 
 export default function DemoPage() {
@@ -37,6 +36,24 @@ export default function DemoPage() {
   const [playing, setPlaying] = useState(false);
   const [hovering, setHovering] = useState(false);
 
+  /**
+   * Which of the two films is on screen. The <video> element is reused rather
+   * than swapped, so the transport, the scrubber and the HLS attachment all
+   * follow the source automatically instead of being rebuilt per film.
+   */
+  const [index, setIndex] = useState(0);
+  const [ended, setEnded] = useState(false);
+  const demo = DEMOS[index];
+  const nextDemo = DEMOS[index + 1];
+
+  const goNext = useCallback(() => {
+    if (!nextDemo) return;
+    setIndex((i) => i + 1);
+    setEnded(false);
+    // hasStarted stays true: the viewer has already opted in once, so the
+    // second film should roll rather than make them press play again.
+  }, [nextDemo]);
+
   const playPause = useCallback(() => {
     const v = videoRef.current;
     if (!v) return;
@@ -57,7 +74,28 @@ export default function DemoPage() {
     void v.play();
   }, []);
 
-  useHlsVideo(videoRef, HLS_SRC);
+  useHlsVideo(videoRef, demo.hls);
+
+  // Autoplay the second film, and reset the ended flag when a new one loads.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v || !hasStarted || index === 0) return;
+    v.muted = false;
+    void v.play();
+  }, [index, hasStarted]);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onEnded = () => setEnded(true);
+    const onPlay = () => setEnded(false);
+    v.addEventListener("ended", onEnded);
+    v.addEventListener("play", onPlay);
+    return () => {
+      v.removeEventListener("ended", onEnded);
+      v.removeEventListener("play", onPlay);
+    };
+  }, [index]);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -113,11 +151,12 @@ export default function DemoPage() {
           className="absolute inset-0 w-full h-full object-contain bg-black"
           playsInline
           muted
-          poster="/demo-poster.jpg"
+          poster={demo.poster}
           preload="metadata"
+          key={demo.id}
         >
-          <source src="https://darjazmh8n7xf.cloudfront.net/videos/introducing-caribbooks.mp4" type="video/mp4" />
-          <track kind="captions" src="/demo-captions.vtt" srcLang="en" label="English" default />
+          {demo.mp4 && <source src={demo.mp4} type="video/mp4" />}
+          <track kind="captions" src={demo.captions} srcLang="en" label="English" default />
         </video>
 
         {/* Play affordance. Without autoplay the poster alone gives no signal
@@ -132,20 +171,36 @@ export default function DemoPage() {
           </div>
         )}
 
+        <RotatePrompt active={hasStarted && demo.orientation === "landscape"} />
+
         <VideoCenterControls
           playing={playing}
           onPlayPause={playPause}
           onSkip={skip}
-          visible={showControls}
+          visible={showControls && !ended}
           enabled={hasStarted}
         />
+
+        {/* Offered when the viewer stops, or when the film runs out. Not while
+            it is playing — an exit sitting over the picture the whole way
+            through invites leaving something they chose to watch. */}
+        {hasStarted && nextDemo && (playing === false || ended) && (
+          <div className="absolute left-0 right-0 flex justify-center px-5" style={{ bottom: "22%" }}>
+            <DemoNextUp
+              title={nextDemo.title}
+              mode={ended ? "ended" : "paused"}
+              onNext={goNext}
+              needsLandscape={nextDemo.orientation === "landscape"}
+            />
+          </div>
+        )}
 
         {/* Transport. Only after the first tap: before that the poster and
             the play affordance are the whole interface, and a scrubber sitting
             on a still that has not started reads as chrome for nothing. */}
         {hasStarted && (
           <div className={`absolute left-0 right-0 px-5 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`} style={{ bottom: "3%" }}>
-            <VideoScrubber videoRef={videoRef} chapters={CHAPTERS} tone="dark" accent="#FFFFFF" onPlayingChange={setPlaying} />
+            <VideoScrubber videoRef={videoRef} chapters={demo.chapters} tone="dark" accent="#FFFFFF" onPlayingChange={setPlaying} />
           </div>
         )}
 
@@ -225,11 +280,12 @@ export default function DemoPage() {
               className="w-full h-full rounded-2xl object-contain bg-white"
               playsInline
               muted
-              poster="/demo-poster.jpg"
+              poster={demo.poster}
               preload="metadata"
+              key={demo.id}
             >
-              <source src="https://darjazmh8n7xf.cloudfront.net/videos/introducing-caribbooks.mp4" type="video/mp4" />
-              <track kind="captions" src="/demo-captions.vtt" srcLang="en" label="English" default />
+              {demo.mp4 && <source src={demo.mp4} type="video/mp4" />}
+              <track kind="captions" src={demo.captions} srcLang="en" label="English" default />
             </video>
             {!hasStarted && (
               <button
@@ -244,13 +300,26 @@ export default function DemoPage() {
                 </div>
               </button>
             )}
+            <RotatePrompt active={false} />
+
             <VideoCenterControls
               playing={playing}
               onPlayPause={playPause}
               onSkip={skip}
-              visible={hovering || !playing}
+              visible={(hovering || !playing) && !ended}
               enabled={hasStarted}
             />
+
+            {hasStarted && nextDemo && (playing === false || ended) && (
+              <div className="absolute left-0 right-0 flex justify-center px-4" style={{ bottom: 24 }}>
+                <DemoNextUp
+                  title={nextDemo.title}
+                  mode={ended ? "ended" : "paused"}
+                  onNext={goNext}
+                  needsLandscape={false}
+                />
+              </div>
+            )}
 
             {/* Unmute button */}
             <button
@@ -273,7 +342,7 @@ export default function DemoPage() {
           </div>
           <VideoScrubber
             videoRef={videoRef}
-            chapters={CHAPTERS}
+            chapters={demo.chapters}
             tone="light"
             accent="#0077B6"
             className="mt-1"

@@ -1,0 +1,859 @@
+WEBVTT
+
+NOTE
+Captions for the CaribBooks walkthrough.
+Timed from Whisper word-level timestamps, so each cue starts on its
+first word and ends on its last. Proper nouns corrected by hand.
+
+1
+00:00:00.000 --> 00:00:06.000
+Hi, I'm Dominic Waite, founder of
+CaribNexus AI, this is CaribBooks,
+
+2
+00:00:07.600 --> 00:00:11.259
+an AI bookkeeper that works entirely in
+WhatsApp, and what you're looking at right now
+
+3
+00:00:11.260 --> 00:00:16.700
+is a view of the dashboard that is
+available to an accounting firm.
+
+4
+00:00:16.860 --> 00:00:21.139
+So when you take a look here to your left
+and to your right, you're seeing a navigation
+
+5
+00:00:21.140 --> 00:00:23.080
+bar for Barrett Wynter & Associates,
+
+6
+00:00:23.460 --> 00:00:26.099
+that's the name of your accounting
+firm will appear there.
+
+7
+00:00:26.100 --> 00:00:32.100
+You're also seeing the overview section that
+is in a wider section over to your right,
+
+8
+00:00:32.440 --> 00:00:35.659
+where you're seeing the number
+of active clients that you have,
+
+9
+00:00:35.660 --> 00:00:40.039
+you're seeing transaction pool, you're seeing
+quick actions and we send CB activity across
+
+10
+00:00:40.040 --> 00:00:41.379
+all of your various clients.
+
+11
+00:00:41.380 --> 00:00:45.799
+This is a condensed view of everything that
+is happening within your organisation.
+
+12
+00:00:45.800 --> 00:00:50.699
+Now I want to head into what are
+the features of this dashboard.
+
+13
+00:00:50.700 --> 00:00:52.740
+I'm going to head into clients.
+
+14
+00:00:52.800 --> 00:00:58.159
+Clients specifically is a section of your
+dashboard where you'll be able to see all of
+
+15
+00:00:58.160 --> 00:01:02.279
+the clients that you have within your organisation,
+these are the clients that your accounting
+
+16
+00:01:02.280 --> 00:01:08.280
+practice serves, as well as a wider section
+where you can be able to see overview,
+
+17
+00:01:08.540 --> 00:01:13.080
+transactions, reports, messages,
+chart of accounts, capacity,
+
+18
+00:01:13.360 --> 00:01:14.759
+invoices, and bills.
+
+19
+00:01:14.760 --> 00:01:20.580
+Now I'm going to go in and scope specifically
+to Ocho Rios Tours & Excursions,
+
+20
+00:01:21.260 --> 00:01:25.119
+just to show you exactly
+how this looks for them.
+
+21
+00:01:25.120 --> 00:01:31.120
+You'll be able to see an overview and the
+recent transactions that CB would have handled
+
+22
+00:01:31.420 --> 00:01:37.079
+for your specific client, all of
+their transactions will show up here.
+
+23
+00:01:37.080 --> 00:01:41.719
+If you want to see a more granular view of
+all of their transactions, you can go through
+
+24
+00:01:41.720 --> 00:01:45.960
+the transactions tab and see every
+transaction that Ocho Rios Tours & Excursions
+
+25
+00:01:46.360 --> 00:01:52.360
+did. You can also be able to go through
+and pull any one of 11 reports for them,
+
+26
+00:01:53.320 --> 00:01:59.320
+ranging from a GL register to transaction detail to profit
+and loss, balance sheet, trial balance, AR aging, AP aging,
+
+27
+00:02:03.040 --> 00:02:04.819
+account ledger, expense breakdown.
+
+28
+00:02:04.820 --> 00:02:10.339
+It is all there for you to pull, let me kind
+of show you exactly what that looks like.
+
+29
+00:02:10.340 --> 00:02:16.299
+So CaribBooks, reports, transaction detail,
+you can go through and download a PDF or
+
+30
+00:02:16.300 --> 00:02:21.799
+an Excel sheet for any one
+of, for the specific report.
+
+31
+00:02:21.800 --> 00:02:25.319
+You can also pull for
+trial balance as well,
+
+32
+00:02:25.320 --> 00:02:27.780
+as CB manages trial balance.
+
+33
+00:02:28.800 --> 00:02:32.119
+Profit and loss works the
+same way as well. GL register
+
+34
+00:02:32.120 --> 00:02:33.879
+works that same way as well.
+
+35
+00:02:33.880 --> 00:02:35.799
+You can also pull a balance sheet.
+
+36
+00:02:35.800 --> 00:02:41.800
+So that is available as well to
+all of your organisation for any
+
+37
+00:02:42.020 --> 00:02:46.599
+one of your specific clients
+you want to put a report for.
+
+38
+00:02:46.600 --> 00:02:49.299
+Now, let's just head into messages.
+
+39
+00:02:49.300 --> 00:02:53.779
+Messages is the back and forth
+interaction between CB and your client.
+
+40
+00:02:53.780 --> 00:02:57.499
+You can be able to go through all
+of those messages available there.
+
+41
+00:02:57.500 --> 00:03:00.260
+As for chart of accounts,
+
+42
+00:03:00.620 --> 00:03:05.619
+once it is that you're onboarding a client via
+add new client, you will be able to actually
+
+43
+00:03:05.620 --> 00:03:11.620
+create a chart of accounts either by allowing
+CB to create a chart of accounts based
+
+44
+00:03:12.000 --> 00:03:17.960
+off of the information that you provided
+during signup, which we will get into.
+
+45
+00:03:17.980 --> 00:03:23.979
+And also as it pertains to
+you, you can also import a
+
+46
+00:03:23.980 --> 00:03:29.679
+chart of accounts from QuickBooks and then
+make adjustments if necessary and updates.
+
+47
+00:03:29.680 --> 00:03:32.859
+Of course, you're seeing
+assets, liabilities,
+
+48
+00:03:32.860 --> 00:03:34.139
+capital, revenue and expenses.
+
+49
+00:03:34.140 --> 00:03:40.140
+You can be able to remove any one of the
+entries or add an entry if needs be to any
+
+50
+00:03:40.380 --> 00:03:42.280
+one of the features.
+
+51
+00:03:42.480 --> 00:03:48.480
+And then you'll be able to update and CB will be
+acting from that updated chart of accounts. Now,
+
+52
+00:03:50.500 --> 00:03:53.600
+as it pertains to capacity,
+
+53
+00:03:54.060 --> 00:03:56.120
+when it pertains to capacity,
+
+54
+00:03:56.380 --> 00:04:01.540
+remember your organisation, as
+stated before, from your dashboard,
+
+55
+00:04:01.920 --> 00:04:05.660
+you will be able to have
+300 transactions that is
+
+56
+00:04:05.820 --> 00:04:09.240
+available to you during
+signup before any allocation.
+
+57
+00:04:09.540 --> 00:04:15.540
+In clients, when you go into capacity, this
+is the place where you allocate transactions
+
+58
+00:04:16.280 --> 00:04:21.839
+to them. So, for example, let us say
+you're working with a client and you know,
+
+59
+00:04:21.840 --> 00:04:25.459
+based on their business relationship or any
+information that you've gathered for them,
+
+60
+00:04:25.460 --> 00:04:30.759
+that they will have up to 20
+transactions for the month.
+
+61
+00:04:30.760 --> 00:04:34.220
+You can approve them for 20
+out of the pool that you have.
+
+62
+00:04:34.580 --> 00:04:40.580
+20 from that 300 will leave 280 for you
+to split across any other of your clients
+
+63
+00:04:40.780 --> 00:04:42.420
+within your organisation.
+
+64
+00:04:42.620 --> 00:04:46.739
+For this case that you need more, you can
+order more capacity for your organisation that
+
+65
+00:04:46.740 --> 00:04:52.740
+way. But this is how you specifically scope
+transactions by adjusting their capacity.
+
+66
+00:04:52.960 --> 00:04:58.219
+If, you know, Blue Mountain Roasters grow
+and they reach up to 30 transactions for the
+
+67
+00:04:58.220 --> 00:05:00.280
+month, you can update your allocation.
+
+68
+00:05:00.840 --> 00:05:06.779
+Updating their allocation will, you know, go
+into your pool and then give them an extra
+
+69
+00:05:06.780 --> 00:05:11.599
+10 on top of what they
+had previously there.
+
+70
+00:05:11.600 --> 00:05:15.819
+And that is exactly how their
+capacity updates in real time.
+
+71
+00:05:15.820 --> 00:05:21.820
+So, that's how that works for the features
+for showing you how to, you know,
+
+72
+00:05:22.720 --> 00:05:26.899
+view and make edits and changes to
+any one of your existing clients.
+
+73
+00:05:26.900 --> 00:05:30.320
+As it pertains now to adding a new client,
+
+74
+00:05:30.340 --> 00:05:33.579
+you can actually go and go through
+the workflow to add in a new client.
+
+75
+00:05:33.580 --> 00:05:36.999
+I'm just going to go through
+and speed through this workflow.
+
+76
+00:05:37.000 --> 00:05:43.000
+This is just going to be like randomized
+information, just to show you exactly
+
+77
+00:05:43.120 --> 00:05:44.879
+what the workflow looks like.
+
+78
+00:05:44.880 --> 00:05:48.039
+Threadia AI onboarding it as
+a software or tech services.
+
+79
+00:05:48.040 --> 00:05:50.879
+Does this business do? Just put
+it in some information there.
+
+80
+00:05:50.880 --> 00:05:54.680
+You'd be describing what this business is,
+
+81
+00:05:54.740 --> 00:05:59.859
+how do their customer pay, whether
+it be cash in hand, bank transfer,
+
+82
+00:05:59.860 --> 00:06:04.960
+invoice, card upholds, whatever you want to
+put there, depending on the specific client.
+
+83
+00:06:05.280 --> 00:06:10.340
+What banks do they use? NCB, First Global.
+
+84
+00:06:11.820 --> 00:06:16.260
+Where is this business located?
+What do they sell, services?
+
+85
+00:06:16.520 --> 00:06:18.580
+Do they own any business assets?
+
+86
+00:06:19.220 --> 00:06:24.980
+Business owner financing, just what number you have
+options available for bank loan and vehicle financing,
+
+87
+00:06:25.060 --> 00:06:26.719
+mortgages. How's the business set up?
+
+88
+00:06:26.720 --> 00:06:28.720
+It's a limited company.
+
+89
+00:06:28.840 --> 00:06:34.840
+Supplies from credit.
+Continue. GCT registered. Yes.
+
+90
+00:06:38.000 --> 00:06:40.440
+Customers on payroll. Yes.
+
+91
+00:06:40.640 --> 00:06:46.640
+Now we're to a very good point in the
+onboarding process, where you see who
+
+92
+00:06:46.860 --> 00:06:47.959
+represents this business.
+
+93
+00:06:47.960 --> 00:06:52.439
+This person will message CB on your
+WhatsApp line about this business.
+
+94
+00:06:52.440 --> 00:06:58.440
+What I really want to state firstly is that
+once it is that you sign up for CaribBooks,
+
+95
+00:07:01.860 --> 00:07:06.940
+you'll be able to associate your WhatsApp
+business account to your dashboard.
+
+96
+00:07:06.960 --> 00:07:12.960
+That WhatsApp business account will
+have a specific number and then every
+
+97
+00:07:13.660 --> 00:07:19.660
+client that you onboard via the new
+client will be manually approved to
+
+98
+00:07:19.960 --> 00:07:22.260
+text that phone number. Therefore,
+
+99
+00:07:22.520 --> 00:07:28.520
+CB will not respond to anyone's phone number that
+is not a registered business within this portal.
+
+100
+00:07:30.600 --> 00:07:35.859
+They have to have a business profile that
+you're actually creating right now so that
+
+101
+00:07:35.860 --> 00:07:38.779
+CB can respond contextually from.
+
+102
+00:07:38.780 --> 00:07:41.179
+In this case, we have a full name.
+
+103
+00:07:41.180 --> 00:07:43.639
+Full name in this case,
+I'm just put Dominic Waite.
+
+104
+00:07:43.640 --> 00:07:45.119
+I'm putting a random number.
+
+105
+00:07:45.120 --> 00:07:47.199
+It's MSA. It's just a random number there.
+
+106
+00:07:47.200 --> 00:07:53.200
+I am the owner and you continue and then you
+determine how much capacity to approve for
+
+107
+00:07:53.380 --> 00:07:55.640
+this new business initially.
+
+108
+00:07:55.700 --> 00:07:57.959
+In this case, you can approve up to 20.
+
+109
+00:07:57.960 --> 00:08:03.960
+It will actually take from the
+available pool of 165 and leave 145
+
+110
+00:08:04.560 --> 00:08:10.560
+out of 300 remaining for any other of your
+existing or new clients that you will onboard.
+
+111
+00:08:11.520 --> 00:08:14.499
+Now, to set up your account, you
+will need a chart of accounts.
+
+112
+00:08:14.500 --> 00:08:20.119
+You have two options that are available for
+you whether or not you want CB to create
+
+113
+00:08:20.120 --> 00:08:25.200
+a chart of accounts based off the information
+that you just provided in the workflow.
+
+114
+00:08:25.440 --> 00:08:30.439
+It's a recommended option and then after it
+generates the account, it will show up in
+
+115
+00:08:30.440 --> 00:08:34.419
+the chart of accounts tab in any
+one of your specific clients.
+
+116
+00:08:34.420 --> 00:08:40.420
+I did show you that before or you can import
+from QuickBooks a CSV sheet and then make
+
+117
+00:08:40.500 --> 00:08:46.500
+edits or improvements if needs be from
+there and then same for generate for me.
+
+118
+00:08:46.680 --> 00:08:52.680
+CB will create a draft and then you can
+approve and then make edits if needs be.
+
+119
+00:08:54.040 --> 00:09:00.040
+It will show up specifically in the chart
+
+120
+00:09:00.080 --> 00:09:06.080
+of accounts. We don't allow you to sit
+down and wait until the chart is actually
+
+121
+00:09:06.460 --> 00:09:12.339
+completed. The moment you click generate
+for me and the work starts happening in the
+
+122
+00:09:12.340 --> 00:09:14.579
+background and then the
+workflow is completed.
+
+123
+00:09:14.580 --> 00:09:19.959
+Then after some time, probably in the next
+two minutes, you can check and see the chart
+
+124
+00:09:19.960 --> 00:09:25.439
+of accounts that was created from CB like
+this and then you'll be able to actually just
+
+125
+00:09:25.440 --> 00:09:29.999
+go through it, make changes if needs be,
+additions or improvements if needs be.
+
+126
+00:09:30.000 --> 00:09:36.000
+Or if you already had this client working
+around QuickBooks, import their CSV sheet for
+
+127
+00:09:36.120 --> 00:09:41.899
+their existing chart of accounts and bam,
+you're right in there to be able to just allow
+
+128
+00:09:41.900 --> 00:09:46.939
+CB to see that chart of accounts and make
+edits and changes accordingly from there on
+
+129
+00:09:46.940 --> 00:09:52.879
+then. So that is how you can see and manage
+your existing clients and add a new client.
+
+130
+00:09:52.880 --> 00:09:55.079
+Heading over to the connect section,
+
+131
+00:09:55.080 --> 00:09:59.659
+remember I stated before once it is that you
+sign up for CaribBooks, you are given the
+
+132
+00:09:59.660 --> 00:10:01.519
+option to connect a
+WhatsApp business account.
+
+133
+00:10:01.520 --> 00:10:04.539
+Of course, you will need
+a SIM card or an eSIM.
+
+134
+00:10:04.540 --> 00:10:06.519
+You create a WhatsApp
+business account with it.
+
+135
+00:10:06.520 --> 00:10:11.879
+Whether it be an existing SIM that you have,
+a SIM card or eSIM or a new one that you
+
+136
+00:10:11.880 --> 00:10:14.739
+purchase from any mobile carrier store,
+
+137
+00:10:14.740 --> 00:10:20.499
+you'll be able to actually just associate
+a WhatsApp business account with it.
+
+138
+00:10:20.500 --> 00:10:24.999
+There is a QR code that actually will show
+up here once it is you put in a number.
+
+139
+00:10:25.000 --> 00:10:31.000
+You scan that QR code as if you're
+scanning from your phone and
+
+140
+00:10:31.740 --> 00:10:35.560
+then that WhatsApp account will be
+
+141
+00:10:35.620 --> 00:10:38.719
+associated with CB for CB to act within.
+
+142
+00:10:38.720 --> 00:10:43.239
+So all of your clients will text that phone
+number and once it is that they have a business
+
+143
+00:10:43.240 --> 00:10:49.240
+account as indicated, if they sign up through add
+a new client, CB will be able to see their name,
+
+144
+00:10:50.000 --> 00:10:56.000
+see who represent this business and then
+talk to them and do transactions for them.
+
+145
+00:10:56.200 --> 00:11:02.200
+And any one of the transactions that they have
+to report will show up in recent transactions.
+
+146
+00:11:02.260 --> 00:11:08.260
+You can download your reports and do what
+to do with all of what I've just showed you
+
+147
+00:11:08.400 --> 00:11:09.919
+before in this demonstration.
+
+148
+00:11:09.920 --> 00:11:15.920
+So that is exactly what CaribBooks
+represents in a nutshell.
+
+149
+00:11:17.440 --> 00:11:19.999
+Of course, you will be able
+to go into your settings.
+
+150
+00:11:20.000 --> 00:11:22.259
+You will have a profile profile.
+
+151
+00:11:22.260 --> 00:11:27.119
+You'll also have your billing information,
+your card, your invoices will show up here.
+
+152
+00:11:27.120 --> 00:11:29.679
+You can buy transactions
+for your organisation.
+
+153
+00:11:29.680 --> 00:11:31.679
+So if it is a case that
+you want to upgrade,
+
+154
+00:11:31.680 --> 00:11:37.079
+you can upgrade your plan or you can
+buy transactions on demand as well.
+
+155
+00:11:37.080 --> 00:11:41.540
+So our starter plan up to 300
+transactions for the month start at $99.
+
+156
+00:11:41.680 --> 00:11:45.779
+For growth, it's $169 up to
+a thousand transactions.
+
+157
+00:11:45.780 --> 00:11:50.619
+Of course, if you upgrade, all of that will
+be shown in your overview and then you will
+
+158
+00:11:50.620 --> 00:11:56.620
+be able to approve and create new clients
+and then be able to dedicate and divide and
+
+159
+00:11:56.640 --> 00:12:00.979
+allocate your existing transaction
+goals to your existing and new clients.
+
+160
+00:12:00.980 --> 00:12:03.239
+And that's exactly what
+the dashboard represents.
+
+161
+00:12:03.240 --> 00:12:08.059
+It's a portal for you to be able
+to log into, get your dashboard.
+
+162
+00:12:08.060 --> 00:12:11.380
+You'll be able to see all of the
+clients that you have specifically.
+
+163
+00:12:11.420 --> 00:12:17.420
+You'll be able to download reports,
+see updates, manage your clients
+
+164
+00:12:18.800 --> 00:12:20.279
+capacity that they have,
+
+165
+00:12:20.280 --> 00:12:22.579
+and even make updates if needs be.
+
+166
+00:12:22.580 --> 00:12:24.899
+And that is exactly what
+it looks like here.
+
+167
+00:12:24.900 --> 00:12:27.859
+That's it. Thank you again for taking
+the time to look at this video.
+
+168
+00:12:27.860 --> 00:12:29.359
+I hope you have yourself a wonderful day.
+
+169
+00:12:29.360 --> 00:12:31.939
+If you do need to get in touch with us,
+
+170
+00:12:31.940 --> 00:12:36.660
+please message us on
+WhatsApp at 1 876 770 6900
+
+171
+00:12:37.080 --> 00:12:42.639
+You can also send me an email at
+D-O-M-I-N-I-C W-A-I-T-E at caribnexusai.com
+
+172
+00:12:42.640 --> 00:12:48.640
+which is D O M I N I C dot
+W A I T E at CaribNexus,
+
+173
+00:12:48.720 --> 00:12:54.720
+C A R I B N E X U X AI com You can also
+
+174
+00:12:54.800 --> 00:12:58.180
+message me on LinkedIn as
+well, Dominic A R Waite,
+
+175
+00:12:59.000 --> 00:13:03.959
+and let me know your concerns as well as
+your interest in this product as well.
+
+176
+00:13:03.960 --> 00:13:06.999
+And if you have any further questions,
+
+177
+00:13:07.000 --> 00:13:08.520
+concerns, or comments to raise,
+
+178
+00:13:08.580 --> 00:13:09.679
+please raise them with me.
+
+179
+00:13:09.680 --> 00:13:12.399
+With that said, thank you again for
+taking the time to look at this video.
+
+180
+00:13:12.400 --> 00:13:14.480
+I hope you have yourself a
+wonderful day. Take care.
