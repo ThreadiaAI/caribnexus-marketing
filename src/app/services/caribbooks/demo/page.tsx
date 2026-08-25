@@ -209,7 +209,6 @@ export default function DemoPage() {
             onSkip={skip}
             visible={(showControls || !playing) && !menuOpen && !ended}
             enabled={hasStarted}
-            onMenu={() => setMenuOpen(true)}
           />
 
           {hasStarted && !menuOpen && (
@@ -263,7 +262,6 @@ export default function DemoPage() {
                 onSkip={skip}
                 visible={(showControls || !playing) && !menuOpen && !ended}
                 enabled={hasStarted}
-                onMenu={() => setMenuOpen(true)}
               />
             </div>
             {hasStarted && (
