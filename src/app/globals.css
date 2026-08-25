@@ -228,3 +228,9 @@ body {
   transition: background-color 0.2s;
 }
 .cn-menu-link:hover { background-color: rgba(43, 51, 63, 0.95); }
+
+/* Video.js supplies the engine, not the chrome. Its own big play button and
+   control bar are suppressed so the custom transport and timeline designed for
+   this page are the only controls on screen. The caption display stays. */
+.cn-player .video-js .vjs-big-play-button,
+.cn-player .video-js .vjs-control-bar { display: none !important; }

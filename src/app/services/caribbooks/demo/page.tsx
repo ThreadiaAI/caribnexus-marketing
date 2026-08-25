@@ -6,6 +6,8 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { TRANSCRIPT } from "@/lib/videoTranscript";
 import DemoPlayer from "@/components/DemoPlayer";
+import VideoCenterControls from "@/components/VideoCenterControls";
+import VideoScrubber from "@/components/VideoScrubber";
 import DemoMenu from "@/components/DemoMenu";
 import RotatePrompt from "@/components/RotatePrompt";
 import { DEMOS } from "@/lib/demos";
@@ -30,6 +32,29 @@ export default function DemoPage() {
   const [menuOpen, setMenuOpen] = useState(true);   // the page opens on the choice
 
   const playerRef = useRef<Player | null>(null);
+  /** The <video> Video.js owns. Our transport and timeline read it directly. */
+  const [mediaEl, setMediaEl] = useState<HTMLVideoElement | null>(null);
+  /**
+   * The 3s auto-hide applies only while the film is RUNNING. A paused film
+   * keeps its transport: stopping is how a viewer says they want the controls,
+   * and it is what puts the play button and the way back to the menu in the
+   * middle of the picture where they are looking.
+   */
+  const [showControls, setShowControls] = useState(true);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  /**
+   * Reveal the chrome and restart its countdown, cancelling any already
+   * running, so there is only ever one timer and it belongs to the most recent
+   * interaction.
+   */
+  const bumpControls = useCallback(() => {
+    setShowControls(true);
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => setShowControls(false), 3000);
+  }, []);
+  useEffect(() => () => { if (hideTimer.current) clearTimeout(hideTimer.current); }, []);
+  useEffect(() => { bumpControls(); }, [bumpControls]);
   const demo = DEMOS[index];
   /** The desktop layout follows the film's shape, not the viewport's. */
   const wide = demo.orientation === "landscape";
@@ -95,6 +120,21 @@ export default function DemoPage() {
     setMenuOpen(true);
   }, [index]);
 
+  const playPause = useCallback(() => {
+    const p = playerRef.current;
+    if (!p) return;
+    if (p.paused()) void p.play()?.catch(() => {});
+    else p.pause();
+    bumpControls();
+  }, [bumpControls]);
+
+  const skip = useCallback((delta: number) => {
+    const p = playerRef.current;
+    if (!p) return;
+    p.currentTime(Math.min(Math.max((p.currentTime() ?? 0) + delta, 0), p.duration() || 0));
+    bumpControls();
+  }, [bumpControls]);
+
   const handleShare = async () => {
     const url = `${ORG_URL}/services/caribbooks/demo`;
     if (navigator.share) await navigator.share({ title: demo.title, url });
@@ -127,32 +167,36 @@ export default function DemoPage() {
         {/* The floating voice widget would sit over the picture. */}
         <style dangerouslySetInnerHTML={{ __html: `[class*="fixed bottom-6 right-6"] { display: none !important; }` }} />
         <main className="bg-black fixed inset-0 w-full h-full overflow-hidden">
-          <DemoPlayer
-            source={source}
-            fill
-            onEnded={onEnded}
-            onPlayingChange={setPlaying}
-            onReady={(p) => { playerRef.current = p; }}
+          <div className="absolute inset-0" onClick={bumpControls}>
+            <DemoPlayer
+              source={source}
+              fill
+              onEnded={onEnded}
+              onPlayingChange={setPlaying}
+              onReady={(p) => { playerRef.current = p; }}
+              onMedia={setMediaEl}
+            />
+          </div>
+
+          <VideoCenterControls
+            playing={playing}
+            onPlayPause={playPause}
+            onSkip={skip}
+            visible={(showControls || !playing) && !menuOpen && !ended}
+            enabled={hasStarted}
+            onMenu={() => setMenuOpen(true)}
           />
+
+          {hasStarted && !menuOpen && (
+            <div
+              className={`absolute left-0 right-0 px-5 transition-[opacity,visibility] duration-500 ${showControls || !playing ? "opacity-100 visible" : "opacity-0 invisible"}`}
+              style={{ bottom: "3%" }}
+            >
+              <VideoScrubber video={mediaEl} chapters={demo.chapters} tone="dark" accent="#FFFFFF" mediaKey={demo.id} />
+            </div>
+          )}
           {menu}
           <RotatePrompt active={hasStarted && !menuOpen && wide} />
-          {hasStarted && !menuOpen && !playing && (
-            <button
-              onClick={() => setMenuOpen(true)}
-              /* Directly beneath the big play button, which Video.js now shows
-                 while paused. A viewer who has stopped is looking at the centre
-                 of the picture, not hunting the corners. */
-              className="cn-menu-link"
-              /* Clear of the big play button, which is ~49px tall and centred. */
-              style={{ top: "calc(50% + 48px)" }}
-            >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                   strokeWidth="2" strokeLinecap="round" aria-hidden>
-                <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="14" y2="18" />
-              </svg>
-              <span>Back to main menu</span>
-            </button>
-          )}
         </main>
       </>
     );
@@ -180,29 +224,26 @@ export default function DemoPage() {
                 : "min(calc((100vh - var(--nav-h) - 120px) * 9 / 16), 418px)",
             }}
           >
-            <DemoPlayer
-              source={source}
-              onEnded={onEnded}
-              onPlayingChange={setPlaying}
-              onReady={(p) => { playerRef.current = p; }}
-            />
-            {hasStarted && !menuOpen && !playing && (
-            <button
-              onClick={() => setMenuOpen(true)}
-              /* Directly beneath the big play button, which Video.js now shows
-                 while paused. A viewer who has stopped is looking at the centre
-                 of the picture, not hunting the corners. */
-              className="cn-menu-link"
-              /* Clear of the big play button, which is ~49px tall and centred. */
-              style={{ top: "calc(50% + 48px)" }}
-            >
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor"
-                   strokeWidth="2" strokeLinecap="round" aria-hidden>
-                <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="14" y2="18" />
-              </svg>
-              <span>Back to main menu</span>
-            </button>
-          )}
+            <div className="relative" onMouseMove={bumpControls} onMouseEnter={bumpControls}>
+              <DemoPlayer
+                source={source}
+                onEnded={onEnded}
+                onPlayingChange={setPlaying}
+                onReady={(p) => { playerRef.current = p; }}
+                onMedia={setMediaEl}
+              />
+              <VideoCenterControls
+                playing={playing}
+                onPlayPause={playPause}
+                onSkip={skip}
+                visible={(showControls || !playing) && !menuOpen && !ended}
+                enabled={hasStarted}
+                onMenu={() => setMenuOpen(true)}
+              />
+            </div>
+            {hasStarted && (
+              <VideoScrubber video={mediaEl} chapters={demo.chapters} tone="light" accent="#0077B6" className="mt-1" mediaKey={demo.id} />
+            )}
             {menu}
           </div>
 
