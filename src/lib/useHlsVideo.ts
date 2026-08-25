@@ -34,19 +34,62 @@ import { useEffect } from "react";
  * file; this page is judged on how fast it starts and how fast a scrub lands,
  * so the buffers are deliberately short and the first rung deliberately low.
  */
+/**
+ * THE HOOK OWNS THE SOURCE, and nothing else may touch it.
+ *
+ * This page plays two films through ONE <video> element. That element must
+ * never be replaced: the scrubber and the transport bind their listeners to
+ * whatever node existed when they mounted, so swapping the node silently
+ * orphans them — the film plays while nothing observes it. Reusing the node
+ * means the source has to be changed imperatively instead, and it means a
+ * <source> child cannot be used, because changing one has no effect until
+ * load() is called and React gives no hook for that ordering. So the mp4
+ * fallback comes through here too, and this effect is the only writer.
+ *
+ * Switching source also has to RESET the element. Without load() the old
+ * duration and buffered ranges survive into the new film, which is what makes
+ * a scrubber sit at the wrong length.
+ */
 export function useHlsVideo(
-  videoRef: React.RefObject<HTMLVideoElement | null>,
+  /**
+   * The ELEMENT, not a ref to it. A ref object's identity never changes, so an
+   * effect keyed on one cannot notice that React has mounted a different
+   * <video> underneath — which is exactly what happens here when the layout
+   * switches between the phone and desktop branches. Taking the node means the
+   * dependency array changes when the node does, and the stream re-attaches.
+   */
+  video: HTMLVideoElement | null,
   src: string,
+  /** Progressive fallback for anything without MSE or native HLS. */
+  mp4?: string,
   enabled = true,
 ) {
   useEffect(() => {
-    const video = videoRef.current;
     if (!video || !enabled || !src) return;
 
-    // Safari and iOS: native. canPlayType returns "maybe" here, which is truthy
-    // but not "probably", so test loosely.
-    if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = src;
+    // ORDER MATTERS, and canPlayType cannot be the thing that decides it.
+    // Chrome answers "maybe" for application/vnd.apple.mpegurl while being
+    // completely unable to play it, so trusting that answer sends a browser
+    // that needs hls.js down the native path, where it stalls at duration 0.
+    // That used to be masked by the <source> MP4 sitting underneath.
+    //
+    // Feature-detect Media Source Extensions instead: if MSE exists, hls.js
+    // works and is the right choice. Only when it is genuinely absent — real
+    // iOS Safari on iPhone — do we hand the playlist to the native player.
+    // That keeps hls.js out of the bundle on iOS, which was the point of
+    // checking at all.
+    const hasMSE =
+      typeof window !== "undefined" &&
+      ("MediaSource" in window || "ManagedMediaSource" in window);
+
+    if (!hasMSE) {
+      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = src;
+        video.load();
+      } else if (mp4) {
+        video.src = mp4;
+        video.load();
+      }
       return;
     }
 
@@ -56,7 +99,13 @@ export function useHlsVideo(
     void (async () => {
       const mod = await import("hls.js");
       const Hls = mod.default;
-      if (cancelled || !Hls.isSupported()) return;   // <source> MP4 carries it
+      if (cancelled) return;
+      if (!Hls.isSupported()) {
+        // No MSE and no native HLS. Fall back to the progressive file if this
+        // film has one; otherwise there is nothing to play.
+        if (mp4) { video.src = mp4; video.load(); }
+        return;
+      }
 
       hls = new Hls({
         // Start on a low rung and climb. The alternative is guessing high,
@@ -88,7 +137,10 @@ export function useHlsVideo(
         // teardown leaves the <source> MP4 to take over.
         if (data.type === Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
         else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
-        else { hls.destroy(); hls = null; }
+        else {
+          hls.destroy(); hls = null;
+          if (mp4) { video.src = mp4; video.load(); }
+        }
       });
     })();
 
@@ -96,5 +148,5 @@ export function useHlsVideo(
       cancelled = true;
       hls?.destroy();
     };
-  }, [videoRef, src, enabled]);
+  }, [video, src, mp4, enabled]);
 }

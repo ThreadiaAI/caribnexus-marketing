@@ -37,6 +37,13 @@ export type Demo = {
   orientation: "portrait" | "landscape";
   /** Seconds. Used for the runtime label before metadata loads. */
   duration: number;
+  /**
+   * width / height of the source. The desktop frame is sized from this so the
+   * picture fills its box exactly — anything absolutely positioned over the
+   * video (transport, menu, prompts) is then centred on the picture rather
+   * than on a letterboxed frame around it.
+   */
+  aspect: number;
 };
 
 const CDN = "https://darjazmh8n7xf.cloudfront.net/videos";
@@ -74,6 +81,7 @@ export const DEMOS: Demo[] = [
     chapters: WHATSAPP_CHAPTERS,
     orientation: "portrait",
     duration: 726,
+    aspect: 1080 / 2340,
   },
   {
     id: "dashboard",
@@ -87,6 +95,7 @@ export const DEMOS: Demo[] = [
     chapters: DASHBOARD_CHAPTERS,
     orientation: "landscape",
     duration: 797,
+    aspect: 1790 / 844,
   },
 ];
 

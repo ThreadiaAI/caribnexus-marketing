@@ -41,13 +41,26 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export type Chapter = { label: string; at: number };
 
 type Props = {
-  videoRef: React.RefObject<HTMLVideoElement | null>;
+  /**
+   * The ELEMENT. Not a ref — a ref's identity never changes, so an effect
+   * keyed on one cannot see that a different <video> has been mounted, and
+   * this component would go on listening to a node that is no longer on the
+   * page. That is what leaves the bar frozen while the film plays.
+   */
+  video: HTMLVideoElement | null;
   chapters?: Chapter[];
   /** Tint for the played portion and the handle. */
   accent?: string;
   className?: string;
   /** Lets the page drive the centred transport from the same state. */
   onPlayingChange?: (playing: boolean) => void;
+  /**
+   * Identity of the film currently loaded. The <video> element is deliberately
+   * REUSED across films, so nothing about the DOM tells this component that the
+   * source changed — without this it would keep showing the previous film's
+   * duration and playhead until the new metadata happened to arrive.
+   */
+  mediaKey?: string;
   /** Light chrome sits on white; dark chrome sits on the video itself. */
   tone?: "light" | "dark";
 };
@@ -60,12 +73,13 @@ function fmt(s: number) {
 }
 
 export default function VideoScrubber({
-  videoRef,
+  video,
   chapters = [],
   accent = "#0077B6",
   className = "",
   tone = "dark",
   onPlayingChange,
+  mediaKey,
 }: Props) {
   const barRef = useRef<HTMLDivElement>(null);
   const [duration, setDuration] = useState(0);
@@ -75,9 +89,20 @@ export default function VideoScrubber({
   const [playing, setPlaying] = useState(false);
   const [hover, setHover] = useState<number | null>(null);
 
-  // Bind to the element. Re-run if the element is swapped between branches.
+  // Clear the previous film's readings the moment the source changes, rather
+  // than waiting for loadedmetadata — otherwise the bar sits at the old
+  // duration, with the playhead somewhere in the middle of a film that is no
+  // longer loaded.
   useEffect(() => {
-    const v = videoRef.current;
+    setDuration(0); setCurrent(0); setBuffered(0);
+    setScrubbing(null); setHover(null);
+  }, [mediaKey]);
+
+  // Bind to the element. mediaKey is in the deps so a source change re-reads
+  // duration immediately instead of relying on an event that may already have
+  // fired before this ran.
+  useEffect(() => {
+    const v = video;
     if (!v) return;
 
     const onMeta = () => setDuration(v.duration || 0);
@@ -112,7 +137,7 @@ export default function VideoScrubber({
       v.removeEventListener("play", onPlay);
       v.removeEventListener("pause", onPause);
     };
-  }, [videoRef, onPlayingChange]);
+  }, [video, onPlayingChange, mediaKey]);
 
   const timeAt = useCallback(
     (clientX: number) => {
@@ -127,15 +152,15 @@ export default function VideoScrubber({
 
   const seek = useCallback(
     (t: number) => {
-      const v = videoRef.current;
+      const v = video;
       if (!v || !Number.isFinite(t)) return;
       v.currentTime = Math.min(Math.max(t, 0), duration || v.duration || 0);
       setCurrent(v.currentTime);
     },
-    [videoRef, duration],
+    [video, duration],
   );
 
-  const nudge = (delta: number) => seek((videoRef.current?.currentTime ?? 0) + delta);
+  const nudge = (delta: number) => seek((video?.currentTime ?? 0) + delta);
 
   const onPointerDown = (e: React.PointerEvent) => {
     e.stopPropagation();
@@ -199,7 +224,7 @@ export default function VideoScrubber({
           if (e.key === "End") { e.preventDefault(); seek(duration); }
           if (e.key === " " || e.key === "Enter") {
             e.preventDefault();
-            const v = videoRef.current;
+            const v = video;
             if (v) (v.paused ? v.play() : v.pause());
           }
         }}

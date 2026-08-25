@@ -13,7 +13,22 @@ import { DEMOS } from "@/lib/demos";
 import { ORG_URL } from "@/lib/site";
 
 export default function DemoPage() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  /**
+   * TWO REFERENCES TO ONE ELEMENT, DELIBERATELY.
+   *
+   * videoRef is for imperative calls (play, seek) where we just need whatever
+   * is current. videoEl is STATE, so that effects and children re-run when
+   * React mounts a different <video> — which happens every time the layout
+   * crosses the mobile/desktop boundary. Keying effects on the ref alone meant
+   * the stream and the scrubber stayed bound to an element no longer on the
+   * page: the film played and nothing observed it.
+   */
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [videoEl, setVideoEl] = useState<HTMLVideoElement | null>(null);
+  const attachVideo = useCallback((node: HTMLVideoElement | null) => {
+    videoRef.current = node;
+    setVideoEl(node);
+  }, []);
   const [isMuted, setIsMuted] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [showControls, setShowControls] = useState(true);
@@ -34,12 +49,20 @@ export default function DemoPage() {
    */
   const [hasStarted, setHasStarted] = useState(false);
   const [playing, setPlaying] = useState(false);
-  const [hovering, setHovering] = useState(false);
 
   /**
-   * Which of the two films is on screen. The <video> element is reused rather
-   * than swapped, so the transport, the scrubber and the HLS attachment all
-   * follow the source automatically instead of being rebuilt per film.
+   * Which of the two films is on screen.
+   *
+   * Each film gets its OWN <video> element, keyed by id. That is only safe
+   * because every effect and child here binds to videoEl — the element held in
+   * state — rather than to a ref whose identity never changes. Keyed off a
+   * ref, a remount silently orphaned the scrubber and the transport on a node
+   * no longer in the document, which is what left the bar frozen while the
+   * film played.
+   *
+   * A fresh element is also what removes the start-up race: reusing one meant
+   * changing src on an element that was already loading, and the resulting
+   * load() aborted the play() every time.
    */
   const [index, setIndex] = useState(0);
   const [ended, setEnded] = useState(false);
@@ -49,24 +72,81 @@ export default function DemoPage() {
   /** The desktop layout follows the film's shape, not the viewport's. */
   const wide = demo.orientation === "landscape";
 
-  /** Pick a film from the menu. The same film resumes; a different one starts. */
+  /**
+   * PLAYBACK IS AN INTENT, NOT A CALL.
+   *
+   * Trying to play at the moment the viewer asks cannot be made reliable here.
+   * Choosing a film changes the source, and the reload races whatever play()
+   * is in flight — the element reports HAVE_ENOUGH_DATA for the film it is
+   * about to throw away, play() is issued against that, and load() then kills
+   * it with AbortError. A one-shot retry only moves the race.
+   *
+   * So we record that the viewer WANTS this playing, and a listener that lives
+   * with the element starts it the moment it genuinely can. Whatever order the
+   * effects, the reload and the network happen in, the intent is still there
+   * when the element becomes ready.
+   */
+  const wantPlay = useRef(false);
+
+  /**
+   * Keep asking until it takes. hls.js attaches its MediaSource AFTER the
+   * element has already reported canplay on the raw source, and that attach
+   * issues a load which aborts any play() in flight. Since canplay does not
+   * fire a second time, a listener alone gives up after one try and the film
+   * sits fully buffered at zero, paused — which is precisely the dead player.
+   * Retrying on AbortError alone rides that out; every other rejection, such
+   * as an autoplay refusal, is the browser's call and is left alone.
+   */
+  const tryPlay = useCallback((v: HTMLVideoElement | null) => {
+    if (!v) return;
+    // paused is NOT a usable signal while this race is running. play() clears
+    // it synchronously, long before the promise settles, so a retry checking
+    // paused a moment later sees false, concludes it worked, and gives up —
+    // and then the pending load sets it back to true and nothing is playing.
+    // The only honest evidence that playback started is the playhead moving.
+    let ticks = 0;
+    let last = -1;
+    const id = setInterval(() => {
+      if (!wantPlay.current || ticks++ > 30) { clearInterval(id); return; }
+      if (last >= 0 && v.currentTime > last) { clearInterval(id); return; }
+      last = v.currentTime;
+      if (v.paused) void v.play().catch(() => {});
+    }, 200);
+  }, []);
+
+  const requestPlay = useCallback((v: HTMLVideoElement | null) => {
+    wantPlay.current = true;
+    tryPlay(v);
+  }, [tryPlay]);
+
+  /**
+   * Play a film from the menu, FROM THE START. Choosing a title is a decision
+   * to watch that film; carrying on from wherever it was left is what Resume
+   * is for, and conflating the two left the picture stuck mid-way with no
+   * obvious way to begin again.
+   */
   const pick = useCallback((i: number) => {
     setMenuOpen(false);
     setEnded(false);
     setHasStarted(true);
+    const v = videoRef.current;
     if (i === index) {
-      const v = videoRef.current;
-      if (v) { v.muted = false; setIsMuted(false); void v.play(); }
+      if (v) { v.currentTime = 0; v.muted = false; setIsMuted(false); requestPlay(v); }
       return;
     }
+    // A different film. Record the intent HERE rather than leaving it to the
+    // effect that reacts to the index change — that effect is one more thing
+    // that has to fire in the right order relative to the source reload, and
+    // the intent is knowable right now: the viewer just asked for this film.
+    wantPlay.current = true;
     setIndex(i);
-  }, [index]);
+  }, [index, requestPlay]);
 
   const resume = useCallback(() => {
     setMenuOpen(false);
     const v = videoRef.current;
-    if (v) { v.muted = false; setIsMuted(false); void v.play(); }
-  }, []);
+    if (v) { v.muted = false; setIsMuted(false); requestPlay(v); }
+  }, [requestPlay]);
 
   /**
    * Reveal the transport and start its 3s countdown, cancelling any countdown
@@ -89,9 +169,10 @@ export default function DemoPage() {
   const playPause = useCallback(() => {
     const v = videoRef.current;
     if (!v) return;
-    void (v.paused ? v.play() : v.pause());
+    if (v.paused) requestPlay(v);
+    else { wantPlay.current = false; v.pause(); }
     showAndHideControls();
-  }, [showAndHideControls]);
+  }, [showAndHideControls, requestPlay]);
   const skip = useCallback((delta: number) => {
     const v = videoRef.current;
     if (!v) return;
@@ -105,18 +186,18 @@ export default function DemoPage() {
     v.muted = false;
     setIsMuted(false);
     setHasStarted(true);
-    void v.play();
-  }, []);
+    requestPlay(v);
+  }, [requestPlay]);
 
-  useHlsVideo(videoRef, demo.hls);
+  useHlsVideo(videoEl, demo.hls, demo.mp4);
 
   // Autoplay the second film, and reset the ended flag when a new one loads.
   useEffect(() => {
     const v = videoRef.current;
     if (!v || !hasStarted || index === 0) return;
     v.muted = false;
-    void v.play();
-  }, [index, hasStarted]);
+    requestPlay(v);
+  }, [index, hasStarted, videoEl, requestPlay]);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -136,7 +217,7 @@ export default function DemoPage() {
       v.removeEventListener("ended", onEnded);
       v.removeEventListener("play", onPlay);
     };
-  }, [index]);
+  }, [index, videoEl]);
 
   useEffect(() => {
     // Measure the SHORT edge, not the width. A phone turned sideways reports
@@ -157,11 +238,42 @@ export default function DemoPage() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
+  // Arm the countdown on both branches, not just the phone. On desktop the
+  // only thing that used to start it was a mouse movement, so a viewer who
+  // pressed play and then sat still kept the transport over the picture for
+  // the whole film. Nothing about "no mouse has moved" means "still watching
+  // the controls".
+  useEffect(() => { showAndHideControls(); }, [isMobile, showAndHideControls]);
+
+  // Playback starting is itself a reason to clear the chrome: the viewer has
+  // committed, and the transport has done its job.
+  // Honour a pending play intent as soon as the element can act on it. This is
+  // what actually starts a film after a source switch.
   useEffect(() => {
-    if (isMobile) {
-      showAndHideControls();
-    }
-  }, [isMobile, showAndHideControls]);
+    const v = videoEl;
+    if (!v) return;
+    const go = () => tryPlay(v);
+    v.addEventListener("canplay", go);
+    v.addEventListener("canplaythrough", go);
+    v.addEventListener("loadeddata", go);
+    return () => {
+      v.removeEventListener("canplay", go);
+      v.removeEventListener("canplaythrough", go);
+      v.removeEventListener("loadeddata", go);
+    };
+  }, [videoEl, tryPlay]);
+
+  useEffect(() => {
+    const v = videoEl;
+    if (!v) return;
+    const bump = () => showAndHideControls();
+    v.addEventListener("play", bump);
+    v.addEventListener("seeked", bump);
+    return () => {
+      v.removeEventListener("play", bump);
+      v.removeEventListener("seeked", bump);
+    };
+  }, [showAndHideControls, videoEl]);
 
   // A pending timer outliving the page would fire setState on an unmounted
   // component; it also means a stale countdown could survive a fast route
@@ -201,15 +313,14 @@ export default function DemoPage() {
         }}
       >
         <video
-          ref={videoRef}
+          ref={attachVideo}
+          key={demo.id}
           className="absolute inset-0 w-full h-full object-contain bg-black"
           playsInline
           muted
           poster={demo.poster}
           preload="metadata"
-          key={demo.id}
         >
-          {demo.mp4 && <source src={demo.mp4} type="video/mp4" />}
           <track kind="captions" src={demo.captions} srcLang="en" label="English" default />
         </video>
 
@@ -263,7 +374,7 @@ export default function DemoPage() {
             on a still that has not started reads as chrome for nothing. */}
         {hasStarted && (
           <div className={`absolute left-0 right-0 px-5 transition-[opacity,visibility] duration-500 ${showControls ? "opacity-100 visible" : "opacity-0 invisible"}`} style={{ bottom: "3%" }}>
-            <VideoScrubber videoRef={videoRef} chapters={demo.chapters} tone="dark" accent="#FFFFFF" onPlayingChange={setPlaying} />
+            <VideoScrubber video={videoEl} chapters={demo.chapters} tone="dark" accent="#FFFFFF" onPlayingChange={setPlaying} mediaKey={demo.id} />
           </div>
         )}
 
@@ -337,7 +448,6 @@ export default function DemoPage() {
             className="shrink-0 flex flex-col"
             style={{
               height: wide
-                // Transport (~56px) plus the stacked copy below it.
                 ? "min(calc((100vw - 64px) / 2.121 + 56px), calc(100vh - var(--nav-h) - 210px))"
                 : "calc(100vh - var(--nav-h) - 40px)",
               maxHeight: wide ? "760px" : "800px",
@@ -354,20 +464,24 @@ export default function DemoPage() {
           >
           <div
             className="relative w-full"
-            style={{ flex: "1 1 auto", minHeight: 0 }}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
+            // aspect-ratio, not flex-grow. The transport and the tap surface
+            // are absolutely positioned against THIS box, so it has to be the
+            // picture exactly. Sizing it by leftover space let it letterbox,
+            // which is what put the play button adrift of the video.
+            style={{ aspectRatio: String(demo.aspect), minHeight: 0, maxHeight: "100%" }}
+            onMouseMove={showAndHideControls}
+            onMouseEnter={showAndHideControls}
+            onMouseLeave={() => setShowControls(false)}
           >
             <video
-              ref={videoRef}
+              ref={attachVideo}
+              key={demo.id}
               className="w-full h-full rounded-2xl object-contain bg-white"
               playsInline
               muted
               poster={demo.poster}
               preload="metadata"
-              key={demo.id}
-            >
-              {demo.mp4 && <source src={demo.mp4} type="video/mp4" />}
+                >
               <track kind="captions" src={demo.captions} srcLang="en" label="English" default />
             </video>
             {!hasStarted && !menuOpen && (
@@ -400,7 +514,10 @@ export default function DemoPage() {
               playing={playing}
               onPlayPause={playPause}
               onSkip={skip}
-              visible={(hovering || !playing) && !ended}
+              // Same rule as the phone. Resting the pointer on the picture
+              // used to hold the transport open indefinitely; it now fades 3s
+              // after the last movement, and any movement brings it back.
+              visible={showControls && !ended}
               enabled={hasStarted}
               onMenu={() => setMenuOpen(true)}
             />
@@ -425,12 +542,13 @@ export default function DemoPage() {
             </button>
           </div>
           <VideoScrubber
-            videoRef={videoRef}
+            video={videoEl}
             chapters={demo.chapters}
             tone="light"
             accent="#0077B6"
             className="mt-1"
             onPlayingChange={setPlaying}
+            mediaKey={demo.id}
           />
           </div>
 
