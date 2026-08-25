@@ -139,13 +139,18 @@ export default function DemoPage() {
           {hasStarted && !menuOpen && !playing && (
             <button
               onClick={() => setMenuOpen(true)}
-              className="absolute left-1/2 -translate-x-1/2 bottom-[86px] z-20 flex items-center gap-2 rounded-full bg-black/55 backdrop-blur-sm pl-3 pr-4 py-1.5 text-white/90"
+              /* Directly beneath the big play button, which Video.js now shows
+                 while paused. A viewer who has stopped is looking at the centre
+                 of the picture, not hunting the corners. */
+              className="cn-menu-link"
+              /* Clear of the big play button, which is ~49px tall and centred. */
+              style={{ top: "calc(50% + 48px)" }}
             >
               <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor"
                    strokeWidth="2" strokeLinecap="round" aria-hidden>
                 <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="14" y2="18" />
               </svg>
-              <span className="text-[11.5px] font-medium">Back to main menu</span>
+              <span>Back to main menu</span>
             </button>
           )}
         </main>
@@ -181,6 +186,23 @@ export default function DemoPage() {
               onPlayingChange={setPlaying}
               onReady={(p) => { playerRef.current = p; }}
             />
+            {hasStarted && !menuOpen && !playing && (
+            <button
+              onClick={() => setMenuOpen(true)}
+              /* Directly beneath the big play button, which Video.js now shows
+                 while paused. A viewer who has stopped is looking at the centre
+                 of the picture, not hunting the corners. */
+              className="cn-menu-link"
+              /* Clear of the big play button, which is ~49px tall and centred. */
+              style={{ top: "calc(50% + 48px)" }}
+            >
+              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor"
+                   strokeWidth="2" strokeLinecap="round" aria-hidden>
+                <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="14" y2="18" />
+              </svg>
+              <span>Back to main menu</span>
+            </button>
+          )}
             {menu}
           </div>
 
