@@ -89,10 +89,18 @@ export default function VideoCenterControls({
 
   // pointer-events-none on the wrapper so the film underneath still takes taps
   // for reveal; the buttons themselves opt back in.
+  //
+  // WHY VISIBILITY AND NOT JUST OPACITY. The buttons set pointer-events-auto,
+  // which does NOT inherit the wrapper's none — so at opacity-0 there were
+  // still three invisible buttons sitting dead centre of the screen. A tap
+  // meant to bring the controls back hit the unseen play button and toggled
+  // playback instead. visibility:hidden does reach descendants, so faded
+  // really means untappable. It is in the transition list so the fade still
+  // runs; visibility flips as a discrete step at the end of it.
   return (
     <div
-      className={`absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-300 ${
-        visible ? "opacity-100" : "opacity-0"
+      className={`absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-[opacity,visibility] duration-300 ${
+        visible ? "opacity-100 visible" : "opacity-0 invisible"
       }`}
     >
       <div className="flex items-center justify-center gap-7 sm:gap-9">

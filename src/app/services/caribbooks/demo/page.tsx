@@ -68,16 +68,36 @@ export default function DemoPage() {
     if (v) { v.muted = false; setIsMuted(false); void v.play(); }
   }, []);
 
+  /**
+   * Reveal the transport and start its 3s countdown, cancelling any countdown
+   * already running. Every route that should keep the controls alive calls
+   * this, so there is only ever one timer and it always belongs to the most
+   * recent interaction.
+   */
+  const showAndHideControls = useCallback(() => {
+    setShowControls(true);
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = setTimeout(() => setShowControls(false), 3000);
+  }, []);
+
+  // Both of these re-arm the auto-hide. The transport's buttons call
+  // stopPropagation so a tap on them never reaches the <main> tap surface,
+  // which meant the 3s countdown still belonged to whatever tap REVEALED the
+  // controls — so pressing pause a moment before it elapsed hid the transport
+  // almost immediately, and pressing it just after left the old timer dead and
+  // the controls up for good. That is the "works sometimes" case.
   const playPause = useCallback(() => {
     const v = videoRef.current;
     if (!v) return;
     void (v.paused ? v.play() : v.pause());
-  }, []);
+    showAndHideControls();
+  }, [showAndHideControls]);
   const skip = useCallback((delta: number) => {
     const v = videoRef.current;
     if (!v) return;
     v.currentTime = Math.min(Math.max(v.currentTime + delta, 0), v.duration || 0);
-  }, []);
+    showAndHideControls();
+  }, [showAndHideControls]);
 
   const start = useCallback(() => {
     const v = videoRef.current;
@@ -137,17 +157,18 @@ export default function DemoPage() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const showAndHideControls = useCallback(() => {
-    setShowControls(true);
-    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-    hideTimerRef.current = setTimeout(() => setShowControls(false), 3000);
-  }, []);
-
   useEffect(() => {
     if (isMobile) {
       showAndHideControls();
     }
   }, [isMobile, showAndHideControls]);
+
+  // A pending timer outliving the page would fire setState on an unmounted
+  // component; it also means a stale countdown could survive a fast route
+  // change back onto this page.
+  useEffect(() => () => {
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+  }, []);
 
   const handleShare = async () => {
     const url = `${ORG_URL}/services/caribbooks/demo`;
@@ -209,27 +230,45 @@ export default function DemoPage() {
           playing={playing}
           onPlayPause={playPause}
           onSkip={skip}
-          // A paused film keeps its controls. The 3s auto-hide exists to get
-          // the transport out of the way of a film that is running; while it
-          // is stopped there is nothing to get out of the way of, and hiding
-          // them would take the menu button with it three seconds after the
-          // one moment the viewer is most likely to want it.
-          visible={(showControls || !playing) && !ended}
+          // One source of truth. This briefly read (showControls || !playing)
+          // so a paused film kept its controls indefinitely, which on a phone
+          // meant the transport sat on the picture until you tapped it away.
+          // The 3s window now applies in every state; a tap brings it back.
+          visible={showControls && !ended}
           enabled={hasStarted}
           onMenu={() => setMenuOpen(true)}
         />
 
-        {/* Transport. Only after the first tap: before that the poster and
+        {/*
+          POINTER-EVENTS-NONE WHEN FADED, on every one of these.
+
+          They were opacity-0 only, which hides a thing without unhooking it:
+          the scrubber strip and the button column stayed hit-testable across
+          the bottom and right of the screen while invisible. A tap meant to
+          reveal the controls instead landed on the hidden scrubber, which
+          takes pointer capture and seeks — so the film carried on playing with
+          audio and subtitles running while the tap surface underneath never
+          fired, the auto-hide timer was never re-armed, and nothing the viewer
+          did got them back. Reloading was the only way out. That is the bug.
+
+          visibility rather than pointer-events, because the scrubber is
+          role="slider" with tabIndex 0 and opacity does not touch the tab
+          order: a keyboard user could Tab into an invisible seek bar, where
+          Space toggles playback and the arrows scrub, with nothing on screen
+          to show where the focus had gone. visibility:hidden removes it from
+          both hit testing and the tab order in one move.
+
+          Transport. Only after the first tap: before that the poster and
             the play affordance are the whole interface, and a scrubber sitting
             on a still that has not started reads as chrome for nothing. */}
         {hasStarted && (
-          <div className={`absolute left-0 right-0 px-5 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`} style={{ bottom: "3%" }}>
+          <div className={`absolute left-0 right-0 px-5 transition-[opacity,visibility] duration-500 ${showControls ? "opacity-100 visible" : "opacity-0 invisible"}`} style={{ bottom: "3%" }}>
             <VideoScrubber videoRef={videoRef} chapters={demo.chapters} tone="dark" accent="#FFFFFF" onPlayingChange={setPlaying} />
           </div>
         )}
 
         {/* Bottom overlay — fades */}
-        <div className={`absolute left-0 right-0 px-5 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`} style={{ bottom: "12%" }}>
+        <div className={`absolute left-0 right-0 px-5 transition-[opacity,visibility] duration-500 ${showControls ? "opacity-100 visible" : "opacity-0 invisible"}`} style={{ bottom: "12%" }}>
           <div className="flex items-center gap-2 mb-1.5">
             <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="h-[22px] w-auto" />
           </div>
@@ -238,7 +277,7 @@ export default function DemoPage() {
         </div>
 
         {/* Right side actions — fades */}
-        <div className={`absolute right-4 bottom-[120px] flex flex-col items-center gap-3 transition-opacity duration-500 ${showControls ? "opacity-100" : "opacity-0"}`}>
+        <div className={`absolute right-4 bottom-[120px] flex flex-col items-center gap-3 transition-[opacity,visibility] duration-500 ${showControls ? "opacity-100 visible" : "opacity-0 invisible"}`}>
           <button onClick={(e) => { e.stopPropagation(); toggleMute(); }} className="flex flex-col items-center gap-1">
             <div className="w-16 h-16 rounded-full bg-[#6B7280]/40 flex items-center justify-center">
               {isMuted ? (
