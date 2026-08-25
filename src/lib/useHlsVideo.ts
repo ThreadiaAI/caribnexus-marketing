@@ -95,6 +95,7 @@ export function useHlsVideo(
 
     let hls: import("hls.js").default | null = null;
     let cancelled = false;
+    let cleanupCap: (() => void) | null = null;
 
     void (async () => {
       const mod = await import("hls.js");
@@ -115,18 +116,6 @@ export function useHlsVideo(
         // Begin fetching before play is pressed, so the first frame is not
         // waiting on a round trip that could have happened already.
         startFragPrefetch: true,
-
-        // NEVER FETCH A RUNG BIGGER THAN THE PICTURE.
-        //
-        // The dashboard ladder tops out at 1790x844 / 1.43 Mbps, but the frame
-        // renders about 1143px wide on a laptop and far less on a phone. Left
-        // alone, ABR climbs to that top rung and every seek then has to pull
-        // the most expensive segment in the ladder before anything appears —
-        // which is the stall on scrubbing. Capping to the displayed size holds
-        // it at 1280 on a laptop and 854 on a phone, roughly halving the bytes
-        // a seek must wait for, with no visible loss: the extra pixels were
-        // being thrown away by the scaler anyway.
-        capLevelToPlayerSize: true,
 
         // BUFFER GENEROUSLY. This was the stutter.
         //
@@ -175,8 +164,51 @@ export function useHlsVideo(
         enableWorker: true,
       });
 
-      hls.loadSource(src);
+      // Attach before loading: hls's own docs do it in this order, and the
+      // level-capping controller below depends on the element being known.
       hls.attachMedia(video);
+      hls.loadSource(src);
+
+      /**
+       * NEVER FETCH A RUNG BIGGER THAN THE PICTURE.
+       *
+       * The dashboard ladder tops out at 1790x844 / 1.43 Mbps while the frame
+       * renders about 1143px wide on a laptop, so ABR was fetching the most
+       * expensive segments in the ladder and handing the surplus pixels to the
+       * scaler to throw away.
+       *
+       * Done by hand rather than with capLevelToPlayerSize. That flag sat in
+       * the config for a while doing nothing whatsoever: its controller starts
+       * on MANIFEST_PARSED, builds a ResizeObserver, attaches it only if the
+       * media element is already known, and refuses to start twice — so one
+       * bad ordering kills capping for the entire session, silently, while the
+       * config still reads as though it is on. Fifteen lines we can verify
+       * beat a flag we cannot watch fail.
+       *
+       * Measured on the LARGER edge, so a portrait film in a portrait frame is
+       * judged on height. Scaled by devicePixelRatio to keep a phone honest:
+       * 393 CSS px at DPR 3 needs 1179 real pixels, so it correctly asks for
+       * the 1080 rung rather than the 480 one.
+       */
+      const applyCap = () => {
+        if (!hls) return;
+        const levels = hls.levels;
+        if (!levels || levels.length < 2) return;
+        const r = video.getBoundingClientRect();
+        if (!r.width || !r.height) return;
+        const need = Math.max(r.width, r.height) * (window.devicePixelRatio || 1);
+        let idx = levels.length - 1;
+        for (let i = 0; i < levels.length; i++) {
+          if (levels[i].width >= need || levels[i].height >= need) { idx = i; break; }
+        }
+        if (hls.autoLevelCapping !== idx) hls.autoLevelCapping = idx;
+      };
+      hls.on(Hls.Events.MANIFEST_PARSED, applyCap);
+      hls.on(Hls.Events.LEVEL_LOADED, applyCap);
+      // Rotating a phone or resizing a window changes which rung is enough.
+      const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(applyCap) : null;
+      ro?.observe(video);
+      cleanupCap = () => ro?.disconnect();
 
       hls.on(Hls.Events.ERROR, (_e, data) => {
         if (!data.fatal || !hls) return;
@@ -193,6 +225,7 @@ export function useHlsVideo(
 
     return () => {
       cancelled = true;
+      cleanupCap?.();
       hls?.destroy();
     };
   }, [video, src, mp4, enabled]);
