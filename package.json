@@ -20,9 +20,11 @@
     "postcss": "^8.5.25",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "video.js": "^8.24.0"
   },
   "devDependencies": {
+    "@types/video.js": "^7.3.58",
     "typescript": "^5.9.3"
   }
 }

@@ -1,5 +1,6 @@
 import { CHAPTERS as WHATSAPP_CHAPTERS } from "@/lib/videoTranscript";
-import type { Chapter } from "@/components/VideoScrubber";
+/** A marker in a film. Kept here now that the hand-rolled scrubber is gone. */
+export type Chapter = { label: string; at: number };
 
 /**
  * The demo page plays TWO films back to back.
@@ -35,6 +36,8 @@ export type Demo = {
    *   Safari does not implement it at all, so asking is the only honest option.
    */
   orientation: "portrait" | "landscape";
+  /** WebVTT chapter track, so chapters come from one source of truth. */
+  chaptersVtt: string;
   /** Seconds. Used for the runtime label before metadata loads. */
   duration: number;
   /**
@@ -78,6 +81,7 @@ export const DEMOS: Demo[] = [
     mp4: `${CDN}/introducing-caribbooks.mp4`,
     poster: "/demo-poster.jpg",
     captions: "/demo-captions.vtt",
+    chaptersVtt: "/demo-chapters.vtt",
     chapters: WHATSAPP_CHAPTERS,
     orientation: "portrait",
     duration: 726,
@@ -92,6 +96,7 @@ export const DEMOS: Demo[] = [
     hls: `${CDN}/dashboard-hls/master.m3u8`,
     poster: "/dashboard-poster.jpg",
     captions: "/dashboard-captions.vtt",
+    chaptersVtt: "/dashboard-chapters.vtt",
     chapters: DASHBOARD_CHAPTERS,
     orientation: "landscape",
     duration: 797,
