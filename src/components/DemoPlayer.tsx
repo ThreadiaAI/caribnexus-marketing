@@ -48,6 +48,13 @@ type Props = {
   onPlayingChange?: (playing: boolean) => void;
   /** Exposes the player so the page can start it from inside a tap handler. */
   onReady?: (player: Player) => void;
+  /**
+   * The underlying <video>. The custom transport and scrubber are drawn over
+   * the picture and read this directly; Video.js guarantees it is the same
+   * element for the life of the player, which is what they need and what a
+   * hand-rolled version could not promise.
+   */
+  onMedia?: (el: HTMLVideoElement | null) => void;
 };
 
 export default function DemoPlayer({
@@ -57,6 +64,7 @@ export default function DemoPlayer({
   onEnded,
   onPlayingChange,
   onReady,
+  onMedia,
 }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<Player | null>(null);
@@ -70,8 +78,8 @@ export default function DemoPlayer({
    */
   const [ready, setReady] = useState(false);
   // Callbacks live in a ref so changing them never tears the player down.
-  const cbs = useRef({ onEnded, onPlayingChange, onReady });
-  cbs.current = { onEnded, onPlayingChange, onReady };
+  const cbs = useRef({ onEnded, onPlayingChange, onReady, onMedia });
+  cbs.current = { onEnded, onPlayingChange, onReady, onMedia };
 
   // Create ONCE. The player outlives every source change; see the note above.
   useEffect(() => {
@@ -87,16 +95,26 @@ export default function DemoPlayer({
       hostRef.current.appendChild(el);
 
       const player = videojs(el, {
-        controls: true,
+        // OUR CHROME, THEIR ENGINE.
+        //
+        // Video.js runs playback — HLS, the native path on iOS, one element
+        // across source changes — but the controls are ours: the circular 5s
+        // arrows, the centre transport and the timeline that were designed for
+        // this page. Swapping the engine was never meant to swap the look, and
+        // doing both at once was the mistake.
+        controls: false,
         // Only the header until someone presses play. The partner deck's QR
         // code lands here, so a visitor on mobile data in a meeting should not
         // be made to download a twelve minute film to find out if they care.
         preload: "metadata",
-        // FILL THE BOX WE GIVE IT. Without this the player keeps Video.js's
-        // own default size and sits small in the top-left of its container,
-        // needing the expand button pressed before it is watchable. The host
-        // <div> already describes the right box in both layouts: inset-0 on a
-        // phone, a stated width at the film's aspect ratio on desktop.
+        // FILL THE BOX WE GIVE IT.
+        //
+        // Without this the player keeps Video.js's own default size and sits
+        // small in the top-left of its container — which is why the film had
+        // to be expanded by hand after choosing it. The host <div> already
+        // defines the correct box in both layouts: inset-0 on a phone, and a
+        // stated width with the film's aspect ratio on desktop. fill makes the
+        // player adopt that box instead of ignoring it.
         fill: true,
         responsive: true,
         playsinline: true,
@@ -113,6 +131,7 @@ export default function DemoPlayer({
       player.ready(() => {
         setReady(true);
         cbs.current.onReady?.(player);
+        cbs.current.onMedia?.(player.el().querySelector("video"));
       });
     })();
 
