@@ -123,8 +123,23 @@ export default function VideoCenterControls({
             <rect x="14" y="4.5" width="4" height="15" rx="1.2" />
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" className="w-8 h-8 ml-1" fill="currentColor" aria-hidden>
-            <path d="M8 5v14l11-7z" />
+          <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor" aria-hidden>
+            {/*
+              OPTICALLY CENTRED, NOT NUDGED.
+
+              A right-pointing triangle reads as off-centre when its bounding
+              box is centred, because the eye follows its centre of MASS. That
+              was being corrected with a 4px ml-1 on the icon, which overshot
+              badly: the centroid of the old path — vertices (8,5) (8,19)
+              (19,12) — sits at x=11.67, so it wants 0.33 of a 24-unit viewBox.
+              At this size that is about 0.44px, not four, and the triangle
+              ended up visibly right of centre while the pause glyph, which
+              spans 6 to 18 and is already centred, looked correct beside it.
+
+              Shifting the path itself by that 0.33 puts the centroid at
+              exactly 12. In user units it stays right at any rendered size.
+            */}
+            <path d="M8.33 5v14l11-7z" />
           </svg>
         )}
       </button>
