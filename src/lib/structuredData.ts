@@ -148,13 +148,58 @@ export const ORG_PROFILES: string[] = [ORG_LINKEDIN, ORG_INSTAGRAM];
  * the two sharing a GitHub organisation or a founder; neither makes a
  * corporate relationship, and a false one in structured data is slow to undo.
  */
+/**
+ * THE SITE ITSELF, AS DISTINCT FROM THE COMPANY THAT RUNS IT.
+ *
+ * Organization describes the business. WebSite describes this collection of
+ * pages, and Google reads it for one specific thing: the SITE NAME shown above
+ * a result, beside the favicon — the "JPS" or "Instagram" treatment rather than
+ * a bare "caribnexusai.com".
+ *
+ * Without it Google falls back to the domain string, which is what it had been
+ * doing. The two render together, so a site with a favicon and no WebSite name
+ * still looks unbranded in results.
+ *
+ * `publisher` points at the Organization node by @id rather than repeating it,
+ * so the graph says these are the same company rather than describing a second
+ * one that happens to share a name.
+ */
+export const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${ORG_URL}/#website`,
+  name: ORG_NAME,
+  // Candidates Google may choose between. It picks one; giving it the forms
+  // people actually type beats letting it invent one from the domain.
+  alternateName: ['CaribNexus', 'Carib Nexus AI', 'caribnexusai.com'],
+  url: ORG_URL,
+  inLanguage: 'en',
+  publisher: { '@id': `${ORG_URL}/#organization` },
+};
+
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': `${ORG_URL}/#organization`,
   name: ORG_NAME,
   url: ORG_URL,
-  logo: `${ORG_URL}/logo/caribnexus-main.png`,
+  /*
+   * A DIFFERENT FILE FROM THE SOCIAL IMAGE, ON PURPOSE.
+   *
+   * This field feeds the logo in a knowledge panel, where Google renders it
+   * small. caribnexus-main.png is a 1500x1500 square holding a wordmark that is
+   * only 1093x145 — measured at 7% of the frame, so 93% of what Google would
+   * scale down is empty white, and the wordmark arrives illegible.
+   *
+   * caribnexus-logo-schema.png is the same artwork cropped to 1175x227, filling
+   * ~59% of its frame. It is flattened onto white rather than left transparent,
+   * because a transparent logo over a dark panel renders as nothing at all.
+   *
+   * The square version is still correct for og:image in layout.tsx and must
+   * stay there — social previews want a roomy frame, a schema logo wants a
+   * tight one, and one file cannot be both.
+   */
+  logo: `${ORG_URL}/logo/caribnexus-logo-schema.png`,
   /* Sep 2024, per the founder's LinkedIn experience entry. A month-precise
      date agrees with that source where a bare year merely fails to contradict
      it, and agreement is what builds confidence. */

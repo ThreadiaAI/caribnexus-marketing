@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { GridlinesGate } from "@/components/dev/Gridlines";
 import { VoiceWidget } from "@/components/VoiceWidget";
-import { FOUNDED, FOUNDER_NAME, jsonLd, organizationSchema, productSchema } from "@/lib/structuredData";
+import { FOUNDED, FOUNDER_NAME, jsonLd, organizationSchema, productSchema, websiteSchema } from "@/lib/structuredData";
 import { ORG_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -58,6 +58,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Organisation and product graphs on every page. The founder claim
             lives here as well as on /about so it is not dependent on one URL
             being crawled. */}
+        {/* WebSite carries the SITE NAME Google prints above a result, next to
+            the favicon. Without it Google falls back to the bare domain, which
+            is why results read "caribnexusai.com" rather than "CaribNexus AI". */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(websiteSchema)} />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationSchema)} />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(productSchema)} />
         {children}
