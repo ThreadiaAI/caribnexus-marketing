@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev --port 3001",
     "build": "next build",
-    "start": "next start --port 3001"
+    "start": "next start --port 3001",
+    "prebuild": "node scripts/check-canonicals.mjs",
+    "check:canonicals": "node scripts/check-canonicals.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.1101.0",
