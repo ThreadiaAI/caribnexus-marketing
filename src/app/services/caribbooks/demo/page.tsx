@@ -175,7 +175,11 @@ export default function DemoPage() {
     aspect: demo.aspect,
   };
 
-  const menu = menuOpen && (
+  // Two calls rather than one shared element: the menu and the transport are
+  // sized for a phone filling the screen, and the same sizes inside a desktop
+  // panel read as though they belong to a different site. `compact` is only
+  // ever passed by the desktop branch below.
+  const menuFor = (compact: boolean) => menuOpen && (
     <DemoMenu
       demos={DEMOS}
       activeIndex={index}
@@ -183,8 +187,10 @@ export default function DemoPage() {
       canResume={hasStarted && !ended}
       onPick={pick}
       onResume={resume}
+      compact={compact}
     />
   );
+  const menu = menuFor(false);
 
   if (isMobile) {
     return (
@@ -262,12 +268,13 @@ export default function DemoPage() {
                 onSkip={skip}
                 visible={(showControls || !playing) && !menuOpen && !ended}
                 enabled={hasStarted}
+                compact
               />
             </div>
             {hasStarted && (
               <VideoScrubber video={mediaEl} chapters={demo.chapters} tone="light" accent="#0077B6" className="mt-1" mediaKey={demo.id} />
             )}
-            {menu}
+            {menuFor(true)}
           </div>
 
           <div className={wide ? "max-w-[620px] text-center" : "max-w-[300px]"}>

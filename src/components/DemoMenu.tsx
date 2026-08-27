@@ -34,11 +34,19 @@ type Props = {
   canResume: boolean;
   onPick: (index: number) => void;
   onResume: () => void;
+  /**
+   * Desktop, where this sits inside a panel on a page rather than filling a
+   * phone. The sm: breakpoints below scale type UP past 640px, which is right
+   * for a fullscreen menu and wrong here: the surrounding page runs at 10-18px,
+   * so the untouched menu read as though it belonged to a different site.
+   */
+  compact?: boolean;
 };
 
 export default function DemoMenu({
-  demos, activeIndex, watched, canResume, onPick, onResume,
+  demos, activeIndex, watched, canResume, onPick, onResume, compact = false,
 }: Props) {
+  const c = <A, B>(a: A, b: B) => (compact ? a : b);
   return (
     <div
       className="absolute inset-0 z-30 flex flex-col justify-center overflow-y-auto"
@@ -48,20 +56,20 @@ export default function DemoMenu({
       style={{ background: "#2E3642" }}
       onClick={(e) => e.stopPropagation()}
     >
-      <div className="w-full max-w-[560px] mx-auto px-6 py-10 my-auto">
-        <div className="flex items-baseline justify-between gap-4">
+      <div className={`w-full mx-auto my-auto ${c("max-w-[420px] px-6 py-7", "max-w-[560px] px-6 py-10")}`}>
+        <div className={`flex items-baseline justify-between ${c("gap-3", "gap-4")}`}>
           <div>
-            <p className="text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <p className={`uppercase tracking-[0.14em] ${c("text-[9px]", "text-[10px]")}`} style={{ color: "rgba(255,255,255,0.5)" }}>
               CaribBooks
             </p>
-            <h2 className="text-white text-[22px] sm:text-[26px] font-bold tracking-tight mt-1">
+            <h2 className={`text-white font-bold tracking-tight mt-1 ${c("text-[17px]", "text-[22px] sm:text-[26px]")}`}>
               Choose a walkthrough
             </h2>
           </div>
           {canResume && (
             <button
               onClick={onResume}
-              className="shrink-0 text-[12px] font-semibold text-white rounded-full px-4 py-2"
+              className={`shrink-0 font-semibold text-white rounded-full ${c("text-[10.5px] px-3 py-1.5", "text-[12px] px-4 py-2")}`}
               style={{ background: "rgba(255,255,255,0.14)" }}
             >
               Resume
@@ -69,7 +77,7 @@ export default function DemoMenu({
           )}
         </div>
 
-        <ul className="mt-7 space-y-3">
+        <ul className={c("mt-5 space-y-2", "mt-7 space-y-3")}>
           {demos.map((d, i) => {
             const isActive = i === activeIndex;
             const seen = watched.has(d.id);
@@ -77,36 +85,41 @@ export default function DemoMenu({
               <li key={d.id}>
                 <button
                   onClick={() => onPick(i)}
-                  className="w-full text-left rounded-2xl p-4 sm:p-5 transition-colors"
+                  className={`w-full text-left transition-colors ${c("rounded-xl p-3", "rounded-2xl p-4 sm:p-5")}`}
                   style={{
                     background: isActive ? "rgba(255,255,255,0.13)" : "rgba(255,255,255,0.06)",
                     outline: isActive ? "1px solid rgba(255,255,255,0.22)" : "1px solid transparent",
                   }}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className={`flex items-start ${c("gap-3", "gap-4")}`}>
                     <span
                       className="shrink-0 flex items-center justify-center rounded-full mt-0.5"
-                      style={{ width: 38, height: 38, background: "rgba(255,255,255,0.14)" }}
+                      style={{ width: c(30, 38), height: c(30, 38), background: "rgba(255,255,255,0.14)" }}
                     >
-                      <svg viewBox="0 0 24 24" className="w-4 h-4 text-white ml-0.5" fill="currentColor" aria-hidden>
-                        <path d="M8 5v14l11-7z" />
+                      {/* Optically centred the same way as the transport's play
+                          glyph: the centroid of this triangle sits 0.33 right of
+                          the box centre in a 24-unit viewBox. */}
+                      <svg viewBox="0 0 24 24" className={`text-white ${c("w-3 h-3", "w-4 h-4")}`} fill="currentColor" aria-hidden>
+                        <path d="M8.33 5v14l11-7z" />
                       </svg>
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="text-white text-[15px] font-semibold leading-snug">{d.title}</p>
-                      <p className="text-[12.5px] mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.62)" }}>
+                      <p className={`text-white font-semibold leading-snug ${c("text-[13px]", "text-[15px]")}`}>{d.title}</p>
+                      <p className={`mt-0.5 leading-snug ${c("text-[11px]", "text-[12.5px]")}`} style={{ color: "rgba(255,255,255,0.62)" }}>
                         {d.subtitle}
                       </p>
-                      <p className="text-[11px] mt-2 flex flex-wrap items-center gap-x-2 gap-y-1"
+                      <p className={`mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 ${c("text-[9.5px]", "text-[11px]")}`}
                          style={{ color: "rgba(255,255,255,0.45)" }}>
                         <span>{runtime(d.duration)}</span>
                         <span aria-hidden>·</span>
                         <span>{d.chapters.length} chapters</span>
-                        {d.orientation === "landscape" && (
+                        {d.orientation === "landscape" && !compact && (
                           <>
                             <span aria-hidden>·</span>
                             {/* Said here as well as in the prompt, so the choice is
-                                informed before they commit twelve minutes to it. */}
+                                informed before they commit twelve minutes to it.
+                                Suppressed on desktop, where there is no phone to
+                                turn and the advice is just noise in the row. */}
                             <span>turn your phone sideways</span>
                           </>
                         )}
@@ -133,7 +146,7 @@ export default function DemoMenu({
           })}
         </ul>
 
-        <p className="text-[11px] mt-7 leading-relaxed" style={{ color: "rgba(255,255,255,0.42)" }}>
+        <p className={`leading-relaxed ${c("text-[9.5px] mt-5", "text-[11px] mt-7")}`} style={{ color: "rgba(255,255,255,0.42)" }}>
           Pause at any time to come back here. Captions are on by default, and the
           full transcript is below the player.
         </p>

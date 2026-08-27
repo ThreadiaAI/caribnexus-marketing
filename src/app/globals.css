@@ -234,3 +234,36 @@ body {
    this page are the only controls on screen. The caption display stays. */
 .cn-player .video-js .vjs-big-play-button,
 .cn-player .video-js .vjs-control-bar { display: none !important; }
+
+/* CAPTIONS, SIZED FOR A PAGE RATHER THAN A PHONE.
+
+   Video.js scales cue text to the player's own dimensions and writes the result
+   as an inline font-size, so the dashboard film — up to 1400px wide on desktop —
+   drew captions far larger than any type on the page around it, in a hard black
+   box. The inline style is why every rule here needs !important; there is no
+   other way to reach it.
+
+   Deliberately NOT applied below 768px: on a phone the player is the whole
+   screen, the default sizing is correct there, and that is the one part of this
+   page that was already right.
+
+   Colours are fixed rather than inherited. A caption is read against moving
+   video, so it needs its own guaranteed contrast — white on a translucent dark
+   panel holds over both the WhatsApp film's pale chat and the dashboard's
+   white tables. */
+@media (min-width: 768px) {
+  .cn-player .video-js .vjs-text-track-display > div > div > div {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    font-family: inherit !important;
+    color: #fff !important;
+    background-color: rgba(24, 28, 34, 0.72) !important;
+    padding: 3px 9px !important;
+    border-radius: 6px !important;
+    /* Keeps a long line from spanning the full width of a 1400px film, where
+       the eye has to travel too far to be worth reading. */
+    max-width: 62ch;
+    margin-inline: auto;
+    text-shadow: none !important;
+  }
+}

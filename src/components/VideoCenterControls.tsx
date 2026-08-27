@@ -41,6 +41,8 @@ type Props = {
    * WHILE PAUSED — see the note on the wrapper for why only then.
    */
   onMenu?: () => void;
+  /** Desktop: a lighter transport, sized for a player embedded in a page. */
+  compact?: boolean;
 };
 
 function SkipIcon({ back, step }: { back: boolean; step: number }) {
@@ -84,8 +86,14 @@ export default function VideoCenterControls({
   enabled = true,
   step = 5,
   onMenu,
+  compact = false,
 }: Props) {
   if (!enabled) return null;
+
+  // Desktop sizing. The sm: steps below grow the transport past 640px, which is
+  // correct for a phone held at arm's length and too heavy for a player sitting
+  // inside a page — the buttons ended up larger than any other element on it.
+  const c = <A, B>(a: A, b: B) => (compact ? a : b);
 
   // pointer-events-none on the wrapper so the film underneath still takes taps
   // for reveal; the buttons themselves opt back in.
@@ -103,11 +111,11 @@ export default function VideoCenterControls({
         visible ? "opacity-100 visible" : "opacity-0 invisible"
       }`}
     >
-      <div className="flex items-center justify-center gap-7 sm:gap-9">
+      <div className={`flex items-center justify-center ${c("gap-5", "gap-7 sm:gap-9")}`}>
       <button
         aria-label={`Back ${step} seconds`}
         onClick={(e) => { e.stopPropagation(); onSkip(-step); }}
-        className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 p-[9px] rounded-full bg-black/45 backdrop-blur-sm text-white/90 hover:bg-black/60 hover:text-white active:scale-90 transition-all"
+        className={`pointer-events-auto rounded-full bg-black/45 backdrop-blur-sm text-white/90 hover:bg-black/60 hover:text-white active:scale-90 transition-all ${c("w-9 h-9 p-[7px]", "w-11 h-11 sm:w-12 sm:h-12 p-[9px]")}`}
       >
         <SkipIcon back step={step} />
       </button>
@@ -115,15 +123,15 @@ export default function VideoCenterControls({
       <button
         aria-label={playing ? "Pause" : "Play"}
         onClick={(e) => { e.stopPropagation(); onPlayPause(); }}
-        className="pointer-events-auto w-16 h-16 sm:w-[68px] sm:h-[68px] rounded-full bg-black/45 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 active:scale-95 transition-all"
+        className={`pointer-events-auto rounded-full bg-black/45 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/60 active:scale-95 transition-all ${c("w-[50px] h-[50px]", "w-16 h-16 sm:w-[68px] sm:h-[68px]")}`}
       >
         {playing ? (
-          <svg viewBox="0 0 24 24" className="w-7 h-7" fill="currentColor" aria-hidden>
+          <svg viewBox="0 0 24 24" className={c("w-5 h-5", "w-7 h-7")} fill="currentColor" aria-hidden>
             <rect x="6" y="4.5" width="4" height="15" rx="1.2" />
             <rect x="14" y="4.5" width="4" height="15" rx="1.2" />
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor" aria-hidden>
+          <svg viewBox="0 0 24 24" className={c("w-6 h-6", "w-8 h-8")} fill="currentColor" aria-hidden>
             {/*
               OPTICALLY CENTRED, NOT NUDGED.
 
@@ -147,7 +155,7 @@ export default function VideoCenterControls({
       <button
         aria-label={`Forward ${step} seconds`}
         onClick={(e) => { e.stopPropagation(); onSkip(step); }}
-        className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 p-[9px] rounded-full bg-black/45 backdrop-blur-sm text-white/90 hover:bg-black/60 hover:text-white active:scale-90 transition-all"
+        className={`pointer-events-auto rounded-full bg-black/45 backdrop-blur-sm text-white/90 hover:bg-black/60 hover:text-white active:scale-90 transition-all ${c("w-9 h-9 p-[7px]", "w-11 h-11 sm:w-12 sm:h-12 p-[9px]")}`}
       >
         <SkipIcon back={false} step={step} />
       </button>
@@ -169,15 +177,15 @@ export default function VideoCenterControls({
       {onMenu && !playing && (
         <button
           onClick={(e) => { e.stopPropagation(); onMenu(); }}
-          className="pointer-events-auto mt-5 sm:mt-6 flex items-center gap-2 rounded-full bg-black/45 backdrop-blur-sm pl-3 pr-4 py-1.5 text-white/90 hover:bg-black/60 hover:text-white active:scale-95 transition-all"
+          className={`pointer-events-auto flex items-center rounded-full bg-black/45 backdrop-blur-sm text-white/90 hover:bg-black/60 hover:text-white active:scale-95 transition-all ${c("mt-4 gap-1.5 pl-2.5 pr-3 py-1", "mt-5 sm:mt-6 gap-2 pl-3 pr-4 py-1.5")}`}
         >
-          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor"
+          <svg viewBox="0 0 24 24" className={c("w-3 h-3", "w-3.5 h-3.5")} fill="none" stroke="currentColor"
                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <line x1="3" y1="6" x2="21" y2="6" />
             <line x1="3" y1="12" x2="21" y2="12" />
             <line x1="3" y1="18" x2="14" y2="18" />
           </svg>
-          <span className="text-[11.5px] font-medium tracking-tight whitespace-nowrap">
+          <span className={`font-medium tracking-tight whitespace-nowrap ${c("text-[10px]", "text-[11.5px]")}`}>
             Back to main menu
           </span>
         </button>
