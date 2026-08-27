@@ -41,6 +41,15 @@ export default function DemoPage() {
    * middle of the picture where they are looking.
    */
   const [showControls, setShowControls] = useState(true);
+  /**
+   * The stage: the element wrapping the player AND its overlaid controls. Held
+   * in state rather than a ref because a ref's identity never changes, so an
+   * effect keyed on one never re-runs when React mounts a different node — the
+   * listeners would attach to nothing and silently do nothing.
+   */
+  // HTMLElement, not HTMLDivElement: the mobile stage is a <main> and the
+  // desktop stage is a <div>, and only the wider type accepts both.
+  const [stageEl, setStageEl] = useState<HTMLElement | null>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   /**
@@ -57,29 +66,45 @@ export default function DemoPage() {
   useEffect(() => { bumpControls(); }, [bumpControls]);
 
   /**
-   * REVEAL ON TAP, BOUND TO THE PLAYER ITSELF.
+   * REVEAL ON HOVER OR TAP, BOUND TO THE WHOLE STAGE.
    *
-   * This used to be an onClick on a wrapper <div> around the player, on the
-   * assumption that a tap on the picture would bubble up to it. It does not:
-   * Video.js handles the click on its own tech element first, so the tap
-   * landed on VIDEO.vjs-tech and the wrapper never heard about it — which is
-   * why the controls stopped coming up at all.
+   * Two earlier versions of this were wrong in the same way — they listened on
+   * something smaller than the area the pointer actually moves over.
    *
-   * Binding to the player's root in the CAPTURE phase sees the event on the
-   * way down, before anything can stop it, and works for mouse and touch
-   * alike. Playback is untouched: this only reveals chrome.
+   * First it was an onClick on a wrapper <div>, on the assumption that a tap on
+   * the picture would bubble up. It does not: Video.js handles the click on its
+   * own tech element first, so the tap landed on VIDEO.vjs-tech and the wrapper
+   * never heard about it.
+   *
+   * Then it was bound to the player's own root, which fixed tapping the picture
+   * but not hovering the chrome: the transport is a SIBLING of the player, not
+   * a child, and its buttons set pointer-events:auto. So with the cursor resting
+   * on the play button, every mousemove targeted the button, the listener on the
+   * player never fired, the three-second timer ran out, and the controls faded
+   * away underneath the pointer — exactly where the viewer was aiming.
+   *
+   * Binding to the stage, the one element that contains both the player and its
+   * controls, is what makes "appears on hover, hides when idle" behave the way
+   * every other player does. CAPTURE phase so nothing downstream can swallow it,
+   * and pointer events so mouse and touch take the same path. Playback is
+   * untouched: this only reveals chrome.
    */
   useEffect(() => {
-    const root = mediaEl?.closest(".video-js") as HTMLElement | null;
-    if (!root) return;
+    if (!stageEl) return;
     const reveal = () => bumpControls();
-    root.addEventListener("pointerdown", reveal, true);
-    root.addEventListener("mousemove", reveal, true);
+    // mouseleave rather than pointerleave: it does not fire for touch, which is
+    // what we want. On a phone there is no cursor to leave, and hiding the
+    // chrome the instant a finger lifts would undo the tap that summoned it.
+    const leave = () => setShowControls(false);
+    stageEl.addEventListener("pointerdown", reveal, true);
+    stageEl.addEventListener("pointermove", reveal, true);
+    stageEl.addEventListener("mouseleave", leave);
     return () => {
-      root.removeEventListener("pointerdown", reveal, true);
-      root.removeEventListener("mousemove", reveal, true);
+      stageEl.removeEventListener("pointerdown", reveal, true);
+      stageEl.removeEventListener("pointermove", reveal, true);
+      stageEl.removeEventListener("mouseleave", leave);
     };
-  }, [mediaEl, bumpControls]);
+  }, [stageEl, bumpControls]);
   const demo = DEMOS[index];
   /** The desktop layout follows the film's shape, not the viewport's. */
   const wide = demo.orientation === "landscape";
@@ -197,7 +222,7 @@ export default function DemoPage() {
       <>
         {/* The floating voice widget would sit over the picture. */}
         <style dangerouslySetInnerHTML={{ __html: `[class*="fixed bottom-6 right-6"] { display: none !important; }` }} />
-        <main className="bg-black fixed inset-0 w-full h-full overflow-hidden">
+        <main ref={setStageEl} className="bg-black fixed inset-0 w-full h-full overflow-hidden">
           <div className="absolute inset-0">
             <DemoPlayer
               source={source}
@@ -254,7 +279,9 @@ export default function DemoPage() {
                 : "min(calc((100vh - var(--nav-h) - 120px) * 9 / 16), 418px)",
             }}
           >
-            <div className="relative">
+            {/* The stage: player and transport together, so hovering either
+                keeps the chrome up. See the reveal effect above. */}
+            <div ref={setStageEl} className="relative">
               <DemoPlayer
                 source={source}
                 onEnded={onEnded}
