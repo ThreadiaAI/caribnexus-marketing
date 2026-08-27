@@ -25,6 +25,18 @@ export const metadata: Metadata = {
   description:
     `Caribbean-based artificial intelligence company building agentic AI systems for small and medium businesses. Founded in ${FOUNDED} by ${FOUNDER_NAME}.`,
   metadataBase: new URL(ORG_URL),
+  /* THE HOMEPAGE MUST DECLARE ITS OWN CANONICAL.
+     Every other route sets one through its layout; the root did not, which left
+     the single page that ranks for "CaribNexus AI" as the only page unable to
+     consolidate its variants.
+     That matters because inbound links to the homepage rarely arrive clean.
+     They arrive as /?utm_source=..., /?fbclid=..., /?ref=... — each a distinct
+     URL to a crawler. Without this, authority splits across every tagged
+     variant instead of accumulating on one address, which is the opposite of
+     what a young domain trying to establish brand authority can afford.
+     Relative, so it resolves against metadataBase and cannot drift to the
+     non-www host that 308s away. */
+  alternates: { canonical: "/" },
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
