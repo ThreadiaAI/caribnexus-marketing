@@ -49,7 +49,7 @@ export type Demo = {
   aspect: number;
 };
 
-const CDN = "https://d1t3cwz3alq7bf.cloudfront.net/videos";
+const CDN = "https://media.caribnexusai.com/videos";
 
 /**
  * Chapters for the dashboard film, taken from its own transcript so a marker

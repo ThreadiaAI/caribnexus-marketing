@@ -83,7 +83,7 @@ const videoSchema = {
   // incomplete, and at twelve minutes the runtime is information a
   // searcher wants before they commit to playing anything.
   duration: `PT${Math.floor(VIDEO_DURATION_SECONDS / 60)}M${VIDEO_DURATION_SECONDS % 60}S`,
-  contentUrl: "https://d1t3cwz3alq7bf.cloudfront.net/videos/introducing-caribbooks.mp4",
+  contentUrl: "https://media.caribnexusai.com/videos/introducing-caribbooks.mp4",
   embedUrl: `${ORG_URL}/services/caribbooks/demo`,
   transcript: TRANSCRIPT_TEXT,
   inLanguage: "en",
