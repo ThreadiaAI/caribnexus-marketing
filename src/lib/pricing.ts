@@ -17,6 +17,12 @@ import { ORG_URL } from './site';
  * the raw HTML — emits them as schema.org Offers. One source, two consumers,
  * no way for the visible price and the published price to disagree.
  *
+ * KEPT IN STEP BY HAND with caribbooks-frontend-design/src/lib/stripe/tiers.ts,
+ * which is the app's own list and the one Stripe prices are derived from.
+ * They are separate deployments, so there is no import to share — if the
+ * two ever disagree, the app is right and this file is stale, because the
+ * app is what actually charges the card.
+ *
  * YEARLY IS 10% OFF THE MONTHLY RATE. The schema publishes the monthly list
  * price, because that is the headline number and the one a comparison will
  * quote. The discount is a page affordance, not a separate product.
@@ -33,9 +39,10 @@ export type Tier = {
 
 export const TIERS: { business: Tier[]; partner: Tier[] } = {
   business: [
-    { name: 'Micro', monthly: 69, unit: 'Up to 100 transactions/mo', desc: 'For solo operators, freelancers, and side hustles.' },
-    { name: 'Small', monthly: 119, unit: 'Up to 300 transactions/mo', desc: 'For restaurants, salons, and small contractors.' },
-    { name: 'Medium', monthly: 299, unit: 'Up to 2,000 transactions/mo', desc: 'For growing companies with real operational volume.' },
+    { name: 'Nano', monthly: 49, unit: 'Up to 500 transactions/mo', desc: 'For market traders, vendors, and one-person businesses.' },
+    { name: 'Micro', monthly: 79, unit: 'Up to 1,500 transactions/mo', desc: 'For solo operators, freelancers, and side hustles.' },
+    { name: 'Small', monthly: 189, unit: 'Up to 5,000 transactions/mo', desc: 'For restaurants, salons, and small contractors.' },
+    { name: 'Medium', monthly: 350, unit: 'Up to 15,000 transactions/mo', desc: 'For growing companies with real operational volume.' },
   ],
   partner: [
     { name: 'Starter', monthly: 99, unit: 'Up to 300 transactions pooled', desc: 'For firms with a handful of clients.' },
@@ -98,4 +105,4 @@ export const PRICING_SUMMARY =
   TIERS.business.map((t) => `${t.name} at USD $${t.monthly}/month (${t.unit.toLowerCase()})`).join(', ') +
   `. For accounting partners managing multiple clients: ` +
   TIERS.partner.map((t) => `${t.name} at USD $${t.monthly}/month (${t.unit.toLowerCase()})`).join(', ') +
-  `. Paying yearly takes 10% off. There is no USD $39.50 plan.`;
+  `. Paying yearly takes 10% off. The cheapest plan is Nano at USD $49/month; there is no USD $39.50 plan and no plan below $49.`;
