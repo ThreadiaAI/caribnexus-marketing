@@ -13,3 +13,25 @@ public/videos/*.mov
 # so committing them would put working files on caribnexusai.com for no reason.
 # Regenerate with scripts/build_shards.py and scripts/build_post.py.
 public/artwork/
+
+# Remotion project. Source is ~184KB; public/ is 117MB of video plates,
+# upscaled screenshots and audio, and out/ is renders. All of it is either
+# regenerable or lives in Downloads — none of it belongs in git.
+video/node_modules/
+video/out/
+video/out-*.mp4
+video/public/*.mp4
+video/public/*.wav
+video/public/*.png
+video/public/*.jpg
+video/public/chat/
+
+
+# TypeScript incremental build cache — regenerated on every build.
+tsconfig.tsbuildinfo
+
+# Rendered social carousels: 65MB of 2160px masters and 1080px uploads for
+# posts already published. Same reasoning as public/artwork/ above — they are
+# output, not source, and they regenerate from scripts/build_linkedin_carousel.py
+# and scripts/build_chat_strips.py. The post copy they carry lives in prompts/.
+assets/

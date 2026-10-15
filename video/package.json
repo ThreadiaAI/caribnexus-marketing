@@ -1,0 +1,22 @@
+{
+  "name": "caribnexus-video",
+  "version": "1.0.0",
+  "description": "CaribNexus AI social video compositions",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "remotion studio --no-open",
+    "build": "remotion bundle",
+    "render": "remotion render"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.466",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.466"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}
