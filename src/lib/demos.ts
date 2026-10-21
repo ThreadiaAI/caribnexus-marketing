@@ -84,8 +84,8 @@ export const DEMOS: Demo[] = [
     chaptersVtt: "/demo-chapters.vtt",
     chapters: WHATSAPP_CHAPTERS,
     orientation: "portrait",
-    duration: 726,
-    aspect: 1080 / 2340,
+    duration: 702,
+    aspect: 1284 / 2778,
   },
   {
     id: "dashboard",
