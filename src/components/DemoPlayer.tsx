@@ -33,8 +33,8 @@ export type DemoSource = {
   id: string;
   hls: string;
   poster: string;
-  captions: string;
-  chapters: string;
+  captions?: string;
+  chapters?: string;
   /** width / height of the source, so the frame matches the picture. */
   aspect: number;
 };
@@ -43,6 +43,19 @@ type Props = {
   source: DemoSource;
   /** Fill the viewport (phone) rather than sitting in a sized frame. */
   fill?: boolean;
+  /** Start the first film by itself, without waiting to be asked. */
+  autoPlay?: boolean;
+  /**
+   * Reports that autoplay only succeeded with the sound off.
+   *
+   * No browser will start a film with audio unless a gesture asked for it,
+   * and none of them tell you in advance — the play() promise simply
+   * rejects. So the only way to autoplay is to try with sound, and fall back
+   * to muted when that is refused. The page has to KNOW that happened,
+   * because a silent walkthrough is a broken one: the whole thing is
+   * narration. Hence this, and the control it drives.
+   */
+  onMutedChange?: (muted: boolean) => void;
   className?: string;
   onEnded?: () => void;
   onPlayingChange?: (playing: boolean) => void;
@@ -65,6 +78,8 @@ export default function DemoPlayer({
   onPlayingChange,
   onReady,
   onMedia,
+  autoPlay = false,
+  onMutedChange,
 }: Props) {
   const hostRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<Player | null>(null);
@@ -78,8 +93,11 @@ export default function DemoPlayer({
    */
   const [ready, setReady] = useState(false);
   // Callbacks live in a ref so changing them never tears the player down.
-  const cbs = useRef({ onEnded, onPlayingChange, onReady, onMedia });
-  cbs.current = { onEnded, onPlayingChange, onReady, onMedia };
+  const cbs = useRef({ onEnded, onPlayingChange, onReady, onMedia, onMutedChange });
+  cbs.current = { onEnded, onPlayingChange, onReady, onMedia, onMutedChange };
+  /** Autoplay is for the FIRST film only; every later one is a deliberate
+   *  choice and already starts itself. */
+  const autoTried = useRef(false);
 
   // Create ONCE. The player outlives every source change; see the note above.
   useEffect(() => {
@@ -126,8 +144,13 @@ export default function DemoPlayer({
 
       playerRef.current = player;
       player.on("ended", () => cbs.current.onEnded?.());
-      player.on("play", () => cbs.current.onPlayingChange?.(true));
-      player.on("pause", () => cbs.current.onPlayingChange?.(false));
+      // Read the element rather than trusting the event: an interrupted
+      // play() fires "play" and then "pause", and a transport driven off the
+      // event names alone shows playing for a film that never started.
+      const report = () => cbs.current.onPlayingChange?.(!player.paused());
+      player.on("play", report);
+      player.on("playing", report);
+      player.on("pause", report);
       player.ready(() => {
         setReady(true);
         cbs.current.onReady?.(player);
@@ -143,12 +166,70 @@ export default function DemoPlayer({
     };
   }, []);
 
-  // Swap the film. Same element, so the iOS unlock carries over.
+  /**
+   * Swap the film. Same element, so the iOS unlock carries over.
+   *
+   * CUT, DO NOT DISSOLVE INTO BUFFERING.
+   *
+   * Changing src alone left the OUTGOING film on screen — still running for a
+   * beat, then frozen on its last frame — until the new rendition had enough
+   * data to paint. Choosing a card looked like the player had stalled on the
+   * film you were leaving.
+   *
+   * Video.js hides the poster overlay for good once anything has played, via
+   * a vjs-has-started class, so the new poster had nowhere to show. Three
+   * calls in this order fix it: pause kills the outgoing picture immediately,
+   * hasStarted(false) brings the poster overlay back, and the poster is set
+   * before the source so there is something to bring back. The result is a
+   * cut to the new film's title card on the same frame as the click, with the
+   * video arriving underneath it whenever it is ready.
+   */
   useEffect(() => {
     const p = playerRef.current;
     if (!p || !ready) return;
+    p.pause();
     p.poster(source.poster);
+    p.hasStarted(false);
     p.src({ src: source.hls, type: "application/x-mpegURL" });
+
+    /*
+      AUTOPLAY, AFTER THE SOURCE CAN ACTUALLY PLAY.
+
+      The first version of this called play() on the line after src(). HLS
+      loads asynchronously, so that call was killed by the load request still
+      in flight — an AbortError, "play() interrupted by a new load request".
+      The handler then muted and called play() again, which was interrupted
+      in exactly the same way. Nothing ever started, and the aborted
+      play/pause pair was what made the transport flicker between playing and
+      paused without the picture moving.
+
+      It also tried unmuted FIRST and fell back to muted. That cannot work
+      reliably: an unmuted attempt rejects because no gesture has happened,
+      and an interrupted attempt rejects too, and the two are
+      indistinguishable from the outside. So the fallback fired on load
+      races as well as on policy, and the real state was never knowable.
+
+      Muted is the only mode a browser guarantees without a gesture, so that
+      is what this asks for — the same thing every feed does. Sound comes
+      back on the first gesture of any kind, which the page handles.
+    */
+    if (autoPlay && !autoTried.current) {
+      autoTried.current = true;
+      const start = () => {
+        p.muted(true);
+        cbs.current.onMutedChange?.(true);
+        void p.play()?.catch(() => {
+          // Refused even muted — some data-saver modes do this. Leave it on
+          // the poster; the transport is right there and works.
+          p.muted(false);
+          cbs.current.onMutedChange?.(false);
+        });
+      };
+      // readyState may already be past metadata on a warm cache, and the
+      // event would then never come.
+      if (p.readyState() >= 1) start();
+      else p.one("loadedmetadata", start);
+    }
 
     // Text tracks do not follow a source change; rebuild them per film.
     // TextTrackList is array-like but not an array, and its typings do not
@@ -162,14 +243,21 @@ export default function DemoPlayer({
       const track = existing[i];
       if (track) p.removeRemoteTextTrack(track as never);
     }
-    p.addRemoteTextTrack(
-      { kind: "captions", src: source.captions, srclang: "en", label: "English", default: true },
-      false,
-    );
-    p.addRemoteTextTrack(
-      { kind: "chapters", src: source.chapters, srclang: "en", label: "Chapters" },
-      false,
-    );
+    if (source.captions) {
+      p.addRemoteTextTrack(
+        { kind: "captions", src: source.captions, srclang: "en", label: "English", default: true },
+        false,
+      );
+    }
+    if (source.chapters) {
+      p.addRemoteTextTrack(
+        { kind: "chapters", src: source.chapters, srclang: "en", label: "Chapters" },
+        false,
+      );
+    }
+    // autoPlay is deliberately not a dependency: it gates a one-off attempt
+    // guarded by autoTried, and listing it would re-run this whole swap.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, source.id, source.hls, source.poster, source.captions, source.chapters]);
 
   return (
