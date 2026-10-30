@@ -39,10 +39,10 @@ export type Tier = {
 
 export const TIERS: { business: Tier[]; partner: Tier[] } = {
   business: [
-    { name: 'Nano', monthly: 49, unit: 'Up to 500 transactions/mo', desc: 'For market traders, vendors, and one-person businesses.' },
-    { name: 'Micro', monthly: 79, unit: 'Up to 1,500 transactions/mo', desc: 'For solo operators, freelancers, and side hustles.' },
-    { name: 'Small', monthly: 189, unit: 'Up to 5,000 transactions/mo', desc: 'For restaurants, salons, and small contractors.' },
-    { name: 'Medium', monthly: 350, unit: 'Up to 15,000 transactions/mo', desc: 'For growing companies with real operational volume.' },
+    { name: 'Nano', monthly: 49, unit: 'Up to 250 transactions/mo', desc: 'Bookkeeping only, for market traders, vendors, and one-person businesses.' },
+    { name: 'Micro', monthly: 99, unit: 'Up to 750 transactions/mo', desc: 'Adds estimates, invoices and receipts, for solo operators and freelancers.' },
+    { name: 'Small', monthly: 189, unit: 'Up to 2,000 transactions/mo', desc: 'For restaurants, salons, and small contractors.' },
+    { name: 'Medium', monthly: 350, unit: 'Up to 5,000 transactions/mo', desc: 'For growing companies with real operational volume.' },
   ],
   partner: [
     { name: 'Starter', monthly: 99, unit: 'Up to 300 transactions pooled', desc: 'For firms with a handful of clients.' },
@@ -105,4 +105,5 @@ export const PRICING_SUMMARY =
   TIERS.business.map((t) => `${t.name} at USD $${t.monthly}/month (${t.unit.toLowerCase()})`).join(', ') +
   `. For accounting partners managing multiple clients: ` +
   TIERS.partner.map((t) => `${t.name} at USD $${t.monthly}/month (${t.unit.toLowerCase()})`).join(', ') +
-  `. Paying yearly takes 10% off. The cheapest plan is Nano at USD $49/month; there is no USD $39.50 plan and no plan below $49.`;
+  `. Paying yearly takes 10% off. The cheapest plan is Nano at USD $49/month; there is no USD $39.50 plan and no plan below $49. ` +
+  `Nano covers bookkeeping only; sending estimates, invoices and receipts to clients is included from Micro upwards, and is not sold as a separate add-on.`;
