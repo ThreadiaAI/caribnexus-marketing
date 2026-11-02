@@ -35,3 +35,8 @@ tsconfig.tsbuildinfo
 # output, not source, and they regenerate from scripts/build_linkedin_carousel.py
 # and scripts/build_chat_strips.py. The post copy they carry lives in prompts/.
 assets/
+
+# Remotion render output: 290 MB of ProRes masters that git would keep a
+# copy of forever. Already excluded from deploys by .vercelignore; this
+# keeps it out of history too.
+motion/

@@ -50,22 +50,22 @@ const STANDARDS: { n: string; standard: string; how: string }[] = [
   {
     n: "5",
     standard: "Not kept longer than necessary",
-    how: "A published retention schedule: message history 24 months, reasoning records 90 days, server logs 30 days. The accounting record is held for the statutory period because the law requires it of you.",
+    how: "Server logs expire after 30 days, enforced by the retention setting on the log group rather than by a promise. Message history, reasoning records and learned facts are held for the life of the account and deleted when it closes or when you ask; there is no timer on them, and we would rather say so than publish a schedule nothing enforces. The accounting record is held for the statutory period because the law requires it of you.",
   },
   {
     n: "6",
     standard: "Processed in accordance with the rights of data subjects",
-    how: "Access, correction, erasure, restriction, portability and objection, answered within 30 days. Erasure covers message history, learned facts and reminders; the statutory accounting record is exempt, as the Act allows.",
+    how: "Access, correction, erasure, restriction, portability and objection, answered within 30 days. Erasure covers message history, learned facts and reminders; the statutory accounting record is exempt, as the Act allows. This one is a commitment rather than a mechanism — a request is carried out by hand today, not by a routine that runs on its own.",
   },
   {
     n: "7",
     standard: "Appropriate technical and organisational measures",
-    how: "AES-256 at rest, TLS 1.2 and 1.3 in transit, no plaintext path anywhere. Passwordless sign-in, role-scoped access, and tenant isolation the agent cannot address around. Backups with 35-day recovery and deletion protection on every table.",
+    how: "AES-256 at rest, TLS 1.2 and 1.3 in transit, no plaintext path anywhere. Passwordless sign-in, role-scoped access, and tenant isolation the agent cannot address around. Continuous backups with 35-day point-in-time recovery, and deletion protection on the tables holding the accounting record.",
   },
   {
     n: "8",
     standard: "Not transferred without adequate protection",
-    how: "Named jurisdictions rather than vagueness: the books in AWS United States, message content in the European Union with Unipile under the GDPR. Each transfer under contractual safeguards, and a data processing agreement for practices that need one.",
+    how: "Named jurisdictions rather than vagueness: the books in AWS United States, and WhatsApp message content through Meta's WhatsApp Business Platform, under Meta's own data processing terms. Each transfer under contractual safeguards, and a data processing agreement for practices that need one.",
   },
 ];
 
@@ -76,14 +76,14 @@ const CARDS = [
     img: "/illustrations/dp-encryption.png",
     title: "Encrypted, both ways",
     color: "#0077B6",
-    desc: "AES-256 at rest across every database and file store. TLS 1.2 and 1.3 in transit, with no plaintext path anywhere in the chain. Requests over plain HTTP are refused rather than upgraded.",
+    desc: "AES-256 at rest across every database and file store. TLS 1.2 and 1.3 in transit, with no plaintext path anywhere in the chain. A plain HTTP request is redirected to HTTPS before anything is served over it.",
   },
   {
     fig: "FIG 2.2",
     img: "/illustrations/dp-residency.png",
     title: "Named jurisdictions",
     color: "#00A859",
-    desc: "The books sit with Amazon Web Services in the United States. WhatsApp message content sits with Unipile in France, inside the European Union, under the GDPR. No Caribbean provider offers a local region, so we name the real ones.",
+    desc: "The books sit with Amazon Web Services in the United States. WhatsApp message content passes through Meta's WhatsApp Business Platform, which Meta processes on its own data centres without committing to a single country. Meta's local storage option can pin message data to one named country; we have not enabled it, and its list has no Caribbean region. No provider here offers a local one, so we name the real ones.",
   },
   {
     fig: "FIG 2.3",
@@ -204,11 +204,14 @@ export function DataProtectionContent() {
             <div
               className="relative overflow-hidden"
               style={{
-                background: "linear-gradient(160deg, #0A0A0A 0%, #111827 40%, #0d1a2e 100%)",
+                // Sand, like the bands on the home and CaribBooks pages, rather than
+                // the near-black slab this used to be.
+                background: "var(--cn-paper-deep)",
+                border: "1px solid var(--cn-border)",
                 padding: "40px 32px",
               }}
             >
-              <span className="text-[9px] font-medium uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.45)" }}>
+              <span className="text-[9px] font-medium uppercase tracking-wider" style={{ color: "rgba(0,0,0,0.45)" }}>
                 FIG 1.1 &nbsp;·&nbsp; How a business is identified
               </span>
 
@@ -233,13 +236,13 @@ export function DataProtectionContent() {
                   style={{ paddingBottom: "10px" }}
                 >
                   {["Ref", "Event", "Known after this line"].map((h) => (
-                    <span key={h} className="text-[9px] font-medium uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>
+                    <span key={h} className="text-[9px] font-medium uppercase tracking-wider" style={{ color: "rgba(0,0,0,0.42)" }}>
                       {h}
                     </span>
                   ))}
                 </div>
 
-                <div style={{ borderTop: "1px solid rgba(255,255,255,0.22)" }} />
+                <div style={{ borderTop: "1px solid rgba(0,0,0,0.2)" }} />
 
                 {[
                   { ref: "01", event: "A message arrives", sub: "WhatsApp, inbound", known: "a phone number" },
@@ -249,18 +252,18 @@ export function DataProtectionContent() {
                   <div
                     key={r.ref}
                     className="md:grid md:grid-cols-[56px_minmax(0,1.05fr)_minmax(0,1fr)] md:gap-6"
-                    style={{ padding: "16px 0", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+                    style={{ padding: "16px 0", borderBottom: "1px solid rgba(0,0,0,0.1)" }}
                   >
-                    <span className="text-[11px] tabular-nums" style={{ color: "rgba(255,255,255,0.35)" }}>{r.ref}</span>
+                    <span className="text-[11px] tabular-nums" style={{ color: "rgba(0,0,0,0.42)" }}>{r.ref}</span>
                     <div>
-                      <p className="text-[13px] font-semibold text-white" style={{ lineHeight: "18px" }}>{r.event}</p>
-                      <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)", lineHeight: "16px", marginTop: "3px" }}>{r.sub}</p>
+                      <p className="text-[13px] font-semibold text-cn-dark" style={{ lineHeight: "18px" }}>{r.event}</p>
+                      <p className="text-[11px]" style={{ color: "rgba(0,0,0,0.48)", lineHeight: "16px", marginTop: "3px" }}>{r.sub}</p>
                     </div>
                     <div className="mt-2 md:mt-0">
-                      <span className="md:hidden text-[9px] font-medium uppercase tracking-wider block" style={{ color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>
+                      <span className="md:hidden text-[9px] font-medium uppercase tracking-wider block" style={{ color: "rgba(0,0,0,0.38)", marginBottom: "2px" }}>
                         Known after
                       </span>
-                      <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.62)", lineHeight: "18px" }}>{r.known}</p>
+                      <p className="text-[12px]" style={{ color: "rgba(0,0,0,0.66)", lineHeight: "18px" }}>{r.known}</p>
                     </div>
                   </div>
                 ))}
@@ -268,11 +271,11 @@ export function DataProtectionContent() {
                 {/* The closing rule. Two lines, 3px apart, exactly as a ledger
                     draws a final total. This is the security boundary. */}
                 <div style={{ marginTop: "18px" }}>
-                  <div style={{ borderTop: "1px solid rgba(255,255,255,0.55)" }} />
+                  <div style={{ borderTop: "1px solid rgba(0,0,0,0.5)" }} />
                   <div style={{ height: "3px" }} />
-                  <div style={{ borderTop: "1px solid rgba(255,255,255,0.55)" }} />
+                  <div style={{ borderTop: "1px solid rgba(0,0,0,0.5)" }} />
                 </div>
-                <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.4)", marginTop: "10px" }}>
+                <p className="text-[10px]" style={{ color: "rgba(0,0,0,0.48)", marginTop: "10px" }}>
                   Everything above this rule happens before the model is invoked.
                 </p>
 
@@ -280,34 +283,34 @@ export function DataProtectionContent() {
                   className="md:grid md:grid-cols-[56px_minmax(0,1.05fr)_minmax(0,1fr)] md:gap-6"
                   style={{ padding: "16px 0 0" }}
                 >
-                  <span className="text-[11px] tabular-nums" style={{ color: "rgba(255,255,255,0.35)" }}>04</span>
+                  <span className="text-[11px] tabular-nums" style={{ color: "rgba(0,0,0,0.42)" }}>04</span>
                   <div>
                     <p className="text-[13px] font-semibold" style={{ lineHeight: "18px", color: "#00A859" }}>The agent runs</p>
-                    <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)", lineHeight: "16px", marginTop: "3px" }}>
+                    <p className="text-[11px]" style={{ color: "rgba(0,0,0,0.48)", lineHeight: "16px", marginTop: "3px" }}>
                       it cannot change it, name another, or ask
                     </p>
                   </div>
                   <div className="mt-2 md:mt-0">
-                    <span className="md:hidden text-[9px] font-medium uppercase tracking-wider block" style={{ color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>
+                    <span className="md:hidden text-[9px] font-medium uppercase tracking-wider block" style={{ color: "rgba(0,0,0,0.38)", marginBottom: "2px" }}>
                       Known after
                     </span>
-                    <p className="text-[12px]" style={{ color: "rgba(255,255,255,0.62)", lineHeight: "18px" }}>
+                    <p className="text-[12px]" style={{ color: "rgba(0,0,0,0.66)", lineHeight: "18px" }}>
                       one business, and only that one
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div style={{ height: "1px", background: "rgba(255,255,255,0.12)", margin: "32px 0 20px" }} />
+              <div style={{ height: "1px", background: "rgba(0,0,0,0.14)", margin: "32px 0 20px" }} />
 
               <div className="md:grid md:grid-cols-2 md:gap-10">
-                <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.5)", lineHeight: "16px" }}>
+                <p className="text-[11px]" style={{ color: "rgba(0,0,0,0.55)", lineHeight: "16px" }}>
                   Every record CaribBooks holds is partitioned by business. Reaching
                   another business&rsquo;s data is not a filter someone could forget to
                   apply. It is a different partition, and nothing in the agent&rsquo;s
                   vocabulary points at it.
                 </p>
-                <p className="text-[11px] mt-3 md:mt-0" style={{ color: "rgba(255,255,255,0.5)", lineHeight: "16px" }}>
+                <p className="text-[11px] mt-3 md:mt-0" style={{ color: "rgba(0,0,0,0.55)", lineHeight: "16px" }}>
                   A posted transaction cannot be deleted by the agent either. To undo
                   one it posts a reversing entry, so the original stays in the ledger
                   and the audit trail survives the correction.
@@ -390,17 +393,25 @@ export function DataProtectionContent() {
             {CARDS.map((c) => (
               <div
                 key={c.fig}
-                className="flex flex-col border border-cn-border rounded-none p-4 shadow-sm min-w-[280px] max-w-[280px] h-[350px] snap-start shrink-0 bg-white"
+                className="flex flex-col border border-cn-border rounded-none p-4 shadow-sm min-w-[280px] max-w-[280px] h-[350px] snap-start shrink-0 bg-[var(--cn-paper)]"
               >
-                <div className="flex-1 mb-3">
+                {/* The text sizes its own block and the picture takes what is
+                    left — the same shape as the home page's MobileCard, and for
+                    the same reason. Text on flex-1 with a width-driven image
+                    after it made the two together outgrow a 350px card, and the
+                    illustration fell out of the bottom. min-h-0 is what lets
+                    the image shrink at all; object-contain keeps it undistorted
+                    while it does. */}
+                <div className="shrink-0">
                   <span className="text-[9px] font-medium text-cn-muted uppercase tracking-wider block mb-2">
                     {c.fig}
                   </span>
                   <h3 className="text-[13px] font-bold" style={{ color: c.color }}>{c.title}</h3>
                   <p className="text-[11px] text-cn-muted mt-1 leading-relaxed">{c.desc}</p>
                 </div>
-                <div className="mt-auto mb-1">
-                  <img src={c.img} alt="" style={{ width: "100%", height: "auto", display: "block", mixBlendMode: "multiply" }} />
+                <div className="flex-1 min-h-0 flex items-center justify-center pt-3">
+                  <img src={c.img} alt="" className="max-h-full w-auto object-contain"
+                       style={{ mixBlendMode: "multiply" }} />
                 </div>
               </div>
             ))}

@@ -152,16 +152,15 @@ export default function ServicesPage() {
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
             <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
-              Embeddable voice widget for any website. Customers speak naturally — the agent handles customer service, booking, reminders, and team updates. Trained on your business context.
+              We build embeddable voice agents for any website. Customers speak naturally — the agent handles customer service, booking, reminders, and team updates, trained on your business context. Each one is built for the business it serves, so the way to start is a conversation about yours.
             </p>
             <p style={{ marginTop: "16px" }}>
               <span className="text-[10px] font-medium text-cn-muted">3.1</span>{" "}
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "ask" }))}
+              <Link href="/contact"
                 className="text-[11px] font-medium bg-gradient-to-r from-[#FF5733] to-[#009088] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
               >
-                Try it live +
-              </button>
+                Book a consultation +
+              </Link>
             </p>
           </FadeIn>
         </section>
@@ -237,12 +236,11 @@ export default function ServicesPage() {
             </p>
             <p style={{ marginTop: "16px" }}>
               <span className="text-[10px] font-medium text-cn-muted">4.1</span>{" "}
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
+              <Link href="/contact"
                 className="text-[11px] font-medium bg-gradient-to-r from-[#FF5733] to-[#009088] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
               >
                 Book a consultation +
-              </button>
+              </Link>
             </p>
           </FadeIn>
         </section>
@@ -328,13 +326,12 @@ export default function ServicesPage() {
               Tell us what you&apos;re building or what problem you need solved. We&apos;ll tell you exactly how AI fits.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
+              <Link href="/contact"
                 className="text-[12px] font-medium text-white px-5 py-2.5 rounded-full transition-all hover:opacity-90"
                 style={{ background: "linear-gradient(135deg, #0077B6, #009088, #00A859, #FF5733)" }}
               >
                 Book a consultation
-              </button>
+              </Link>
               <Link
                 href="https://books.caribnexusai.com/signup"
                 className="text-[12px] font-medium text-cn-dark px-5 py-2.5 rounded-full border border-cn-border hover:border-cn-muted transition-colors"

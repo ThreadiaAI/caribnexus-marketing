@@ -320,7 +320,10 @@ export function AboutContent() {
             <div
               className="relative overflow-hidden flex flex-col justify-between"
               style={{
-                background: "linear-gradient(160deg, #0A0A0A 0%, #111827 40%, #0d1a2e 100%)",
+                // Sand, matching the bands elsewhere and the FIG 1.1 panel on
+                // /data-protection, rather than the near-black slab this was.
+                background: "var(--cn-paper-deep)",
+                border: "1px solid var(--cn-border)",
                 minHeight: "560px",
                 padding: "48px",
               }}
@@ -339,22 +342,22 @@ export function AboutContent() {
                     }}
                   />
                 </div>
-                <div className="hidden md:block w-px bg-white/10 self-stretch" />
+                <div className="hidden md:block w-px bg-cn-border self-stretch" />
                 <div className="flex flex-col justify-center w-full md:w-[45%] shrink-0 md:pr-[10%] md:pl-8 space-y-4">
-                  <p className="text-[12px] font-semibold text-white" style={{ lineHeight: "15px" }}>
+                  <p className="text-[12px] font-semibold text-cn-dark" style={{ lineHeight: "15px" }}>
                     The businesses we build for
                   </p>
-                  <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
+                  <p className="text-[11px] text-cn-muted" style={{ lineHeight: "16px" }}>
                     A hardware store in Montego Bay. A tour operator in Negril. A salon, a
                     trucking outfit, a café with three staff and one point of sale, a small
                     manufacturer selling into two islands.
                   </p>
-                  <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
+                  <p className="text-[11px] text-cn-muted" style={{ lineHeight: "16px" }}>
                     Businesses that trade in cash, negotiate over WhatsApp, and file GCT.
                     Businesses where the owner is also the bookkeeper, the receptionist and
                     the person answering Instagram at eleven at night.
                   </p>
-                  <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
+                  <p className="text-[11px] text-cn-muted" style={{ lineHeight: "16px" }}>
                     And the accountants who keep books for twenty of them at once.
                   </p>
                 </div>

@@ -38,12 +38,22 @@
   --cn-muted: #6B7280;
   --cn-border: #E5E7EB;
   --cn-surface: #FAFAFA;
+  /* The ground. Warm rather than pure white: #ffffff is the colour a page
+     is before anyone decides anything, and it makes #FF5733 read as a
+     warning rather than a brand. Three points of warmth is enough to settle
+     the orange and is otherwise invisible. */
+  --cn-paper: #FCFBF9;
+  /* Nav and footer. A DEEPER PAPER rather than a grey: grey is cool and the
+     ground is warm, so the two would read as muddy where they meet. Same
+     hue family, a few points darker, which separates the chrome from the
+     page without introducing a second temperature. */
+  --cn-paper-deep: #F4F1EB;
 
   --content-max-w: 1200px;
   --grid-columns: 12;
   --grid-gap: 24px;
   --grid-padding: 24px;
-  --nav-h: 48px;
+  --nav-h: 64px;
 }
 
 @theme inline {
@@ -55,6 +65,8 @@
   --color-cn-muted: var(--cn-muted);
   --color-cn-border: var(--cn-border);
   --color-cn-surface: var(--cn-surface);
+  --color-cn-paper: var(--cn-paper);
+  --color-cn-paper-deep: var(--cn-paper-deep);
   --font-sans: "Creato Display", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -137,7 +149,7 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--cn-dark);
-  background: #ffffff;
+  background: var(--cn-paper);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   zoom: 0.92;

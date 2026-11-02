@@ -1,0 +1,15 @@
+# The deploy failed on a 339 MB ProRes master in public/videos: Vercel's
+# limit is 100 MB per file, and the CLI does NOT fall back to .gitignore —
+# with no .vercelignore it uploads everything beside the app.
+#
+# Nothing below is referenced by src/. The site's films stream from
+# media.caribnexusai.com, so public/videos is 403 MB of masters and
+# intermediates that no page asks for.
+public/videos/
+
+# Source projects that live alongside the site and never ship with it:
+# Remotion renders, their caches, and the raw brand material.
+motion/
+video/
+assets/
+WhatsApp CB/

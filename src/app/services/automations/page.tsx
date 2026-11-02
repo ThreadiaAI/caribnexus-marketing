@@ -3,6 +3,7 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { FadeIn, ScaleIn } from "@/components/Animate";
+import Link from "next/link";
 
 export default function AutomationsPage() {
   return (
@@ -29,12 +30,11 @@ export default function AutomationsPage() {
             </p>
           </FadeIn>
           <div className="hidden md:flex items-end justify-end" style={{ gridColumn: "10 / 12" }}>
-            <button
-              onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
+            <Link href="/contact"
               className="text-[11px] font-medium bg-gradient-to-r from-[#FF5733] to-[#00A859] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             >
               Interested in this? →
-            </button>
+            </Link>
           </div>
         </section>
 
@@ -351,12 +351,11 @@ export default function AutomationsPage() {
           <FadeIn style={{ gridColumn: "2 / 12" }}>
             <p className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">...and whatever else your business needs. </span>
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
+              <Link href="/contact"
                 className="bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent hover:opacity-80 transition-opacity inline-flex items-baseline gap-1"
               >
                 Tell us <span className="text-[16px]">→</span>
-              </button>
+              </Link>
             </p>
           </FadeIn>
         </section>
@@ -369,13 +368,12 @@ export default function AutomationsPage() {
             <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight text-cn-muted" style={{ lineHeight: "1.1" }}>
               Imagine what your business could look like?
             </h2>
-            <button
-              onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
+            <Link href="/contact"
               className="mt-4 text-[11px] font-medium text-white px-5 py-[7px] rounded-full transition-all hover:opacity-90"
               style={{ background: "linear-gradient(135deg, #00A859, #0077B6)" }}
             >
               Get started
-            </button>
+            </Link>
           </FadeIn>
         </section>
 

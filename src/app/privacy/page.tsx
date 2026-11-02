@@ -52,19 +52,20 @@ const EFFECTIVE = "18 August 2026";
 const SECTIONS = [
   { id: "who-we-are", n: "1", title: "Who we are" },
   { id: "what-we-collect", n: "2", title: "What we collect" },
-  { id: "legal-basis", n: "3", title: "Why we are allowed to process it" },
-  { id: "client-data", n: "4", title: "Your clients' data, and our role" },
-  { id: "ai-processing", n: "5", title: "How AI processing works" },
-  { id: "sub-processors", n: "6", title: "Sub-processors" },
-  { id: "residency", n: "7", title: "Where your data is held" },
-  { id: "retention", n: "8", title: "How long we keep it" },
-  { id: "deletion", n: "9", title: "Deletion and erasure" },
-  { id: "your-rights", n: "10", title: "Your rights" },
-  { id: "security", n: "11", title: "Security" },
-  { id: "breaches", n: "12", title: "Personal data breaches" },
-  { id: "cookies", n: "13", title: "Cookies" },
-  { id: "children", n: "14", title: "Children" },
-  { id: "changes", n: "15", title: "Changes and contact" },
+  { id: "enquiries", n: "3", title: "When you ask for a consultation" },
+  { id: "legal-basis", n: "4", title: "Why we are allowed to process it" },
+  { id: "client-data", n: "5", title: "Your clients' data, and our role" },
+  { id: "ai-processing", n: "6", title: "How AI processing works" },
+  { id: "sub-processors", n: "7", title: "Sub-processors" },
+  { id: "residency", n: "8", title: "Where your data is held" },
+  { id: "retention", n: "9", title: "How long we keep it" },
+  { id: "deletion", n: "10", title: "Deletion and erasure" },
+  { id: "your-rights", n: "11", title: "Your rights" },
+  { id: "security", n: "12", title: "Security" },
+  { id: "breaches", n: "13", title: "Personal data breaches" },
+  { id: "cookies", n: "14", title: "Cookies" },
+  { id: "children", n: "15", title: "Children" },
+  { id: "changes", n: "16", title: "Changes and contact" },
 ] as const;
 
 export const metadata: Metadata = {
@@ -184,8 +185,11 @@ export default function PrivacyPage() {
 
           <div className="print-full" style={{ gridColumn: "5 / 12" }}>
             <p className={BODY} style={LEAD}>
-              {ORG_NAME} builds artificial intelligence systems for businesses across the
-              Caribbean. This policy explains what personal data we handle, why, where it is
+              {ORG_NAME} builds AI teams for Caribbean businesses. The work begins before any
+              system does: mapping how a process actually runs, to find where a business is
+              spending labour, capital, time and information for less than it gets back. Then we
+              build the systems that do that work, in the places the work already happens. This
+              policy explains what personal data we handle, why, where it is
               held, how long we keep it, and what you can ask us to do with it. It is written
               to be read rather than to be survived, and every factual statement in it
               describes the system as it actually runs.
@@ -198,6 +202,24 @@ export default function PrivacyPage() {
                 deploy across messaging channels; the voice agents we embed on business
                 websites; and any custom system we build through consulting. The rules below do
                 not change from one to the next.
+              </P>
+              <P>
+                <strong>What CaribBooks is, plainly.</strong>{" "}
+                It is a bookkeeper that works over WhatsApp. A business sends it a photograph of
+                a receipt, a voice note about a payment, or a line of text, and it records the
+                transaction, asks when something does not add up, and produces the reports an
+                accountant would. There is no app to open and no form to fill: the conversation
+                is the interface.
+              </P>
+              <P>
+                That is also why this document is longer than most. A system you talk to receives
+                whatever you happen to say to it — a customer&rsquo;s name, a bank balance, a
+                photograph with a face in it — and the honest version of a privacy notice for
+                such a thing has to say where each of those goes. Three facts do most of the
+                work. Your books are yours and are never used to train a model. Each business is
+                a separate partition and the agent has no means of naming another. And a posted
+                transaction cannot be deleted by the agent — reversing one leaves both entries in
+                the ledger, so the audit trail stays whole.
               </P>
               <P>
                 The lines isolate differently, and it is worth saying how. CaribBooks is a
@@ -217,7 +239,7 @@ export default function PrivacyPage() {
               <P>
                 Where an accounting practice uses CaribBooks to keep books on behalf of its own
                 clients, that practice is the controller of its clients&rsquo; data and we act as
-                its processor. Section 4 explains what that means in practice.
+                its processor. Section 5 explains what that means in practice.
               </P>
             </Section>
 
@@ -235,13 +257,43 @@ export default function PrivacyPage() {
             </Section>
 
             <Section s={SECTIONS[2]}>
+              <P>
+                The form on our contact page asks for your name, your business name, a
+                telephone number, your industry, how many people work with you, which of our
+                products you are asking about, what you would like to achieve, and when you
+                would like to speak. There is no account and no password: it is a request for
+                a conversation.
+              </P>
+              <P>
+                What happens to it is short. The answers are sent as a single email to our own
+                address and are not written to any database, advertising platform or customer
+                list. We use them to prepare for the call and to call you back. We do not sell
+                them, we do not share them with anyone outside {ORG_NAME}, and we do not add you
+                to a mailing list on the strength of a consultation request.
+              </P>
+              <P>
+                The telephone number is the only way we can reach you, because the form asks for
+                nothing else. We call or message it on WhatsApp to agree a time; the form holds
+                no slot and books nothing. The legal basis is your consent, given by the tick box
+                on the form, and you can withdraw it by replying to the call or writing to{" "}
+                <a className="underline" href={`mailto:${ORG_EMAIL}`}>{ORG_EMAIL}</a>, after which
+                we delete the enquiry.
+              </P>
+              <P>
+                If a conversation goes nowhere, the email is deleted within twelve months. If it
+                becomes an engagement, it becomes account data and the rest of this policy applies
+                to it.
+              </P>
+            </Section>
+
+            <Section s={SECTIONS[3]}>
               <Row k="Contract" v="Providing the service you or your practice has engaged us for: recording transactions, producing reports, keeping your account working." />
               <Row k="Legal obligation" v="Retaining accounting records for the statutory period, and meeting tax and audit requirements." />
               <Row k="Legitimate interests" v="Keeping the service secure, preventing abuse, and diagnosing faults. We do this in a way that does not override your rights." />
               <Row k="Consent" v="Marketing email, where you have asked to receive it. You can withdraw it at any time and the link is in every message." />
             </Section>
 
-            <Section s={SECTIONS[3]}>
+            <Section s={SECTIONS[4]}>
               <P>
                 When an accounting practice runs CaribBooks across its client list, we process
                 those clients&rsquo; data <strong>on the practice&rsquo;s instructions</strong>. The
@@ -261,7 +313,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[4]}>
+            <Section s={SECTIONS[5]}>
               <P>
                 CaribBooks learns your business, your vendors, your categories and the way you
                 describe things, so that it asks fewer questions over time. That learning stays
@@ -294,29 +346,25 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[5]}>
+            <Section s={SECTIONS[6]}>
               <P>
                 We use a small number of providers to run the service. Each is bound by its own
                 contract and processes data only to deliver the function described.
               </P>
               <Row k="Amazon Web Services" v="Hosting, databases, file storage, queues and email delivery. United States." />
               <Row
-                k="Unipile"
+                k="Meta Platforms"
                 v={
                   <>
-                    The WhatsApp connection carrying messages between a business and CaribBooks.
-                    A French company acting as data processor under the GDPR, SOC 2 Type II and
-                    CASA Tier II certified, with annual third-party penetration testing. Message
-                    content is encrypted at rest with AES-256-GCM and in transit with TLS 1.3,
-                    and is hosted exclusively in France. Data associated with an account is
-                    removed when that account is deleted. See their{" "}
-                    <a className="underline" href="https://www.unipile.com/security-compliance/" target="_blank" rel="noopener noreferrer">
-                      security documentation
-                    </a>{" "}
-                    and{" "}
-                    <a className="underline" href="https://www.unipile.com/privacy-policy/" target="_blank" rel="noopener noreferrer">
-                      privacy policy
-                    </a>.
+                    The WhatsApp Business Platform (Cloud API) carries messages between a
+                    business and CaribBooks. A message a customer sends is delivered to our
+                    WhatsApp Business Account and processed by Meta on the way; Meta&rsquo;s own
+                    terms govern what it does with it. We authenticate every inbound webhook
+                    against Meta&rsquo;s signature before reading it, so a message we act on is a
+                    message Meta actually sent. See the{" "}
+                    <a className="underline" href="https://www.whatsapp.com/legal/business-data-processing-terms" target="_blank" rel="noopener noreferrer">
+                      WhatsApp Business Data Processing Terms
+                    </a>, last updated 22 August 2025.
                   </>
                 }
               />
@@ -329,7 +377,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[6]}>
+            <Section s={SECTIONS[7]}>
               <P>
                 Your data is held in two places, and we would rather name both than generalise.
               </P>
@@ -341,10 +389,19 @@ export default function PrivacyPage() {
               </P>
               <P>
                 <strong>WhatsApp message content</strong>{" "}
-                passes through and is stored by
-                Unipile, a French company, on Scaleway infrastructure in France. Unipile states
-                that this data is hosted exclusively in the European Union with no transfer
-                outside it, so your clients&rsquo; messages sit under the GDPR.
+                passes through Meta&rsquo;s
+                WhatsApp Business Platform on its way to and from us. Meta processes it on its
+                own data centres and does not commit to a single country: its processing terms
+                describe the service as global and name the European Economic Area and the
+                United States. Once a message reaches us, the copy we keep lives with the books,
+                in the AWS regions named above.
+              </P>
+              <P>
+                Meta does offer a local storage option that pins message data at rest to one
+                named country. We have not enabled it, and we would be naming a country rather
+                than this one if we had: the supported list has no Caribbean region, and the
+                nearest to us is Canada. If a practice needs message data pinned to a particular
+                jurisdiction, say so before onboarding and we will tell you what is possible.
               </P>
               <P>
                 There is no Jamaican cloud region behind either provider. A claim of local
@@ -357,7 +414,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[7]}>
+            <Section s={SECTIONS[8]}>
               <div style={{ marginTop: "14px", overflowX: "auto" }}>
                 <table className="text-[14px]" style={{ borderCollapse: "collapse", width: "100%" }}>
                   <thead>
@@ -370,11 +427,11 @@ export default function PrivacyPage() {
                     {[
                       ["Accounting records: journal entries, ledger, chart of accounts, invoices", "Life of the account, then 10 years"],
                       ["Receipt and document images", "Life of the account, then 10 years"],
-                      ["WhatsApp message history", "24 months"],
+                      ["WhatsApp message history", "Life of the account, erasable on request"],
                       ["What CaribBooks has learned about a business", "Life of the account, erasable on request"],
                       ["Reminders", "Until cancelled or fired, erasable on request"],
-                      ["Agent reasoning records", "90 days"],
-                      ["Server logs", "30 days"],
+                      ["Agent reasoning records", "Life of the account, erasable on request"],
+                      ["Server logs", "30 days, expired automatically"],
                       ["Backups and point-in-time recovery", "35 days"],
                     ].map(([a, b]) => (
                       <tr key={a}>
@@ -386,6 +443,22 @@ export default function PrivacyPage() {
                 </table>
               </div>
               <P>
+                <strong>What deletes itself, and what does not.</strong>{" "}
+                Server logs and backups expire on their own, on the schedule above. Nothing else
+                does. Message history, reasoning records and what CaribBooks has learned about a
+                business are held for as long as the account is open, and are deleted when it
+                closes or when you ask — whichever comes first. We used to publish a 24-month
+                figure for message history. No timer enforced it, so the number was a statement
+                of intent dressed as a mechanism, and we have replaced it with what is true.
+              </P>
+              <P>
+                We would rather hold message history than expire it on a clock. A question about
+                an entry can arrive two years after it was posted, and the message that produced
+                it is often the only explanation of why it reads the way it does. The law asks
+                that data not be kept longer than necessary, and for a set of books that period
+                is the life of the books.
+              </P>
+              <P>
                 Ten years on the accounting record is deliberate, and longer than the statutory
                 minimum in Jamaica. A business is required by law to keep its accounting records,
                 and a practice should never have to leave us in order to answer a records
@@ -393,7 +466,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[8]}>
+            <Section s={SECTIONS[9]}>
               <P>
                 You can ask us to erase the message history, the facts CaribBooks has learned
                 about your operations, and your reminders, at any time. We will do it and
@@ -419,7 +492,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[9]}>
+            <Section s={SECTIONS[10]}>
               <P>
                 Under the Jamaica Data Protection Act, and under the GDPR where it applies to
                 you, you may ask us to give you a copy of your data, correct it, erase it,
@@ -442,7 +515,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[10]}>
+            <Section s={SECTIONS[11]}>
               <Row k="In transit" v="TLS 1.2 and 1.3. Every request between your device, our systems and our providers is encrypted. Plain HTTP is refused." />
               <Row k="At rest" v="AES-256 across databases and file storage." />
               <Row k="Access" v="Sign-in is a one-time code to a verified email address; no password exists to be stolen or reused. Access is scoped by role, and a staff seat cannot delete data." />
@@ -456,7 +529,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[11]}>
+            <Section s={SECTIONS[12]}>
               <P>
                 If a breach occurs that is likely to put anyone at risk, we will notify the
                 Office of the Information Commissioner promptly, and within 72 hours where that
@@ -466,7 +539,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[12]}>
+            <Section s={SECTIONS[13]}>
               <P>
                 This website uses only what is necessary to serve pages and remember your session.
                 We do not use advertising cookies and we do not sell or share data with
@@ -474,7 +547,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[13]}>
+            <Section s={SECTIONS[14]}>
               <P>
                 Our services are for businesses and are not directed at children. We do not
                 knowingly collect data from anyone under 16. If we learn that we have, we will
@@ -482,7 +555,7 @@ export default function PrivacyPage() {
               </P>
             </Section>
 
-            <Section s={SECTIONS[14]}>
+            <Section s={SECTIONS[15]}>
               <P>
                 If we change this policy in a way that materially affects you, we will update the
                 date at the top, post a notice on this page, and tell partner firms in writing.

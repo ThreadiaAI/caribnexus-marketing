@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const NAV_LINKS: { label: string; href: string; action?: string }[] = [
+const NAV_LINKS: { label: string; href: string }[] = [
   { label: "Services", href: "/services" },
   { label: "CaribBooks", href: "/services/caribbooks" },
   { label: "Automations", href: "/services/automations" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "#", action: "open-widget-book" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Nav() {
@@ -25,7 +25,7 @@ export function Nav() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-cn-border">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[var(--cn-paper-deep)]/85 backdrop-blur-xl border-b border-cn-border">
         <div
           className="mx-auto max-w-[var(--content-max-w)] py-3 md:h-[var(--nav-h)] grid items-center"
           style={{
@@ -38,30 +38,20 @@ export function Nav() {
             <img
               src="/logo/caribnexus-wordmark.svg"
               alt="CaribNexus AI"
-              className="w-[140px] md:w-[120px] h-auto"
+              className="w-[150px] md:w-[164px] h-auto"
             />
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-baseline gap-4" style={{ gridColumn: "8 / 12", justifySelf: "end", position: "relative", top: "3px" }}>
+          <div className="hidden md:flex items-baseline gap-6" style={{ gridColumn: "8 / 12", justifySelf: "end", position: "relative", top: "3px" }}>
             {NAV_LINKS.map((link) => (
-              link.action ? (
-                <button
-                  key={link.label}
-                  onClick={() => window.dispatchEvent(new CustomEvent("open-voice-widget", { detail: "book" }))}
-                  className="text-[11px] font-medium text-cn-muted hover:text-[#FF5733] transition-colors"
-                >
-                  {link.label}
-                </button>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-[11px] font-medium text-cn-muted hover:text-[#FF5733] transition-colors"
-                >
-                  {link.label}
-                </Link>
-              )
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[16px] font-medium text-cn-muted hover:text-[#FF5733] transition-colors"
+              >
+                {link.label}
+              </Link>
             ))}
           </div>
 
@@ -88,7 +78,7 @@ export function Nav() {
 
       {/* Full-screen mobile menu overlay */}
       <div
-        className={`fixed inset-0 bg-white z-40 md:hidden transition-all duration-300 ease-out ${
+        className={`fixed inset-0 bg-[var(--cn-paper-deep)] z-40 md:hidden transition-all duration-300 ease-out ${
           mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >

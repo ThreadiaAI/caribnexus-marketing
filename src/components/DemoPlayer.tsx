@@ -32,6 +32,16 @@ import "video.js/dist/video-js.css";
 export type DemoSource = {
   id: string;
   hls: string;
+  /**
+   * The progressive file, offered after the stream.
+   *
+   * Video.js takes a LIST and picks the first entry it believes it can play,
+   * so this costs nothing when HLS works and is the whole difference between
+   * a picture and MEDIA_ERR_SRC_NOT_SUPPORTED when it does not — a browser
+   * without Media Source Extensions, an extension that blocks the manifest,
+   * or anything else that leaves the m3u8 unplayable.
+   */
+  mp4?: string;
   poster: string;
   captions?: string;
   chapters?: string;
@@ -43,6 +53,16 @@ type Props = {
   source: DemoSource;
   /** Fill the viewport (phone) rather than sitting in a sized frame. */
   fill?: boolean;
+  /**
+   * Use Video.js's own control bar.
+   *
+   * Off by default because the demo page draws its own transport over the
+   * picture and two sets of controls is worse than none. Anywhere that does
+   * NOT draw its own has to turn this on, or the film cannot be started at
+   * all — which is exactly what happened the first time this component was
+   * reused.
+   */
+  chrome?: boolean;
   /** Start the first film by itself, without waiting to be asked. */
   autoPlay?: boolean;
   /**
@@ -70,9 +90,18 @@ type Props = {
   onMedia?: (el: HTMLVideoElement | null) => void;
 };
 
+/** HLS first, the progressive file behind it. */
+function _sources(s: DemoSource) {
+  return [
+    { src: s.hls, type: "application/x-mpegURL" },
+    ...(s.mp4 ? [{ src: s.mp4, type: "video/mp4" }] : []),
+  ];
+}
+
 export default function DemoPlayer({
   source,
   fill = false,
+  chrome = false,
   className = "",
   onEnded,
   onPlayingChange,
@@ -99,6 +128,24 @@ export default function DemoPlayer({
    *  choice and already starts itself. */
   const autoTried = useRef(false);
 
+  /**
+   * The source the player is CONSTRUCTED with, and the one currently on it.
+   *
+   * WHY THE PLAYER IS NOT BORN EMPTY
+   *   It used to be. The element was created, the tech attached, and the
+   *   source was assigned later by an effect that waits for `ready`. In
+   *   between there is a <video> with nothing to play, and a media element
+   *   asked to load nothing fires `error` with MEDIA_ERR_SRC_NOT_SUPPORTED —
+   *   which Video.js dutifully logged on every page that mounted a player,
+   *   for a film that then played perfectly.
+   *
+   *   Handing `sources` to the constructor removes the gap. `applied` then
+   *   stops the effect re-assigning the source it was just built with, which
+   *   would throw away the load already in flight.
+   */
+  const boot = useRef(source);
+  const applied = useRef<string | null>(null);
+
   // Create ONCE. The player outlives every source change; see the note above.
   useEffect(() => {
     if (playerRef.current || !hostRef.current) return;
@@ -120,11 +167,14 @@ export default function DemoPlayer({
         // arrows, the centre transport and the timeline that were designed for
         // this page. Swapping the engine was never meant to swap the look, and
         // doing both at once was the mistake.
-        controls: false,
+        controls: chrome,
         // Only the header until someone presses play. The partner deck's QR
         // code lands here, so a visitor on mobile data in a meeting should not
         // be made to download a twelve minute film to find out if they care.
         preload: "metadata",
+        // Born with a source and a poster; see `boot` above.
+        poster: boot.current.poster,
+        sources: _sources(boot.current),
         // FILL THE BOX WE GIVE IT.
         //
         // Without this the player keeps Video.js's own default size and sits
@@ -143,6 +193,28 @@ export default function DemoPlayer({
       });
 
       playerRef.current = player;
+      applied.current = boot.current.id;
+
+      /*
+        SWALLOW THE ERROR THAT IS ABOUT NOTHING.
+
+        Video.js logs MEDIA_ERR_SRC_NOT_SUPPORTED while the element has no
+        source on it — a state it passes through during setup — and the film
+        then plays perfectly. The log is noise, but a blanket silence would
+        also hide the identical error from a source that genuinely cannot be
+        played, which is a real failure and must stay visible.
+
+        So the test is `currentSrc`. No source loaded means the element is
+        complaining about nothing and the error is cleared. A source loaded
+        means something real failed on something real, and it is left alone
+        to be logged and surfaced.
+      */
+      player.on("error", () => {
+        const err = player.error();
+        if (!err || err.code !== 4) return;
+        if (player.currentSrc()) return;   // a real source, a real failure
+        player.error(null);
+      });
       player.on("ended", () => cbs.current.onEnded?.());
       // Read the element rather than trusting the event: an interrupted
       // play() fires "play" and then "pause", and a transport driven off the
@@ -164,6 +236,7 @@ export default function DemoPlayer({
       playerRef.current = null;
       if (p && !p.isDisposed()) p.dispose();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**
@@ -187,10 +260,15 @@ export default function DemoPlayer({
   useEffect(() => {
     const p = playerRef.current;
     if (!p || !ready) return;
-    p.pause();
-    p.poster(source.poster);
-    p.hasStarted(false);
-    p.src({ src: source.hls, type: "application/x-mpegURL" });
+    // Already on screen — either the constructor put it there or a previous
+    // run of this effect did. Re-assigning would abort a load for nothing.
+    if (applied.current !== source.id) {
+      applied.current = source.id;
+      p.pause();
+      p.poster(source.poster);
+      p.hasStarted(false);
+      p.src(_sources(source));
+    }
 
     /*
       AUTOPLAY, AFTER THE SOURCE CAN ACTUALLY PLAY.
@@ -258,7 +336,7 @@ export default function DemoPlayer({
     // autoPlay is deliberately not a dependency: it gates a one-off attempt
     // guarded by autoTried, and listing it would re-run this whole swap.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ready, source.id, source.hls, source.poster, source.captions, source.chapters]);
+  }, [ready, source.id, source.hls, source.mp4, source.poster, source.captions, source.chapters]);
 
   return (
     <div

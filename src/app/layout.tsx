@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { GridlinesGate } from "@/components/dev/Gridlines";
-import { VoiceWidget } from "@/components/VoiceWidget";
 import { FOUNDED, FOUNDER_NAME, jsonLd, organizationSchema, productSchema, websiteSchema } from "@/lib/structuredData";
 import { ORG_URL } from "@/lib/site";
 import "./globals.css";
@@ -65,7 +64,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationSchema)} />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(productSchema)} />
         {children}
-        <VoiceWidget />
         <GridlinesGate />
       </body>
     </html>

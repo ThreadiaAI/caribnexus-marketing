@@ -33,7 +33,7 @@ export { ORG_NAME, ORG_URL };
  */
 export const ORG_PHONE = '+1-876-770-6900';
 export const ORG_PHONE_DISPLAY = '1 876 770-6900';
-export const ORG_EMAIL = 'hello@caribnexusai.com';
+export const ORG_EMAIL = 'admin@caribnexusai.com';
 export const FOUNDED = '2024';
 
 /**

@@ -3,6 +3,7 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { FadeIn, ScaleIn } from "@/components/Animate";
+import { DemoShelf } from "./DemoShelf";
 import Link from "next/link";
 
 export default function CaribBooksPage() {
@@ -20,18 +21,21 @@ export default function CaribBooksPage() {
             >
               <span className="text-cn-muted">Introducing</span>{" "}
               <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[28px] md:h-[32px] align-baseline" style={{ marginBottom: "-2px" }} /><span className="text-cn-muted">,</span><br className="hidden md:inline" />
-              <span className="text-cn-muted"> your AI bookkeeper that works in WhatsApp</span>
+              <span className="text-cn-muted"> your AI bookkeeper and financial administrator, in WhatsApp</span>
             </h1>
             <p className="text-[13px] text-cn-muted mt-3 max-w-[420px]" style={{ lineHeight: "1.3" }}>
-              Message your transactions in plain English or patois. Every report updates in real time. No setup. No training. Just start texting.
+              Message your transactions in English, Patois, Kreyol, French or Spanish. Issue an invoice, log a receipt, ask for the P&amp;L. CB keeps the books current and follows up on what you&apos;re owed.
             </p>
           </FadeIn>
-          <div className="hidden md:flex items-end justify-end" style={{ gridColumn: "10 / 12" }}>
+          {/* Was an 11px "Start free" in the corner, and hidden outright on a
+              phone — the smallest thing on the page pointing at the one asset
+              that shows the product working. */}
+          <div className="flex mt-5 md:mt-0 md:items-end md:justify-end" style={{ gridColumn: "10 / 12" }}>
             <Link
-              href="https://books.caribnexusai.com/signup"
-              className="text-[11px] font-medium bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+              href="https://media.caribnexusai.com"
+              className="text-[16px] md:text-[18px] font-semibold bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             >
-              Start free →
+              View Demo Series →
             </Link>
           </div>
         </section>
@@ -98,12 +102,16 @@ export default function CaribBooksPage() {
 
         <div className="border-t border-cn-border w-full" />
 
+        {/* Sand, paper, sand, paper down the page. This first band is the
+            prose statement and the three FIG cards; the demo shelf below it
+            goes back to paper, and "Send a photo" takes sand again. */}
+        <div className="bg-[var(--cn-paper-deep)]">
         {/* Prose statement */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
           <FadeIn style={{ gridColumn: "2 / 11" }}>
             <p className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Made for the Caribbean to understand your </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">texts and voicenotes</span><span className="text-cn-muted">,</span><br className="hidden md:inline" />
-              <span className="text-cn-muted"> and keep your </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">books current</span><span className="text-cn-muted">, all from a </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">WhatsApp message</span><span className="text-cn-muted">.</span>
+              <span className="text-cn-muted"> keep your </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">books current</span><span className="text-cn-muted">, issue your </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">documents</span><span className="text-cn-muted"> and </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">chase what you&apos;re owed</span><span className="text-cn-muted">, all from a </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">WhatsApp message</span><span className="text-cn-muted">.</span>
             </p>
             <p className="text-[22px] md:text-[30px] font-bold tracking-tight mt-4" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">No app to download or spreadsheet to maintain.</span>
@@ -117,10 +125,14 @@ export default function CaribBooksPage() {
           <div className="md:hidden flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
             {[
               { fig: "FIG 0.1", img: "/illustrations/cb-fig-double-entry.svg", title: "Double-entry from a message", color: "#0077B6", desc: "One text produces a debit and a credit of equal amounts. The math is always balanced." },
-              { fig: "FIG 0.2", img: "/illustrations/cb-fig-memory.svg", title: "Memory that compounds", color: "#00A859", desc: "CB learns your vendors and patterns. Week 1 it asks questions. Week 4 it posts automatically." },
-              { fig: "FIG 0.3", img: "/illustrations/cb-fig-reports.svg", title: "Reports delivered in-chat", color: "#FF5733", desc: "\"Send me the P&L\" → branded PDF in your WhatsApp. No login required." },
+              { fig: "FIG 0.2", img: "/illustrations/cb-fig-memory.svg", title: "Memory that compounds", color: "#00A859", desc: "CB learns your vendors and patterns. The first time, it asks which account. Once it knows, it posts without asking." },
+              { fig: "FIG 0.3", img: "/illustrations/cb-fig-reports.svg", title: "Documents and reports, in-chat", color: "#FF5733", desc: "\"Send me the P&L\" → branded PDF in your WhatsApp. Same for an invoice or a receipt." },
             ].map((card) => (
-              <div key={card.fig} className="flex flex-col border border-cn-border rounded-lg p-4 min-w-[240px] max-w-[240px] snap-start shrink-0 bg-white">
+              /* No fill. The band behind these is sand, and a white card on
+                 it made three bright rectangles of the one section that is
+                 meant to read as a single surface. The hairline stays, so a
+                 swipeable card still has an edge. */
+              <div key={card.fig} className="flex flex-col border border-cn-border rounded-lg p-4 min-w-[240px] max-w-[240px] snap-start shrink-0">
                 <span className="text-[9px] font-medium text-cn-muted uppercase tracking-wider">{card.fig}</span>
                 <div className="flex items-center justify-center my-3">
                   <img src={card.img} alt="" style={{ height: "120px", width: "auto" }} />
@@ -147,7 +159,7 @@ export default function CaribBooksPage() {
                 <img src="/illustrations/cb-fig-memory.svg" alt="" style={{ height: "200px", width: "auto" }} />
               </div>
               <h3 className="text-[13px] font-bold" style={{ lineHeight: "24px", color: "#00A859" }}>Memory that compounds</h3>
-              <p className="text-[11px] text-cn-muted" style={{ marginTop: "8px", lineHeight: "16px" }}>CB learns your vendors and patterns. Week 1 it asks questions. Week 4 it posts automatically.</p>
+              <p className="text-[11px] text-cn-muted" style={{ marginTop: "8px", lineHeight: "16px" }}>CB learns your vendors and patterns. The first time, it asks which account. Once it knows, it posts without asking.</p>
             </div>
             <div className="bg-cn-border" />
             <div className="pl-4 pr-2">
@@ -155,14 +167,24 @@ export default function CaribBooksPage() {
               <div className="flex items-center justify-center" style={{ height: "220px", marginTop: "16px", marginBottom: "20px" }}>
                 <img src="/illustrations/cb-fig-reports.svg" alt="" style={{ height: "200px", width: "auto" }} />
               </div>
-              <h3 className="text-[13px] font-bold" style={{ lineHeight: "24px", color: "#FF5733" }}>Reports delivered in-chat</h3>
-              <p className="text-[11px] text-cn-muted" style={{ marginTop: "8px", lineHeight: "16px" }}>&ldquo;Send me the P&amp;L&rdquo; → branded PDF in your WhatsApp. No login, no dashboard required. The reports come to you.</p>
+              <h3 className="text-[13px] font-bold" style={{ lineHeight: "24px", color: "#FF5733" }}>Documents and reports, in-chat</h3>
+              <p className="text-[11px] text-cn-muted" style={{ marginTop: "8px", lineHeight: "16px" }}>&ldquo;Send me the P&amp;L&rdquo; → branded PDF in your WhatsApp. Same for an invoice or a receipt. No login, no dashboard required.</p>
             </div>
           </div>
         </section>
 
+        </div>
+
         <div className="border-t border-cn-border w-full" />
 
+        {/* The shelf stays on the page's own paper. The spines and the title
+            cards are the colour on this stretch; a tinted ground behind them
+            is one tone too many. */}
+        <DemoShelf />
+
+        <div className="border-t border-cn-border w-full" />
+
+        <div className="bg-[var(--cn-paper-deep)]">
         {/* Send anything — vision + audio explanation */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[48px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
@@ -177,6 +199,8 @@ export default function CaribBooksPage() {
             </p>
           </FadeIn>
         </section>
+
+        </div>
 
         {/* Voice note demo — Transaction Detail report + video overlay */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[80px]">
