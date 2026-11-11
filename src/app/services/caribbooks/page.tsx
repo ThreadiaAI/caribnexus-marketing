@@ -16,11 +16,11 @@ export default function CaribBooksPage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[48px] md:pt-[160px] pb-[48px]">
           <FadeIn style={{ gridColumn: "2 / 10" }} y={32} duration={0.8}>
             <h1
-              className="text-[28px] md:text-[40px] font-bold tracking-tight"
+              className="text-[28px] md:text-[40px] font-semibold tracking-tight"
               style={{ lineHeight: "1" }}
             >
               <span className="text-cn-muted">Introducing</span>{" "}
-              <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[28px] md:h-[32px] align-baseline" style={{ marginBottom: "-2px" }} /><span className="text-cn-muted">,</span><br className="hidden md:inline" />
+              <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[21px] md:h-[30px] align-baseline" style={{ marginBottom: "-2px" }} /><span className="text-cn-muted">,</span><br className="hidden md:inline" />
               <span className="text-cn-muted"> your AI bookkeeper and financial administrator, in WhatsApp</span>
             </h1>
             <p className="text-[13px] text-cn-muted mt-3 max-w-[420px]" style={{ lineHeight: "1.3" }}>
@@ -102,6 +102,35 @@ export default function CaribBooksPage() {
 
         <div className="border-t border-cn-border w-full" />
 
+        {/* THE PLATFORM CLAIM, AND WHY IT IS HERE.
+
+            It sits on paper between the screenshots and the prose statement
+            because this is the moment the reader has just watched a WhatsApp
+            thread do bookkeeping and is deciding whether that is real or a
+            trick. The honest differentiator is that it is the official
+            platform: most WhatsApp automation sold locally rides a scraped
+            web session, which is what gets numbers banned. Saying so plainly,
+            once, in the same voice as the rest of the page.
+
+            No badges and no logos. Meta's brand guidelines do not permit
+            their marks in a way that implies endorsement, and the quiet
+            typographic version reads as more credible anyway. */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[72px] pb-[72px]">
+          <FadeIn style={{ gridColumn: "2 / 11" }}>
+            <p className="text-[26px] md:text-[44px] font-semibold tracking-tight" style={{ lineHeight: "1.05" }}>
+              <span className="text-cn-muted">Built on the </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">official<br className="hidden md:inline" /> WhatsApp Business Platform</span><span className="text-cn-muted">.</span>
+            </p>
+            <p className="text-[13px] text-cn-muted max-w-[560px]" style={{ marginTop: "20px", lineHeight: "1.5" }}>
+              CaribBooks runs on <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent font-medium">Meta&apos;s Cloud API</span> — the same
+              platform large companies use to message their customers. Nothing is installed on your
+              phone, nothing logs into your WhatsApp, and nothing reads your personal chats. You
+              message your books the way you message anyone else.
+            </p>
+          </FadeIn>
+        </section>
+
+        <div className="border-t border-cn-border w-full" />
+
         {/* Sand, paper, sand, paper down the page. This first band is the
             prose statement and the three FIG cards; the demo shelf below it
             goes back to paper, and "Send a photo" takes sand again. */}
@@ -109,11 +138,11 @@ export default function CaribBooksPage() {
         {/* Prose statement */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
           <FadeIn style={{ gridColumn: "2 / 11" }}>
-            <p className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <p className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Made for the Caribbean to understand your </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">texts and voicenotes</span><span className="text-cn-muted">,</span><br className="hidden md:inline" />
               <span className="text-cn-muted"> keep your </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">books current</span><span className="text-cn-muted">, issue your </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">documents</span><span className="text-cn-muted"> and </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">chase what you&apos;re owed</span><span className="text-cn-muted">, all from a </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">WhatsApp message</span><span className="text-cn-muted">.</span>
             </p>
-            <p className="text-[22px] md:text-[30px] font-bold tracking-tight mt-4" style={{ lineHeight: "1" }}>
+            <p className="text-[22px] md:text-[30px] font-semibold tracking-tight mt-4" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">No app to download or spreadsheet to maintain.</span>
             </p>
           </FadeIn>
@@ -188,7 +217,7 @@ export default function CaribBooksPage() {
         {/* Send anything — vision + audio explanation */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[48px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">Send a photo, a voice note,</span><br className="hidden md:inline" />
               <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent"> or just type it out.</span>
             </h2>
@@ -265,7 +294,7 @@ export default function CaribBooksPage() {
         {/* Reports continuation — same section as "Send a photo" */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[48px]">
           <FadeIn style={{ gridColumn: "2 / 12" }}>
-            <p className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <p className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">...and every entry auto-syncs to your </span><span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">11 financial reports.</span>
             </p>
           </FadeIn>
@@ -297,7 +326,7 @@ export default function CaribBooksPage() {
         */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Every client&rsquo;s books</span><br />
               <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">stay their own.</span>
             </h2>
@@ -331,7 +360,7 @@ export default function CaribBooksPage() {
         {/* Built for */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 12" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight text-cn-muted">Built for how you <span className="bg-gradient-to-r from-[#0077B6] to-[#FF5733] bg-clip-text text-transparent">work</span></h2>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight text-cn-muted">Built for how you <span className="bg-gradient-to-r from-[#0077B6] to-[#FF5733] bg-clip-text text-transparent">work</span></h2>
           </FadeIn>
         </section>
 

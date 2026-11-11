@@ -65,7 +65,7 @@ export default function ContactPage() {
         >
           <div className="md:sticky md:top-[36px]">
             <h1
-              className="text-[30px] lg:text-[38px] font-bold tracking-tight"
+              className="text-[30px] lg:text-[38px] font-semibold tracking-tight"
               style={{ lineHeight: 1.1, letterSpacing: "-0.02em" }}
             >
               <span className="text-cn-muted">Let&apos;s see how we can</span>{" "}
@@ -99,7 +99,7 @@ export default function ContactPage() {
         <div style={{ gridColumn: "8 / 13" }}>
           <div className="md:hidden mb-8">
             <h1
-              className="text-[28px] font-bold tracking-tight"
+              className="text-[28px] font-semibold tracking-tight"
               style={{ lineHeight: 1.1, letterSpacing: "-0.02em" }}
             >
               <span className="text-cn-muted">Let&apos;s see how we can</span>{" "}

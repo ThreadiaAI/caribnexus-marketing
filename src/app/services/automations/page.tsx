@@ -15,13 +15,13 @@ export default function AutomationsPage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[48px] md:pt-[160px] pb-[48px]">
           <FadeIn style={{ gridColumn: "2 / 10" }} y={32} duration={0.8}>
             <h1
-              className="text-[28px] md:text-[40px] font-bold tracking-tight"
+              className="text-[28px] md:text-[40px] font-semibold tracking-tight"
               style={{ lineHeight: "1" }}
             >
               <span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>Introducing</span><br className="md:hidden" />{" "}
               <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[24px] md:h-[34px]" style={{ marginTop: "-7px", marginBottom: "-9px" }} /><span className="text-cn-muted" style={{ position: "relative", top: "5px" }}>,</span>
             </h1>
-            <p className="text-[28px] md:text-[40px] font-bold tracking-tight mt-2" style={{ lineHeight: "1" }}>
+            <p className="text-[28px] md:text-[40px] font-semibold tracking-tight mt-2" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted" style={{ position: "relative", top: "-3px" }}>Intelligent agents that run the digital side</span><br className="hidden md:inline" />
               <span className="text-cn-muted" style={{ position: "relative", top: "-3px" }}> of your business.</span>
             </p>
@@ -89,7 +89,7 @@ export default function AutomationsPage() {
         {/* Prose statement — segue into verticals */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
           <FadeIn style={{ gridColumn: "2 / 11" }}>
-            <p className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <p className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Whether it&apos;s </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">social media</span><span className="text-cn-muted">, </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">content</span><span className="text-cn-muted">, </span><span className="bg-gradient-to-r from-[#0077B6] via-[#009088] to-[#FF5733] bg-clip-text text-transparent">customer service</span><span className="text-cn-muted">, or </span><span className="bg-gradient-to-r from-[#FF5733] to-[#FF8C42] bg-clip-text text-transparent">operations</span><span className="text-cn-muted">.</span><br />
               <span className="text-cn-muted">We have a system we can build for your business.</span>
             </p>
@@ -99,7 +99,7 @@ export default function AutomationsPage() {
         {/* 1. Customer Service — heading left, desc right */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Your </span><span className="bg-gradient-to-r from-[#0077B6] via-[#009088] to-[#FF5733] bg-clip-text text-transparent">customer service team</span><span className="text-cn-muted">,</span><br />
               <span className="bg-gradient-to-r from-[#0077B6] via-[#009088] to-[#FF5733] bg-clip-text text-transparent">always on</span>
             </h2>
@@ -152,7 +152,7 @@ export default function AutomationsPage() {
         {/* 2. Social Media — heading left, desc right */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Your </span><span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">social media manager</span><span className="text-cn-muted">,</span><br />
               <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">fully managed</span>
             </h2>
@@ -205,7 +205,7 @@ export default function AutomationsPage() {
         {/* 3. Content Strategy — heading left, desc right */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Your </span><span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">content strategist</span><span className="text-cn-muted">,</span><br />
               <span className="bg-gradient-to-r from-[#00A859] to-[#FF5733] bg-clip-text text-transparent">on autopilot</span>
             </h2>
@@ -258,7 +258,7 @@ export default function AutomationsPage() {
         {/* 4. Operations — heading left, desc right */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Your </span><span className="bg-gradient-to-r from-[#FF5733] to-[#FF8C42] bg-clip-text text-transparent">receptionist</span><span className="text-cn-muted">,</span><br />
               <span className="bg-gradient-to-r from-[#FF5733] to-[#FF8C42] bg-clip-text text-transparent">handled</span>
             </h2>
@@ -322,7 +322,7 @@ export default function AutomationsPage() {
         */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Your customers&rsquo; messages</span><br />
               <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">stay yours.</span>
             </h2>
@@ -349,7 +349,7 @@ export default function AutomationsPage() {
         {/* Segue */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[48px] pb-[80px]">
           <FadeIn style={{ gridColumn: "2 / 12" }}>
-            <p className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <p className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">...and whatever else your business needs. </span>
               <Link href="/contact"
                 className="bg-gradient-to-r from-[#00A859] to-[#0077B6] bg-clip-text text-transparent hover:opacity-80 transition-opacity inline-flex items-baseline gap-1"
@@ -365,7 +365,7 @@ export default function AutomationsPage() {
         {/* CTA */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid py-[80px]">
           <FadeIn style={{ gridColumn: "2 / 12" }} className="text-center">
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight text-cn-muted" style={{ lineHeight: "1.1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight text-cn-muted" style={{ lineHeight: "1.1" }}>
               Imagine what your business could look like?
             </h2>
             <Link href="/contact"

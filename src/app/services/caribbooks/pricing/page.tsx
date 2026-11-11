@@ -95,7 +95,7 @@ function PricingContent() {
       <main className="pt-[var(--nav-h)]">
         <div className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid">
           {/* Title */}
-          <h1 className="text-[28px] md:text-[40px] font-bold tracking-tight text-cn-muted pt-[48px] md:pt-[120px]" style={{ gridColumn: "2 / 12" }}>
+          <h1 className="text-[28px] md:text-[40px] font-semibold tracking-tight text-cn-muted pt-[48px] md:pt-[120px]" style={{ gridColumn: "2 / 12" }}>
             Pricing
           </h1>
 

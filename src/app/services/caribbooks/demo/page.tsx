@@ -606,7 +606,7 @@ export default function DemoPage() {
             <span className="text-[10px] font-medium text-cn-muted tracking-wide uppercase">
               Transcript
             </span>
-            <h2 className="mt-2 text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="mt-2 text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">The full</span>
               <br />
               <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">

@@ -29,7 +29,7 @@ export default function ServicesPage() {
             <FadeIn style={{ gridColumn: "2 / 8" }} className="col-span-full md:col-auto" y={32} duration={0.8}>
               <span className="text-[10px] font-medium text-cn-muted tracking-wide uppercase">Our Services</span>
               <h1
-                className="mt-2 text-[28px] md:text-[40px] font-bold tracking-tight"
+                className="mt-2 text-[28px] md:text-[40px] font-semibold tracking-tight"
                 style={{ lineHeight: "1" }}
               >
                 <span className="text-cn-muted">AI infrastructure for</span><br />
@@ -49,9 +49,9 @@ export default function ServicesPage() {
         ═══════════════════════════════════════════════════════════════ */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[40px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6", position: "relative", top: "5px" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted" style={{ position: "relative", top: "1px" }}>AI bookkeeping</span><br />
-              <span className="text-cn-muted" style={{ position: "relative", top: "2px" }}>with </span><img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[22px] md:h-[28px] align-baseline" style={{ marginBottom: "-2px", position: "relative", top: "3px" }} />
+              <span className="text-cn-muted" style={{ position: "relative", top: "2px" }}>with </span><img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="inline-block h-[16px] md:h-[22px] align-baseline" style={{ marginBottom: "-2px", position: "relative", top: "3px" }} />
             </h2>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12", position: "relative", top: "5px" }} delay={0.1}>
@@ -77,7 +77,7 @@ export default function ServicesPage() {
         ═══════════════════════════════════════════════════════════════ */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted" style={{ position: "relative", top: "-1px" }}>Intelligent systems</span><br />
               <span className="relative" style={{ top: "-1px" }}>
                 <span className="text-cn-muted">with </span>
@@ -145,7 +145,7 @@ export default function ServicesPage() {
         ═══════════════════════════════════════════════════════════════ */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="bg-gradient-to-r from-[#FF5733] to-[#009088] bg-clip-text text-transparent">Voice agents,</span><br />
               <span className="bg-gradient-to-r from-[#FF5733] to-[#009088] bg-clip-text text-transparent">not voice bots</span>
             </h2>
@@ -225,7 +225,7 @@ export default function ServicesPage() {
         ═══════════════════════════════════════════════════════════════ */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="bg-gradient-to-r from-[#FF5733] to-[#009088] bg-clip-text text-transparent">AI consulting,</span><br />
               <span className="bg-gradient-to-r from-[#FF5733] to-[#009088] bg-clip-text text-transparent">not guesswork</span>
             </h2>
@@ -321,7 +321,7 @@ export default function ServicesPage() {
             />
           </div>
           <FadeIn className="relative mx-auto max-w-[var(--content-max-w)] px-[var(--grid-padding)] py-[80px] text-center">
-            <h2 className="text-[24px] md:text-[30px] font-bold tracking-tight text-cn-muted">Ready to automate?</h2>
+            <h2 className="text-[24px] md:text-[30px] font-semibold tracking-tight text-cn-muted">Ready to automate?</h2>
             <p className="text-[13px] text-cn-muted mt-2 max-w-md mx-auto">
               Tell us what you&apos;re building or what problem you need solved. We&apos;ll tell you exactly how AI fits.
             </p>
@@ -365,7 +365,8 @@ function CaribBooksPanel() {
         <div
           className="relative overflow-hidden flex flex-col justify-between"
           style={{
-            background: "linear-gradient(160deg, #0A0A0A 0%, #111827 40%, #1a1a2e 100%)",
+            background: "var(--cn-paper-deep)",
+            border: "1px solid var(--cn-border)",
             minHeight: "680px",
             padding: "48px",
           }}
@@ -376,7 +377,7 @@ function CaribBooksPanel() {
               <motion.img
                 src="/screenshots/cb-recurring-reminder.png"
                 alt="Recurring reminder setup"
-                className="absolute shadow-2xl border border-white/10"
+                className="absolute shadow-xl border border-cn-border"
                 style={{
                   height: "440px",
                   width: "auto",
@@ -386,14 +387,14 @@ function CaribBooksPanel() {
                   objectFit: "contain",
                 }}
                 initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 0.7, y: 0 } : {}}
+                animate={isInView ? { opacity: 0.92, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
               />
               {/* Screenshot 2 — staggered */}
               <motion.img
                 src="/screenshots/cb-report-delivery.png"
                 alt="CSV report delivery"
-                className="absolute shadow-2xl border border-white/10"
+                className="absolute shadow-xl border border-cn-border"
                 style={{
                   height: "440px",
                   width: "auto",
@@ -403,14 +404,14 @@ function CaribBooksPanel() {
                   objectFit: "contain",
                 }}
                 initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 0.8, y: 0 } : {}}
+                animate={isInView ? { opacity: 0.96, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
               />
               {/* Screenshot 3 — front, last to land */}
               <motion.img
                 src="/screenshots/cb-salary-payment.png"
                 alt="Instant salary journal entry"
-                className="absolute shadow-2xl border border-white/10 z-10"
+                className="absolute shadow-xl border border-cn-border z-10"
                 style={{
                   height: "480px",
                   width: "auto",
@@ -424,7 +425,7 @@ function CaribBooksPanel() {
               />
             </div>
 
-            <div className="w-px bg-white/10 self-stretch" />
+            <div className="w-px bg-cn-border self-stretch" />
 
             {/* Text — fades in with screenshots */}
             <motion.div
@@ -433,22 +434,22 @@ function CaribBooksPanel() {
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <p className="text-[12px] font-semibold text-white" style={{ lineHeight: "16px" }}>
+              <p className="text-[12px] font-semibold text-cn-dark" style={{ lineHeight: "16px" }}>
                 One journal entry feeds all 11 reports
               </p>
-              <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
+              <p className="text-[11px] text-cn-muted" style={{ lineHeight: "16px" }}>
                 Message your bookkeeper on WhatsApp in plain<br />
                 English or patois. CB posts the double-entry<br />
                 journal entry instantly.
               </p>
-              <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
+              <p className="text-[11px] text-cn-muted" style={{ lineHeight: "16px" }}>
                 That single entry updates every report in real<br />
                 time — Balance Sheet, P&amp;L, Cash Flow, GL Register,<br />
                 Trial Balance, Aged Receivables, Aged Payables,<br />
                 Tax Summary, Budget vs Actual, Revenue by<br />
                 Customer, Expense by Vendor.
               </p>
-              <p className="text-[11px] text-white/50" style={{ lineHeight: "16px" }}>
+              <p className="text-[11px] text-cn-muted" style={{ lineHeight: "16px" }}>
                 It learns your patterns — same vendor and amount<br />
                 seen twice? Next time it posts automatically.<br />
                 You just confirm.

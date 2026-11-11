@@ -41,7 +41,7 @@ import {
  * learning to discount.
  */
 
-const HEAD = "text-[22px] md:text-[30px] font-bold tracking-tight";
+const HEAD = "text-[22px] md:text-[30px] font-semibold tracking-tight";
 const BODY = "text-[13px] text-cn-muted";
 const LINE = { lineHeight: "1.3" };
 
@@ -139,7 +139,7 @@ export function AboutContent() {
                 About
               </span>
               <h1
-                className="mt-2 text-[28px] md:text-[40px] font-bold tracking-tight"
+                className="mt-2 text-[28px] md:text-[40px] font-semibold tracking-tight"
                 style={{ lineHeight: "1" }}
               >
                 <span className="text-cn-muted">An artificial intelligence company</span>
@@ -519,7 +519,7 @@ export function AboutContent() {
         <div className="border-t border-cn-border w-full" style={{ marginTop: "40px" }} />
 
         <section className="py-[80px] text-center">
-          <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight text-cn-muted">
+          <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight text-cn-muted">
             Built for how you work. Available today.
           </h2>
         </section>

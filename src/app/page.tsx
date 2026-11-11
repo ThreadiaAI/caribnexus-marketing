@@ -12,9 +12,9 @@ export default function HomePage() {
       <Nav />
       <main className="pt-[var(--nav-h)]">
         {/* Hero */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[64px] md:pt-[140px] pb-[48px] md:pb-[96px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[48px] md:pt-[104px] pb-[40px] md:pb-[72px]">
           <FadeIn className="flex-1" style={{ gridColumn: "2 / 8" }} y={32} duration={0.8}>
-            <h1 className="text-[34px] md:text-[52px] font-bold tracking-tight" style={{ lineHeight: "1.05", letterSpacing: "-0.02em" }}>
+            <h1 className="text-[30px] md:text-[42px] font-semibold tracking-tight" style={{ lineHeight: "1.1", letterSpacing: "-0.025em" }}>
               <span className="text-cn-muted">
                 We build AI teams for
               </span>
@@ -23,10 +23,10 @@ export default function HomePage() {
                 Caribbean businesses
               </span>
             </h1>
-            <p className="text-[16px] md:text-[17px] text-cn-muted max-w-[560px]" style={{ marginTop: "28px", lineHeight: "1.5" }}>
+            <p className="text-[15px] md:text-[16px] text-cn-muted max-w-[520px]" style={{ marginTop: "20px", lineHeight: "1.6" }}>
               We work with Caribbean businesses <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent font-medium">who want to do more with less.</span> We analyze your operations, identify the waste, and build AI systems so your team focuses on what grows revenue.
             </p>
-            <div className="flex items-center gap-3" style={{ marginTop: "32px" }}>
+            <div className="flex items-center gap-3" style={{ marginTop: "26px" }}>
               <Link href="/contact"
                 className="text-[14px] font-medium text-white px-5 py-[10px] rounded-full transition-all hover:opacity-90"
                 style={{ background: "linear-gradient(135deg, #0077B6, #009088, #00A859, #FF5733)" }}
@@ -59,20 +59,20 @@ export default function HomePage() {
         <div className="border-t border-cn-border w-full" />
 
         {/* Product Section — heading left, desc right */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[64px] pb-[20px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[26px] md:text-[36px] font-bold tracking-tight" style={{ lineHeight: "1.15", position: "relative", top: "-1px" }}>
+            <h2 className="text-[22px] md:text-[28px] font-semibold tracking-tight" style={{ lineHeight: "1.15", position: "relative", top: "-1px" }}>
               <span className="text-cn-muted">Introducing</span><br />
               <span className="inline-flex items-baseline">
-                <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="block h-[26px] md:h-[36px]" style={{ marginBottom: "-4px" }} />
+                <img src="/logo/logo-caribbooks.svg" alt="CaribBooks" className="block h-[16px] md:h-[21px]" style={{ marginBottom: "-4px" }} />
                 <span className="text-cn-muted">,</span>
               </span><br />
               <span className="text-cn-muted">our flagship product</span>
             </h2>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
-            <p className="text-[16px] text-cn-muted" style={{ lineHeight: "1.5" }}>
-              A bookkeeper and a financial administrator on WhatsApp. One message posts the entry, updates every report, and writes the estimate, invoice or receipt that goes with it. Built for the Caribbean, in your currency and your tax.
+            <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5" }}>
+              A bookkeeper and a financial administrator on WhatsApp. One message posts the entry, updates every report, and writes the quotation, invoice or receipt that goes with it. Built for the Caribbean, in your currency and your tax.
             </p>
 
             <div className="flex items-center gap-3" style={{ marginTop: "16px" }}>
@@ -94,7 +94,7 @@ export default function HomePage() {
         </section>
 
         {/* Cards: desktop = 3 cols inside grid. Mobile = horizontal scroll */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[64px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[52px]">
           <div className="hidden md:grid md:grid-cols-[1fr_1px_1fr_1px_1fr] md:gap-0" style={{ gridColumn: "2 / 12", marginTop: "40px" }}>
             <Card
               fig="FIG 0.1"
@@ -138,18 +138,18 @@ export default function HomePage() {
             read as one surface rather than three stacked bands. */}
         <div className="bg-[var(--cn-paper-deep)]">
         {/* Automations Section — heading left, desc right */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[64px] pb-[20px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[26px] md:text-[36px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
-              <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[24px] md:h-[32px]" style={{ marginBottom: "-4px" }} />
+            <h2 className="text-[22px] md:text-[28px] font-semibold tracking-tight" style={{ lineHeight: "1.15" }}>
+              <img src="/logo/logo-caribnexus-automations.svg" alt="CaribNexus AI Automations" className="inline-block h-[20px] md:h-[26px]" style={{ marginBottom: "-4px" }} />
 
             </h2>
-            <p className="text-[16px] text-cn-muted mt-1 pb-3 border-b border-cn-border" style={{ lineHeight: "1.5", position: "relative", top: "4px" }}>
+            <p className="text-[15px] text-cn-muted mt-1 pb-3 border-b border-cn-border" style={{ lineHeight: "1.5", position: "relative", top: "4px" }}>
               Built for businesses that want to do more without hiring more.
             </p>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
-            <p className="text-[16px] text-cn-muted" style={{ lineHeight: "1.5" }}>
+            <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5" }}>
               Intelligent systems that run the digital side of your business. Social media, content, customer service, operations — deployed across WhatsApp, Instagram, and every channel your customers use.
             </p>
             <div className="flex items-center gap-3" style={{ marginTop: "16px" }}>
@@ -170,7 +170,7 @@ export default function HomePage() {
         </section>
 
         {/* Automations Cards: desktop = 3 cols inside grid. Mobile = horizontal scroll */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[64px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pb-[52px]">
           <div className="hidden md:grid md:grid-cols-[1fr_1px_1fr_1px_1fr] md:gap-0" style={{ gridColumn: "2 / 12", marginTop: "40px" }}>
             <Card
               fig="FIG 1.1"
@@ -212,20 +212,20 @@ export default function HomePage() {
         <div className="border-t border-cn-border w-full" />
 
         {/* Consultancy Section — heading left, desc right */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[64px] pb-[20px]">
           <div style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[26px] md:text-[36px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
+            <h2 className="text-[22px] md:text-[28px] font-semibold tracking-tight" style={{ lineHeight: "1.15" }}>
               <span className="text-cn-muted">We build AI systems</span><br />
               <span className="text-cn-muted">that </span>
               <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">cut costs by 50%.</span>
             </h2>
           </div>
           <div className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }}>
-            <p className="text-[16px] text-cn-muted" style={{ lineHeight: "1.5" }}>
+            <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5" }}>
               We walk in, analyze your operations, and identify where AI can eliminate repetitive work — saving hours per week and reducing overhead. Custom-built systems, not off-the-shelf tools.
             </p>
             <p style={{ marginTop: "16px" }}>
-              <span className="text-[15px] font-medium text-cn-muted">1.0</span>{" "}
+              <span className="text-[14px] font-medium text-cn-muted">1.0</span>{" "}
               <Link href="/contact" className="text-[14px] font-medium bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
                 Get a consultation +
               </Link>
@@ -237,15 +237,15 @@ export default function HomePage() {
             a black slab between two warm sections reads as a different site
             for the length of one screen. Same tone as the nav and footer, so
             the page is held together by three uses of one colour. */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[40px] pb-[80px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[32px] pb-[64px]">
           <div
             className="relative rounded-none overflow-hidden flex flex-col justify-between panel-scale-mobile"
             style={{
               gridColumn: "2 / 12",
               background: "var(--cn-paper-deep)",
               border: "1px solid var(--cn-border)",
-              minHeight: "560px",
-              padding: "48px",
+              minHeight: "480px",
+              padding: "40px",
             }}
           >
             <div className="flex h-full flex-1 items-stretch">
@@ -255,7 +255,7 @@ export default function HomePage() {
                   src="/illustrations/feature-neural-pathway-transparent.png"
                   alt="AI operations network"
                   style={{
-                    height: "380px",
+                    height: "320px",
                     width: "auto",
                     objectFit: "contain",
                     opacity: 0.9,
@@ -267,19 +267,19 @@ export default function HomePage() {
               <div className="w-px bg-cn-border self-stretch" />
 
               {/* Right: vertically centered text */}
-              <div className="flex flex-col justify-center w-[46%] shrink-0 pr-[4%] pl-10 space-y-5">
-                <p className="text-[17px] font-semibold text-cn-dark" style={{ lineHeight: "1.3" }}>
+              <div className="flex flex-col justify-center w-[46%] shrink-0 pr-[4%] pl-10 space-y-4">
+                <p className="text-[16px] font-semibold text-cn-dark" style={{ lineHeight: "1.3" }}>
                   From analysis to production
                 </p>
-                <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.55" }}>
+                <p className="text-[14px] text-cn-muted" style={{ lineHeight: "1.6" }}>
                   We map your operations end-to-end — every bottleneck, every
                   repetitive task, every decision that doesn&apos;t need a human.
                 </p>
-                <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.55" }}>
+                <p className="text-[14px] text-cn-muted" style={{ lineHeight: "1.6" }}>
                   Then we build the system: purpose-built AI that plugs into the
                   workflow you already have. Not a demo. A production system you own.
                 </p>
-                <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.55" }}>
+                <p className="text-[14px] text-cn-muted" style={{ lineHeight: "1.6" }}>
                   Bookkeeping, customer service, lead qualification, internal ops.
                   Wherever repetition lives, AI replaces it.
                 </p>
@@ -319,26 +319,26 @@ export default function HomePage() {
           a property of its architecture. An Automations system is built for a
           single business, so there is no second tenant for it to reach.
         */}
-        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[64px] pb-[96px]">
           <FadeIn style={{ gridColumn: "2 / 6" }}>
-            <h2 className="text-[26px] md:text-[36px] font-bold tracking-tight" style={{ lineHeight: "1.15" }}>
+            <h2 className="text-[22px] md:text-[28px] font-semibold tracking-tight" style={{ lineHeight: "1.15" }}>
               <span className="text-cn-muted">Your data, and what</span><br />
               <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">we do with it.</span>
             </h2>
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
-            <p className="text-[16px] text-cn-muted" style={{ lineHeight: "1.5" }}>
+            <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5" }}>
               The same rules govern everything we build. Encrypted in transit and at rest, held
               in jurisdictions we name rather than gesture at, kept to a published schedule, and
               deleted when you ask. We do not train foundation models on your data.
             </p>
-            <p className="text-[16px] text-cn-muted" style={{ lineHeight: "1.5", marginTop: "12px" }}>
+            <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5", marginTop: "12px" }}>
               In CaribBooks, every business sits in its own partition and the agent has no way to
               name another one. In CaribNexus Automations, each system is built for a single
               business, so there is no second business for it to reach.
             </p>
             <p style={{ marginTop: "16px" }}>
-              <span className="text-[15px] font-medium text-cn-muted">2.0</span>{" "}
+              <span className="text-[14px] font-medium text-cn-muted">2.0</span>{" "}
               <a href="/data-protection" className="text-[14px] font-medium bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent hover:opacity-80 transition-opacity">
                 How we protect your data +
               </a>
@@ -349,11 +349,11 @@ export default function HomePage() {
         {/* Closing CTA — on the deeper paper, the same tone the nav and the
             footer use. The heading and the two buttons, nothing else to read. */}
         <div className="border-t border-cn-border w-full" />
-        <section className="py-[104px] md:py-[132px] text-center bg-[var(--cn-paper-deep)]">
-          <h2 className="text-[26px] md:text-[36px] font-bold tracking-tight text-cn-muted">
+        <section className="py-[80px] md:py-[100px] text-center bg-[var(--cn-paper-deep)]">
+          <h2 className="text-[22px] md:text-[28px] font-semibold tracking-tight text-cn-muted">
             Built for how you work. Available today.
           </h2>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-9 px-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-7 px-6">
             <Link
               href="/contact"
               className="w-full sm:w-auto text-[15px] font-semibold text-white px-7 py-[13px]
@@ -386,10 +386,10 @@ function Card({ fig, img, title, titleColor, desc }: { fig: string; img: string;
       {/* A 190px picture used to sit in a 180px box and hang out of it by
           ten. It is contained now, so the card cannot be the wrong size for
           the drawing in it. */}
-      <div className="flex items-center justify-center" style={{ height: "180px", marginTop: "16px", marginBottom: "20px" }}>
+      <div className="flex items-center justify-center" style={{ height: "160px", marginTop: "14px", marginBottom: "16px" }}>
         <img src={img} alt="" className="max-h-full w-auto object-contain" />
       </div>
-      <h3 className="text-[16px] font-bold" style={{ lineHeight: "24px", color: titleColor }}>{title}</h3>
+      <h3 className="text-[15px] font-semibold" style={{ lineHeight: "22px", color: titleColor }}>{title}</h3>
       <p className="text-[14px] text-cn-muted" style={{ marginTop: "8px", lineHeight: "1.5" }}>{desc}</p>
     </div>
   );
@@ -404,7 +404,7 @@ function MobileCard({ fig, img, title, titleColor, desc }: { fig: string; img: s
     <div className="flex flex-col border border-cn-border rounded-none p-4 shadow-sm min-w-[240px] max-w-[240px] h-[360px] snap-start shrink-0 bg-[var(--cn-paper)]">
       <div className="shrink-0">
         <span className="text-[11px] font-medium text-cn-muted uppercase tracking-wider block mb-2">{fig}</span>
-        <h3 className="text-[16px] font-bold" style={{ color: titleColor }}>{title}</h3>
+        <h3 className="text-[15px] font-semibold" style={{ color: titleColor }}>{title}</h3>
         <p className="text-[14px] text-cn-muted mt-1 leading-relaxed">{desc}</p>
       </div>
       <div className="flex-1 min-h-0 flex items-center justify-center pt-3">

@@ -91,7 +91,7 @@ export function DemoShelf() {
               style={{ lineHeight: "16px" }}>
           FIG 0.4
         </span>
-        <h2 className="text-[22px] md:text-[30px] font-bold tracking-tight mt-1"
+        <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight mt-1"
             style={{ lineHeight: "1.05" }}>
           <span className="text-cn-muted">The demo series.</span>{" "}
           <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">

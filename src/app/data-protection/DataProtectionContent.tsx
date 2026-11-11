@@ -20,7 +20,7 @@ import { FadeIn, ScaleIn } from "@/components/Animate";
  * than a shipped mechanism, it is described as policy.
  */
 
-const HEAD = "text-[22px] md:text-[30px] font-bold tracking-tight";
+const HEAD = "text-[22px] md:text-[30px] font-semibold tracking-tight";
 const BODY = "text-[13px] text-cn-muted";
 const LINE = { lineHeight: "1.3" };
 
@@ -115,7 +115,7 @@ export function DataProtectionContent() {
             <span className="text-[10px] font-medium text-cn-muted tracking-wide uppercase">
               Data protection
             </span>
-            <h1 className="mt-2 text-[28px] md:text-[40px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h1 className="mt-2 text-[28px] md:text-[40px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Your clients&rsquo; books are</span>
               <br />
               <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">

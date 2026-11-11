@@ -128,7 +128,7 @@ export default function PrivacyPage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[48px] md:pt-[96px] pb-[24px]">
           <div style={{ gridColumn: "2 / 11" }} className="col-span-full md:col-auto">
             <span className="text-[10px] font-medium text-cn-muted tracking-wide uppercase">Legal</span>
-            <h1 className="mt-2 text-[28px] md:text-[40px] font-bold tracking-tight" style={{ lineHeight: "1" }}>
+            <h1 className="mt-2 text-[28px] md:text-[40px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
               <span className="text-cn-muted">Privacy</span>{" "}
               <span className="bg-gradient-to-r from-[#0077B6] to-[#00A859] bg-clip-text text-transparent">
                 Policy
@@ -198,18 +198,20 @@ export default function PrivacyPage() {
             <Section s={SECTIONS[0]}>
               <P>
                 <strong>This policy governs everything we build.</strong>{" "}
-                That is CaribBooks, the AI bookkeeper; CaribNexus Automations, the agents we
+                That is CaribBooks, the bookkeeper and financial administrator on WhatsApp;
+                CaribNexus Automations, the agents we
                 deploy across messaging channels; the voice agents we embed on business
                 websites; and any custom system we build through consulting. The rules below do
                 not change from one to the next.
               </P>
               <P>
                 <strong>What CaribBooks is, plainly.</strong>{" "}
-                It is a bookkeeper that works over WhatsApp. A business sends it a photograph of
-                a receipt, a voice note about a payment, or a line of text, and it records the
-                transaction, asks when something does not add up, and produces the reports an
-                accountant would. There is no app to open and no form to fill: the conversation
-                is the interface.
+                It is a bookkeeper and a financial administrator on WhatsApp. A business sends
+                it a photograph of a receipt, a voice note about a payment, or a line of text,
+                and it records the transaction, asks when something does not add up, issues the
+                quotation, invoice or receipt that goes with it, chases what is owed, and produces
+                the reports an accountant would. There is no app to open and no form to fill: the
+                conversation is the interface.
               </P>
               <P>
                 That is also why this document is longer than most. A system you talk to receives
