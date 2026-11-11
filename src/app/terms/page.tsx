@@ -201,7 +201,7 @@ export default function TermsPage() {
               className="text-[10px] font-medium text-cn-muted tracking-wide uppercase"
               style={{ cursor: "pointer" }}
             >
-              Contents &mdash; {SECTIONS.length} sections
+              Contents — {SECTIONS.length} sections
             </summary>
             <ol style={{ marginTop: "12px" }}>
               {SECTIONS.map((sec) => (
@@ -229,9 +229,9 @@ export default function TermsPage() {
             <Section s={SECTIONS[0]}>
               <P>
                 These terms are between {ORG_NAME}, a company based in Montego Bay, Saint
-                James, Jamaica, founded in 2024 by {FOUNDER_NAME} (&ldquo;we&rdquo;,
-                &ldquo;us&rdquo;), and the business or accounting practice holding the
-                account (&ldquo;you&rdquo;). They take effect when you first use CaribBooks
+                James, Jamaica, founded in 2024 by {FOUNDER_NAME} (“we”,
+                “us”), and the business or accounting practice holding the
+                account (“you”). They take effect when you first use CaribBooks
                 or complete sign-up, whichever is earlier.
               </P>
               <Row k="Supplier" v={`${ORG_NAME}, Montego Bay, Saint James, Jamaica`} />
@@ -249,7 +249,7 @@ export default function TermsPage() {
                 <em>business</em> uses CaribBooks to keep its own books. An{" "}
                 <em>accounting practice</em> uses it to keep books on behalf of its clients.
                 Everything below applies to both unless a clause says otherwise; section 7
-                exists because the second arrangement puts a third party&rsquo;s data in our
+                exists because the second arrangement puts a third party’s data in our
                 hands and that needs saying out loud.
               </P>
               <P>
@@ -290,7 +290,7 @@ export default function TermsPage() {
               </P>
               <P>
                 Two structural facts worth knowing before you rely on it. A posted transaction
-                cannot be deleted by the agent &mdash; reversing one leaves both entries in
+                cannot be deleted by the agent — reversing one leaves both entries in
                 the ledger, so the audit trail stays whole. And each business is a separate
                 partition, with no means for the agent to name another.
               </P>
@@ -314,7 +314,7 @@ export default function TermsPage() {
                 <strong>Anyone on that list can post to your ledger.</strong> CaribBooks
                 authenticates the number, not the human holding the handset. If a phone is
                 lost, sold, or passes to a former employee, remove the number from your
-                dashboard immediately &mdash; until you do, whoever has it can instruct
+                dashboard immediately — until you do, whoever has it can instruct
                 CaribBooks as you. We are not able to tell the difference and do not accept
                 responsibility for entries made by a number you left authorised.
               </P>
@@ -344,14 +344,14 @@ export default function TermsPage() {
               </P>
               <P>
                 <strong>Reviewing what comes back.</strong> Section 5 says this at length. In
-                short: CaribBooks&rsquo; entries and documents are drafts for you to check, and
+                short: CaribBooks’ entries and documents are drafts for you to check, and
                 the obligation to check them is yours.
               </P>
               <P>
                 <strong>The right to share what you share.</strong> When you send us a
-                customer&rsquo;s name, a supplier&rsquo;s bank details or an employee&rsquo;s
+                customer’s name, a supplier’s bank details or an employee’s
                 pay, you confirm you are entitled to. Where an accounting practice sends a
-                client&rsquo;s records, section 7 applies.
+                client’s records, section 7 applies.
               </P>
               <P>
                 <strong>Your own legal obligations.</strong> Filing returns, keeping statutory
@@ -383,8 +383,8 @@ export default function TermsPage() {
                 <strong>It is not advice.</strong> Nothing CaribBooks says is accounting,
                 audit, tax, legal, investment or financial advice, including when it answers a
                 direct question, suggests a categorisation, or produces a report that looks
-                authoritative. Where the answer matters &mdash; a return, a filing, a
-                disclosure, a decision with money behind it &mdash; take it to a qualified
+                authoritative. Where the answer matters — a return, a filing, a
+                disclosure, a decision with money behind it — take it to a qualified
                 professional in your jurisdiction.
               </P>
               <P>
@@ -416,7 +416,7 @@ export default function TermsPage() {
                 instrument. The prices, the terms, the tax treatment and the obligation they
                 create between you and your customer are yours; so is the consequence of
                 sending one that is wrong. A document number, once issued, is burned and not
-                reused &mdash; that is a deliberate property of the ledger, and it means a
+                reused — that is a deliberate property of the ledger, and it means a
                 document sent in error is corrected by issuing a credit or a replacement, not
                 by pretending the first never existed.
               </P>
@@ -436,11 +436,11 @@ export default function TermsPage() {
               </P>
               <P>
                 <strong>You are the controller; we are your processor.</strong> Your
-                clients&rsquo; data is yours to govern. We process it on your documented
+                clients’ data is yours to govern. We process it on your documented
                 instructions, which are the instructions implicit in your use of the product,
                 and we do not use it for our own purposes. The detail of that arrangement
-                &mdash; sub-processors, residency, security, breach notification, deletion
-                &mdash; is in the{" "}
+                — sub-processors, residency, security, breach notification, deletion
+                — is in the{" "}
                 <a className="underline" href="/privacy">
                   privacy policy
                 </a>{" "}
@@ -466,7 +466,7 @@ export default function TermsPage() {
               <P>
                 One practical consequence of that, which we have deliberately built around: if
                 your card fails, your clients keep posting. They are third parties, they cannot
-                fix your card, and they usually do not know it failed &mdash; so cutting them
+                fix your card, and they usually do not know it failed — so cutting them
                 off on the first decline would stop their bookkeeping mid-month over something
                 that is usually transient. See section 9.
               </P>
@@ -485,13 +485,13 @@ export default function TermsPage() {
                 any time, which ends that permission.
               </P>
               <P>
-                <strong>Meta&rsquo;s rules apply to you directly.</strong> A number on the
-                WhatsApp Business Platform is governed by WhatsApp&rsquo;s own Business Terms
-                and Meta&rsquo;s policies, and messaging charges levied by Meta for
+                <strong>Meta’s rules apply to you directly.</strong> A number on the
+                WhatsApp Business Platform is governed by WhatsApp’s own Business Terms
+                and Meta’s policies, and messaging charges levied by Meta for
                 conversations on your number are billed by Meta to you, not by us. Those terms
                 are between you and Meta. We cannot waive them, and where Meta requires us to
-                suspend or disconnect a number &mdash; a policy breach, a quality rating
-                falling too far, an instruction we are given &mdash; we will comply, and will
+                suspend or disconnect a number — a policy breach, a quality rating
+                falling too far, an instruction we are given — we will comply, and will
                 tell you.
               </P>
               <P>
@@ -500,7 +500,7 @@ export default function TermsPage() {
                 alongside CaribBooks, two things follow and both have bitten people before.
                 Messages you send by hand are yours, not ours, and will not always be visible
                 to CaribBooks or reflected in your books. And group conversations do not reach
-                the platform at all &mdash; anything agreed in a group is invisible to
+                the platform at all — anything agreed in a group is invisible to
                 CaribBooks and will not be recorded.
               </P>
               <P>
@@ -545,8 +545,8 @@ export default function TermsPage() {
               </P>
               <P>
                 <strong>If a card fails.</strong> We do not stop your bookkeeping on the first
-                decline, because a bank&rsquo;s fraud check that clears two days later would
-                otherwise have taken your records away in the meantime &mdash; and the
+                decline, because a bank’s fraud check that clears two days later would
+                otherwise have taken your records away in the meantime — and the
                 transactions are yours.
               </P>
               <Row
@@ -562,7 +562,7 @@ export default function TermsPage() {
                 when payment succeeds. Section 13 governs what happens if the account closes.
               </P>
               <P>
-                We may change prices with at least 30 days&rsquo; notice by email. A change
+                We may change prices with at least 30 days’ notice by email. A change
                 takes effect at your next renewal, and if you do not want it you may cancel
                 before then.
               </P>
@@ -604,7 +604,7 @@ export default function TermsPage() {
               <Row k="Probe, scrape or overload it" v="Automated access beyond ordinary use, or anything intended to extract the system's prompts, models or internal structure." />
               <P>
                 CaribBooks will also decline instructions of its own accord in some cases
-                &mdash; it will not issue a document it cannot stand behind, and it will not
+                — it will not issue a document it cannot stand behind, and it will not
                 delete a posted entry. Persistently working around those refusals is a breach
                 of this section.
               </P>
@@ -625,10 +625,10 @@ export default function TermsPage() {
                 reasonable chance to put it right.
               </P>
               <P>
-                <strong>We may end the agreement</strong> on 30 days&rsquo; notice, or
+                <strong>We may end the agreement</strong> on 30 days’ notice, or
                 immediately for a serious breach. If we end it for our own convenience, we will
-                refund the unused portion of anything you have paid in advance &mdash; the
-                exception to section 9&rsquo;s no-part-refunds rule, because the decision was
+                refund the unused portion of anything you have paid in advance — the
+                exception to section 9’s no-part-refunds rule, because the decision was
                 ours and not yours.
               </P>
               <P>
@@ -654,7 +654,7 @@ export default function TermsPage() {
               </P>
               <P>
                 The full schedule, including what is retained while an account is live and what
-                &ldquo;deletion&rdquo; actually means in each store, is in the{" "}
+                “deletion” actually means in each store, is in the{" "}
                 <a className="underline" href="/privacy">
                   privacy policy
                 </a>
@@ -724,8 +724,8 @@ export default function TermsPage() {
               </P>
               <P>
                 <strong>What we are not liable for.</strong> Indirect or consequential loss;
-                loss of profit, revenue, goodwill or anticipated savings; and &mdash; stated
-                explicitly because it is the one that matters here &mdash; penalties, interest
+                loss of profit, revenue, goodwill or anticipated savings; and — stated
+                explicitly because it is the one that matters here — penalties, interest
                 or assessments imposed on you by a revenue authority, and the cost of
                 professional work to correct or restate records.
               </P>
@@ -735,7 +735,7 @@ export default function TermsPage() {
                 year cannot stand behind the tax position of a business, and any supplier who
                 tells you otherwise has not thought about the arithmetic. The protection against
                 a miscategorised entry reaching a return is your review of the books and your
-                accountant&rsquo;s, not this contract.
+                accountant’s, not this contract.
               </P>
               <P>
                 <strong>Provided as it is.</strong> To the extent the law allows, we exclude
@@ -745,8 +745,8 @@ export default function TermsPage() {
               </P>
               <P>
                 <strong>You indemnify us</strong> against claims brought by a third party
-                &mdash; including your own client, your customer, or a person you messaged
-                &mdash; arising from your use of CaribBooks in breach of these terms, from data
+                — including your own client, your customer, or a person you messaged
+                — arising from your use of CaribBooks in breach of these terms, from data
                 you had no right to share with us, or from a document issued under your name.
               </P>
             </Section>
@@ -761,7 +761,7 @@ export default function TermsPage() {
               </P>
               <P>
                 <strong>Changes.</strong> We may update these terms. Where a change materially
-                affects your rights we will give at least 30 days&rsquo; notice by email to your
+                affects your rights we will give at least 30 days’ notice by email to your
                 registered address, and it takes effect at your next renewal. Continuing to use
                 CaribBooks after that is acceptance. The effective date at the top of this page
                 always reflects the current version.
