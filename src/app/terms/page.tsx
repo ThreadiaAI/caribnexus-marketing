@@ -432,43 +432,123 @@ export default function TermsPage() {
             <Section s={SECTIONS[6]}>
               <P>
                 This section applies where you are an accounting practice, bookkeeping firm or
-                similar, using CaribBooks to serve your own clients.
+                similar, using CaribBooks to serve your own clients. It is written to satisfy
+                the Jamaica Data Protection Act, 2020, and is intended to do the same work
+                under the comparable regimes elsewhere in the region.
               </P>
               <P>
                 <strong>You are the controller; we are your processor.</strong> Your
                 clients’ data is yours to govern. We process it on your documented
                 instructions, which are the instructions implicit in your use of the product,
-                and we do not use it for our own purposes. The detail of that arrangement
-                — sub-processors, residency, security, breach notification, deletion
-                — is in the{" "}
+                and we do not use it for our own purposes.
+              </P>
+              <P>
+                <strong>This section is the written contract the Act requires.</strong> The
+                Jamaica Data Protection Act obliges a controller who engages a processor to
+                have an arrangement made or evidenced in writing, under which the processor
+                acts only on the controller’s instructions and is bound by security
+                obligations equivalent to those the Act places on the controller itself. That
+                is what the undertakings below are, and they are given to you.
+              </P>
+              <Row
+                k="Instructions only"
+                v="We process your clients' personal data only on your instructions, and for no purpose of our own. Your books are never used to train a model."
+              />
+              <Row
+                k="Equivalent security"
+                v="We apply technical and organisational measures equivalent to those the Act requires of you as controller. They are described in the data protection page, which is written from the running system rather than from intent."
+              />
+              <Row
+                k="Our people"
+                v="Anyone with access is bound by confidentiality that survives the end of their engagement."
+              />
+              <Row
+                k="Sub-processors"
+                v={
+                  <>
+                    Named in the{" "}
+                    <a className="underline" href="/privacy">
+                      privacy policy
+                    </a>
+                    . We impose these same obligations on each of them, and we remain
+                    answerable to you for what they do. We will tell you before adding or
+                    replacing one, and you may object.
+                  </>
+                }
+              />
+              <Row
+                k="Breaches"
+                v="We notify you without undue delay on becoming aware of a personal data breach affecting your clients, with enough detail for you to meet your own duty to report to the Office of the Information Commissioner. The duty to notify the Commissioner is yours, because the Act places it on the controller."
+              />
+              <Row
+                k="Helping you answer"
+                v="We assist you, so far as we reasonably can, with requests from your clients or their data subjects to access, correct, or object to processing, and with any assessment or consultation the Act requires of you."
+              />
+              <Row
+                k="At the end"
+                v={
+                  <>
+                    On closure we return or delete your clients’ data on the schedule in
+                    section 13 and in the{" "}
+                    <a className="underline" href="/privacy">
+                      privacy policy
+                    </a>
+                    .
+                  </>
+                }
+              />
+              <Row
+                k="Audit"
+                v="We make available the information you reasonably need to satisfy yourself that these obligations are met."
+              />
+              <P>
+                <strong>Where the data goes, and on what basis.</strong> The eighth data
+                protection standard bars a transfer out of Jamaica unless the receiving
+                territory affords an adequate level of protection, or an exception applies.
+                CaribBooks runs on Amazon Web Services and reasons using third-party model
+                providers, and there is no Jamaican cloud region behind either — so your
+                clients’ data does leave Jamaica. Where it goes, which providers hold it and
+                the contractual safeguards those transfers are made under are set out in the{" "}
                 <a className="underline" href="/privacy">
                   privacy policy
-                </a>{" "}
-                and the{" "}
-                <a className="underline" href="/data-protection">
-                  data protection
-                </a>{" "}
-                page, which together serve as our processing terms.
+                </a>
+                . You are the controller, so the transfer is made on your instruction and you
+                should satisfy yourself it is one you can lawfully give. We will give you
+                whatever detail you need to make that assessment.
               </P>
               <P>
                 <strong>You warrant that you may share what you share.</strong> When you bring
                 a client onto CaribBooks you confirm you have the authority and the lawful
-                basis to have their records processed by us and by the sub-processors we name.
-                We have no relationship with your client and no way to verify this; we rely on
-                you.
+                basis to have their records processed by us and by the sub-processors we name,
+                that you have given your clients whatever notice their own law requires, and
+                that you are registered with the Office of the Information Commissioner where
+                the Act requires it of you. We have no relationship with your client and no way
+                to verify any of this; we rely on you.
+              </P>
+              <P>
+                <strong>Elsewhere in the region.</strong> If your clients sit outside Jamaica
+                — Barbados, Trinidad and Tobago, The Bahamas, the Cayman Islands, Guyana or
+                the OECS states — their own data protection legislation may apply to you as
+                controller, and the duties it places on you are not identical to Jamaica’s.
+                The undertakings above are given in the same terms whichever regime applies,
+                but assessing which one governs you, and registering where you must, is yours
+                to do.
               </P>
               <P>
                 <strong>Your client is not our customer.</strong> They do not hold an account
                 with us, cannot be billed by us and cannot instruct us directly. If your
                 relationship with them ends, their data remains under your account until you
-                tell us otherwise.
+                tell us otherwise. Under the Act a person who suffers damage through a
+                contravention claims against the <em>controller</em>, which is you — so the
+                undertakings in this section are the protection you hold, and they are owed to
+                you directly.
               </P>
               <P>
-                One practical consequence of that, which we have deliberately built around: if
-                your card fails, your clients keep posting. They are third parties, they cannot
-                fix your card, and they usually do not know it failed — so cutting them
-                off on the first decline would stop their bookkeeping mid-month over something
-                that is usually transient. See section 9.
+                One practical consequence of that split, which we have deliberately built
+                around: if your card fails, your clients keep posting. They are third parties,
+                they cannot fix your card, and they usually do not know it failed — so cutting
+                them off on the first decline would stop their bookkeeping mid-month over
+                something that is usually transient. See section 9.
               </P>
             </Section>
 
@@ -716,6 +796,16 @@ export default function TermsPage() {
                 Nothing in these terms limits liability for death or personal injury caused by
                 negligence, for fraud or fraudulent misrepresentation, or for anything else
                 that cannot lawfully be limited. Everything below is subject to that.
+              </P>
+              <P>
+                <strong>That carve-out includes data protection, and it is meant literally.</strong>{" "}
+                Nothing here limits or excludes any right a data subject has under the Jamaica
+                Data Protection Act, 2020 or under the comparable law of another territory,
+                affects the Information Commissioner’s powers against either of us, or
+                relieves us of the processor undertakings in section 7. A data subject is not
+                a party to this contract and their statutory rights are not ours to cap. Where
+                a court or the Commissioner finds any part of this section unenforceable, the
+                rest of it stands.
               </P>
               <P>
                 <strong>The cap.</strong> Our total liability to you, for all claims arising in
