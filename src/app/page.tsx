@@ -24,7 +24,7 @@ export default function HomePage() {
               </span>
             </h1>
             <p className="text-[15px] md:text-[16px] text-cn-muted max-w-[520px]" style={{ marginTop: "20px", lineHeight: "1.6" }}>
-              We work with Caribbean businesses <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent font-medium">who want to do more with less.</span> We analyze your operations, identify the waste, and build AI systems so your team focuses on what grows revenue.
+              We work with Caribbean businesses that <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent font-medium">want more done without hiring more people.</span> That starts with watching how a job actually gets done, then building a system for the part that shouldn’t need a person.
             </p>
             <div className="flex items-center gap-3" style={{ marginTop: "26px" }}>
               <Link href="/contact"
@@ -72,7 +72,7 @@ export default function HomePage() {
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
             <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5" }}>
-              A bookkeeper and a financial administrator on WhatsApp. One message posts the entry, updates every report, and writes the quotation, invoice or receipt that goes with it. Built for the Caribbean, in your currency and your tax.
+              A bookkeeper and financial administrator on WhatsApp. Send a photo of a receipt, a voice note, or a line of text. CB records the transaction, updates the reports, and writes the quotation, invoice or receipt that goes with it. It handles Caribbean currencies and Caribbean tax, because that’s who we built it for.
             </p>
 
             <div className="flex items-center gap-3" style={{ marginTop: "16px" }}>
@@ -150,7 +150,7 @@ export default function HomePage() {
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
             <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5" }}>
-              Intelligent systems that run the digital side of your business. Social media, content, customer service, operations — deployed across WhatsApp, Instagram, and every channel your customers use.
+              Systems that handle the digital side of a business. Customer service, social media, content, internal operations, running on WhatsApp, Instagram, or wherever your customers already are. Each one is built for a single business, so there is no second company’s data inside it.
             </p>
             <div className="flex items-center gap-3" style={{ marginTop: "16px" }}>
               <Link href="/contact"
@@ -215,14 +215,13 @@ export default function HomePage() {
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[64px] pb-[20px]">
           <div style={{ gridColumn: "2 / 6" }}>
             <h2 className="text-[22px] md:text-[28px] font-semibold tracking-tight" style={{ lineHeight: "1.15" }}>
-              <span className="text-cn-muted">We build AI systems</span><br />
-              <span className="text-cn-muted">that </span>
-              <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">cut costs by 50%.</span>
+              <span className="text-cn-muted">We start by finding out</span><br />
+              <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">where the work actually goes.</span>
             </h2>
           </div>
           <div className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }}>
             <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5" }}>
-              We walk in, analyze your operations, and identify where AI can eliminate repetitive work — saving hours per week and reducing overhead. Custom-built systems, not off-the-shelf tools.
+              We map a process end to end, then say plainly which parts a system can take and which still need a person. What gets built is yours and runs in production. Not a demo that impresses in a meeting.
             </p>
             <p style={{ marginTop: "16px" }}>
               <span className="text-[14px] font-medium text-cn-muted">1.0</span>{" "}
@@ -272,16 +271,16 @@ export default function HomePage() {
                   From analysis to production
                 </p>
                 <p className="text-[14px] text-cn-muted" style={{ lineHeight: "1.6" }}>
-                  We map your operations end-to-end — every bottleneck, every
-                  repetitive task, every decision that doesn&apos;t need a human.
+                  We map the process end to end: where it stalls, what gets
+                  repeated, which decisions don’t need a person.
                 </p>
                 <p className="text-[14px] text-cn-muted" style={{ lineHeight: "1.6" }}>
-                  Then we build the system: purpose-built AI that plugs into the
-                  workflow you already have. Not a demo. A production system you own.
+                  Then we build the thing that handles it, inside the workflow
+                  you already have. It runs in production and you own it.
                 </p>
                 <p className="text-[14px] text-cn-muted" style={{ lineHeight: "1.6" }}>
-                  Bookkeeping, customer service, lead qualification, internal ops.
-                  Wherever repetition lives, AI replaces it.
+                  Bookkeeping, customer service, lead qualification, internal
+                  operations.
                 </p>
               </div>
             </div>
@@ -328,9 +327,10 @@ export default function HomePage() {
           </FadeIn>
           <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
             <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5" }}>
-              The same rules govern everything we build. Encrypted in transit and at rest, held
-              in jurisdictions we name rather than gesture at, kept to a published schedule, and
-              deleted when you ask. We do not train foundation models on your data.
+              The same rules apply to everything we build. Encrypted in transit and at rest.
+              Held in places we name: AWS in the United States, and Meta’s WhatsApp platform
+              for messages. Kept to a published schedule, and deleted when you ask. We don’t
+              train foundation models on your data.
             </p>
             <p className="text-[15px] text-cn-muted" style={{ lineHeight: "1.5", marginTop: "12px" }}>
               In CaribBooks, every business sits in its own partition and the agent has no way to
