@@ -45,7 +45,7 @@ const STANDARDS: { n: string; standard: string; how: string }[] = [
   {
     n: "4",
     standard: "Accurate and kept up to date",
-    how: "Entries are proposed and confirmed rather than assumed. When CaribBooks is unsure it asks, and it names the account it would add rather than guessing. Corrections post as reversing entries, so the record shows both the error and the fix.",
+    how: "Entries are proposed and confirmed rather than assumed. When CaribBooks is unsure it asks, and it names the account it would add rather than guessing. A confirmation settles more than the entry in front of it: it becomes a rule, so the same question is not put to you twice. Every rule CaribBooks holds for your business is listed in your dashboard, each with the case it came from and how often it has been confirmed; tell the agent one is wrong and it is retired, with the reason recorded. Corrections post as reversing entries, so the record shows both the error and the fix.",
   },
   {
     n: "5",

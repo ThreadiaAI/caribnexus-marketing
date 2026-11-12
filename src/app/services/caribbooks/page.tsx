@@ -357,6 +357,49 @@ export default function CaribBooksPage() {
 
         <div className="border-t border-cn-border w-full" />
 
+        {/* WHERE THE JUDGEMENT SITS.
+            Sits after isolation because both sections answer the same
+            question — can this be trusted — from opposite ends. That one is
+            about what CB cannot do. This one is about the single thing it
+            decides, and who gets a say in it.
+
+            Plain register on purpose. The claim being made is that a person
+            built this and will tell you how it works; prose that performs
+            undercuts it. */}
+        <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[80px]">
+          <FadeIn style={{ gridColumn: "2 / 6" }}>
+            <h2 className="text-[22px] md:text-[30px] font-semibold tracking-tight" style={{ lineHeight: "1" }}>
+              <span className="text-cn-muted">What we built in,</span><br />
+              <span className="bg-gradient-to-r from-[#0077B6] via-[#00A859] to-[#FF5733] bg-clip-text text-transparent">and what you teach it.</span>
+            </h2>
+          </FadeIn>
+          <FadeIn className="mt-3 md:mt-0" style={{ gridColumn: "7 / 12" }} delay={0.1}>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3" }}>
+              CB won&rsquo;t record a transaction until it knows where the money came from. Say
+              it, type it, or send a picture of the receipt.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              Each entry debits one of your accounts and credits another, for the same amount.
+              There&rsquo;s no way to enter two different figures, so nothing goes in unbalanced.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              Your reports are built from the ledger itself. CB doesn&rsquo;t write them and
+              doesn&rsquo;t total them.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              The judgement call is which two accounts. That depends on your business, so CB asks
+              the first time and remembers your answer. Same expense next month, no question.
+            </p>
+            <p className="text-[13px] text-cn-muted" style={{ lineHeight: "1.3", marginTop: "12px" }}>
+              Those answers stay with your business. Nothing is shared across clients and nothing
+              trains a model. Every rule is visible in the dashboard, and CB drops any you tell it
+              to.
+            </p>
+          </FadeIn>
+        </section>
+
+        <div className="border-t border-cn-border w-full" />
+
         {/* Built for */}
         <section className="mx-auto max-w-[var(--content-max-w)] product-section-mobile md:page-grid pt-[80px] pb-[24px]">
           <FadeIn style={{ gridColumn: "2 / 12" }}>
